@@ -3,7 +3,7 @@
 以 [runoob · AI Agent（智能体）教程](https://www.runoob.com/ai-agent/ai-agent-tutorial.html) 为蓝本重构的**本地学习站**：
 8 个阶段、47 个带「目标 / 前置 / 要点 / 动手 / 自检」的学习小节，附内容时效审计、更新对照与维护指引。
 
-> 个人本地学习用途。不复制原文全文，不用于商业分发；每节保留原文链接，版权归原站点所有。
+> 个人学习项目：代码 MIT，原创文字 CC BY-NC-SA 4.0。不复制原文全文；每节保留原文链接，版权归原站点所有。
 
 ![Dopamine Agent Lab 首页](docs/preview-index.png)
 
@@ -39,6 +39,9 @@ ai-agent-learning/
 ├── search.html         全文搜索：按关键词定位到小节与句子
 ├── audit.html          审计台账（47 行）+ 更新对照表 + 方法说明
 ├── about.html          假设声明、设计令牌、维护指引、待核实清单
+├── LICENSE             MIT（代码）
+├── LICENSE-CONTENT.md  原创文字许可与署名说明（CC BY-NC-SA 4.0）
+├── LICENSE-CC-BY-NC-SA-4.0.txt  CC BY-NC-SA 4.0 完整法律文本
 ├── examples/
 │   ├── stage5/         第 5 阶段完整 Python 实验、固定依赖、测试与实际输出
 │   ├── stage5-examples.zip     第 5 阶段下载包
@@ -193,11 +196,24 @@ python3.11 tools/verify_stage6_examples.py
 - 产品信息：DuMate、WorkBuddy、MonkeyCode、OpenClaw 的可用地区、额度、系统要求、安装命令。
 - 统计数字：Harness Engineering 章节引用的代码行数、团队规模等。
 
-## 来源与许可
+## 许可证
+
+本仓库采用**双许可**：
+
+| 范围 | 许可证 |
+|---|---|
+| 代码：HTML / CSS / JavaScript、`tools/` 脚本、`examples/` 示例代码 | **MIT**（[`LICENSE`](LICENSE)） |
+| 原创文字：学习路径、要点、动手任务、自检题、内容审计、框架选型说明、页面文案 | **CC BY-NC-SA 4.0**（[`LICENSE-CONTENT.md`](LICENSE-CONTENT.md)） |
+| runoob 原文与第三方内容 | 不在本仓库授权范围，归各自权利人 |
+
+- CC 完整法律文本：[`LICENSE-CC-BY-NC-SA-4.0.txt`](LICENSE-CC-BY-NC-SA-4.0.txt)
+- 建议署名：`"Dopamine Agent Lab" by LuOzawa, based on the runoob AI Agent Tutorial.` 并保留每节原文链接。
+- CC BY-NC-SA 的 **NC** 限制商业使用；如果希望允许商用，可把原创文字改为 CC BY-SA 4.0，代码仍为 MIT。
+
+## 来源
 
 - 蓝本：<https://www.runoob.com/ai-agent/ai-agent-tutorial.html>（版权归原站点/原作者）。
-- 本站原创的路径设计、要点提炼、任务与审计文字：仅供个人学习使用，转载/引用请注明来源与链接。
-- 公开分享请保留署名与来源链接；不复制原文全文、不用于商业售卖。
+- 本站不复制原文全文，只提供学习路径、要点提炼、任务与审计；原文与商标不在本站授权范围。
 
 ---
 
