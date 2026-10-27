@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>全文搜索 | Dopamine Agent Lab</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-accent="violet">
+<a class="skip" href="#main">跳到主要内容</a>
+<div class="read-progress" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true" style="display:grid;place-items:center;font-weight:800">D</span>
+      <span>Dopamine Agent Lab</span>
+    </a>
+    <nav class="topnav" aria-label="主导航">
+      <a href="index.html">学习地图</a>
+      <a href="contents.html">全部目录</a>
+      <a href="search.html" aria-current="page">搜索</a>
+      <a href="audit.html">内容审计</a>
+      <a href="about.html" class="nav-about">使用说明</a>
+    </nav>
+    <div class="mini-progress" title="总学习进度">
+      <span class="mini-bar" aria-hidden="true"><i data-mini-bar></i></span>
+      <span data-mini-text>0/47</span>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="doc">
+  <div class="kicker">Search · 47 节本地索引</div>
+  <h1>全文搜索</h1>
+  <p class="lede">搜标题、学习目标、核心要点、动手任务与自检答案，定位到具体小节和句子。
+    索引在本地生成，不联网、不上传查询。</p>
+
+  <form class="search-box" id="search-form" role="search">
+    <label for="search-q">关键词</label>
+    <input id="search-q" name="q" type="search" placeholder="例如：MCP、向量数据库、上下文压缩、拒答、LangGraph"
+      autocomplete="off" spellcheck="false">
+    <button class="btn sm search-clear" id="search-clear" type="button">清空搜索</button>
+  </form>
+
+  <div class="search-suggests" id="search-suggests">
+    <span class="label">试试：</span>
+    <button type="button" data-q="MCP">MCP</button>
+    <button type="button" data-q="RAG">RAG</button>
+    <button type="button" data-q="上下文">上下文</button>
+    <button type="button" data-q="评估">评估</button>
+    <button type="button" data-q="拒绝">拒绝</button>
+    <button type="button" data-q="LangGraph">LangGraph</button>
+    <button type="button" data-q="部署">部署</button>
+  </div>
+
+  <div class="search-meta">
+    <span id="search-count" aria-live="polite">输入关键词开始</span>
+    <span id="search-index-meta" class="muted"></span>
+  </div>
+
+  <div class="search-results" id="search-results"></div>
+
+  <div class="search-empty" id="search-empty" hidden>
+    <p><b>没有匹配结果。</b>试试更短的关键词，或换一个同义词。</p>
+    <p class="small">例如：把「智能体记忆」换成「记忆」，把「工具调用」换成「function」。</p>
+  </div>
+
+  <div class="search-empty" id="search-idle">
+    <p><b>搜索范围：</b>47 个学习小节的标题、目标、核心要点、动手任务与自检答案（近千条句子），
+      不包含原文全文。想按原文目录查，用 <a href="contents.html">全部目录</a>。</p>
+  </div>
+
+  <noscript>
+    <div class="callout warn"><p>搜索需要启用 JavaScript。你仍然可以通过 <a href="contents.html">全部目录</a> 浏览 47 节。</p></div>
+  </noscript>
+
+  <nav class="pager" aria-label="翻页">
+    <a href="contents.html"><span class="dir">← 上一页</span><span class="t">全部目录</span></a>
+    <a class="next" href="frameworks.html"><span class="dir">下一页 →</span><span class="t">框架与工具选型矩阵</span></a>
+  </nav>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-in">
+      <div>
+        <p>蓝本：<a href="https://www.runoob.com/ai-agent/ai-agent-tutorial.html" target="_blank" rel="noopener">runoob · AI Agent 教程</a>。个人本地学习用途，不复制原文全文、不用于商业分发。</p>
+        <p class="small">索引由 <code>tools/build_search_index.py</code> 生成；改完小节内容后重新运行即可。</p>
+      </div>
+      <div>
+        <h3>学习</h3>
+        <ul>
+          <li><a href="contents.html">全部目录</a></li>
+          <li><a href="frameworks.html">框架与工具矩阵</a></li>
+          <li><a href="index.html">学习地图</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>说明</h3>
+        <ul>
+          <li><a href="audit.html">内容审计台账</a></li>
+          <li><a href="about.html">来源与版权</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">离线可用 · 无外部请求 · 查询不离开本机</div>
+  </div>
+</footer>
+<script src="assets/search-index.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

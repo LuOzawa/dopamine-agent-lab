@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>使用说明 · 来源、设计与维护 | Dopamine Agent Lab</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-accent="violet">
+<a class="skip" href="#main">跳到主要内容</a>
+<div class="read-progress" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true" style="display:grid;place-items:center;font-weight:800">D</span>
+      <span>Dopamine Agent Lab</span>
+    </a>
+    <nav class="topnav" aria-label="主导航">
+      <a href="index.html">学习地图</a>
+      <a href="contents.html">全部目录</a>
+      <a href="search.html">搜索</a>
+      <a href="audit.html">内容审计</a>
+      <a href="about.html" aria-current="page" class="nav-about">使用说明</a>
+    </nav>
+    <div class="mini-progress" title="总学习进度">
+      <span class="mini-bar" aria-hidden="true"><i data-mini-bar></i></span>
+      <span data-mini-text>0/47</span>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="doc">
+  <div class="kicker">About · Usage · Maintenance</div>
+  <h1>使用说明</h1>
+  <p class="lede">这一页写清四件事：本站基于什么假设做的、怎么打开与维护、设计令牌怎么改、哪些内容必须你自己核实。</p>
+
+  <h2 id="open"><span class="no">01</span>打开方式</h2>
+  <p>站点是纯静态文件，不需要安装、不需要服务器、不需要联网：</p>
+  <ol>
+    <li>把整个 <code>ai-agent-learning/</code> 文件夹放在本机任意位置（不要只拷贝单个 HTML）。</li>
+    <li>双击 <code>index.html</code>，默认浏览器会以 <code>file://</code> 协议打开。</li>
+    <li>进度存在浏览器的 localStorage：换浏览器、清理站点数据或使用无痕模式都会丢失。</li>
+    <li>首页会根据上次阅读的小节和完成记录提供「继续学习」入口；完成上次小节后，会推荐后续未完成的小节。</li>
+    <li>少数浏览器在 <code>file://</code> 或严格隐私模式下会禁用 localStorage：保存失败时页面会显示持续提示。当前更改仅临时有效，修复存储设置或空间问题后可点「重试保存」。</li>
+    <li>手机和平板可展开阅读区顶部的「本阶段目录」跳转小节；跳转后目录自动收起。</li>
+  </ol>
+  <div class="callout warn">
+    <p><b>如果样式丢失：</b>通常是把 HTML 单独移动了位置。页面引用的是 <code>assets/style.css</code> 相对路径，必须和 <code>assets/</code> 目录保持同级。</p>
+  </div>
+
+  <h2 id="assumptions"><span class="no">02</span>假设声明</h2>
+  <p>以下是构建时采用的默认假设。任一条不成立，都会影响内容取舍，请按需校正：</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th style="width:150px">输入项</th><th style="width:230px">采用的假设</th><th>影响</th></tr></thead>
+      <tbody>
+        <tr><td>蓝本</td><td>runoob AI Agent 教程（47 个章节）</td><td>不增删主题；章节顺序按学习路径重排，原文链接保留</td></tr>
+        <tr><td>学习者水平</td><td>有基础编程经验、无 Agent 实战经验</td><td>Python 章节不教语法；概念章节从零解释</td></tr>
+        <tr><td>章节规模与时长</td><td>47 节，每节 20–40 分钟，总计约 18 小时</td><td>动手任务控制在 15–60 分钟；不追求覆盖所有细节</td></tr>
+        <tr><td>运行环境</td><td>本地现代浏览器，离线优先</td><td>零外部字体/CDN/统计；双击即可打开</td></tr>
+        <tr><td>视觉强度</td><td>多巴胺风格，以「高饱和强调 + 中性底色」为上限</td><td>高饱和只用于标签/按钮/边饰；正文保持高对比</td></tr>
+        <tr><td>内容时效</td><td>以审计时（2026-10）能核验到的信息为准</td><td>无法确证的标「待核实」，不编造版本与参数</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="tokens"><span class="no">03</span>设计说明与令牌</h2>
+  <p>所有颜色、圆角、阴影、动效都定义在 <code>assets/style.css</code> 顶部的 <code>:root</code> 中，页面只引用变量。
+    对比度按 WCAG 2.1 计算，正文与次要文字均达到 AA。</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>令牌</th><th>值</th><th>用途</th><th>对比度（前景/背景）</th></tr></thead>
+      <tbody>
+        <tr><td><code>--ink</code></td><td>#191036</td><td>正文、边框、阴影</td><td>17.4:1（on #FFFBF2）</td></tr>
+        <tr><td><code>--paper</code></td><td>#FFFBF2</td><td>页面底色（带点阵）</td><td>—</td></tr>
+        <tr><td><code>--muted</code></td><td>#5B5470</td><td>次要文字</td><td>7.3:1（on #FFFBF2）</td></tr>
+        <tr><td><code>--violet</code></td><td>#6D28D9</td><td>主强调、链接、按钮</td><td>7.1:1（白字）/ 6.9:1（on 纸色）</td></tr>
+        <tr><td><code>--pink</code></td><td>#FF2E93</td><td>贴纸、强调块</td><td>5.19:1（墨字）；白字仅限大字（3.46:1）</td></tr>
+        <tr><td><code>--yellow</code></td><td>#FFD84D</td><td>高亮、完成态</td><td>13.0:1（墨字）</td></tr>
+        <tr><td><code>--lime</code></td><td>#C8F169</td><td>动手任务、成功态</td><td>13.9:1（墨字）</td></tr>
+        <tr><td><code>--cyan</code></td><td>#6EE7F5</td><td>自检、信息提示</td><td>12.3:1（墨字）</td></tr>
+        <tr><td><code>--orange</code></td><td>#FF8A3D</td><td>警示、阶段 5</td><td>7.7:1（墨字）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>字体与尺寸</h3>
+  <ul>
+    <li>字体：系统中文字体栈（PingFang SC / 微软雅黑 / Noto Sans SC），不加载外部字体，避免离线失败与中文 webfont 体积。</li>
+    <li>正文 16px / 行高 1.75；标题使用 <code>clamp()</code> 响应式缩放；代码使用等宽字体栈。</li>
+    <li>间距按 4px 节奏：4 / 8 / 12 / 16 / 24 / 32 / 48 / 64；卡片圆角 16–24px。</li>
+    <li>阴影使用「实色偏移」而非模糊阴影（<code>3px 3px 0</code>），与粗描边形成贴纸感，同时不牺牲文字对比。</li>
+  </ul>
+
+  <h3>组件规范</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th style="width:130px">组件</th><th>形态</th><th style="width:190px">交互 / 状态</th></tr></thead>
+      <tbody>
+        <tr><td>主按钮</td><td>46px 高、2px 墨色描边、药丸圆角、紫底白字、3px 实色偏移阴影</td><td>悬停上移 1px 并加深阴影；按下位移到阴影位置</td></tr>
+        <tr><td>次按钮</td><td>白底墨字，同描边与阴影</td><td>悬停变黄底；不做透明度渐隐</td></tr>
+        <tr><td>卡片</td><td>白底、16–24px 圆角、2px 描边、3–5px 实色阴影</td><td>悬停轻微上移；焦点态用 3px 紫色外框</td></tr>
+        <tr><td>标签 / 徽章</td><td>药丸形、12.5px 粗体、2px 描边</td><td>纯展示，不可点击；颜色只用于分类</td></tr>
+        <tr><td>完成态</td><td>按钮变青柠底 + 勾选图标，卡片加浅绿底</td><td>通过 <code>aria-pressed</code> 同步语义状态</td></tr>
+        <tr><td>禁用态</td><td>透明度 0.5 + <code>cursor: not-allowed</code></td><td>保留可读性，不使用纯灰色文字</td></tr>
+        <tr><td>提示条</td><td>2px 描边 + 4 种底色（信息/更新/警示/成功）</td><td>图标 + 文字双编码，不依赖颜色单独传达含义</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>动效规范</h3>
+  <ul>
+    <li>只动 <code>transform</code> 与 <code>opacity</code>；时长 150–220ms；缓动 <code>cubic-bezier(.2,.8,.2,1)</code>。</li>
+    <li>悬停位移不超过 3px；不做自动轮播、闪烁、无限循环动画。</li>
+    <li><code>prefers-reduced-motion: reduce</code> 时关闭所有位移与过渡，滚动改回即时。</li>
+    <li>进度条与圆环只随「标记完成」变化，属于状态反馈而非装饰。</li>
+  </ul>
+
+  <h2 id="add"><span class="no">04</span>如何新增或修改一节</h2>
+  <ol>
+    <li>在对应 <code>stage-N.html</code> 中复制一个 <code>&lt;article class="lesson"&gt;</code> 整块。</li>
+    <li>改三处：<code>id="sN-M"</code>、<code>lesson-badge</code> 的编号、<code>data-done-id="sN-M"</code>；三处必须一致。</li>
+    <li>补全五个字段：学习目标、前置知识、核心要点、动手任务、自检（每个至少 1 条）。</li>
+    <li>在左侧目录 <code>.toc</code> 里加一条锚点；如果是原文已有章节，在 <code>contents.html</code> 对应分组里加一行并指向新锚点；本站扩展则标注「本站扩展」。</li>
+    <li>运行 <code>python3 tools/link_chapters.py</code>：重建全站章级前后篇，并自动同步 <code>STAGE_TOTAL</code>。</li>
+    <li>运行 <code>python3 tools/build_search_index.py</code>：把新增/修改的要点纳入全文搜索。</li>
+    <li>刷新页面，点一次「标记完成」，确认进度条与圆环同步变化。</li>
+  </ol>
+  <div class="callout info">
+    <p><b>只改配色：</b>编辑 <code>style.css</code> 的 <code>:root</code> 变量即可，全站生效。
+      若某个阶段要换主色，改对应页面的 <code>body[data-accent]</code> 与 <code>.stage-card</code> 的 <code>--sc</code>。
+      改完请重新核对前景/背景对比度，正文不低于 4.5:1。</p>
+  </div>
+
+  <h2 id="verify"><span class="no">05</span>必须自行核实的清单</h2>
+  <p>以下内容在审计时无法确证，或本身变化极快。使用前请查官方来源，不要直接引用：</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th style="width:220px">内容</th><th>需要核实什么</th><th style="width:200px">去哪查</th></tr></thead>
+      <tbody>
+        <tr><td>模型版本与名称</td><td>GPT-6 Astra / DeepSeek V4 / Claude 4.6 等命名是否存在、上下文与价格</td><td>各厂商官方模型文档 / 发布公告</td></tr>
+        <tr><td>框架 API</td><td>LangChain <code>create_agent</code>、AutoGen <code>autogen_agentchat</code> 的当前签名</td><td>官方文档 + PyPI 版本页</td></tr>
+        <tr><td>Python 版本支持</td><td>3.9/3.10 的 EOL 时间、依赖包的最低版本</td><td>python.org 生命周期表、包元数据</td></tr>
+        <tr><td>产品能力与定价</td><td>DuMate / WorkBuddy / MonkeyCode / OpenClaw 的可用地区、额度、系统要求</td><td>产品官网 / 官方仓库</td></tr>
+        <tr><td>社区统计</td><td>Harness 章节引用的代码行数、团队规模等数字</td><td>原始来源（若找不到则不引用）</td></tr>
+        <tr><td>安装命令与端口</td><td>OpenClaw / GraphRAG / CrewAI 的安装方式与版本区间</td><td>官方快速开始页</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="license"><span class="no">06</span>来源、版权与边界</h2>
+  <ul>
+    <li><b>蓝本与署名：</b>内容框架来自 <a href="https://www.runoob.com/ai-agent/ai-agent-tutorial.html" target="_blank" rel="noopener">runoob.com · AI Agent（智能体）教程</a>，版权归原作者/站点所有。本站不复制原文全文，只提供学习路径、要点提炼、动手任务与审计结论，并逐节保留原文链接。</li>
+    <li><b>使用范围：</b>个人学习项目。公开分享请保留署名与来源链接；不复制原文全文、不用于商业售卖。引用本站原创部分请注明来源与链接。</li>
+    <li><b>准确性：</b>站内对原文的评价是「基于公开文档的时效性判断」，不是对原作者的否定；发现判断有误，以官方文档为准并修正本站。</li>
+    <li><b>无追踪：</b>没有统计脚本、没有外部字体、没有 Cookie；学习进度只写入本机 <code>localStorage</code>，可用下方按钮清空。</li>
+  </ul>
+
+  <h2 id="reset"><span class="no">07</span>清空本机进度</h2>
+  <p>如果你要重新走一遍，或把站点交给别人，点下面这个按钮。此操作会清空当前浏览器的完成进度和上次阅读位置；保存失败时保留原记录。</p>
+  <p><button class="btn btn-pink" type="button" data-reset>清空学习进度</button></p>
+
+  <nav class="pager" aria-label="翻页">
+    <a href="audit.html"><span class="dir">← 上一页</span><span class="t">内容审计台账</span></a>
+    <a class="next" href="index.html"><span class="dir">回到 →</span><span class="t">学习地图</span></a>
+  </nav>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-in">
+      <div>
+        <p>蓝本：<a href="https://www.runoob.com/ai-agent/ai-agent-tutorial.html" target="_blank" rel="noopener">runoob · AI Agent 教程</a>。个人本地学习用途，不复制原文全文、不用于商业分发。</p>
+        <p class="small">审计时间 2026-10；产品与 API 信息请以官方文档为准。</p>
+      </div>
+      <div>
+        <h3>相关</h3>
+        <ul>
+          <li><a href="index.html">学习地图</a></li>
+          <li><a href="audit.html">内容审计台账</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>维护</h3>
+        <ul>
+          <li><a href="#add">新增一节</a></li>
+          <li><a href="#tokens">调整令牌</a></li>
+          <li><a href="#verify">待核实清单</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">离线可用 · 无外部请求 · 进度仅保存在本机</div>
+  </div>
+</footer>
+<script src="assets/app.js"></script>
+</body>
+</html>

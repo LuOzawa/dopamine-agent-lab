@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>阶段 4 · 架构与工具选型 | Dopamine Agent Lab</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-accent="lime">
+<a class="skip" href="#main">跳到主要内容</a>
+<div class="read-progress" aria-hidden="true"></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01" stroke-width="3"/></symbol>
+  <symbol id="i-wrench" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0 5 5L20 11l-8.5 8.5a2.1 2.1 0 0 1-3-3L17 8l-.3-1.7z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v18H6.5A2.5 2.5 0 0 0 4 23z"/><path d="M4 18.5h16"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 16H3z"/><path d="M12 9v5M12 17.5h.01"/></symbol>
+</svg>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true"><svg><use href="#i-spark"/></svg></span>
+      <span>Dopamine Agent Lab</span>
+    </a>
+    <nav class="topnav" aria-label="主导航">
+      <a href="index.html">学习地图</a>
+      <a href="contents.html">全部目录</a>
+      <a href="search.html">搜索</a>
+      <a href="audit.html">内容审计</a>
+      <a href="about.html" class="nav-about">使用说明</a>
+    </nav>
+    <div class="mini-progress" title="总学习进度">
+      <span class="mini-bar" aria-hidden="true"><i data-mini-bar></i></span>
+      <span data-mini-text>0/47</span>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <div class="page-head">
+      <div class="crumbs"><a href="index.html">学习地图</a> <span aria-hidden="true">/</span> <span>阶段 4</span></div>
+      <div class="kicker">Stage 04 · Architecture &amp; Tooling</div>
+      <h1>架构与选型：先选对形态</h1>
+      <p class="lede">
+        同样是「做个 Agent」，单循环、计划执行、多 Agent、可视化平台的成本与风险差一个数量级。
+        这一阶段只做三件事：认架构、选平台、分清工作流与自主 Agent。
+      </p>
+      <div class="chips">
+        <span class="chip accent">3 节</span>
+        <span class="chip">约 1.5 小时</span>
+        <span class="chip">前置：阶段 1–3</span>
+        <span class="chip plain">决策阶段，不写代码</span>
+      </div>
+      <div class="stage-progress">
+        <b>本阶段进度</b>
+        <span class="bar" aria-hidden="true"><i data-stage-bar="4"></i></span>
+        <b data-stage-label="4">0 / 3</b>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap layout">
+    <nav class="toc" aria-label="本阶段目录">
+      <details open>
+        <summary>本阶段目录<span class="toc-current">选择小节跳转</span></summary>
+        <div class="toc-content">
+          <ol>
+            <li><a href="#s4-1"><span class="n">4.1</span><span>六种 Agent 架构</span></a></li>
+            <li><a href="#s4-2"><span class="n">4.2</span><span>第一个 Agent 与平台选型</span></a></li>
+            <li><a href="#s4-3"><span class="n">4.3</span><span>AI 工作流 vs Agent</span></a></li>
+          </ol>
+          <p class="toc-done">学完这一阶段，你应该能在一页纸内说清「为什么不用更简单的方案」。</p>
+        </div>
+      </details>
+    </nav>
+
+    <div>
+      <article class="lesson" id="s4-1">
+        <div class="lesson-head">
+          <span class="lesson-badge">4.1</span>
+          <h2>六种 Agent 架构：复杂度要花在刀刃上</h2>
+        </div>
+        <div class="lesson-tags">
+          <span class="chip accent">约 35 分钟</span>
+          <span class="chip plain">架构</span>
+          <a class="origin" href="https://www.runoob.com/ai-agent/agent-architecture.html" target="_blank" rel="noopener">对照原文 ↗</a>
+        </div>
+        <div class="fields">
+          <div class="field goal">
+            <h3><svg aria-hidden="true"><use href="#i-target"/></svg>学习目标</h3>
+            <p>根据任务形态选择架构，并能反驳「多 Agent 一定更强」这个假设。</p>
+          </div>
+          <div class="field">
+            <h3><svg aria-hidden="true"><use href="#i-book"/></svg>前置知识</h3>
+            <p>阶段 1 的循环；3.1 的推理模式。</p>
+          </div>
+          <div class="field wide">
+            <h3><svg aria-hidden="true"><use href="#i-list"/></svg>核心要点</h3>
+            <ul>
+              <li><b>单 Agent 循环</b>：最常用，适合 80% 的工具型任务；瓶颈是上下文增长。</li>
+              <li><b>路由 / 分诊</b>：先判断任务类型，再交给专门的处理链；适合客服、工单等类别清晰的场景。</li>
+              <li><b>Plan-and-Execute</b>：规划者 + 执行者，适合长任务；需要重规划机制。</li>
+              <li><b>多 Agent / 层级</b>：任务可分解且子任务异构时才有收益；协调成本与错误放大是主要代价。</li>
+              <li><b>评估器-优化器</b>：生成 + 评审循环，适合有明确质量标准的内容任务；没有外部标准时会退化为互相吹捧。</li>
+            </ul>
+          </div>
+          <div class="field task wide">
+            <h3><svg aria-hidden="true"><use href="#i-wrench"/></svg>动手任务（30 分钟）</h3>
+            <p>为「每周自动生成团队周报」和「跨三个仓库的代码迁移」各选一个架构，画不超过 5 个框的图，并写一句「为什么不用更简单的单 Agent」。如果写不出来，说明你不需要更复杂的架构。</p>
+          </div>
+          <div class="field check wide">
+            <h3><svg aria-hidden="true"><use href="#i-check"/></svg>自检</h3>
+            <div class="qa">
+              <details>
+                <summary>什么情况下多 Agent 反而是负优化？</summary>
+                <div class="a">任务线性、上下文可以共享、子任务同质时。多 Agent 会引入信息丢失、重复工作和调试困难，成本上升但质量未必提升。先尝试单 Agent + 更好的工具与提示。</div>
+              </details>
+              <details>
+                <summary>评估器-优化器架构什么时候有效？</summary>
+                <div class="a">当「好」可以被外部标准检验时（测试通过、格式校验、事实核对）。如果只让模型自评，容易产生偏好偏差，评审轮次越多不代表质量越高。</div>
+              </details>
+            </div>
+          </div>
+        </div>
+        <div class="lesson-actions">
+          <button class="done-btn" type="button" data-done-id="s4-1" aria-pressed="false">
+            <span class="dot" aria-hidden="true"><svg><use href="#i-check"/></svg></span>
+            <span class="label">标记完成</span>
+          </button>
+          <span class="meta-note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-3.html#s3-4"><span class="dir">← 上一节</span><span class="t">3.4 上下文工程：把窗口当预算，而不是垃圾桶</span></a>
+          <a class="next" href="stage-4.html#s4-2"><span class="dir">下一节 →</span><span class="t">4.2 第一个 Agent 与平台选型：三条轴，不追新</span></a>
+        </nav>
+</article>
+
+      <article class="lesson" id="s4-2">
+        <div class="lesson-head">
+          <span class="lesson-badge">4.2</span>
+          <h2>第一个 Agent 与平台选型：三条轴，不追新</h2>
+        </div>
+        <div class="lesson-tags">
+          <span class="chip accent">约 30 分钟</span>
+          <span class="chip plain">选型</span>
+          <a class="origin" href="https://www.runoob.com/ai-agent/first-ai-agent.html" target="_blank" rel="noopener">对照原文 ↗</a>
+        </div>
+        <div class="fields">
+          <div class="field goal">
+            <h3><svg aria-hidden="true"><use href="#i-target"/></svg>学习目标</h3>
+            <p>用「搭建速度 / 系统衔接 / 可控深度」三条轴给候选平台打分，并识别数据锁定与合规风险。</p>
+          </div>
+          <div class="field">
+            <h3><svg aria-hidden="true"><use href="#i-book"/></svg>前置知识</h3>
+            <p>3.4 上下文工程；对至少一个平台有初步印象。</p>
+          </div>
+          <div class="field wide">
+            <h3><svg aria-hidden="true"><use href="#i-list"/></svg>核心要点</h3>
+            <ul>
+              <li>平台（Dify / n8n / 各类办公 Agent）、框架（LangChain / CrewAI）、库（SDK）解决的是不同层的问题。</li>
+              <li>先问「一周内能不能验证价值」，再问「以后能不能迁走」。不能导出数据与流程的平台要谨慎。</li>
+              <li>桌面 Agent 权限大、体验好，但数据边界与误操作风险也更大；优先在独立工作区试用。</li>
+              <li>产品宣传里的「免费」「支持某模型」变化很快，<b>以官网与合同为准</b>，不要把教程里的价格/额度当事实。</li>
+              <li>选型输出应该是一页纸：场景、候选、评分、试点计划、退出策略。</li>
+            </ul>
+          </div>
+          <div class="field task wide">
+            <h3><svg aria-hidden="true"><use href="#i-wrench"/></svg>动手任务（30 分钟）</h3>
+            <p>列 4 个候选（至少包含 1 个可视化平台、1 个代码框架），按速度 / 衔接 / 可控 / 成本 / 锁定风险打 1–5 分，加权求和。选一个本周做 30 分钟试点，并写下「什么结果会让你放弃它」。</p>
+          </div>
+          <div class="field check wide">
+            <h3><svg aria-hidden="true"><use href="#i-check"/></svg>自检</h3>
+            <div class="qa">
+              <details>
+                <summary>为什么建议先平台后框架？</summary>
+                <div class="a">平台能最快验证需求是否真实，避免一上来写几千行代码后发现没人用。但验证通过后，要评估可迁移性，避免被平台能力锁死。</div>
+              </details>
+              <details>
+                <summary>如何降低平台锁定风险？</summary>
+                <div class="a">数据可导出、提示与流程可版本化、核心逻辑不依赖平台私有节点、保留一个可运行的代码版原型。合同层面确认数据使用与删除条款。</div>
+              </details>
+            </div>
+          </div>
+        </div>
+        <div class="callout info" style="margin-top:18px">
+          <svg aria-hidden="true"><use href="#i-list"/></svg>
+          <div>
+            <p><b>选型补充：</b>13 个 Agent 框架与 8 个工具的对比矩阵（定位 / 适合 / 注意），见
+              <a href="frameworks.html">框架与工具选型矩阵</a>。</p>
+          </div>
+        </div>
+        <div class="lesson-actions">
+          <button class="done-btn" type="button" data-done-id="s4-2" aria-pressed="false">
+            <span class="dot" aria-hidden="true"><svg><use href="#i-check"/></svg></span>
+            <span class="label">标记完成</span>
+          </button>
+          <span class="meta-note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-4.html#s4-1"><span class="dir">← 上一节</span><span class="t">4.1 六种 Agent 架构：复杂度要花在刀刃上</span></a>
+          <a class="next" href="stage-4.html#s4-3"><span class="dir">下一节 →</span><span class="t">4.3 AI 工作流：确定性优先，自主性按需</span></a>
+        </nav>
+</article>
+
+      <article class="lesson" id="s4-3">
+        <div class="lesson-head">
+          <span class="lesson-badge">4.3</span>
+          <h2>AI 工作流：确定性优先，自主性按需</h2>
+        </div>
+        <div class="lesson-tags">
+          <span class="chip accent">约 30 分钟</span>
+          <span class="chip plain">架构</span>
+          <a class="origin" href="https://www.runoob.com/ai-agent/ai-workflow.html" target="_blank" rel="noopener">对照原文 ↗</a>
+        </div>
+        <div class="fields">
+          <div class="field goal">
+            <h3><svg aria-hidden="true"><use href="#i-target"/></svg>学习目标</h3>
+            <p>判断一个需求该做成固定工作流、自主 Agent，还是「工作流里嵌 Agent 节点」的混合形态。</p>
+          </div>
+          <div class="field">
+            <h3><svg aria-hidden="true"><use href="#i-book"/></svg>前置知识</h3>
+            <p>4.1 架构；3.1 推理模式。</p>
+          </div>
+          <div class="field wide">
+            <h3><svg aria-hidden="true"><use href="#i-list"/></svg>核心要点</h3>
+            <ul>
+              <li>工作流的优势是<b>可预测、可测试、成本可控</b>；缺点是遇到未枚举的情况就断。</li>
+              <li>Agent 的优势是处理开放路径；缺点是难测试、成本波动、可能跑偏。</li>
+              <li>生产里最常见的是混合：外层工作流保证步骤与审批，内层用 Agent 处理「这一步怎么做」。</li>
+              <li>每个节点都要定义输入/输出契约、超时、重试与失败兜底，否则编排只是把不确定性藏起来。</li>
+              <li>能写成 if/else 的，不要交给模型决定——确定性逻辑用代码，语义判断才用模型。</li>
+            </ul>
+          </div>
+          <div class="field task wide">
+            <h3><svg aria-hidden="true"><use href="#i-wrench"/></svg>动手任务（30 分钟）</h3>
+            <p>把「每天抓竞品价格 → 对比昨日 → 生成日报 → 发邮件」画成 6 步工作流，并在每一步标注：输入、输出、失败怎么办。最后圈出「哪一步值得用 Agent，哪一步必须用代码」。</p>
+          </div>
+          <div class="field check wide">
+            <h3><svg aria-hidden="true"><use href="#i-check"/></svg>自检</h3>
+            <div class="qa">
+              <details>
+                <summary>为什么「能用工作流就别用 Agent」？</summary>
+                <div class="a">因为工作流的行为可枚举，测试、监控、成本估算都更容易；Agent 的每次执行路径可能不同，出错时更难复现。自主性应该花在真正需要判断的地方。</div>
+              </details>
+              <details>
+                <summary>混合形态里，Agent 节点最容易出什么问题？</summary>
+                <div class="a">输出格式不稳定，导致下游节点解析失败。解决方式是给 Agent 明确的 schema、校验与重试，并设置「解析失败就转人工」的兜底路径。</div>
+              </details>
+            </div>
+          </div>
+        </div>
+        <div class="lesson-actions">
+          <button class="done-btn" type="button" data-done-id="s4-3" aria-pressed="false">
+            <span class="dot" aria-hidden="true"><svg><use href="#i-check"/></svg></span>
+            <span class="label">标记完成</span>
+          </button>
+          <span class="meta-note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-4.html#s4-2"><span class="dir">← 上一节</span><span class="t">4.2 第一个 Agent 与平台选型：三条轴，不追新</span></a>
+          <a class="next" href="stage-5.html#s5-1"><span class="dir">下一节 →</span><span class="t">5.1 环境配置：先把「能跑」变成确定的事</span></a>
+        </nav>
+</article>
+
+      <nav class="pager" aria-label="阶段翻页">
+        <a href="stage-3.html"><span class="dir">← 上一阶段</span><span class="t">阶段 3 · 推理、知识与上下文</span></a>
+        <a class="next" href="stage-5.html"><span class="dir">下一阶段 →</span><span class="t">阶段 5 · 亲手构建</span></a>
+      </nav>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-in">
+      <div>
+        <p>蓝本：<a href="https://www.runoob.com/ai-agent/ai-agent-tutorial.html" target="_blank" rel="noopener">runoob · AI Agent 教程</a>。个人本地学习用途，不复制原文全文、不用于商业分发。</p>
+        <p class="small">审计时间 2026-10；产品与 API 信息请以官方文档为准。</p>
+      </div>
+      <div>
+        <h3>继续</h3>
+        <ul>
+          <li><a href="stage-5.html">阶段 5 · 亲手构建</a></li>
+          <li><a href="audit.html">内容审计台账</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>说明</h3>
+        <ul>
+          <li><a href="about.html">来源与版权</a></li>
+          <li><a href="about.html#verify">待核实清单</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">离线可用 · 无外部请求 · 进度仅保存在本机</div>
+  </div>
+</footer>
+<script src="assets/app.js"></script>
+</body>
+</html>

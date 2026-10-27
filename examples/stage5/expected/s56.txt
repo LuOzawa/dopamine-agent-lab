@@ -1,0 +1,6 @@
+mode=offline（确定性故障注入）
+turn=1 tool=list_docs args={} result={"ok": true, "data": {"files": ["learning.md", "safety.md", "setup.md"]}}
+status=repeated_action turns=2 tool_calls=1 tokens=0
+已完成工具：list_docs
+未完成：列出文档，读取 setup.md，说明配置方法。
+建议下一步：检查错误记录，缩小任务或修正参数后重跑。

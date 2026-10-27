@@ -1,0 +1,10 @@
+mode=offline（确定性故障注入）
+turn=1 tool=list_docs args={broken result={"ok": false, "error": "invalid_json", "message": "参数必须是合法 JSON 对象，请修正后重试。"}
+turn=2 tool=list_docs args={} result={"ok": true, "data": {"files": ["learning.md", "safety.md", "setup.md"]}}
+turn=3 tool=read_doc args={"name":"setup.md"} result={"ok": true, "data": {"source": "setup.md", "text": "# 环境\n本实验推荐 Python 3.11，使用虚拟环境隔离依赖。\n\nAPI 密钥存放在 .env 中，.env 必须加入 .gitignore，不要提交到仓库。\n"}}
+status=completed turns=4 tool_calls=3 tokens=0
+# 环境
+本实验推荐 Python 3.11，使用虚拟环境隔离依赖。
+
+API 密钥存放在 .env 中，.env 必须加入 .gitignore，不要提交到仓库。
+来源：setup.md

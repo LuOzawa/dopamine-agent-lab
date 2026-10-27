@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>框架与工具选型矩阵 | Dopamine Agent Lab</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-accent="lime">
+<a class="skip" href="#main">跳到主要内容</a>
+<div class="read-progress" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true" style="display:grid;place-items:center;font-weight:800">D</span>
+      <span>Dopamine Agent Lab</span>
+    </a>
+    <nav class="topnav" aria-label="主导航">
+      <a href="index.html">学习地图</a>
+      <a href="contents.html">全部目录</a>
+      <a href="search.html">搜索</a>
+      <a href="audit.html">内容审计</a>
+      <a href="about.html" class="nav-about">使用说明</a>
+    </nav>
+    <div class="mini-progress" title="总学习进度">
+      <span class="mini-bar" aria-hidden="true"><i data-mini-bar></i></span>
+      <span data-mini-text>0/47</span>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="doc">
+  <div class="crumbs" style="display:flex;gap:8px;font-size:13px;color:var(--muted);margin-bottom:12px">
+    <a href="index.html" style="color:var(--muted);text-decoration:none;font-weight:600">学习地图</a>
+    <span aria-hidden="true">/</span><span>框架与工具选型</span>
+  </div>
+  <div class="kicker">Tooling Matrix · 2026-10</div>
+  <h1>框架与工具选型矩阵</h1>
+  <p class="lede">把原文首页提到的 13 个 Agent 框架和 8 个工具/平台放到一张表里：定位、适合谁、注意什么、本站先看哪一节。
+    定位来自原教程，评价是学习建议，不是 benchmark。</p>
+
+  <div class="callout warn">
+    <p><b>使用前提：</b>版本、许可证、价格与可用地区变化很快。表里的「适合 / 注意」用于缩小候选，不构成选型结论；
+      真正决定前，跑一个 1 天能完成的最小 demo，并核对官方文档。</p>
+  </div>
+
+  <h2><span class="no">01</span>先问三个问题</h2>
+  <div class="fields three">
+    <div class="field goal">
+      <h3>① 流程确定吗？</h3>
+      <p>步骤可枚举 → 用工作流（4.3）；路径不确定 → 用 Agent。大多数“Agent 需求”其实是工作流。</p>
+    </div>
+    <div class="field task">
+      <h3>② 团队是什么栈？</h3>
+      <p>Python → LangGraph / LangChain / CrewAI / PydanticAI；TypeScript → Mastra；.NET → Semantic Kernel。</p>
+    </div>
+    <div class="field check">
+      <h3>③ 能接受多大锁定？</h3>
+      <p>平台快，但要看数据/流程能否导出；库灵活，但状态、部署、观测要自己搭。</p>
+    </div>
+  </div>
+
+  <h2><span class="no">02</span>13 个 Agent 框架</h2>
+  <p class="small muted">按原教程顺序排列；官方仓库链接来自原文所列项目，点开前请自行确认许可证与当前版本。</p>
+  <div class="table-wrap">
+    <table class="stack" style="min-width:820px">
+      <caption>“适合 / 注意”是学习建议，不是性能排名</caption>
+      <thead><tr><th style="width:170px">框架</th><th style="width:150px">定位</th><th style="width:190px">适合</th><th style="width:210px">注意</th><th style="width:100px">先看</th></tr></thead>
+      <tbody>
+<tr>
+          <td data-label="框架"><b>OpenAI Agents SDK</b><br><a class="origin" href="https://github.com/openai/openai-agents-python" target="_blank" rel="noopener">官方仓库 ↗</a></td>
+          <td data-label="定位">轻量级 Agent 开发框架</td>
+          <td data-label="适合">想快速上手官方抽象、做轻量编排</td>
+          <td data-label="注意">生态较新；复杂状态/持久化仍需自己补</td>
+          <td data-label="先看"><a href="stage-4.html#s4-1">对应小节 →</a></td>
+        </tr>
+<tr>
+          <td data-label="框架"><b>LangGraph</b><br><a class="origin" href="https://github.com/langchain-ai/langgraph" target="_blank" rel="noopener">官方仓库 ↗</a></td>
+          <td data-label="定位">状态机式 Agent 编排</td>
+          <td data-label="适合">长任务、需要断点恢复或审批</td>
+          <td data-label="注意">学习曲线与图设计成本；简单任务别上图</td>
+          <td data-label="先看"><a href="stage-6.html#s6-2">对应小节 →</a></td>
+        </tr>
+<tr>
+          <td data-label="框架"><b>LlamaIndex</b><br><a class="origin" href="https://github.com/run-llama/llama_index" target="_blank" rel="noopener">官方仓库 ↗</a></td>
+          <td data-label="定位">RAG + Agent 框架</td>
+          <td data-label="适合">文档密集的知识库与企业搜索</td>
+          <td data-label="注意">索引维护与检索评估才是主要工作量</td>
+          <td data-label="先看"><a href="stage-3.html#s3-3">对应小节 →</a></td>
+        </tr>
+<tr>
+          <td data-label="框架"><b>Semantic Kernel</b><br><a class="origin" href="https://github.com/microsoft/semantic-kernel" target="_blank" rel="noopener">官方仓库 ↗</a></td>
+          <td data-label="定位">企业级 Agent 编排</td>
+          <td data-label="适合">.NET / 企业集成、已有微软技术栈</td>
+          <td data-label="注意">概念较多，先读官方概念图再动手</td>
+          <td data-label="先看"><a href="stage-4.html#s4-2">对应小节 →</a></td>
+        </tr>
+<tr>
+          <td data-label="框架"><b>PydanticAI</b><br><a class="origin" href="https://github.com/pydantic/pydantic-ai" target="_blank" rel="noopener">官方仓库 ↗</a></td>
+          <td data-label="定位">类型安全 Agent 开发</td>
+          <td data-label="适合">工程化、强类型、需要可测试输出</td>
+          <td data-label="注意">生态相对小；复杂编排要自己搭</td>
+          <td data-label="先看"><a href="stage-5.html#s5-4">对应小节 →</a></td>
+        </tr>
+<tr>
+          <td data-label="框架"><b>Mastra</b><br><a class="origin" href="https://github.com/mastra-ai/mastra" target="_blank" rel="noopener">官方仓库 ↗</a></td>
+          <td data-label="定位">现代全栈 Agent 框架</td>
+          <td data-label="适合">TypeScript / Node 全栈应用</td>
+          <td data-label="注意">JS/TS 生态；Python 团队不适用</td>
+          <td data-label="先看"><a href="stage-4.html#s4-2">对应小节 →</a></td>
+        </tr>
+<tr>
+          <td data-label="框架"><b>Agno（原 Phidata）</b><br><a class="origin" href="https://github.com/agno-agi/agno" target="_blank" rel="noopener">官方仓库 ↗</a></td>
+          <td data-label="定位">多 Agent 应用框架</td>
+          <td data-label="适合">快速搭多 Agent 应用与助手</td>
+          <td data-label="注意">抽象迭代快；锁定前先确认数据可导出</td>
+          <td data-label="先看"><a href="stage-4.html#s4-1">对应小节 →</a></td>
+        </tr>
+<tr>
+          <td data-label="框架"><b>Camel-AI</b><br><a class="origin" href="https://github.com/camel-ai/camel" target="_blank" rel="noopener">官方仓库 ↗</a></td>
+          <td data-label="定位">多智能体协作框架</td>
+          <td data-label="适合">研究角色协作、模拟对话</td>
+          <td data-label="注意">生产可控性与成本要额外设计</td>
+          <td data-label="先看"><a href="stage-8.html#s8-1">对应小节 →</a></td>
+        </tr>
+<tr>
+          <td data-label="框架"><b>MetaGPT</b><br><a class="origin" href="https://github.com/FoundationAgents/MetaGPT" target="_blank" rel="noopener">官方仓库 ↗</a></td>
+          <td data-label="定位">软件公司模拟框架</td>
+          <td data-label="适合">模拟软件团队、生成项目骨架</td>
+          <td data-label="注意">成本高、确定性低，更适合实验</td>
+          <td data-label="先看"><a href="stage-8.html#s8-1">对应小节 →</a></td>
+        </tr>
+<tr>
+          <td data-label="框架"><b>Swarms</b><br><a class="origin" href="https://github.com/kyegomez/swarms" target="_blank" rel="noopener">官方仓库 ↗</a></td>
+          <td data-label="定位">Agent 集群编排</td>
+          <td data-label="适合">批量任务、集群实验</td>
+          <td data-label="注意">协调与成本是主要风险</td>
+          <td data-label="先看"><a href="stage-8.html#s8-1">对应小节 →</a></td>
+        </tr>
+<tr>
+          <td data-label="框架"><b>Haystack</b><br><a class="origin" href="https://github.com/deepset-ai/haystack" target="_blank" rel="noopener">官方仓库 ↗</a></td>
+          <td data-label="定位">搜索与知识增强 Agent</td>
+          <td data-label="适合">企业搜索、RAG 流水线</td>
+          <td data-label="注意">Agent 能力相对专注；复杂自主循环需组合</td>
+          <td data-label="先看"><a href="stage-3.html#s3-3">对应小节 →</a></td>
+        </tr>
+<tr>
+          <td data-label="框架"><b>Atomic Agents</b><br><a class="origin" href="https://github.com/BrainBlend-AI/atomic-agents" target="_blank" rel="noopener">官方仓库 ↗</a></td>
+          <td data-label="定位">可组合 Agent 架构</td>
+          <td data-label="适合">想要清晰分层与可测试性</td>
+          <td data-label="注意">社区规模较小，案例较少</td>
+          <td data-label="先看"><a href="stage-4.html#s4-1">对应小节 →</a></td>
+        </tr>
+<tr>
+          <td data-label="框架"><b>DSPy</b><br><a class="origin" href="https://github.com/stanfordnlp/dspy" target="_blank" rel="noopener">官方仓库 ↗</a></td>
+          <td data-label="定位">声明式 Prompt / Agent 框架</td>
+          <td data-label="适合">评测驱动、需要系统化调优</td>
+          <td data-label="注意">学习曲线与编译/优化成本</td>
+          <td data-label="先看"><a href="stage-3.html#s3-1">对应小节 →</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2><span class="no">03</span>8 个工具 / 平台</h2>
+  <p class="small muted">来自原文「学习资源」表；这里补上“注意”和本站对应小节，不重复价格与额度。</p>
+  <div class="table-wrap">
+    <table class="stack" style="min-width:780px">
+      <caption>工具解决“怎么落地”，框架解决“怎么组织”</caption>
+      <thead><tr><th style="width:170px">工具 / 平台</th><th style="width:150px">定位</th><th style="width:200px">关键优势</th><th style="width:200px">注意</th><th style="width:100px">先看</th></tr></thead>
+      <tbody>
+<tr>
+          <td data-label="工具"><b>DuMate（百度搭子）</b></td>
+          <td data-label="定位">桌面办公 Agent</td>
+          <td data-label="关键优势">文件整理、Excel、PPT、浏览器操作</td>
+          <td data-label="注意">需独立工作区 + 人工验收；产品信息以官网为准</td>
+          <td data-label="先看"><a href="stage-7.html#s7-9">对应小节 →</a></td>
+        </tr>
+<tr>
+          <td data-label="工具"><b>MonkeyCode</b></td>
+          <td data-label="定位">AI 应用开发平台</td>
+          <td data-label="关键优势">云端环境，需求 → 开发 → Review</td>
+          <td data-label="注意">额度、模型支持与可用地区以官网为准</td>
+          <td data-label="先看"><a href="stage-4.html#s4-2">对应小节 →</a></td>
+        </tr>
+<tr>
+          <td data-label="工具"><b>n8n</b><br><a class="origin" href="https://n8n.io/" target="_blank" rel="noopener">官网/仓库 ↗</a></td>
+          <td data-label="定位">工作流自动化</td>
+          <td data-label="关键优势">集成面广、可自托管、可视化</td>
+          <td data-label="注意">适合确定性流程，不适合复杂推理编排</td>
+          <td data-label="先看"><a href="stage-6.html#s6-6">对应小节 →</a></td>
+        </tr>
+<tr>
+          <td data-label="工具"><b>Dify</b><br><a class="origin" href="https://dify.ai/" target="_blank" rel="noopener">官网/仓库 ↗</a></td>
+          <td data-label="定位">可视化 LLM 应用平台</td>
+          <td data-label="关键优势">RAG、工作流、Agent 内置，可自托管</td>
+          <td data-label="注意">复杂逻辑仍建议回到代码；注意许可证</td>
+          <td data-label="先看"><a href="stage-6.html#s6-5">对应小节 →</a></td>
+        </tr>
+<tr>
+          <td data-label="工具"><b>LangChain</b><br><a class="origin" href="https://www.langchain.com/" target="_blank" rel="noopener">官网/仓库 ↗</a></td>
+          <td data-label="定位">代码级 Agent 框架</td>
+          <td data-label="关键优势">生态大、组件全、教程多</td>
+          <td data-label="注意">版本变化快，旧教程 API 可能已迁移</td>
+          <td data-label="先看"><a href="stage-6.html#s6-1">对应小节 →</a></td>
+        </tr>
+<tr>
+          <td data-label="工具"><b>AutoGen</b><br><a class="origin" href="https://github.com/microsoft/autogen" target="_blank" rel="noopener">官网/仓库 ↗</a></td>
+          <td data-label="定位">多 Agent 对话框架</td>
+          <td data-label="关键优势">角色协作、群聊、代码执行</td>
+          <td data-label="注意">0.4+ 与旧版 API 差异大，注意迁移</td>
+          <td data-label="先看"><a href="stage-8.html#s8-1">对应小节 →</a></td>
+        </tr>
+<tr>
+          <td data-label="工具"><b>CrewAI</b><br><a class="origin" href="https://www.crewai.com/" target="_blank" rel="noopener">官网/仓库 ↗</a></td>
+          <td data-label="定位">多角色编排框架</td>
+          <td data-label="关键优势">角色 / 任务 / Crew 结构清晰</td>
+          <td data-label="注意">角色越多成本越高，先用 3 个验证</td>
+          <td data-label="先看"><a href="stage-6.html#s6-3">对应小节 →</a></td>
+        </tr>
+<tr>
+          <td data-label="工具"><b>AutoGPT</b><br><a class="origin" href="https://github.com/Significant-Gravitas/AutoGPT" target="_blank" rel="noopener">官网/仓库 ↗</a></td>
+          <td data-label="定位">自主任务执行（早期项目）</td>
+          <td data-label="关键优势">目标驱动、循环执行，范式启蒙</td>
+          <td data-label="注意">历史意义大于生产使用，适合了解思路</td>
+          <td data-label="先看"><a href="stage-7.html#s7-3">对应小节 →</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2><span class="no">04</span>怎么用这张表</h2>
+  <div class="table-wrap">
+    <table>
+      <caption>推荐路径：先定形态，再选工具，最后写代码</caption>
+      <thead><tr><th style="width:180px">步骤</th><th>做什么</th><th style="width:220px">对应小节</th></tr></thead>
+      <tbody>
+        <tr><td>1 · 定形态</td><td>先判断是工作流、单 Agent 还是多 Agent；写不出一页纸的流程就别选框架</td><td><a href="stage-4.html#s4-1">4.1 架构</a> · <a href="stage-4.html#s4-3">4.3 工作流</a></td></tr>
+        <tr><td>2 · 选平台</td><td>需要可视化/快速验证 → Dify、n8n；需要代码控制 → LangChain / LangGraph</td><td><a href="stage-4.html#s4-2">4.2 平台选型</a></td></tr>
+        <tr><td>3 · 搭最小闭环</td><td>手写一次循环 + 2 个工具，再决定用哪个框架替代样板代码</td><td><a href="stage-5.html#s5-4">5.4 Python 实现 Agent</a></td></tr>
+        <tr><td>4 · 上多 Agent</td><td>只有子任务异构、且单 Agent 已验证不够时，才引入 CrewAI / AutoGen / Swarms</td><td><a href="stage-8.html#s8-1">8.1 多智能体</a></td></tr>
+        <tr><td>5 · 控长期运行</td><td>长任务用图/检查点；持续改进用 harness 与 loop 的预算、验证、停止条件</td><td><a href="stage-6.html#s6-2">6.2 LangGraph</a> · <a href="stage-7.html#s7-2">7.2</a> · <a href="stage-7.html#s7-3">7.3</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <p><b>一个反直觉建议：</b>先用「模型 + 3 个工具 + 一个循环」跑通需求，再选框架。框架解决的是协作、状态与运维，
+      不是需求验证；先选框架再找问题，通常会把复杂度花在不需要的地方。</p>
+  </div>
+
+  <p class="small muted">来源：框架定位与工具清单整理自 <a href="https://www.runoob.com/ai-agent/ai-agent-tutorial.html" target="_blank" rel="noopener">runoob AI Agent 教程</a>；“注意 / 适合”为本站学习建议。
+    想按关键词找具体章节，用 <a href="search.html">全文搜索</a>；想按原文顺序查，用 <a href="contents.html">全部目录</a>。</p>
+
+  <nav class="pager" aria-label="翻页">
+    <a href="index.html"><span class="dir">← 返回</span><span class="t">学习地图</span></a>
+    <a class="next" href="stage-4.html#s4-2"><span class="dir">去学习 →</span><span class="t">4.2 平台选型</span></a>
+  </nav>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-in">
+      <div>
+        <p>蓝本：<a href="https://www.runoob.com/ai-agent/ai-agent-tutorial.html" target="_blank" rel="noopener">runoob · AI Agent 教程</a>。个人本地学习用途，不复制原文全文、不用于商业分发。</p>
+        <p class="small">审计时间 2026-10；产品、框架与 API 信息请以官方文档为准。</p>
+      </div>
+      <div>
+        <h3>学习</h3>
+        <ul>
+          <li><a href="contents.html">全部目录</a></li>
+          <li><a href="search.html">全文搜索</a></li>
+          <li><a href="stage-4.html#s4-2">4.2 平台选型</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>说明</h3>
+        <ul>
+          <li><a href="audit.html">内容审计台账</a></li>
+          <li><a href="about.html">来源与版权</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">离线可用 · 无外部请求 · 进度仅保存在本机</div>
+  </div>
+</footer>
+<script src="assets/app.js"></script>
+</body>
+</html>

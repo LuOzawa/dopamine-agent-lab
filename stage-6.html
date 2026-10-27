@@ -1,0 +1,1768 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>阶段 6 · 框架与平台 | Dopamine Agent Lab</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-accent="yellow">
+<a class="skip" href="#main">跳到主要内容</a>
+<div class="read-progress" aria-hidden="true"></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01" stroke-width="3"/></symbol>
+  <symbol id="i-wrench" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0 5 5L20 11l-8.5 8.5a2.1 2.1 0 0 1-3-3L17 8l-.3-1.7z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v18H6.5A2.5 2.5 0 0 0 4 23z"/><path d="M4 18.5h16"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 16H3z"/><path d="M12 9v5M12 17.5h.01"/></symbol>
+</svg>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true"><svg><use href="#i-spark"/></svg></span>
+      <span>Dopamine Agent Lab</span>
+    </a>
+    <nav class="topnav" aria-label="主导航">
+      <a href="index.html">学习地图</a>
+      <a href="contents.html">全部目录</a>
+      <a href="search.html">搜索</a>
+      <a href="audit.html">内容审计</a>
+      <a href="about.html" class="nav-about">使用说明</a>
+    </nav>
+    <div class="mini-progress" title="总学习进度">
+      <span class="mini-bar" aria-hidden="true"><i data-mini-bar></i></span>
+      <span data-mini-text>0/47</span>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <div class="page-head">
+      <div class="crumbs"><a href="index.html">学习地图</a> <span aria-hidden="true">/</span> <span>阶段 6</span></div>
+      <div class="kicker">Stage 06 · Frameworks &amp; Platforms</div>
+      <h1>框架与平台：把重复劳动交出去</h1>
+      <p class="lede">
+        框架替你处理状态、工具协议、持久化与可视化；代价是版本变化快、抽象层变厚。
+        这一阶段按「代码框架 → 图编排 → 多角色 → 开箱 harness → 可视化平台 → 自动化 → 图检索」展开。
+      </p>
+      <div class="chips">
+        <span class="chip accent">7 节</span>
+        <span class="chip">约 4 小时</span>
+        <span class="chip">前置：阶段 5</span>
+        <span class="chip plain">注意版本差异</span>
+      </div>
+      <div class="stage-progress">
+        <b>本阶段进度</b>
+        <span class="bar" aria-hidden="true"><i data-stage-bar="6"></i></span>
+        <b data-stage-label="6">0 / 7</b>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap layout">
+    <nav class="toc" aria-label="本阶段目录">
+      <details open>
+        <summary>本阶段目录<span class="toc-current">选择小节跳转</span></summary>
+        <div class="toc-content">
+          <ol>
+            <li><a href="#s6-1"><span class="n">6.1</span><span>LangChain</span></a></li>
+            <li><a href="#s6-2"><span class="n">6.2</span><span>LangGraph</span></a></li>
+            <li><a href="#s6-3"><span class="n">6.3</span><span>CrewAI</span></a></li>
+            <li><a href="#s6-4"><span class="n">6.4</span><span>Deep Agents</span></a></li>
+            <li><a href="#s6-5"><span class="n">6.5</span><span>Dify</span></a></li>
+            <li><a href="#s6-6"><span class="n">6.6</span><span>n8n</span></a></li>
+            <li><a href="#s6-7"><span class="n">6.7</span><span>GraphRAG</span></a></li>
+          </ol>
+          <p class="toc-done">不必全学：按你的项目形态选 2–3 个深入即可。</p>
+        </div>
+      </details>
+    </nav>
+
+    <div>
+      <div class="callout warn">
+        <svg aria-hidden="true"><use href="#i-alert"/></svg>
+        <p><b>版本提醒：</b>LangChain 已进入 1.x，官方推荐用 <code>from langchain.agents import create_agent</code>；
+          原文 6.1 的 <code>AgentExecutor</code> / <code>create_tool_calling_agent</code> 属于旧版写法。
+          RAG 示例中的 <code>langchain.text_splitter</code> 也已拆分到 <code>langchain-text-splitters</code>。</p>
+      </div>
+
+      <article class="lesson" id="s6-1">
+        <div class="lesson-head">
+          <span class="lesson-badge">6.1</span>
+          <h2>LangChain：用 create_agent 起一个 Agent</h2>
+        </div>
+        <div class="lesson-tags">
+          <span class="chip accent">约 40 分钟</span>
+          <span class="chip plain">代码框架</span>
+          <a class="origin" href="https://www.runoob.com/ai-agent/langchain-agent.html" target="_blank" rel="noopener">对照原文 ↗</a>
+        </div>
+        <div class="fields">
+          <div class="field goal">
+            <h3><svg aria-hidden="true"><use href="#i-target"/></svg>学习目标</h3>
+            <p>用 LangChain 1.x 的 <code>create_agent</code> 建一个带两个工具的 Agent，并能解释它替你做了什么。</p>
+          </div>
+          <div class="field">
+            <h3><svg aria-hidden="true"><use href="#i-book"/></svg>前置知识</h3>
+            <p>5.4 手写循环；会读 Python 装饰器。</p>
+          </div>
+          <div class="field wide">
+            <h3><svg aria-hidden="true"><use href="#i-list"/></svg>核心要点</h3>
+            <ul>
+              <li>包已拆分：<code>langchain-core</code>（抽象）、<code>langchain-openai</code>（模型）、<code>langchain</code>（Agent 入口）。</li>
+              <li>1.x 的最小写法：<code>create_agent(model, tools)</code>，返回可直接 <code>invoke</code> 的 Agent。</li>
+              <li>工具用 <code>@tool</code> 装饰，函数签名与 docstring 就是模型看到的 schema 和描述。</li>
+              <li>消息状态统一为 <code>messages</code> 列表；调试时打印完整消息链，而不是只看最终回答。</li>
+              <li>旧教程的 <code>initialize_agent</code> / <code>AgentExecutor</code> 已属 legacy，迁移前先查官方迁移指南。</li>
+            </ul>
+          </div>
+          <div class="field task wide">
+            <h3><svg aria-hidden="true"><use href="#i-wrench"/></svg>动手任务（40 分钟）</h3>
+            <p>把 5.2 的两个工具迁到 LangChain：定义 <code>@tool</code>，用 <code>create_agent</code> 组装，跑两个查询并打印完整消息链。对比手写循环，列出框架替你处理的 3 件事。</p>
+          </div>
+          <div class="field check wide">
+            <h3><svg aria-hidden="true"><use href="#i-check"/></svg>自检</h3>
+            <div class="qa">
+              <details>
+                <summary>为什么旧教程的 <code>initialize_agent</code> 现在容易跑不通？</summary>
+                <div class="a">它属于 0.x 时代的 API，相关模块在 1.x 中已迁移或移除；模型类也搬到了独立包。这不是你的环境问题，而是版本断层——按当前官方文档重写更省时间。</div>
+              </details>
+              <details>
+                <summary>LCEL 和 Agent 是什么关系？</summary>
+                <div class="a">LCEL 是组合原语（用管道把组件串起来），适合确定性的链；Agent 是「由模型决定下一步」的循环。两者可以嵌套：Agent 内部节点仍可用 LCEL 组合。</div>
+              </details>
+            </div>
+          </div>
+        </div>
+<!-- STAGE6-EXAMPLE-1:START -->
+<section class="runnable-example" id="example-s6-1" aria-labelledby="example-title-1">
+<h3 id="example-title-1">可运行实验 · 真实 create_agent 工具闭环</h3>
+<p>固定模型响应替代在线推理，LangChain 仍真正执行 weather 与 calculate。两个问题分别覆盖北京/上海天气和不同算式；天气是教学数据。完整消息中可核对 AI tool_call id 与 ToolMessage.tool_call_id。</p>
+<div id="stage6-setup" class="example-setup"><h4>先选环境，再运行对应课程</h4>
+<p><a class="btn sm" href="examples/stage6-examples.zip" download>下载第 6 阶段完整示例包</a> · <a href="examples/stage6/README.md">完整安装说明</a> · <a href="examples/stage6/VALIDATION.md">验证记录</a></p>
+<p>全部命令先进入 examples/stage6；ZIP 则进入解压后的 stage6。实测 Python 3.11.15 / macOS Apple Silicon。框架、CrewAI、GraphRAG 分别使用三个虚拟环境，避免混用依赖；只安装当前课程需要的环境。页面中的版本是复现基线，不是最新版承诺。</p>
+<p>Windows：创建环境时将 python3.11 换成 py -3.11；执行时将 .venv-名称/bin/python 换成 .\.venv-名称\Scripts\python.exe；graphrag 同理换为 Scripts\graphrag.exe。无需激活环境。Windows/Linux 未在本次环境实测。</p>
+<p><b>验证范围：</b>7 个入口已实跑、15 项行为与契约测试通过；n8n 运行真实断网工作流。Dify 回放仅验证客户端，GraphRAG dry-run 仅验证配置；真实模型调用、平台发布和索引质量没有标为已验证。离线固定响应不能作为模型表现保证。</p></div>
+<p><b>依赖：</b>langchain==1.4.7、langgraph==1.2.18、deepagents==0.7.32、langchain-openai==1.7.3。完整传递依赖：<a href="examples/stage6/requirements/frameworks-lock.txt">requirements/frameworks-lock.txt</a>。</p>
+<pre class="example-code example-command" tabindex="0" role="region" aria-label="命令"><code>python3.11 -m venv .venv-frameworks
+.venv-frameworks/bin/python -m pip install -r requirements/frameworks-lock.txt</code></pre>
+<h4>运行命令与预期输出</h4>
+<pre class="example-code example-command" tabindex="0" role="region" aria-label="命令"><code>.venv-frameworks/bin/python s61_langchain.py</code></pre>
+<pre class="example-code example-output" tabindex="0" role="region" aria-label="离线实跑标准输出"><code>模式：固定模型响应；真实 LangChain 工具循环
+问题：北京天气；(2+3)*6
+  工具 weather: 22°C 晴
+  工具 calculate: 30
+  消息类型：human → ai → tool → ai → tool → ai
+问题：上海天气；8/2
+  工具 weather: 25°C 多云
+  工具 calculate: 4.0
+  消息类型：human → ai → tool → ai → tool → ai</code></pre>
+<p><b>验收：</b>每个问题都有 human → ai → tool → ai → tool → ai；北京算式得到 30，上海算式得到 4.0。修改问题需同步修改固定响应，不能用它评价真实模型理解能力。</p>
+<h4>常见报错与处理</h4><ul>
+<li><b>No module named langchain_core：</b>先安装 frameworks-lock.txt，并使用 .venv-frameworks 的解释器。</li>
+<li><b>create_tool_calling_agent / AgentExecutor 导入失败：</b>此例固定 LangChain 1.4.7，使用 create_agent，不混用旧教程。</li>
+<li><b>固定响应耗尽 / GraphRecursionError：</b>核对工具名和调用参数；本例设置递归上限 12，不无限重试。</li>
+<li><b>错误：仅允许数字和加减乘除：</b>计算器拒绝函数调用和幂运算，除零也返回错误。</li>
+</ul><p>接口依据：<a href="https://docs.langchain.com/oss/python/langchain/agents" target="_blank" rel="noopener">官方文档</a>；具体行为以本例固定版本实测为准。</p>
+<h4>完整代码与配套文件</h4><p>下列内容来自实际文件；运行时使用完整下载包，保留共享模块、资料与工作流目录。</p>
+<details class="example-source"><summary>s61_langchain.py</summary><p><a href="examples/stage6/s61_langchain.py">打开文件</a></p>
+<pre class="example-code example-source-code" tabindex="0" role="region" aria-label="s61_langchain.py"><code>&quot;&quot;&quot;真实 create_agent + 两个本地工具，无密钥运行两个固定问题。&quot;&quot;&quot;
+import ast
+import operator
+from scripted_model import ScriptedModel, call
+from langchain.agents import create_agent
+from langchain_core.messages import AIMessage, ToolMessage
+from langchain_core.tools import tool
+
+
+@tool
+def weather(city: str) -&gt; str:
+    &quot;&quot;&quot;返回北京或上海的固定教学天气，不是实时天气。&quot;&quot;&quot;
+    data = {&#x27;北京&#x27;: &#x27;22°C 晴&#x27;, &#x27;上海&#x27;: &#x27;25°C 多云&#x27;}
+    return data.get(city, &#x27;错误：仅支持北京或上海&#x27;)
+
+
+@tool
+def calculate(expression: str) -&gt; str:
+    &quot;&quot;&quot;计算只含数字、括号及加减乘除的算式，不执行任意代码。&quot;&quot;&quot;
+    ops = {ast.Add: operator.add, ast.Sub: operator.sub,
+           ast.Mult: operator.mul, ast.Div: operator.truediv}
+    def visit(node):
+        if isinstance(node, ast.Constant) and type(node.value) in (int, float):
+            if abs(node.value) &gt; 1e9:
+                raise ValueError(&#x27;数字过大&#x27;)
+            return node.value
+        if isinstance(node, ast.BinOp) and type(node.op) in ops:
+            return ops[type(node.op)](visit(node.left), visit(node.right))
+        raise ValueError(&#x27;仅允许数字和加减乘除&#x27;)
+    try:
+        if len(expression) &gt; 100:
+            raise ValueError(&#x27;算式过长&#x27;)
+        return str(visit(ast.parse(expression, mode=&#x27;eval&#x27;).body))
+    except (ValueError, SyntaxError, ZeroDivisionError, OverflowError) as exc:
+        return f&#x27;错误：{exc}&#x27;
+
+
+def run(city=&#x27;北京&#x27;, expression=&#x27;(2+3)*6&#x27;):
+    model = ScriptedModel(steps=[call(&#x27;weather&#x27;, {&#x27;city&#x27;: city}, 1),
+        call(&#x27;calculate&#x27;, {&#x27;expression&#x27;: expression}, 2), AIMessage(content=&#x27;工具执行完成。&#x27;)])
+    agent = create_agent(model=model, tools=[weather, calculate],
+                         system_prompt=&#x27;使用工具核对天气和算式。&#x27;)
+    return agent.invoke({&#x27;messages&#x27;: [{&#x27;role&#x27;: &#x27;user&#x27;,
+        &#x27;content&#x27;: f&#x27;{city}天气如何？计算 {expression}。&#x27;}]}, {&#x27;recursion_limit&#x27;: 12})
+
+
+if __name__ == &#x27;__main__&#x27;:
+    print(&#x27;模式：固定模型响应；真实 LangChain 工具循环&#x27;)
+    for city, expr in [(&#x27;北京&#x27;, &#x27;(2+3)*6&#x27;), (&#x27;上海&#x27;, &#x27;8/2&#x27;)]:
+        result = run(city, expr)
+        print(f&#x27;问题：{city}天气；{expr}&#x27;)
+        for m in result[&#x27;messages&#x27;]:
+            if isinstance(m, ToolMessage):
+                print(f&#x27;  工具 {m.name}: {m.content}&#x27;)
+        print(&#x27;  消息类型：&#x27; + &#x27; → &#x27;.join(m.type for m in result[&#x27;messages&#x27;]))</code></pre>
+</details>
+<details class="example-source"><summary>scripted_model.py</summary><p><a href="examples/stage6/scripted_model.py">打开文件</a></p>
+<pre class="example-code example-source-code" tabindex="0" role="region" aria-label="scripted_model.py"><code>&quot;&quot;&quot;固定响应只替代模型；编排、工具执行和消息流仍使用真实框架。&quot;&quot;&quot;
+import os
+
+# 教学离线模式不启用云端 tracing。
+os.environ[&#x27;LANGSMITH_TRACING&#x27;] = &#x27;false&#x27;
+os.environ[&#x27;LANGCHAIN_TRACING_V2&#x27;] = &#x27;false&#x27;
+
+from langchain_core.language_models.chat_models import BaseChatModel
+from langchain_core.messages import AIMessage
+from langchain_core.outputs import ChatGeneration, ChatResult
+
+
+class ScriptedModel(BaseChatModel):
+    steps: list[AIMessage]
+
+    @property
+    def _llm_type(self):
+        return &#x27;teaching-script-no-network&#x27;
+
+    def bind_tools(self, tools, **kwargs):
+        return self
+
+    def _generate(self, messages, stop=None, run_manager=None, **kwargs):
+        index = sum(isinstance(m, AIMessage) for m in messages)
+        if index &gt;= len(self.steps):
+            raise RuntimeError(&#x27;固定响应耗尽：检查工具错误或步骤配置&#x27;)
+        return ChatResult(generations=[ChatGeneration(message=self.steps[index])])
+
+
+def call(name, args, number):
+    return AIMessage(content=&#x27;&#x27;, tool_calls=[{
+        &#x27;name&#x27;: name, &#x27;args&#x27;: args, &#x27;id&#x27;: f&#x27;call_{number}&#x27;, &#x27;type&#x27;: &#x27;tool_call&#x27;}])</code></pre>
+</details>
+<details class="example-source"><summary>requirements/frameworks.txt</summary><p><a href="examples/stage6/requirements/frameworks.txt">打开文件</a></p>
+<pre class="example-code example-source-code" tabindex="0" role="region" aria-label="requirements/frameworks.txt"><code>langchain==1.4.7
+langgraph==1.2.18
+deepagents==0.7.32
+langchain-openai==1.7.3</code></pre>
+</details>
+</section>
+<!-- STAGE6-EXAMPLE-1:END -->
+        <div class="lesson-actions">
+          <button class="done-btn" type="button" data-done-id="s6-1" aria-pressed="false">
+            <span class="dot" aria-hidden="true"><svg><use href="#i-check"/></svg></span>
+            <span class="label">标记完成</span>
+          </button>
+          <span class="meta-note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-5.html#s5-7"><span class="dir">← 上一节</span><span class="t">5.7 Python 实现 RAG：让答案带出处</span></a>
+          <a class="next" href="stage-6.html#s6-2"><span class="dir">下一节 →</span><span class="t">6.2 LangGraph：把循环画成状态图</span></a>
+        </nav>
+</article>
+
+      <article class="lesson" id="s6-2">
+        <div class="lesson-head">
+          <span class="lesson-badge">6.2</span>
+          <h2>LangGraph：把循环画成状态图</h2>
+        </div>
+        <div class="lesson-tags">
+          <span class="chip accent">约 45 分钟</span>
+          <span class="chip plain">图编排</span>
+          <a class="origin" href="https://www.runoob.com/ai-agent/langgraph-quick-start.html" target="_blank" rel="noopener">对照原文 ↗</a>
+        </div>
+        <div class="fields">
+          <div class="field goal">
+            <h3><svg aria-hidden="true"><use href="#i-target"/></svg>学习目标</h3>
+            <p>用 StateGraph 实现「检索 → 判断 → 回答 / 重试」，并加上检查点与循环上限。</p>
+          </div>
+          <div class="field">
+            <h3><svg aria-hidden="true"><use href="#i-book"/></svg>前置知识</h3>
+            <p>6.1；理解有向图与状态机。</p>
+          </div>
+          <div class="field wide">
+            <h3><svg aria-hidden="true"><use href="#i-list"/></svg>核心要点</h3>
+            <ul>
+              <li>三个基本元素：<b>State</b>（共享数据）、<b>Node</b>（函数）、<b>Edge</b>（流转，可条件分支）。</li>
+              <li>相比 while 循环，图的价值在显式状态、可持久化、可中断恢复、可视化。</li>
+              <li>Checkpointer 让长任务可以断点续跑，也支撑 human-in-the-loop 审批。</li>
+              <li>循环一定配递归上限 / 退出条件，否则图会转圈。</li>
+              <li>节点要小且单一职责，状态字段要少；把大对象塞进 State 会让持久化变慢。</li>
+            </ul>
+          </div>
+          <div class="field task wide">
+            <h3><svg aria-hidden="true"><use href="#i-wrench"/></svg>动手任务（45 分钟）</h3>
+            <p>画并实现 4 节点图：<code>retrieve</code> → <code>grade</code> → 条件边 → <code>answer</code> 或 <code>retry</code>。加内存 checkpointer，跑两个输入（一个能答、一个证据不足），验证重试不会无限循环。</p>
+          </div>
+          <div class="field check wide">
+            <h3><svg aria-hidden="true"><use href="#i-check"/></svg>自检</h3>
+            <div class="qa">
+              <details>
+                <summary>什么时候该用 LangGraph，而不是一个 while 循环？</summary>
+                <div class="a">需要持久化状态、断点恢复、人工审批、可视化或多分支协作时。简单线性任务用图反而增加理解成本。</div>
+              </details>
+              <details>
+                <summary>Checkpointer 的实际价值是什么？</summary>
+                <div class="a">它保存执行状态，支持中断与审批后恢复；本课的内存后端仅在当前进程有效。跨进程或崩溃恢复需要持久化后端。</div>
+              </details>
+            </div>
+          </div>
+        </div>
+<!-- STAGE6-EXAMPLE-2:START -->
+<section class="runnable-example" id="example-s6-2" aria-labelledby="example-title-2">
+<h3 id="example-title-2">可运行实验 · checkpoint 恢复与有界检索</h3>
+<p>真实 StateGraph 包含 retrieve、grade、retry、answer 四个节点。第一次检索故意为空，第二次根据固定规则命中或拒答；这验证分支与预算，不模拟语义检索。InMemorySaver 暂停在 answer 前，以同一 thread_id 恢复。</p>
+<p><a href="#stage6-setup">环境、下载包与验证范围见 6.1</a>。</p>
+<p><b>依赖：</b>langchain==1.4.7、langgraph==1.2.18、deepagents==0.7.32、langchain-openai==1.7.3。完整传递依赖：<a href="examples/stage6/requirements/frameworks-lock.txt">requirements/frameworks-lock.txt</a>。</p>
+<p>沿用 6.1 的 .venv-frameworks 环境。<a href="examples/stage6/scripted_model.py">共享固定模型模块</a> 已包含在完整包中。</p>
+<h4>运行命令与预期输出</h4>
+<pre class="example-code example-command" tabindex="0" role="region" aria-label="命令"><code>.venv-frameworks/bin/python s62_langgraph.py</code></pre>
+<pre class="example-code example-output" tabindex="0" role="region" aria-label="离线实跑标准输出"><code>暂停：next=answer；检索=2 次
+恢复：密钥放在 .env，不提交到版本库。
+暂停：next=answer；检索=2 次
+恢复：资料不足，停止检索。
+存储：进程内 InMemorySaver；退出进程后不保留</code></pre>
+<p><b>验收：</b>两个问题都检索 2 次；密钥问题返回资料，火星问题拒答。不同 thread_id 的 checkpoint 隔离；退出进程后内存 checkpoint 消失。</p>
+<h4>常见报错与处理</h4><ul>
+<li><b>缺少 thread_id：</b>每次 invoke/get_state 都传 configurable.thread_id。</li>
+<li><b>恢复后没有结果：</b>恢复用 graph.invoke(None, 原 config)，不要重新传 initial 状态覆盖本次流程。</li>
+<li><b>GraphRecursionError：</b>检查 grade 是否在 attempts &gt;= 2 时路由 answer；示例 recursion_limit 为 16。</li>
+</ul><p>接口依据：<a href="https://docs.langchain.com/oss/python/langgraph/persistence" target="_blank" rel="noopener">官方文档</a>；具体行为以本例固定版本实测为准。</p>
+<h4>完整代码与配套文件</h4><p>下列内容来自实际文件；运行时使用完整下载包，保留共享模块、资料与工作流目录。</p>
+<details class="example-source"><summary>s62_langgraph.py</summary><p><a href="examples/stage6/s62_langgraph.py">打开文件</a></p>
+<pre class="example-code example-source-code" tabindex="0" role="region" aria-label="s62_langgraph.py"><code>&quot;&quot;&quot;真实 StateGraph：有界重试、拒答、checkpoint 暂停后恢复。&quot;&quot;&quot;
+from typing import TypedDict
+from langgraph.graph import StateGraph, START, END
+from langgraph.checkpoint.memory import InMemorySaver
+
+
+class State(TypedDict):
+    question: str
+    attempts: int
+    docs: list[str]
+    sufficient: bool
+    answer: str
+
+
+def build_graph(pause=False):
+    def retrieve(s):
+        # 第一次故意未命中，用于确定性验证 retry 分支。
+        n = s[&#x27;attempts&#x27;] + 1
+        docs = [&#x27;密钥放在 .env，不提交到版本库。&#x27;] if n == 2 and &#x27;密钥&#x27; in s[&#x27;question&#x27;] else []
+        return {&#x27;attempts&#x27;: n, &#x27;docs&#x27;: docs}
+    def grade(s):
+        return {&#x27;sufficient&#x27;: bool(s[&#x27;docs&#x27;])}
+    def retry(s):
+        return {&#x27;answer&#x27;: &#x27;&#x27;}
+    def answer(s):
+        return {&#x27;answer&#x27;: s[&#x27;docs&#x27;][0] if s[&#x27;sufficient&#x27;] else &#x27;资料不足，停止检索。&#x27;}
+    graph = StateGraph(State)
+    for name, fn in [(&#x27;retrieve&#x27;, retrieve), (&#x27;grade&#x27;, grade), (&#x27;retry&#x27;, retry), (&#x27;answer&#x27;, answer)]:
+        graph.add_node(name, fn)
+    graph.add_edge(START, &#x27;retrieve&#x27;)
+    graph.add_edge(&#x27;retrieve&#x27;, &#x27;grade&#x27;)
+    graph.add_conditional_edges(&#x27;grade&#x27;, lambda s:
+        &#x27;answer&#x27; if s[&#x27;sufficient&#x27;] or s[&#x27;attempts&#x27;] &gt;= 2 else &#x27;retry&#x27;)
+    graph.add_edge(&#x27;retry&#x27;, &#x27;retrieve&#x27;)
+    graph.add_edge(&#x27;answer&#x27;, END)
+    return graph.compile(checkpointer=InMemorySaver(), interrupt_before=[&#x27;answer&#x27;] if pause else [])
+
+
+def initial(question):
+    return {&#x27;question&#x27;: question, &#x27;attempts&#x27;: 0, &#x27;docs&#x27;: [], &#x27;sufficient&#x27;: False, &#x27;answer&#x27;: &#x27;&#x27;}
+
+
+def demo():
+    graph = build_graph(pause=True)
+    for i, question in enumerate([&#x27;密钥放哪里？&#x27;, &#x27;火星天气如何？&#x27;]):
+        config = {&#x27;configurable&#x27;: {&#x27;thread_id&#x27;: f&#x27;lesson-{i}&#x27;}, &#x27;recursion_limit&#x27;: 16}
+        graph.invoke(initial(question), config)
+        saved = graph.get_state(config)
+        print(f&#x27;暂停：next={saved.next[0]}；检索={saved.values[&quot;attempts&quot;]} 次&#x27;)
+        result = graph.invoke(None, config)
+        print(f&#x27;恢复：{result[&quot;answer&quot;]}&#x27;)
+    print(&#x27;存储：进程内 InMemorySaver；退出进程后不保留&#x27;)
+
+
+if __name__ == &#x27;__main__&#x27;:
+    demo()</code></pre>
+</details>
+</section>
+<!-- STAGE6-EXAMPLE-2:END -->
+        <div class="lesson-actions">
+          <button class="done-btn" type="button" data-done-id="s6-2" aria-pressed="false">
+            <span class="dot" aria-hidden="true"><svg><use href="#i-check"/></svg></span>
+            <span class="label">标记完成</span>
+          </button>
+          <span class="meta-note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-6.html#s6-1"><span class="dir">← 上一节</span><span class="t">6.1 LangChain：用 create_agent 起一个 Agent</span></a>
+          <a class="next" href="stage-6.html#s6-3"><span class="dir">下一节 →</span><span class="t">6.3 CrewAI：角色分工不是越多越好</span></a>
+        </nav>
+</article>
+
+      <article class="lesson" id="s6-3">
+        <div class="lesson-head">
+          <span class="lesson-badge">6.3</span>
+          <h2>CrewAI：角色分工不是越多越好</h2>
+        </div>
+        <div class="lesson-tags">
+          <span class="chip accent">约 35 分钟</span>
+          <span class="chip plain">多角色</span>
+          <a class="origin" href="https://www.runoob.com/ai-agent/crewai-agent.html" target="_blank" rel="noopener">对照原文 ↗</a>
+        </div>
+        <div class="fields">
+          <div class="field goal">
+            <h3><svg aria-hidden="true"><use href="#i-target"/></svg>学习目标</h3>
+            <p>用 3 个角色（调研 / 写作 / 审校）完成一条内容流水线，并解释每个角色的边界。</p>
+          </div>
+          <div class="field">
+            <h3><svg aria-hidden="true"><use href="#i-book"/></svg>前置知识</h3>
+            <p>4.1 多 Agent 架构；5.2 工具调用。</p>
+          </div>
+          <div class="field wide">
+            <h3><svg aria-hidden="true"><use href="#i-list"/></svg>核心要点</h3>
+            <ul>
+              <li>三要素：<b>Agent</b>（角色 / 目标 / 背景）、<b>Task</b>（描述 / 期望输出）、<b>Crew</b>（流程）。</li>
+              <li>顺序流程适合有依赖的流水线；层级流程适合需要动态分配的任务，但成本更高。</li>
+              <li>角色边界要写清「不做什么」，否则会出现重复劳动或互相改稿。</li>
+              <li>输出用结构化 schema（如 Pydantic）比自然语言「请输出 JSON」可靠。</li>
+              <li>角色增加会带来额外模型调用与上下文成本；先用 3 个角色测量，不预设成本线性增长。</li>
+            </ul>
+          </div>
+          <div class="field task wide">
+            <h3><svg aria-hidden="true"><use href="#i-wrench"/></svg>动手任务（35 分钟）</h3>
+            <p>定义 researcher / writer / editor 三个角色，跑一个 300 字的产品介绍。记录每个角色的实际输出与耗时，并回答：删掉 editor 后质量差多少？这个差距值不值那份成本？</p>
+          </div>
+          <div class="field check wide">
+            <h3><svg aria-hidden="true"><use href="#i-check"/></svg>自检</h3>
+            <div class="qa">
+              <details>
+                <summary>角色越多效果越好吗？</summary>
+                <div class="a">不是。角色增加会带来协调成本、信息丢失和风格冲突；只有在子任务确实异构、且每个角色都有明确验收标准时才有收益。</div>
+              </details>
+              <details>
+                <summary>如何保证多角色输出格式一致？</summary>
+                <div class="a">给每个任务定义结构化输出模型，并在 Crew 层做校验；不要让下游角色「从自然语言里猜」上游给了什么。</div>
+              </details>
+            </div>
+          </div>
+        </div>
+<!-- STAGE6-EXAMPLE-3:START -->
+<section class="runnable-example" id="example-s6-3" aria-labelledby="example-title-3">
+<h3 id="example-title-3">可运行实验 · 三角色顺序交接与对照</h3>
+<p>实际创建 Crew、Agent、Task，按 researcher → writer → editor 顺序运行，Task.context 传递上游结果。固定草稿故意含无依据承诺，固定编辑稿删除承诺；再运行无编辑版本，查看差异。</p>
+<p><a href="#stage6-setup">环境、下载包与验证范围见 6.1</a>。</p>
+<p><b>依赖：</b>crewai==1.15.30。完整传递依赖：<a href="examples/stage6/requirements/crew-lock.txt">requirements/crew-lock.txt</a>。</p>
+<pre class="example-code example-command" tabindex="0" role="region" aria-label="命令"><code>python3.11 -m venv .venv-crew
+.venv-crew/bin/python -m pip install -r requirements/crew-lock.txt</code></pre>
+<h4>运行命令与预期输出</h4>
+<pre class="example-code example-command" tabindex="0" role="region" aria-label="命令"><code>.venv-crew/bin/python s63_crewai.py</code></pre>
+<pre class="example-code example-output" tabindex="0" role="region" aria-label="离线实跑标准输出"><code>角色：researcher → writer → editor
+各角色模型调用数：1, 1, 1
+编辑收到草稿：True
+最终介绍：这是一款面向 Agent 初学者的分阶段学习站。你可以从模型调用开始，逐步练习工具调用、状态保存、任务编排与知识检索，再根据项目需要选择框架。每节课程包含目标、动手任务与验收标准。配套示例提供固定依赖、运行命令和预期输出，方便对照自己的执行结果。遇到错误时，可以先检查常见报错，再缩小问题范围。搜索入口帮助定位概念，移动端目录方便切换课程，继续学习入口可以回到尚未完成的内容。学习进度保存在当前浏览器，不会自动同步到其他设备。建议先运行无需密钥的实验，确认程序流程，再按课程说明接入真实模型。示例中的固定响应用于验证编排逻辑，不能证明模型质量，也不保证学习时长。完成练习后，请用自己的问题复测，并记录失败场景。
+去掉编辑后仍有无依据承诺：True
+注意：这是固定对照样本；实际耗时与质量需使用真实模型另行测量。</code></pre>
+<h4>进一步练习</h4>
+<pre class="example-code example-command" tabindex="0" role="region" aria-label="命令"><code>.venv-crew/bin/python s63_crewai.py --timings</code></pre>
+<p><b>验收：</b>各角色调用固定模型 1 次；编辑收到完整草稿；最终介绍约 300 字。--timings 输出各角色结果与本机耗时，数值不固定。该实验不能推出多角色必然比单 Agent 写得好。</p>
+<h4>常见报错与处理</h4><ul>
+<li><b>PermissionError：用户配置目录：</b>CrewAI 导入时会初始化配置/凭据目录，检查当前用户权限；任务缓存放在本例 .runtime/crew。</li>
+<li><b>近似 token count / DeprecationWarning：</b>这是当前框架的计数与内部弃用提示；离线模型没有 API token 费用。</li>
+<li><b>角色未收到上文：</b>检查 Task.context 指向之前的任务，使用 Process.sequential。</li>
+</ul><p>接口依据：<a href="https://docs.crewai.com/v1.15.30/en/learn/custom-llm" target="_blank" rel="noopener">官方文档</a>；具体行为以本例固定版本实测为准。</p>
+<h4>完整代码与配套文件</h4><p>下列内容来自实际文件；运行时使用完整下载包，保留共享模块、资料与工作流目录。</p>
+<details class="example-source"><summary>s63_crewai.py</summary><p><a href="examples/stage6/s63_crewai.py">打开文件</a></p>
+<pre class="example-code example-source-code" tabindex="0" role="region" aria-label="s63_crewai.py"><code>&quot;&quot;&quot;三个实际 CrewAI 角色，固定模型输出；不衡量真实写作质量。&quot;&quot;&quot;
+import os
+import argparse
+from pathlib import Path
+os.environ[&#x27;CREWAI_STORAGE_DIR&#x27;] = str(Path(__file__).resolve().parent / &#x27;.runtime&#x27; / &#x27;crew&#x27;)
+os.environ[&#x27;OTEL_SDK_DISABLED&#x27;] = &#x27;true&#x27;
+os.environ[&#x27;CREWAI_TELEMETRY_DISABLED&#x27;] = &#x27;true&#x27;
+os.environ[&#x27;CREWAI_TRACING_ENABLED&#x27;] = &#x27;false&#x27;
+
+from crewai import Agent, Task, Crew, Process, BaseLLM
+
+FACTS = &#x27;事实：学习站提供分阶段课程、本地进度、搜索与可下载实验。进度仅保存在当前浏览器。&#x27;
+DRAFT = &#x27;这款学习站帮助初学者练习 Agent，并保证每个人都能在一天内精通所有框架。&#x27;
+FINAL = (&#x27;这是一款面向 Agent 初学者的分阶段学习站。你可以从模型调用开始，逐步练习工具调用、&#x27;
+         &#x27;状态保存、任务编排与知识检索，再根据项目需要选择框架。每节课程包含目标、动手任务与验收标准。&#x27;
+         &#x27;配套示例提供固定依赖、运行命令和预期输出，方便对照自己的执行结果。遇到错误时，可以先检查&#x27;
+         &#x27;常见报错，再缩小问题范围。搜索入口帮助定位概念，移动端目录方便切换课程，继续学习入口可以&#x27;
+         &#x27;回到尚未完成的内容。学习进度保存在当前浏览器，不会自动同步到其他设备。建议先运行无需密钥的&#x27;
+         &#x27;实验，确认程序流程，再按课程说明接入真实模型。示例中的固定响应用于验证编排逻辑，不能证明模型&#x27;
+         &#x27;质量，也不保证学习时长。完成练习后，请用自己的问题复测，并记录失败场景。&#x27;)
+
+
+class RoleModel(BaseLLM):
+    def __init__(self, output):
+        super().__init__(model=&#x27;offline-script&#x27;, temperature=0)
+        self.output = output
+        self.calls = 0
+        self.seen = []
+        self.task_seconds = 0.0
+
+    def call(self, messages, tools=None, callbacks=None, available_functions=None, **kwargs):
+        self.calls += 1
+        self.seen.append(str(messages))
+        return &#x27;Final Answer: &#x27; + self.output
+
+    def supports_function_calling(self):
+        return False
+
+
+def run(with_editor=True):
+    agents, tasks, models = [], [], []
+    roles = [(&#x27;researcher&#x27;, &#x27;整理可核对事实&#x27;, FACTS), (&#x27;writer&#x27;, &#x27;写约 300 字介绍&#x27;, DRAFT)]
+    if with_editor:
+        roles.append((&#x27;editor&#x27;, &#x27;删除无依据承诺，输出约 300 字介绍&#x27;, FINAL))
+    for role, goal, output in roles:
+        model = RoleModel(output)
+        agent = Agent(role=role, goal=goal, backstory=&#x27;只处理学习站产品资料。&#x27;,
+                      llm=model, allow_delegation=False, max_iter=2, verbose=False)
+        task = Task(description=goal, expected_output=goal, agent=agent, context=list(tasks))
+        agents.append(agent); tasks.append(task); models.append(model)
+    crew = Crew(agents=agents, tasks=tasks, process=Process.sequential,
+                memory=False, cache=False, verbose=False, tracing=False)
+    result = crew.kickoff()
+    for task, model in zip(tasks, models):
+        model.task_seconds = task.execution_duration or 0.0
+    return result, models
+
+
+if __name__ == &#x27;__main__&#x27;:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(&#x27;--timings&#x27;, action=&#x27;store_true&#x27;)
+    args = parser.parse_args()
+    result, models = run()
+    print(&#x27;角色：&#x27; + &#x27; → &#x27;.join(t.agent for t in result.tasks_output))
+    print(&#x27;各角色模型调用数：&#x27; + &#x27;, &#x27;.join(str(m.calls) for m in models))
+    print(&#x27;编辑收到草稿：&#x27; + str(DRAFT in models[-1].seen[0]))
+    if args.timings:
+        for output, model in zip(result.tasks_output, models):
+            print(f&#x27;{output.agent}：{model.task_seconds:.3f}s；输出：{output.raw}&#x27;)
+    print(&#x27;最终介绍：&#x27; + result.raw)
+    without, _ = run(False)
+    print(&#x27;去掉编辑后仍有无依据承诺：&#x27; + str(&#x27;保证&#x27; in without.raw))
+    print(&#x27;注意：这是固定对照样本；实际耗时与质量需使用真实模型另行测量。&#x27;)</code></pre>
+</details>
+<details class="example-source"><summary>requirements/crew.txt</summary><p><a href="examples/stage6/requirements/crew.txt">打开文件</a></p>
+<pre class="example-code example-source-code" tabindex="0" role="region" aria-label="requirements/crew.txt"><code>crewai==1.15.30</code></pre>
+</details>
+</section>
+<!-- STAGE6-EXAMPLE-3:END -->
+        <div class="lesson-actions">
+          <button class="done-btn" type="button" data-done-id="s6-3" aria-pressed="false">
+            <span class="dot" aria-hidden="true"><svg><use href="#i-check"/></svg></span>
+            <span class="label">标记完成</span>
+          </button>
+          <span class="meta-note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-6.html#s6-2"><span class="dir">← 上一节</span><span class="t">6.2 LangGraph：把循环画成状态图</span></a>
+          <a class="next" href="stage-6.html#s6-4"><span class="dir">下一节 →</span><span class="t">6.4 Deep Agents：开箱 harness 的边界</span></a>
+        </nav>
+</article>
+
+      <article class="lesson" id="s6-4">
+        <div class="lesson-head">
+          <span class="lesson-badge">6.4</span>
+          <h2>Deep Agents：开箱 harness 的边界</h2>
+        </div>
+        <div class="lesson-tags">
+          <span class="chip accent">约 30 分钟</span>
+          <span class="chip plain">长任务</span>
+          <a class="origin" href="https://www.runoob.com/ai-agent/deep-agents-usage.html" target="_blank" rel="noopener">对照原文 ↗</a>
+        </div>
+        <div class="fields">
+          <div class="field goal">
+            <h3><svg aria-hidden="true"><use href="#i-target"/></svg>学习目标</h3>
+            <p>理解「内置规划 / 文件系统 / 子 Agent / 压缩」解决了长任务的哪些具体问题，以及它隐藏了哪些复杂度。</p>
+          </div>
+          <div class="field">
+            <h3><svg aria-hidden="true"><use href="#i-book"/></svg>前置知识</h3>
+            <p>6.2 LangGraph；3.4 上下文工程。</p>
+          </div>
+          <div class="field wide">
+            <h3><svg aria-hidden="true"><use href="#i-list"/></svg>核心要点</h3>
+            <ul>
+              <li>把「待办清单」外置成文件，模型不必把全部计划塞在上下文里。</li>
+              <li>文件系统既是工作区也是外部记忆：中间结果落盘，按需读取。</li>
+              <li>子 Agent 用来隔离上下文：把一个大搜索交给子 Agent，只把结论带回主线程。</li>
+              <li>上下文压缩、长任务执行、人工审批是「开箱能力」，但仍需你定义验收与权限。</li>
+              <li>抽象越高，排错越依赖框架日志；先确认它能导出 trace。</li>
+            </ul>
+          </div>
+          <div class="field task wide">
+            <h3><svg aria-hidden="true"><use href="#i-wrench"/></svg>动手任务（30 分钟）</h3>
+            <p>用它建一个「读取 3 个文件 → 写摘要到 summary.md」的任务，观察待办与中间结果如何保存；本课使用状态文件，持久落盘需另选后端。然后故意让其中一个文件不存在，看它如何恢复。</p>
+          </div>
+          <div class="field check wide">
+            <h3><svg aria-hidden="true"><use href="#i-check"/></svg>自检</h3>
+            <div class="qa">
+              <details>
+                <summary>为什么用文件而不是把所有内容留在上下文？</summary>
+                <div class="a">上下文有成本与注意力上限；文件可以持久化、可检索、可人工检查，也方便断点续跑。代价是要设计目录结构与读写规则。</div>
+              </details>
+              <details>
+                <summary>这类框架最大的隐藏成本是什么？</summary>
+                <div class="a">行为不透明：多层抽象后，出错时很难判断是提示、工具、压缩还是子 Agent 的问题。选型时要确认可观测性与可替换性。</div>
+              </details>
+            </div>
+          </div>
+        </div>
+<!-- STAGE6-EXAMPLE-4:START -->
+<section class="runnable-example" id="example-s6-4" aria-labelledby="example-title-4">
+<h3 id="example-title-4">可运行实验 · 内置文件工具、待办与缺文件恢复</h3>
+<p>Deep Agents 真正调用内置文件工具；预设路径先读 missing.md，再 ls 找到三份资料，读取后写摘要。0.7.32 显式加入 TodoListMiddleware 才提供 write_todos。StateBackend() 的文件位于图状态，不写入电脑磁盘。</p>
+<p><a href="#stage6-setup">环境、下载包与验证范围见 6.1</a>。</p>
+<p><b>依赖：</b>langchain==1.4.7、langgraph==1.2.18、deepagents==0.7.32、langchain-openai==1.7.3。完整传递依赖：<a href="examples/stage6/requirements/frameworks-lock.txt">requirements/frameworks-lock.txt</a>。</p>
+<p>沿用 6.1 的 .venv-frameworks 环境。<a href="examples/stage6/scripted_model.py">共享固定模型模块</a> 已包含在完整包中。</p>
+<h4>运行命令与预期输出</h4>
+<pre class="example-code example-command" tabindex="0" role="region" aria-label="命令"><code>.venv-frameworks/bin/python s64_deepagents.py</code></pre>
+<pre class="example-code example-output" tabindex="0" role="region" aria-label="离线实跑标准输出"><code>实际工具：write_todos → read_file → ls → read_file → read_file → read_file → write_file → write_todos
+待办：completed
+状态文件 /summary.md：
+# 学习摘要
+
+先离线验证，再接入模型；密钥不公开；测试应覆盖失败与停止条件。
+
+宿主磁盘未写入；模型响应为固定脚本，缺文件恢复路径为预设。</code></pre>
+<p><b>验收：</b>执行 8 次工具，missing.md 返回 not found，/summary.md 写入成功，待办状态 completed。固定恢复路线不代表模型自主规划；未调用 shell 或子 Agent。</p>
+<h4>常见报错与处理</h4><ul>
+<li><b>write_todos is not a valid tool：</b>保留 middleware=[TodoListMiddleware()]，不要依赖旧版本默认行为。</li>
+<li><b>File not found：</b>missing.md 是故意注入；检查下一步 ls 与后续三个真实路径。</li>
+<li><b>摘要逐字换行：</b>此版本 FileData.content 是字符串，直接打印，不能按旧版列表 join。</li>
+<li><b>重启后文件消失：</b>StateBackend 只在图状态内；持久化需另选后端。</li>
+</ul><p>接口依据：<a href="https://docs.langchain.com/oss/python/deepagents/backends" target="_blank" rel="noopener">官方文档</a>；具体行为以本例固定版本实测为准。</p>
+<h4>完整代码与配套文件</h4><p>下列内容来自实际文件；运行时使用完整下载包，保留共享模块、资料与工作流目录。</p>
+<details class="example-source"><summary>s64_deepagents.py</summary><p><a href="examples/stage6/s64_deepagents.py">打开文件</a></p>
+<pre class="example-code example-source-code" tabindex="0" role="region" aria-label="s64_deepagents.py"><code>&quot;&quot;&quot;真实 Deep Agents 内置文件工具与 todos；文件仅在图状态中。&quot;&quot;&quot;
+from scripted_model import ScriptedModel, call
+from langchain_core.messages import AIMessage, ToolMessage
+from deepagents import create_deep_agent
+from deepagents.backends import StateBackend
+from deepagents.backends.utils import create_file_data
+from langchain.agents.middleware import TodoListMiddleware
+
+DOCS = {&#x27;/docs/plan.md&#x27;: &#x27;课程：先运行离线示例，再接入真实模型。&#x27;,
+        &#x27;/docs/security.md&#x27;: &#x27;密钥：放在环境变量中，不写进公开代码。&#x27;,
+        &#x27;/docs/testing.md&#x27;: &#x27;测试：同时检查成功、失败和停止条件。&#x27;}
+SUMMARY = &#x27;# 学习摘要\n\n先离线验证，再接入模型；密钥不公开；测试应覆盖失败与停止条件。\n&#x27;
+
+
+def run():
+    steps = [call(&#x27;write_todos&#x27;, {&#x27;todos&#x27;: [{&#x27;content&#x27;: &#x27;读三份资料并写摘要&#x27;, &#x27;status&#x27;: &#x27;in_progress&#x27;}]}, 1),
+             call(&#x27;read_file&#x27;, {&#x27;file_path&#x27;: &#x27;/docs/missing.md&#x27;}, 2),
+             call(&#x27;ls&#x27;, {&#x27;path&#x27;: &#x27;/docs&#x27;}, 3)]
+    steps += [call(&#x27;read_file&#x27;, {&#x27;file_path&#x27;: p}, i) for i, p in enumerate(DOCS, 4)]
+    steps += [call(&#x27;write_file&#x27;, {&#x27;file_path&#x27;: &#x27;/summary.md&#x27;, &#x27;content&#x27;: SUMMARY}, 7),
+              call(&#x27;write_todos&#x27;, {&#x27;todos&#x27;: [{&#x27;content&#x27;: &#x27;读三份资料并写摘要&#x27;, &#x27;status&#x27;: &#x27;completed&#x27;}]}, 8),
+              AIMessage(content=&#x27;摘要已写入状态文件 /summary.md。&#x27;)]
+    agent = create_deep_agent(model=ScriptedModel(steps=steps), backend=StateBackend(),
+                             middleware=[TodoListMiddleware()],
+                             system_prompt=&#x27;只读提供的资料，在状态文件中写摘要。&#x27;)
+    return agent.invoke({&#x27;messages&#x27;: [{&#x27;role&#x27;: &#x27;user&#x27;, &#x27;content&#x27;: &#x27;读取三份资料并写摘要。&#x27;}],
+                         &#x27;files&#x27;: {p: create_file_data(c) for p, c in DOCS.items()}},
+                        {&#x27;recursion_limit&#x27;: 30})
+
+
+if __name__ == &#x27;__main__&#x27;:
+    result = run()
+    names = [m.name for m in result[&#x27;messages&#x27;] if isinstance(m, ToolMessage)]
+    print(&#x27;实际工具：&#x27; + &#x27; → &#x27;.join(names))
+    print(&#x27;待办：&#x27; + result[&#x27;todos&#x27;][0][&#x27;status&#x27;])
+    print(&#x27;状态文件 /summary.md：&#x27;)
+    print(result[&#x27;files&#x27;][&#x27;/summary.md&#x27;][&#x27;content&#x27;])
+    print(&#x27;宿主磁盘未写入；模型响应为固定脚本，缺文件恢复路径为预设。&#x27;)</code></pre>
+</details>
+</section>
+<!-- STAGE6-EXAMPLE-4:END -->
+        <div class="lesson-actions">
+          <button class="done-btn" type="button" data-done-id="s6-4" aria-pressed="false">
+            <span class="dot" aria-hidden="true"><svg><use href="#i-check"/></svg></span>
+            <span class="label">标记完成</span>
+          </button>
+          <span class="meta-note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-6.html#s6-3"><span class="dir">← 上一节</span><span class="t">6.3 CrewAI：角色分工不是越多越好</span></a>
+          <a class="next" href="stage-6.html#s6-5"><span class="dir">下一节 →</span><span class="t">6.5 Dify：把原型做快，把边界想清</span></a>
+        </nav>
+</article>
+
+      <article class="lesson" id="s6-5">
+        <div class="lesson-head">
+          <span class="lesson-badge">6.5</span>
+          <h2>Dify：把原型做快，把边界想清</h2>
+        </div>
+        <div class="lesson-tags">
+          <span class="chip accent">约 30 分钟</span>
+          <span class="chip plain">可视化平台</span>
+          <a class="origin" href="https://www.runoob.com/ai-agent/dify-usage.html" target="_blank" rel="noopener">对照原文 ↗</a>
+        </div>
+        <div class="fields">
+          <div class="field goal">
+            <h3><svg aria-hidden="true"><use href="#i-target"/></svg>学习目标</h3>
+            <p>在 Dify 里搭一个带知识库的问答应用并发布 API，同时说清它不适合做什么。</p>
+          </div>
+          <div class="field">
+            <h3><svg aria-hidden="true"><use href="#i-book"/></svg>前置知识</h3>
+            <p>3.3 RAG；4.2 平台选型。</p>
+          </div>
+          <div class="field wide">
+            <h3><svg aria-hidden="true"><use href="#i-list"/></svg>核心要点</h3>
+            <ul>
+              <li>应用类型不同：Chatflow 偏对话，Workflow 偏批处理/自动化，Agent 模式偏自主决策。</li>
+              <li>知识库效果取决于解析、分段与召回设置，不取决于「上传了多少文档」。</li>
+              <li>变量、节点、条件分支让流程可视化；复杂逻辑仍建议在代码里实现。</li>
+              <li>自托管要注意许可证、升级与备份；SaaS 要注意数据出境与保留策略。</li>
+              <li>发布 API 后要有鉴权、限流与日志，别把内部测试端点直接暴露。</li>
+            </ul>
+          </div>
+          <div class="field task wide">
+            <h3><svg aria-hidden="true"><use href="#i-wrench"/></svg>动手任务（30 分钟）</h3>
+            <p>导入 5 条 FAQ 建知识库，搭一个最小 Chatflow（开始 → 知识检索 → LLM → 回答），测 3 个问题：能答的、跨段综合的、没有答案的；另存多份文档后再验证跨文档检索。记录「没有答案」时它是否拒答。</p>
+          </div>
+          <div class="field check wide">
+            <h3><svg aria-hidden="true"><use href="#i-check"/></svg>自检</h3>
+            <div class="qa">
+              <details>
+                <summary>Dify 和 LangChain 是替代关系吗？</summary>
+                <div class="a">不是。Dify 是可视化平台，适合快速搭建与交付；LangChain 是代码库，适合深度定制。很多团队用 Dify 验证，再用代码重写核心链路。</div>
+              </details>
+              <details>
+                <summary>知识库答不准，先查什么？</summary>
+                <div class="a">先看解析与分段（表格/标题是否被切碎），再看召回数量与阈值，最后看提示是否要求「仅依据资料」。不要一上来就换模型。</div>
+              </details>
+            </div>
+          </div>
+        </div>
+<!-- STAGE6-EXAMPLE-5:START -->
+<section class="runnable-example" id="example-s6-5" aria-labelledby="example-title-5">
+<h3 id="example-title-5">可运行实验 · Dify Chatflow 客户端与三问验收</h3>
+<p>先回放三个 API v1 契约样本，验证响应、引用和拒答处理。配套 DIFY.md 给出五条 FAQ、Start → 检索 → LLM → Answer 的绑定及发布步骤。Dify Cloud 持续更新，没有可锁定的云端版本；本次未部署在线 Chatflow。</p>
+<p><a href="#stage6-setup">环境、下载包与验证范围见 6.1</a>。</p>
+<p><b>依赖：</b>Python 3.11 标准库，无 pip 包；Dify API v1。在线配置见 <a href="examples/stage6/DIFY.md">DIFY.md</a>。</p>
+<h4>运行命令与预期输出</h4>
+<pre class="example-code example-command" tabindex="0" role="region" aria-label="命令"><code>python3.11 s65_dify.py</code></pre>
+<pre class="example-code example-output" tabindex="0" role="region" aria-label="离线实跑标准输出"><code>模式：API 契约样本回放；尚未连接 Dify 知识库
+问题：如何查找课程？
+回答：使用搜索入口输入关键词，或从阶段目录选择小节。
+来源：faq.md
+问题：进度如何保存，换设备后还能继续吗？
+回答：进度保存在当前浏览器；换设备不会自动同步。
+来源：faq.md
+问题：明天北京会下雨吗？
+回答：资料不足，无法回答天气问题。
+来源：无（资料外拒答）</code></pre>
+<h4>进一步练习</h4>
+<pre class="example-code example-command" tabindex="0" role="region" aria-label="命令"><code>python3.11 s65_dify.py --live --query &quot;进度如何保存，换设备后还能继续吗？&quot;</code></pre>
+<p><b>验收：</b>离线回放显示单段回答、跨段综合和资料外拒答。真实模式先按 DIFY.md 设置 DIFY_API_KEY / DIFY_BASE_URL；在线需核对引用命中 FAQ 2、3，而非仅检查响应是否有 answer。</p>
+<h4>常见报错与处理</h4><ul>
+<li><b>缺少 DIFY_API_KEY：</b>从已发布 Chatflow 的 API Access 获取应用密钥，设为环境变量；脚本不自动读取 .env。</li>
+<li><b>HTTP 401 / 404 / 400：</b>检查应用密钥、含 /v1 的 API 地址、应用类型及 inputs 必填变量。</li>
+<li><b>HTTP 429 / 超时：</b>检查额度、服务状态与网络；客户端超时 30 秒、不自动重试。</li>
+<li><b>返回空来源 / 无关问题不拒答：</b>检查知识库索引、检索 result 绑定、上下文提示与引用设置。</li>
+</ul><p>接口依据：<a href="https://docs.dify.ai/en/api-reference/chat-messages/send-chat-message" target="_blank" rel="noopener">官方文档</a>；具体行为以本例固定版本实测为准。</p>
+<h4>完整代码与配套文件</h4><p>下列内容来自实际文件；运行时使用完整下载包，保留共享模块、资料与工作流目录。</p>
+<details class="example-source"><summary>s65_dify.py</summary><p><a href="examples/stage6/s65_dify.py">打开文件</a></p>
+<pre class="example-code example-source-code" tabindex="0" role="region" aria-label="s65_dify.py"><code>&quot;&quot;&quot;Dify Chatflow API v1 客户端。默认回放契约样本，--live 才发送网络请求。&quot;&quot;&quot;
+import argparse
+import json
+import os
+from pathlib import Path
+from urllib.request import Request, urlopen
+from urllib.error import HTTPError, URLError
+from urllib.parse import urlparse
+
+
+def ask(query, base_url, key, opener=urlopen):
+    parsed = urlparse(base_url)
+    if parsed.scheme not in (&#x27;https&#x27;, &#x27;http&#x27;) or not parsed.hostname:
+        raise ValueError(&#x27;DIFY_BASE_URL 必须是完整 http(s) URL，含 /v1&#x27;)
+    if parsed.scheme == &#x27;http&#x27; and parsed.hostname not in (&#x27;localhost&#x27;, &#x27;127.0.0.1&#x27;, &#x27;::1&#x27;):
+        raise ValueError(&#x27;远程服务请使用 HTTPS&#x27;)
+    if not key.strip():
+        raise ValueError(&#x27;缺少 DIFY_API_KEY：使用已发布 Chatflow 的应用密钥&#x27;)
+    payload = {&#x27;inputs&#x27;: {}, &#x27;query&#x27;: query, &#x27;response_mode&#x27;: &#x27;blocking&#x27;, &#x27;user&#x27;: &#x27;stage6-learner&#x27;}
+    request = Request(base_url.rstrip(&#x27;/&#x27;) + &#x27;/chat-messages&#x27;,
+                      data=json.dumps(payload).encode(),
+                      headers={&#x27;Authorization&#x27;: &#x27;Bearer &#x27; + key, &#x27;Content-Type&#x27;: &#x27;application/json&#x27;})
+    try:
+        with opener(request, timeout=30) as response:
+            data = json.load(response)
+    except HTTPError as exc:
+        raise RuntimeError(f&#x27;Dify HTTP {exc.code}：检查应用发布、密钥、模型与额度&#x27;) from None
+    except (URLError, TimeoutError):
+        raise RuntimeError(&#x27;Dify 连接失败或超时：检查地址与网络&#x27;) from None
+    except (ValueError, UnicodeError):
+        raise RuntimeError(&#x27;Dify 返回的不是有效 JSON&#x27;) from None
+    return summarize(data)
+
+
+def summarize(data):
+    if not isinstance(data, dict) or not isinstance(data.get(&#x27;answer&#x27;), str) or not data[&#x27;answer&#x27;].strip():
+        raise ValueError(&#x27;响应缺少非空 answer；确认应用类型为 Chatflow&#x27;)
+    metadata = data.get(&#x27;metadata&#x27;) or {}
+    if not isinstance(metadata, dict):
+        raise ValueError(&#x27;响应 metadata 必须是对象&#x27;)
+    resources = metadata.get(&#x27;retriever_resources&#x27;) or []
+    if not isinstance(resources, list):
+        raise ValueError(&#x27;retriever_resources 必须是列表&#x27;)
+    names = sorted({r[&#x27;document_name&#x27;] for r in resources if isinstance(r, dict) and r.get(&#x27;document_name&#x27;)})
+    return {&#x27;answer&#x27;: data[&#x27;answer&#x27;], &#x27;sources&#x27;: names}
+
+
+def demo():
+    cases = json.loads((Path(__file__).parent/&#x27;data/dify-cases.json&#x27;).read_text())
+    print(&#x27;模式：API 契约样本回放；尚未连接 Dify 知识库&#x27;)
+    for case in cases:
+        result = summarize(case[&#x27;response&#x27;])
+        print(&#x27;问题：&#x27; + case[&#x27;query&#x27;])
+        print(&#x27;回答：&#x27; + result[&#x27;answer&#x27;])
+        print(&#x27;来源：&#x27; + (&#x27;、&#x27;.join(result[&#x27;sources&#x27;]) or &#x27;无（资料外拒答）&#x27;))
+
+
+if __name__ == &#x27;__main__&#x27;:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(&#x27;--live&#x27;, action=&#x27;store_true&#x27;)
+    parser.add_argument(&#x27;--query&#x27;, default=&#x27;进度如何保存，换设备后还能继续吗？&#x27;)
+    args = parser.parse_args()
+    try:
+        if args.live:
+            print(json.dumps(ask(args.query, os.getenv(&#x27;DIFY_BASE_URL&#x27;, &#x27;https://api.dify.ai/v1&#x27;),
+                                 os.getenv(&#x27;DIFY_API_KEY&#x27;, &#x27;&#x27;)), ensure_ascii=False, indent=2))
+        else:
+            demo()
+    except (ValueError, RuntimeError) as exc:
+        parser.exit(1, str(exc) + &#x27;\n&#x27;)</code></pre>
+</details>
+<details class="example-source"><summary>data/faq.md</summary><p><a href="examples/stage6/data/faq.md">打开文件</a></p>
+<pre class="example-code example-source-code" tabindex="0" role="region" aria-label="data/faq.md"><code># 学习站 FAQ（教学数据）
+
+## 1. 面向谁？
+学习站面向有基础 Python 知识、想练习 Agent 开发的初学者。
+
+## 2. 进度怎么保存？
+学习进度保存在当前浏览器的本地存储中。保存失败时页面会显示提示，可以重试。
+
+## 3. 能跨设备继续吗？
+本示例不提供账号和云端同步。换设备或清除浏览器数据后，原设备的本地进度不会自动迁移。
+
+## 4. 必须填写 API 密钥吗？
+离线练习不需要模型密钥。真实模型模式需要自行配置密钥，并可能产生 API 费用。
+
+## 5. 如何查找课程？
+使用搜索入口输入关键词，或在当前阶段目录中选择小节。</code></pre>
+</details>
+<details class="example-source"><summary>data/dify-cases.json</summary><p><a href="examples/stage6/data/dify-cases.json">打开文件</a></p>
+<pre class="example-code example-source-code" tabindex="0" role="region" aria-label="data/dify-cases.json"><code>[
+  {&quot;query&quot;:&quot;如何查找课程？&quot;,&quot;response&quot;:{&quot;answer&quot;:&quot;使用搜索入口输入关键词，或从阶段目录选择小节。&quot;,&quot;metadata&quot;:{&quot;retriever_resources&quot;:[{&quot;document_name&quot;:&quot;faq.md&quot;,&quot;content&quot;:&quot;使用搜索入口输入关键词，或在当前阶段目录中选择小节。&quot;}]}}},
+  {&quot;query&quot;:&quot;进度如何保存，换设备后还能继续吗？&quot;,&quot;response&quot;:{&quot;answer&quot;:&quot;进度保存在当前浏览器；换设备不会自动同步。&quot;,&quot;metadata&quot;:{&quot;retriever_resources&quot;:[{&quot;document_name&quot;:&quot;faq.md&quot;,&quot;segment_id&quot;:&quot;faq-2&quot;},{&quot;document_name&quot;:&quot;faq.md&quot;,&quot;segment_id&quot;:&quot;faq-3&quot;}]}}},
+  {&quot;query&quot;:&quot;明天北京会下雨吗？&quot;,&quot;response&quot;:{&quot;answer&quot;:&quot;资料不足，无法回答天气问题。&quot;,&quot;metadata&quot;:{&quot;retriever_resources&quot;:[]}}}
+]</code></pre>
+</details>
+<details class="example-source"><summary>DIFY.md</summary><p><a href="examples/stage6/DIFY.md">打开文件</a></p>
+<pre class="example-code example-source-code" tabindex="0" role="region" aria-label="DIFY.md"><code># 6.5 Dify：从知识库到已发布 Chatflow
+
+客户端仅依赖 Python 3.11 标准库，契约为 Dify API v1（核对日期 2026-10-27）。Dify Cloud 持续更新，无可锁定的云端版本；本例不声称已验证某个自托管版本。离线回放证明响应处理可运行，不证明平台检索正确。
+
+1. 创建知识库，上传 `data/faq.md`。按标题分段，确保 FAQ 2 和 FAQ 3 分成两个 chunk。选择你有权限的 embedding 模型并等待索引完成。
+2. 新建 **Chatflow**，连接 Start → Knowledge Retrieval → LLM → Answer。检索 query 绑定 Start 的用户问题，选择上述知识库，Top K 设为 3（阈值按实际结果调节）。
+3. LLM 的 Context 绑定检索节点 result，用户输入绑定用户问题。系统提示词：`只根据提供的上下文回答。上下文没有答案时说“资料不足”。不要使用外部知识补全。` 在 Answer 节点绑定 LLM 的 text。
+4. 启用引用与归属显示。在调试器运行下面 3 个问题，查看命中的 chunk，再发布应用，从该应用的 API Access 获取 API key。
+5. 终端设置 DIFY_API_KEY（不要写进 HTML/工作流）；Cloud 使用 `https://api.dify.ai/v1`，自托管使用自己的 API 基地址。脚本不自动读取 .env。
+
+macOS / Linux（隐藏输入；变量仅在当前 shell 有效）：
+```sh
+read -s DIFY_API_KEY
+export DIFY_API_KEY
+export DIFY_BASE_URL=https://api.dify.ai/v1
+python s65_dify.py --live --query &quot;如何查找课程？&quot;
+python s65_dify.py --live --query &quot;进度如何保存，换设备后还能继续吗？&quot;
+python s65_dify.py --live --query &quot;明天北京会下雨吗？&quot;
+unset DIFY_API_KEY
+```
+
+PowerShell 可通过 `$env:DIFY_BASE_URL=&#x27;https://api.dify.ai/v1&#x27;` 设置地址，使用终端安全输入将密钥存入 `$env:DIFY_API_KEY`；结束后 `Remove-Item Env:DIFY_API_KEY`。不要把密钥粘贴进代码或截图。
+
+验收：第一个问题回答查找方法；第二个同时覆盖 FAQ 2、3（跨段综合，而非多个文档）；第三个明确拒答。前两个 metadata.retriever_resources 应有 faq.md；引用的存在不等于语义正确，需核对 chunk 和答案。云端实际措辞与分数会变化。若要做跨文档检索，将 FAQ 2、3 分别另存文件上传，再重复第二问。
+
+常见报错：401 检查应用密钥；404 检查 /v1/chat-messages 路径和已发布应用；400 检查 inputs 必填变量及 Chatflow 类型；429 检查额度；返回空来源时检查索引、检索绑定与引用设置；无关问题仍回答时检查上下文限制和调试轨迹。
+
+官方契约：https://docs.dify.ai/en/api-reference/chat-messages/send-chat-message</code></pre>
+</details>
+</section>
+<!-- STAGE6-EXAMPLE-5:END -->
+        <div class="lesson-actions">
+          <button class="done-btn" type="button" data-done-id="s6-5" aria-pressed="false">
+            <span class="dot" aria-hidden="true"><svg><use href="#i-check"/></svg></span>
+            <span class="label">标记完成</span>
+          </button>
+          <span class="meta-note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-6.html#s6-4"><span class="dir">← 上一节</span><span class="t">6.4 Deep Agents：开箱 harness 的边界</span></a>
+          <a class="next" href="stage-6.html#s6-6"><span class="dir">下一节 →</span><span class="t">6.6 n8n：系统之间的事，交给自动化</span></a>
+        </nav>
+</article>
+
+      <article class="lesson" id="s6-6">
+        <div class="lesson-head">
+          <span class="lesson-badge">6.6</span>
+          <h2>n8n：系统之间的事，交给自动化</h2>
+        </div>
+        <div class="lesson-tags">
+          <span class="chip accent">约 30 分钟</span>
+          <span class="chip plain">自动化</span>
+          <a class="origin" href="https://www.runoob.com/ai-agent/n8n-usage.html" target="_blank" rel="noopener">对照原文 ↗</a>
+        </div>
+        <div class="fields">
+          <div class="field goal">
+            <h3><svg aria-hidden="true"><use href="#i-target"/></svg>学习目标</h3>
+            <p>用 n8n 做一个「请求提交 → 模型处理 → 格式验证 → 回应」自动化，并处理格式失败。</p>
+          </div>
+          <div class="field">
+            <h3><svg aria-hidden="true"><use href="#i-book"/></svg>前置知识</h3>
+            <p>4.3 工作流；基本 HTTP 概念。</p>
+          </div>
+          <div class="field wide">
+            <h3><svg aria-hidden="true"><use href="#i-list"/></svg>核心要点</h3>
+            <ul>
+              <li>三要素：触发器（Webhook / 定时 / 应用事件）、节点、凭证。</li>
+              <li>n8n 的强项是系统集成与确定性流程，不是复杂推理编排。</li>
+              <li>每个节点都要考虑幂等：重复触发不能重复发邮件/重复扣款。</li>
+              <li>错误工作流（Error Workflow）与重试策略要提前配，否则失败无人知晓。</li>
+              <li>自托管要关注版本升级、数据库备份与凭证加密。</li>
+            </ul>
+          </div>
+          <div class="field task wide">
+            <h3><svg aria-hidden="true"><use href="#i-wrench"/></svg>动手任务（30 分钟）</h3>
+            <p>搭建 Webhook → 模型 HTTP 请求 → Code 格式验证 → IF 分支 → 回应。故意让模型返回非 JSON 或缺少字段，检查友好兜底；先用随包的固定输入工作流验证相同分支。</p>
+          </div>
+          <div class="field check wide">
+            <h3><svg aria-hidden="true"><use href="#i-check"/></svg>自检</h3>
+            <div class="qa">
+              <details>
+                <summary>n8n 适合做什么，不适合做什么？</summary>
+                <div class="a">适合定时任务、表单到系统的数据流、跨应用通知；不适合需要复杂状态机、多轮推理或精细上下文控制的任务——那类更适合代码框架。</div>
+              </details>
+              <details>
+                <summary>为什么幂等性在自动化里特别重要？</summary>
+                <div class="a">网络抖动、重试、重复触发都很常见。没有幂等键，一次失败重试可能变成两次发信、两次扣款。用业务 ID 去重是最简单的防线。</div>
+              </details>
+            </div>
+          </div>
+        </div>
+<!-- STAGE6-EXAMPLE-6:START -->
+<section class="runnable-example" id="example-s6-6" aria-labelledby="example-title-6">
+<h3 id="example-title-6">可运行实验 · 真实 n8n 引擎的 JSON 兜底</h3>
+<p>在 n8n 2.44.7 的断网临时容器里执行 Manual Trigger → 固定模型输出 → Validate → IF → 成功或兜底。包含合法 JSON、损坏 JSON、缺字段三条输入。另附可导入的 Webhook → 模型 HTTP 请求 → 同一验证逻辑 → 回应工作流。</p>
+<p><a href="#stage6-setup">环境、下载包与验证范围见 6.1</a>。</p>
+<p><b>依赖：</b>Python 3.11 标准库、Docker、n8n==2.44.7。先启动 Docker，再下载镜像：</p><pre class="example-code example-command" tabindex="0" role="region" aria-label="命令"><code>docker pull docker.n8n.io/n8nio/n8n:2.44.7</code></pre>
+<h4>运行命令与预期输出</h4>
+<pre class="example-code example-command" tabindex="0" role="region" aria-label="命令"><code>python3.11 s66_n8n.py</code></pre>
+<pre class="example-code example-output" tabindex="0" role="region" aria-label="离线实跑标准输出"><code>n8n 2.44.7：真实工作流；容器断网；模型输出为固定样本
+valid → success：学习站提供分阶段课程。
+malformed → fallback：生成结果格式错误，请稍后重试。
+missing-field → fallback：生成结果格式错误，请稍后重试。
+3/3 分支验收通过；容器退出即删除数据库</code></pre>
+<p><b>验收：</b>真实 n8n 执行的三条输入分别进入 success、fallback、fallback。只读挂载资料，退出/超时后清理本次容器；没有向外发送通知。在线 workflow 尚需绑定凭据并完成 webhook 端到端验收。</p>
+<h4>常见报错与处理</h4><ul>
+<li><b>Cannot connect to Docker daemon：</b>先启动 Docker Desktop，再 pull 固定镜像。</li>
+<li><b>Mounts denied / timeout：</b>允许 Docker 访问解压目录，检查资源；启动器最长等待 120 秒。</li>
+<li><b>Python task runner missing：</b>此例只使用 JS Code 节点；验证 JS Task Runner 正常注册。</li>
+<li><b>Webhook 404 / 模型 401：</b>按 N8N.md 开启测试监听或发布，绑定 Header Auth；不把密钥写入工作流 JSON。</li>
+</ul><p>接口依据：<a href="https://docs.n8n.io/hosting/cli-commands/" target="_blank" rel="noopener">官方文档</a>；具体行为以本例固定版本实测为准。</p>
+<h4>完整代码与配套文件</h4><p>下列内容来自实际文件；运行时使用完整下载包，保留共享模块、资料与工作流目录。</p>
+<details class="example-source"><summary>s66_n8n.py</summary><p><a href="examples/stage6/s66_n8n.py">打开文件</a></p>
+<pre class="example-code example-source-code" tabindex="0" role="region" aria-label="s66_n8n.py"><code>&quot;&quot;&quot;在断网的临时 n8n 容器中实际执行工作流，并检查成功/失败路由。&quot;&quot;&quot;
+import json
+from pathlib import Path
+import subprocess
+import uuid
+
+IMAGE = &#x27;docker.n8n.io/n8nio/n8n:2.44.7&#x27;
+ROOT = Path(__file__).resolve().parent
+
+
+def parse_execution(output):
+    # n8n --rawOutput 前仍可能打印迁移与 runner 日志。
+    decoder = json.JSONDecoder()
+    for i, char in enumerate(output):
+        if char != &#x27;{&#x27;:
+            continue
+        try:
+            value, _ = decoder.raw_decode(output[i:])
+        except ValueError:
+            continue
+        if isinstance(value, dict) and &#x27;data&#x27; in value and &#x27;finished&#x27; in value:
+            return value
+    raise RuntimeError(&#x27;没有找到 n8n 执行结果；检查容器日志&#x27;)
+
+
+def verify(result):
+    if result.get(&#x27;status&#x27;) != &#x27;success&#x27;:
+        raise RuntimeError(&#x27;工作流失败：&#x27; + str(result.get(&#x27;status&#x27;)))
+    runs = result[&#x27;data&#x27;][&#x27;resultData&#x27;][&#x27;runData&#x27;]
+    items = [item[&#x27;json&#x27;] for name in (&#x27;Success&#x27;, &#x27;Fallback&#x27;)
+             for run in runs.get(name, []) for branch in run[&#x27;data&#x27;][&#x27;main&#x27;] for item in branch]
+    routes = {i[&#x27;case&#x27;]: i[&#x27;route&#x27;] for i in items}
+    if routes != {&#x27;valid&#x27;: &#x27;success&#x27;, &#x27;malformed&#x27;: &#x27;fallback&#x27;, &#x27;missing-field&#x27;: &#x27;fallback&#x27;}:
+        raise RuntimeError(&#x27;分支结果与验收不符：&#x27; + str(routes))
+    return items
+
+
+def main():
+    name = &#x27;stage6-test-&#x27; + uuid.uuid4().hex[:12]
+    cmd = [&#x27;docker&#x27;, &#x27;run&#x27;, &#x27;--rm&#x27;, &#x27;--name&#x27;, name, &#x27;--network&#x27;, &#x27;none&#x27;,
+           &#x27;-e&#x27;, &#x27;N8N_DIAGNOSTICS_ENABLED=false&#x27;, &#x27;-e&#x27;, &#x27;N8N_VERSION_NOTIFICATIONS_ENABLED=false&#x27;,
+           &#x27;-e&#x27;, &#x27;N8N_TEMPLATES_ENABLED=false&#x27;, &#x27;-e&#x27;, &#x27;N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true&#x27;,
+           &#x27;-v&#x27;, f&#x27;{ROOT / &quot;n8n&quot;}:/work:ro&#x27;, &#x27;--entrypoint&#x27;, &#x27;/bin/sh&#x27;, IMAGE, &#x27;-c&#x27;,
+           &#x27;n8n import:workflow --input=/work/offline.json &gt;/tmp/import.log &amp;&amp; &#x27;
+           &#x27;n8n execute --id=Stage6Smoke --rawOutput&#x27;]
+    try:
+        result = subprocess.run(cmd, text=True, capture_output=True, timeout=120)
+    finally:
+        # 超时杀掉 Docker CLI 后也清理本次容器；不会操作其他容器。
+        subprocess.run([&#x27;docker&#x27;, &#x27;rm&#x27;, &#x27;-f&#x27;, name], capture_output=True, timeout=15)
+    if result.returncode:
+        raise RuntimeError(&#x27;n8n 执行失败：\n&#x27; + (result.stderr + result.stdout)[-2000:])
+    items = verify(parse_execution(result.stdout))
+    print(&#x27;n8n 2.44.7：真实工作流；容器断网；模型输出为固定样本&#x27;)
+    for item in items:
+        print(f&#x27;{item[&quot;case&quot;]} → {item[&quot;route&quot;]}：{item[&quot;summary&quot;]}&#x27;)
+    print(&#x27;3/3 分支验收通过；容器退出即删除数据库&#x27;)
+
+
+if __name__ == &#x27;__main__&#x27;:
+    try:
+        main()
+    except (RuntimeError, FileNotFoundError, subprocess.TimeoutExpired) as exc:
+        raise SystemExit(str(exc))</code></pre>
+</details>
+<details class="example-source"><summary>n8n/validate.js</summary><p><a href="examples/stage6/n8n/validate.js">打开文件</a></p>
+<pre class="example-code example-source-code" tabindex="0" role="region" aria-label="n8n/validate.js"><code>return $input.all().map(item =&gt; {
+  let raw = item.json.modelText;
+  if (raw === undefined) raw = (item.json.output || []).flatMap(x =&gt; x.content || []).filter(x =&gt; x.type === &#x27;output_text&#x27;).map(x =&gt; x.text).join(&#x27;&#x27;);
+  try {
+    const value = JSON.parse(raw);
+    if (!value || typeof value.summary !== &#x27;string&#x27; || !value.summary.trim() || value.summary.length &gt; 1000) throw new Error(&#x27;summary must be a nonempty string &lt;= 1000 chars&#x27;);
+    return {json: {case: item.json.case || &#x27;webhook&#x27;, ok: true, summary: value.summary}};
+  } catch (_) {
+    return {json: {case: item.json.case || &#x27;webhook&#x27;, ok: false, summary: &#x27;生成结果格式错误，请稍后重试。&#x27;}};
+  }
+});</code></pre>
+</details>
+<details class="example-source"><summary>n8n/offline.json</summary><p><a href="examples/stage6/n8n/offline.json">打开文件</a></p>
+<pre class="example-code example-source-code" tabindex="0" role="region" aria-label="n8n/offline.json"><code>{
+  &quot;id&quot;: &quot;Stage6Smoke&quot;,
+  &quot;name&quot;: &quot;Stage6 Offline JSON Guard&quot;,
+  &quot;active&quot;: false,
+  &quot;nodes&quot;: [
+    {
+      &quot;id&quot;: &quot;Start&quot;,
+      &quot;name&quot;: &quot;Start&quot;,
+      &quot;type&quot;: &quot;n8n-nodes-base.manualTrigger&quot;,
+      &quot;typeVersion&quot;: 1,
+      &quot;position&quot;: [
+        0,
+        0
+      ],
+      &quot;parameters&quot;: {}
+    },
+    {
+      &quot;id&quot;: &quot;Fixture&quot;,
+      &quot;name&quot;: &quot;Fixture&quot;,
+      &quot;type&quot;: &quot;n8n-nodes-base.code&quot;,
+      &quot;typeVersion&quot;: 2,
+      &quot;position&quot;: [
+        240,
+        0
+      ],
+      &quot;parameters&quot;: {
+        &quot;jsCode&quot;: &quot;return [{json:{case:&#x27;valid&#x27;,modelText:&#x27;{\&quot;summary\&quot;:\&quot;学习站提供分阶段课程。\&quot;}&#x27;}},{json:{case:&#x27;malformed&#x27;,modelText:&#x27;{not json&#x27;}},{json:{case:&#x27;missing-field&#x27;,modelText:&#x27;{\&quot;text\&quot;:\&quot;oops\&quot;}&#x27;}}];&quot;
+      }
+    },
+    {
+      &quot;id&quot;: &quot;Validate&quot;,
+      &quot;name&quot;: &quot;Validate&quot;,
+      &quot;type&quot;: &quot;n8n-nodes-base.code&quot;,
+      &quot;typeVersion&quot;: 2,
+      &quot;position&quot;: [
+        480,
+        0
+      ],
+      &quot;parameters&quot;: {
+        &quot;jsCode&quot;: &quot;return $input.all().map(item =&gt; {\n  let raw = item.json.modelText;\n  if (raw === undefined) raw = (item.json.output || []).flatMap(x =&gt; x.content || []).filter(x =&gt; x.type === &#x27;output_text&#x27;).map(x =&gt; x.text).join(&#x27;&#x27;);\n  try {\n    const value = JSON.parse(raw);\n    if (!value || typeof value.summary !== &#x27;string&#x27; || !value.summary.trim() || value.summary.length &gt; 1000) throw new Error(&#x27;summary must be a nonempty string &lt;= 1000 chars&#x27;);\n    return {json: {case: item.json.case || &#x27;webhook&#x27;, ok: true, summary: value.summary}};\n  } catch (_) {\n    return {json: {case: item.json.case || &#x27;webhook&#x27;, ok: false, summary: &#x27;生成结果格式错误，请稍后重试。&#x27;}};\n  }\n});&quot;
+      }
+    },
+    {
+      &quot;id&quot;: &quot;Valid?&quot;,
+      &quot;name&quot;: &quot;Valid?&quot;,
+      &quot;type&quot;: &quot;n8n-nodes-base.if&quot;,
+      &quot;typeVersion&quot;: 2.2,
+      &quot;position&quot;: [
+        720,
+        0
+      ],
+      &quot;parameters&quot;: {
+        &quot;conditions&quot;: {
+          &quot;options&quot;: {
+            &quot;caseSensitive&quot;: true,
+            &quot;leftValue&quot;: &quot;&quot;,
+            &quot;typeValidation&quot;: &quot;strict&quot;,
+            &quot;version&quot;: 2
+          },
+          &quot;conditions&quot;: [
+            {
+              &quot;id&quot;: &quot;valid&quot;,
+              &quot;leftValue&quot;: &quot;={{ $json.ok }}&quot;,
+              &quot;rightValue&quot;: true,
+              &quot;operator&quot;: {
+                &quot;type&quot;: &quot;boolean&quot;,
+                &quot;operation&quot;: &quot;true&quot;,
+                &quot;singleValue&quot;: true
+              }
+            }
+          ],
+          &quot;combinator&quot;: &quot;and&quot;
+        },
+        &quot;options&quot;: {}
+      }
+    },
+    {
+      &quot;id&quot;: &quot;Success&quot;,
+      &quot;name&quot;: &quot;Success&quot;,
+      &quot;type&quot;: &quot;n8n-nodes-base.code&quot;,
+      &quot;typeVersion&quot;: 2,
+      &quot;position&quot;: [
+        960,
+        -100
+      ],
+      &quot;parameters&quot;: {
+        &quot;jsCode&quot;: &quot;return $input.all().map(x =&gt; ({json: {...x.json, route: &#x27;success&#x27;}}));&quot;
+      }
+    },
+    {
+      &quot;id&quot;: &quot;Fallback&quot;,
+      &quot;name&quot;: &quot;Fallback&quot;,
+      &quot;type&quot;: &quot;n8n-nodes-base.code&quot;,
+      &quot;typeVersion&quot;: 2,
+      &quot;position&quot;: [
+        960,
+        100
+      ],
+      &quot;parameters&quot;: {
+        &quot;jsCode&quot;: &quot;return $input.all().map(x =&gt; ({json: {...x.json, route: &#x27;fallback&#x27;}}));&quot;
+      }
+    }
+  ],
+  &quot;connections&quot;: {
+    &quot;Validate&quot;: {
+      &quot;main&quot;: [
+        [
+          {
+            &quot;node&quot;: &quot;Valid?&quot;,
+            &quot;type&quot;: &quot;main&quot;,
+            &quot;index&quot;: 0
+          }
+        ]
+      ]
+    },
+    &quot;Valid?&quot;: {
+      &quot;main&quot;: [
+        [
+          {
+            &quot;node&quot;: &quot;Success&quot;,
+            &quot;type&quot;: &quot;main&quot;,
+            &quot;index&quot;: 0
+          }
+        ],
+        [
+          {
+            &quot;node&quot;: &quot;Fallback&quot;,
+            &quot;type&quot;: &quot;main&quot;,
+            &quot;index&quot;: 0
+          }
+        ]
+      ]
+    },
+    &quot;Start&quot;: {
+      &quot;main&quot;: [
+        [
+          {
+            &quot;node&quot;: &quot;Fixture&quot;,
+            &quot;type&quot;: &quot;main&quot;,
+            &quot;index&quot;: 0
+          }
+        ]
+      ]
+    },
+    &quot;Fixture&quot;: {
+      &quot;main&quot;: [
+        [
+          {
+            &quot;node&quot;: &quot;Validate&quot;,
+            &quot;type&quot;: &quot;main&quot;,
+            &quot;index&quot;: 0
+          }
+        ]
+      ]
+    }
+  },
+  &quot;settings&quot;: {
+    &quot;executionOrder&quot;: &quot;v1&quot;
+  }
+}</code></pre>
+</details>
+<details class="example-source"><summary>n8n/webhook.json</summary><p><a href="examples/stage6/n8n/webhook.json">打开文件</a></p>
+<pre class="example-code example-source-code" tabindex="0" role="region" aria-label="n8n/webhook.json"><code>{
+  &quot;name&quot;: &quot;Stage6 Webhook Summary&quot;,
+  &quot;active&quot;: false,
+  &quot;nodes&quot;: [
+    {
+      &quot;id&quot;: &quot;Webhook&quot;,
+      &quot;name&quot;: &quot;Webhook&quot;,
+      &quot;type&quot;: &quot;n8n-nodes-base.webhook&quot;,
+      &quot;typeVersion&quot;: 2,
+      &quot;position&quot;: [
+        0,
+        0
+      ],
+      &quot;parameters&quot;: {
+        &quot;httpMethod&quot;: &quot;POST&quot;,
+        &quot;path&quot;: &quot;stage6-summary&quot;,
+        &quot;responseMode&quot;: &quot;responseNode&quot;,
+        &quot;options&quot;: {}
+      },
+      &quot;webhookId&quot;: &quot;stage6-summary&quot;
+    },
+    {
+      &quot;id&quot;: &quot;Model&quot;,
+      &quot;name&quot;: &quot;Model&quot;,
+      &quot;type&quot;: &quot;n8n-nodes-base.httpRequest&quot;,
+      &quot;typeVersion&quot;: 4.2,
+      &quot;position&quot;: [
+        240,
+        0
+      ],
+      &quot;parameters&quot;: {
+        &quot;method&quot;: &quot;POST&quot;,
+        &quot;url&quot;: &quot;https://api.openai.com/v1/responses&quot;,
+        &quot;authentication&quot;: &quot;genericCredentialType&quot;,
+        &quot;genericAuthType&quot;: &quot;httpHeaderAuth&quot;,
+        &quot;sendBody&quot;: true,
+        &quot;specifyBody&quot;: &quot;json&quot;,
+        &quot;jsonBody&quot;: &quot;={{ JSON.stringify({model: \&quot;gpt-5.4-mini-2026-03-17\&quot;, input: \&quot;Return JSON only with one string field summary. Summarize: \&quot; + String($json.body.text || \&quot;\&quot;), max_output_tokens: 256, store: false}) }}&quot;,
+        &quot;options&quot;: {
+          &quot;timeout&quot;: 30000
+        }
+      },
+      &quot;onError&quot;: &quot;continueRegularOutput&quot;
+    },
+    {
+      &quot;id&quot;: &quot;Validate&quot;,
+      &quot;name&quot;: &quot;Validate&quot;,
+      &quot;type&quot;: &quot;n8n-nodes-base.code&quot;,
+      &quot;typeVersion&quot;: 2,
+      &quot;position&quot;: [
+        480,
+        0
+      ],
+      &quot;parameters&quot;: {
+        &quot;jsCode&quot;: &quot;return $input.all().map(item =&gt; {\n  let raw = item.json.modelText;\n  if (raw === undefined) raw = (item.json.output || []).flatMap(x =&gt; x.content || []).filter(x =&gt; x.type === &#x27;output_text&#x27;).map(x =&gt; x.text).join(&#x27;&#x27;);\n  try {\n    const value = JSON.parse(raw);\n    if (!value || typeof value.summary !== &#x27;string&#x27; || !value.summary.trim() || value.summary.length &gt; 1000) throw new Error(&#x27;summary must be a nonempty string &lt;= 1000 chars&#x27;);\n    return {json: {case: item.json.case || &#x27;webhook&#x27;, ok: true, summary: value.summary}};\n  } catch (_) {\n    return {json: {case: item.json.case || &#x27;webhook&#x27;, ok: false, summary: &#x27;生成结果格式错误，请稍后重试。&#x27;}};\n  }\n});&quot;
+      }
+    },
+    {
+      &quot;id&quot;: &quot;Valid?&quot;,
+      &quot;name&quot;: &quot;Valid?&quot;,
+      &quot;type&quot;: &quot;n8n-nodes-base.if&quot;,
+      &quot;typeVersion&quot;: 2.2,
+      &quot;position&quot;: [
+        720,
+        0
+      ],
+      &quot;parameters&quot;: {
+        &quot;conditions&quot;: {
+          &quot;options&quot;: {
+            &quot;caseSensitive&quot;: true,
+            &quot;leftValue&quot;: &quot;&quot;,
+            &quot;typeValidation&quot;: &quot;strict&quot;,
+            &quot;version&quot;: 2
+          },
+          &quot;conditions&quot;: [
+            {
+              &quot;id&quot;: &quot;valid&quot;,
+              &quot;leftValue&quot;: &quot;={{ $json.ok }}&quot;,
+              &quot;rightValue&quot;: true,
+              &quot;operator&quot;: {
+                &quot;type&quot;: &quot;boolean&quot;,
+                &quot;operation&quot;: &quot;true&quot;,
+                &quot;singleValue&quot;: true
+              }
+            }
+          ],
+          &quot;combinator&quot;: &quot;and&quot;
+        },
+        &quot;options&quot;: {}
+      }
+    },
+    {
+      &quot;id&quot;: &quot;Success&quot;,
+      &quot;name&quot;: &quot;Success&quot;,
+      &quot;type&quot;: &quot;n8n-nodes-base.code&quot;,
+      &quot;typeVersion&quot;: 2,
+      &quot;position&quot;: [
+        960,
+        -100
+      ],
+      &quot;parameters&quot;: {
+        &quot;jsCode&quot;: &quot;return $input.all().map(x =&gt; ({json: {...x.json, route: &#x27;success&#x27;}}));&quot;
+      }
+    },
+    {
+      &quot;id&quot;: &quot;Fallback&quot;,
+      &quot;name&quot;: &quot;Fallback&quot;,
+      &quot;type&quot;: &quot;n8n-nodes-base.code&quot;,
+      &quot;typeVersion&quot;: 2,
+      &quot;position&quot;: [
+        960,
+        100
+      ],
+      &quot;parameters&quot;: {
+        &quot;jsCode&quot;: &quot;return $input.all().map(x =&gt; ({json: {...x.json, route: &#x27;fallback&#x27;}}));&quot;
+      }
+    },
+    {
+      &quot;id&quot;: &quot;Reply&quot;,
+      &quot;name&quot;: &quot;Reply&quot;,
+      &quot;type&quot;: &quot;n8n-nodes-base.respondToWebhook&quot;,
+      &quot;typeVersion&quot;: 1.4,
+      &quot;position&quot;: [
+        1200,
+        0
+      ],
+      &quot;parameters&quot;: {
+        &quot;respondWith&quot;: &quot;json&quot;,
+        &quot;responseBody&quot;: &quot;={{ JSON.stringify($json) }}&quot;,
+        &quot;options&quot;: {}
+      }
+    }
+  ],
+  &quot;connections&quot;: {
+    &quot;Validate&quot;: {
+      &quot;main&quot;: [
+        [
+          {
+            &quot;node&quot;: &quot;Valid?&quot;,
+            &quot;type&quot;: &quot;main&quot;,
+            &quot;index&quot;: 0
+          }
+        ]
+      ]
+    },
+    &quot;Valid?&quot;: {
+      &quot;main&quot;: [
+        [
+          {
+            &quot;node&quot;: &quot;Success&quot;,
+            &quot;type&quot;: &quot;main&quot;,
+            &quot;index&quot;: 0
+          }
+        ],
+        [
+          {
+            &quot;node&quot;: &quot;Fallback&quot;,
+            &quot;type&quot;: &quot;main&quot;,
+            &quot;index&quot;: 0
+          }
+        ]
+      ]
+    },
+    &quot;Webhook&quot;: {
+      &quot;main&quot;: [
+        [
+          {
+            &quot;node&quot;: &quot;Model&quot;,
+            &quot;type&quot;: &quot;main&quot;,
+            &quot;index&quot;: 0
+          }
+        ]
+      ]
+    },
+    &quot;Model&quot;: {
+      &quot;main&quot;: [
+        [
+          {
+            &quot;node&quot;: &quot;Validate&quot;,
+            &quot;type&quot;: &quot;main&quot;,
+            &quot;index&quot;: 0
+          }
+        ]
+      ]
+    },
+    &quot;Success&quot;: {
+      &quot;main&quot;: [
+        [
+          {
+            &quot;node&quot;: &quot;Reply&quot;,
+            &quot;type&quot;: &quot;main&quot;,
+            &quot;index&quot;: 0
+          }
+        ]
+      ]
+    },
+    &quot;Fallback&quot;: {
+      &quot;main&quot;: [
+        [
+          {
+            &quot;node&quot;: &quot;Reply&quot;,
+            &quot;type&quot;: &quot;main&quot;,
+            &quot;index&quot;: 0
+          }
+        ]
+      ]
+    }
+  },
+  &quot;settings&quot;: {
+    &quot;executionOrder&quot;: &quot;v1&quot;
+  }
+}</code></pre>
+</details>
+<details class="example-source"><summary>N8N.md</summary><p><a href="examples/stage6/N8N.md">打开文件</a></p>
+<pre class="example-code example-source-code" tabindex="0" role="region" aria-label="N8N.md"><code># 6.6 n8n 2.44.7
+
+Python 启动器只用标准库；安装并启动 Docker Desktop，然后运行：
+```sh
+docker pull docker.n8n.io/n8nio/n8n:2.44.7
+python s66_n8n.py
+```
+实测镜像 digest：`sha256:942bc274709f27f99f7c6024a785d8e8f75ac06838cabcba448abb8d9127ec7b`。可使用 `docker.n8n.io/n8nio/n8n@sha256:…` 固定同一镜像。版本标签可跨平台拉取；本次在 macOS Apple Silicon / Docker Server 29.5.3 运行。
+
+`n8n/offline.json` 在真实 n8n 引擎中执行 Manual Trigger → Fixture → Validate → IF → Success/Fallback。三条样本为合法 JSON、损坏 JSON、缺少 summary。Validate 不会因 JSON.parse 报错终止整个任务，IF 选择友好兜底。容器没有网络，资料只读挂载，数据库不持久化，不发送通知。
+
+## Webhook 与真实模型
+
+`n8n/webhook.json` 是可导入的在线版本：Webhook → Model（HTTP Request）→ Validate → IF → Reply。Validate/IF 与离线版本完全相同。在线版已做结构检查，尚未在已发布 webhook 上端到端验证。
+
+1. 在 n8n 2.44.7 的编辑器 Import from File，导入 webhook.json。
+2. Model 节点选择 Header Auth 凭据；Header 名为 `Authorization`，值为 `Bearer 你的模型密钥`。凭据保存在 n8n 凭据管理器，不写进 JSON。模型默认 `gpt-5.4-mini-2026-03-17`，可换为账号有权限且支持 Responses 的模型。
+3. 点击 Webhook 的 Listen for test event。复制节点显示的 Test URL（仅测试监听期间有效），以 JSON 发送 `{&quot;text&quot;:&quot;学习站提供分阶段课程和本地进度。&quot;}`。
+```sh
+curl -X POST &#x27;http://localhost:5678/webhook-test/stage6-summary&#x27; \
+  -H &#x27;Content-Type: application/json&#x27; \
+  -d &#x27;{&quot;text&quot;:&quot;学习站提供分阶段课程和本地进度。&quot;}&#x27;
+```
+4. 正常应返回 `ok:true`、非空 summary、`route:&quot;success&quot;`；Model 节点请求失败、非 JSON 或缺字段时返回 `ok:false`、友好提示及 `route:&quot;fallback&quot;`。响应措辞不固定。检查执行记录确认失败发生的位置。
+5. 需要长期使用才发布，并使用 Production URL；对外暴露前给 Webhook 配置认证。示例只回应请求，不接通知服务。
+
+默认最多一次模型 HTTP 请求，30 秒超时，256 输出 tokens；这不是费用上限。在线模式会把输入发给模型服务。当前 prompt 要求 JSON 但不保证模型遵守，所以仍保留验证与兜底。
+
+## 常见报错
+
+- Docker daemon 无法连接：启动 Docker Desktop；确认当前用户可访问 Docker。
+- Mounts denied：允许 Docker 访问解压目录；完整解压，不要只复制启动器。
+- 镜像不存在：先 pull 固定版本；离线容器不负责下载模型。
+- 120 秒超时：检查 Docker 资源和启动日志；不要把超时改成无限。
+- 401：Model 节点没有绑定 Header Auth 或密钥无效。工作流仍应进入 fallback。
+- Webhook 404：测试 URL 需要监听；生产 URL 需要发布。
+- 编辑器节点类型不支持：确认 n8n 2.44.7，旧版本不在本次验证范围。
+
+官方 CLI：https://docs.n8n.io/hosting/cli-commands/</code></pre>
+</details>
+</section>
+<!-- STAGE6-EXAMPLE-6:END -->
+        <div class="lesson-actions">
+          <button class="done-btn" type="button" data-done-id="s6-6" aria-pressed="false">
+            <span class="dot" aria-hidden="true"><svg><use href="#i-check"/></svg></span>
+            <span class="label">标记完成</span>
+          </button>
+          <span class="meta-note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-6.html#s6-5"><span class="dir">← 上一节</span><span class="t">6.5 Dify：把原型做快，把边界想清</span></a>
+          <a class="next" href="stage-6.html#s6-7"><span class="dir">下一节 →</span><span class="t">6.7 GraphRAG：什么问题上它才值得</span></a>
+        </nav>
+</article>
+
+      <article class="lesson" id="s6-7">
+        <div class="lesson-head">
+          <span class="lesson-badge">6.7</span>
+          <h2>GraphRAG：什么问题上它才值得</h2>
+        </div>
+        <div class="lesson-tags">
+          <span class="chip accent">约 30 分钟</span>
+          <span class="chip plain">检索进阶</span>
+          <a class="origin" href="https://www.runoob.com/ai-agent/graphrag-usage.html" target="_blank" rel="noopener">对照原文 ↗</a>
+        </div>
+        <div class="fields">
+          <div class="field goal">
+            <h3><svg aria-hidden="true"><use href="#i-target"/></svg>学习目标</h3>
+            <p>判断一个需求该用向量 RAG 还是 GraphRAG，并估算索引成本。</p>
+          </div>
+          <div class="field">
+            <h3><svg aria-hidden="true"><use href="#i-book"/></svg>前置知识</h3>
+            <p>3.3 RAG；基本的图/实体关系概念。</p>
+          </div>
+          <div class="field wide">
+            <h3><svg aria-hidden="true"><use href="#i-list"/></svg>核心要点</h3>
+            <ul>
+              <li>GraphRAG 先用模型抽取实体与关系，建图并生成社区摘要，再基于图做检索。</li>
+              <li>优势在「全局性问题」：跨文档总结主题、发现实体间的间接联系。</li>
+              <li>成本在索引：抽取与摘要要跑很多次模型调用，更新文档需要增量重建。</li>
+              <li>小数据、低延迟、频繁更新、强精确匹配的场景，向量 RAG 更划算。</li>
+              <li>它不替代原文：答案仍要回到源文档核对，图只是索引结构。</li>
+            </ul>
+          </div>
+          <div class="field task wide">
+            <h3><svg aria-hidden="true"><use href="#i-wrench"/></svg>动手任务（30 分钟）</h3>
+            <p>选 5 篇同主题文章，提 2 个「全局问题」（如「这批文档反复提到的三个风险是什么」）和 2 个「局部问题」。先判断哪些问题向量 RAG 也能答，再决定是否值得跑一次 GraphRAG 索引。</p>
+          </div>
+          <div class="field check wide">
+            <h3><svg aria-hidden="true"><use href="#i-check"/></svg>自检</h3>
+            <div class="qa">
+              <details>
+                <summary>GraphRAG 最大的成本在哪里？</summary>
+                <div class="a">索引阶段：实体/关系抽取与社区摘要需要大量模型调用，且文档更新后要维护增量索引。查询阶段相对便宜，但图质量决定上限。</div>
+              </details>
+              <details>
+                <summary>什么时候不该用 GraphRAG？</summary>
+                <div class="a">数据量小、问题以事实查询为主、要求低延迟或文档每天变化时。此时向量检索 + 重排通常足够，维护成本更低。</div>
+              </details>
+            </div>
+          </div>
+        </div>
+<!-- STAGE6-EXAMPLE-7:START -->
+<section class="runnable-example" id="example-s6-7" aria-labelledby="example-title-7">
+<h3 id="example-title-7">可运行实验 · GraphRAG 项目准备与真实查询清单</h3>
+<p>用 GraphRAG 3.3.0 官方 CLI 实际执行 init 与 index --dry-run --skip-validation，复制五篇相关教学短文。此模式不调用模型、不生成实体和社区报告；真实索引与查询命令、两道全局/两道局部问题及答案检查点见 GRAPHRAG.md。</p>
+<p><a href="#stage6-setup">环境、下载包与验证范围见 6.1</a>。</p>
+<p><b>依赖：</b>graphrag==3.3.0。完整传递依赖：<a href="examples/stage6/requirements/graph-lock.txt">requirements/graph-lock.txt</a>。</p>
+<pre class="example-code example-command" tabindex="0" role="region" aria-label="命令"><code>python3.11 -m venv .venv-graph
+.venv-graph/bin/python -m pip install -r requirements/graph-lock.txt</code></pre>
+<h4>运行命令与预期输出</h4>
+<pre class="example-code example-command" tabindex="0" role="region" aria-label="命令"><code>.venv-graph/bin/python s67_graphrag.py</code></pre>
+<pre class="example-code example-output" tabindex="0" role="region" aria-label="离线实跑标准输出"><code>GraphRAG 3.3.0：init 完成；5 篇教学资料已复制
+index --dry-run --skip-validation：配置检查通过
+模型请求=0；未生成实体、社区报告或向量索引
+临时项目已清理；真实检索质量与费用尚未测量</code></pre>
+<h4>进一步练习</h4>
+<pre class="example-code example-command" tabindex="0" role="region" aria-label="命令"><code>.venv-graph/bin/python s67_graphrag.py --prepare .runtime/graphrag
+# 用编辑器填写新项目 .env 的 GRAPHRAG_API_KEY 后：
+.venv-graph/bin/graphrag index --root .runtime/graphrag
+.venv-graph/bin/graphrag query --root .runtime/graphrag --method global --query &quot;团队如何分工保障发布质量？&quot;
+.venv-graph/bin/graphrag query --root .runtime/graphrag --method local --query &quot;李明负责什么，并与谁协作？&quot;
+.venv-graph/bin/graphrag query --root .runtime/graphrag --method basic --query &quot;团队如何分工保障发布质量？&quot;</code></pre>
+<p><b>验收：</b>离线 CLI 配置检查通过；不等于模型连接成功。真实实验逐题记录引用、漏项、耗时与 token；basic 提供同语料向量查询基线，但共用图索引的总成本不能算作普通 RAG 独立索引成本。</p>
+<h4>常见报错与处理</h4><ul>
+<li><b>目标已存在：</b>prepare 拒绝覆盖已有项目；指定新目录或继续使用原项目。</li>
+<li><b>旧版 models 配置报错：</b>3.3.0 使用 completion_models / embedding_models；用本版本 init 生成。</li>
+<li><b>缺少实体/社区报告文件：</b>先完成真实 index；dry-run 不生成这些文件。</li>
+<li><b>401 / 404 / 429：</b>核对密钥、模型权限与额度；离线检查无法验证这些。</li>
+</ul><p>接口依据：<a href="https://microsoft.github.io/graphrag/cli/" target="_blank" rel="noopener">官方文档</a>；具体行为以本例固定版本实测为准。</p>
+<h4>完整代码与配套文件</h4><p>下列内容来自实际文件；运行时使用完整下载包，保留共享模块、资料与工作流目录。</p>
+<details class="example-source"><summary>s67_graphrag.py</summary><p><a href="examples/stage6/s67_graphrag.py">打开文件</a></p>
+<pre class="example-code example-source-code" tabindex="0" role="region" aria-label="s67_graphrag.py"><code>&quot;&quot;&quot;实际 GraphRAG CLI 初始化/配置检查。默认不建索引、不调用模型。&quot;&quot;&quot;
+import argparse
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+import tempfile
+
+ROOT = Path(__file__).resolve().parent
+
+
+def prepare(path):
+    if path.exists():
+        raise ValueError(&#x27;目标已存在：请指定新目录，避免覆盖已有配置和密钥&#x27;)
+    path.mkdir(parents=True)
+    cli = Path(sys.executable).with_name(&#x27;graphrag.exe&#x27; if os.name == &#x27;nt&#x27; else &#x27;graphrag&#x27;)
+    env = dict(os.environ, LITELLM_LOCAL_MODEL_COST_MAP=&#x27;True&#x27;, GRAPHRAG_API_KEY=&#x27;offline-placeholder&#x27;)
+    commands = [[str(cli), &#x27;init&#x27;, &#x27;--root&#x27;, str(path), &#x27;--model&#x27;, &#x27;gpt-5.4-mini-2026-03-17&#x27;,
+                 &#x27;--embedding&#x27;, &#x27;text-embedding-3-small&#x27;],
+                [str(cli), &#x27;index&#x27;, &#x27;--root&#x27;, str(path), &#x27;--dry-run&#x27;, &#x27;--skip-validation&#x27;]]
+    for i, cmd in enumerate(commands):
+        proc = subprocess.run(cmd, env=env, capture_output=True, text=True, timeout=90)
+        if proc.returncode:
+            raise RuntimeError(&#x27;GraphRAG CLI 失败：\n&#x27; + (proc.stderr + proc.stdout)[-2000:])
+        if i == 0:
+            shutil.copytree(ROOT/&#x27;data/articles&#x27;, path/&#x27;input&#x27;, dirs_exist_ok=True)
+    if not (path/&#x27;settings.yaml&#x27;).is_file() or len(list((path/&#x27;input&#x27;).glob(&#x27;*.txt&#x27;))) != 5:
+        raise RuntimeError(&#x27;项目材料不完整&#x27;)
+    print(&#x27;GraphRAG 3.3.0：init 完成；5 篇教学资料已复制&#x27;)
+    print(&#x27;index --dry-run --skip-validation：配置检查通过&#x27;)
+    print(&#x27;模型请求=0；未生成实体、社区报告或向量索引&#x27;)
+
+
+if __name__ == &#x27;__main__&#x27;:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(&#x27;--prepare&#x27;, type=Path, help=&#x27;保留项目供真实 API 实验，目标必须不存在&#x27;)
+    args = parser.parse_args()
+    try:
+        if args.prepare:
+            prepare(args.prepare.resolve())
+            print(&#x27;下一步：按 GRAPHRAG.md 配置密钥，再真实 index/query。&#x27;)
+        else:
+            with tempfile.TemporaryDirectory(prefix=&#x27;stage6-graphrag-&#x27;) as tmp:
+                prepare(Path(tmp)/&#x27;project&#x27;)
+            print(&#x27;临时项目已清理；真实检索质量与费用尚未测量&#x27;)
+    except (ValueError, RuntimeError, FileNotFoundError, subprocess.TimeoutExpired) as exc:
+        parser.exit(1, str(exc) + &#x27;\n&#x27;)</code></pre>
+</details>
+<details class="example-source"><summary>requirements/graph.txt</summary><p><a href="examples/stage6/requirements/graph.txt">打开文件</a></p>
+<pre class="example-code example-source-code" tabindex="0" role="region" aria-label="requirements/graph.txt"><code>graphrag==3.3.0</code></pre>
+</details>
+<details class="example-source"><summary>GRAPHRAG.md</summary><p><a href="examples/stage6/GRAPHRAG.md">打开文件</a></p>
+<pre class="example-code example-source-code" tabindex="0" role="region" aria-label="GRAPHRAG.md"><code># 6.7 GraphRAG 3.3.0
+
+使用 Python 3.11 独立环境，依赖见 requirements/graph-lock.txt。5 篇中文教学短文在 data/articles/；短文足以练习流程，但不是验证 GraphRAG 优势的基准数据。
+
+## 无密钥检查（已实跑）
+```sh
+python s67_graphrag.py
+```
+真正调用官方 CLI 的 init 和 index --dry-run --skip-validation。临时项目随后清理。skip-validation 跳过模型连接检查，dry-run 不建索引；成功仅代表配置通过，不代表 API 可用。脚本给子进程注入离线占位值，不读取或覆盖你的模型密钥。LiteLLM 使用随包价格表，避免启动时联网获取价格。
+
+## 建立真实索引（需密钥，未在线实测）
+```sh
+python s67_graphrag.py --prepare .runtime/graphrag
+```
+已有目录时脚本拒绝覆盖。用编辑器打开新项目的 `.runtime/graphrag/.env`，把生成的 `GRAPHRAG_API_KEY` 填为自己的密钥；不要上传该文件。检查 settings.yaml 的 completion_models 与 embedding_models：默认模型分别为 gpt-5.4-mini-2026-03-17 和 text-embedding-3-small，账号必须有权限。再执行：
+```sh
+graphrag index --root .runtime/graphrag
+graphrag query --root .runtime/graphrag --method global --query &quot;这些材料共同关注哪些目标和风险？&quot;
+graphrag query --root .runtime/graphrag --method global --query &quot;团队如何分工保障发布质量？&quot;
+graphrag query --root .runtime/graphrag --method local --query &quot;李明负责什么，并与谁协作？&quot;
+graphrag query --root .runtime/graphrag --method local --query &quot;导航学习站的进度能跨设备同步吗？&quot;
+```
+命令需在 `.venv-graph` 环境内执行，或将 graphrag 换为该环境的完整路径。索引会对资料调用模型和 embedding，耗时与费用取决于模型、重试、分块和提取设置。先用这 5 篇小材料观察日志；本例没有预设美元费用，也没有宣称真实建索引已通过。
+
+## 同数据、同问题比较普通 RAG
+
+完成同一索引后，对上述四问分别改用 `--method basic`，这是官方提供的基础向量检索查询，可保持相同语料与 embedding，避免拿不同资料比较。
+```sh
+graphrag query --root .runtime/graphrag --method basic --query &quot;团队如何分工保障发布质量？&quot;
+```
+注意：basic 在已建好的 GraphRAG 项目上查询；本次总索引费用包含图提取，不能当作普通 RAG 独立索引成本。要比较完整系统成本，需另测只做分块与 embedding 的基线。
+
+预期事实（不是承诺的模型原文）：
+
+| 问题 | 应覆盖的证据 | 验收 |
+| --- | --- | --- |
+| 共同目标与风险 | 01 降低入门成本；02 可复现性；04 失败覆盖；05 费用与生产监测 | 全局问题应整合多篇，不只复述第一篇 |
+| 分工保障质量 | 01、04、05：李明课程、王悦平台、陈晨评审、交叉核对 | 关系不混淆，可定位来源 |
+| 李明的职责 | 02、04、05：课程、修复代码、与陈晨核对 | 局部实体相关事实完整 |
+| 跨设备进度 | 03：仅当前浏览器、不自动同步 | 不因图检索补出不存在的云端功能 |
+
+逐问记录方法、答案、引用、漏项、耗时、请求数和实际 token 用量；区分索引一次性成本与每次查询成本，费用按服务账单核对。GraphRAG 在这个小数据集上不一定更好，不预填任何质量或费用结论。
+
+常见报错：
+
+- `No module named graphrag` / CLI 找不到：使用 .venv-graph 及对应锁定依赖。
+- 配置缺少 completion_models：不要沿用 2.x 的 models 配置；用本版本 init 生成。
+- 找不到 input：运行 prepare 后确认有 5 个 .txt；单独 init 不会自动提供资料。
+- 401/404/429：分别核对密钥、模型权限/名称、额度与速率；dry-run 不会发现这些问题。
+- 缺少 entities / communities / community_reports 等表：先确认真实 index 成功，dry-run 不产生这些文件。
+- 没有提取出实体：检查输入、extract_graph 的 entity_types 与语言提示，查看 logs，不能以空图结果下质量结论。
+
+官方说明：https://microsoft.github.io/graphrag/get_started/ 及 https://microsoft.github.io/graphrag/cli/</code></pre>
+</details>
+<details class="example-source"><summary>data/articles/01_overview.txt</summary><p><a href="examples/stage6/data/articles/01_overview.txt">打开文件</a></p>
+<pre class="example-code example-source-code" tabindex="0" role="region" aria-label="data/articles/01_overview.txt"><code>星河学习项目概览
+星河团队开发了导航学习站，用于 Agent 入门课程。李明负责课程，王悦负责平台。项目共同目标是降低初学者第一次运行示例的成本。</code></pre>
+</details>
+<details class="example-source"><summary>data/articles/02_course.txt</summary><p><a href="examples/stage6/data/articles/02_course.txt">打开文件</a></p>
+<pre class="example-code example-source-code" tabindex="0" role="region" aria-label="data/articles/02_course.txt"><code>课程与可复现性
+李明维护导航学习站的 Python 课程。课程提供离线示例、固定依赖和预期输出。离线示例与固定依赖共同降低环境差异造成的失败；固定模型响应不能衡量真实模型能力。</code></pre>
+</details>
+<details class="example-source"><summary>data/articles/03_platform.txt</summary><p><a href="examples/stage6/data/articles/03_platform.txt">打开文件</a></p>
+<pre class="example-code example-source-code" tabindex="0" role="region" aria-label="data/articles/03_platform.txt"><code>平台与进度
+王悦维护导航学习站的平台。平台有搜索、移动端目录和本地学习进度。本地进度保存在当前浏览器；平台没有账号，也不提供跨设备自动同步。</code></pre>
+</details>
+<details class="example-source"><summary>data/articles/04_review.txt</summary><p><a href="examples/stage6/data/articles/04_review.txt">打开文件</a></p>
+<pre class="example-code example-source-code" tabindex="0" role="region" aria-label="data/articles/04_review.txt"><code>评审与风险
+陈晨评审导航学习站的课程和平台。李明负责修复课程代码，王悦负责处理界面问题。评审要求同时覆盖成功、失败和停止条件；引用与答案必须能追溯到资料。</code></pre>
+</details>
+<details class="example-source"><summary>data/articles/05_release.txt</summary><p><a href="examples/stage6/data/articles/05_release.txt">打开文件</a></p>
+<pre class="example-code example-source-code" tabindex="0" role="region" aria-label="data/articles/05_release.txt"><code>发布计划与限制
+星河团队计划先发布离线练习，再开放真实模型练习。李明与陈晨核对依赖和输出，王悦检查移动端目录。真实模型调用可能产生费用；测试数据上的成功不能替代生产监测。</code></pre>
+</details>
+</section>
+<!-- STAGE6-EXAMPLE-7:END -->
+        <div class="lesson-actions">
+          <button class="done-btn" type="button" data-done-id="s6-7" aria-pressed="false">
+            <span class="dot" aria-hidden="true"><svg><use href="#i-check"/></svg></span>
+            <span class="label">标记完成</span>
+          </button>
+          <span class="meta-note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-6.html#s6-6"><span class="dir">← 上一节</span><span class="t">6.6 n8n：系统之间的事，交给自动化</span></a>
+          <a class="next" href="stage-7.html#s7-1"><span class="dir">下一节 →</span><span class="t">7.1 Vibe Coding：把「写」交给 AI，把「验收」留给自己</span></a>
+        </nav>
+</article>
+
+      <nav class="pager" aria-label="阶段翻页">
+        <a href="stage-5.html"><span class="dir">← 上一阶段</span><span class="t">阶段 5 · 亲手构建</span></a>
+        <a class="next" href="stage-7.html"><span class="dir">下一阶段 →</span><span class="t">阶段 7 · 前沿产品与工程范式</span></a>
+      </nav>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-in">
+      <div>
+        <p>蓝本：<a href="https://www.runoob.com/ai-agent/ai-agent-tutorial.html" target="_blank" rel="noopener">runoob · AI Agent 教程</a>。个人本地学习用途，不复制原文全文、不用于商业分发。</p>
+        <p class="small">审计时间 2026-10；产品与 API 信息请以官方文档为准。</p>
+      </div>
+      <div>
+        <h3>继续</h3>
+        <ul>
+          <li><a href="stage-7.html">阶段 7 · 前沿产品</a></li>
+          <li><a href="stage-8.html">阶段 8 · 生产化</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>说明</h3>
+        <ul>
+          <li><a href="about.html">来源与版权</a></li>
+          <li><a href="about.html#verify">待核实清单</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">离线可用 · 无外部请求 · 进度仅保存在本机</div>
+  </div>
+</footer>
+<script src="assets/app.js"></script>
+</body>
+</html>

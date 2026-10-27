@@ -1,0 +1,2 @@
+mode=offline（固定响应，未调用模型）
+pong

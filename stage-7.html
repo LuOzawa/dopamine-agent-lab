@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>阶段 7 · 前沿产品与工程范式 | Dopamine Agent Lab</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-accent="indigo">
+<a class="skip" href="#main">跳到主要内容</a>
+<div class="read-progress" aria-hidden="true"></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01" stroke-width="3"/></symbol>
+  <symbol id="i-wrench" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0 5 5L20 11l-8.5 8.5a2.1 2.1 0 0 1-3-3L17 8l-.3-1.7z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v18H6.5A2.5 2.5 0 0 0 4 23z"/><path d="M4 18.5h16"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 16H3z"/><path d="M12 9v5M12 17.5h.01"/></symbol>
+</svg>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true"><svg><use href="#i-spark"/></svg></span>
+      <span>Dopamine Agent Lab</span>
+    </a>
+    <nav class="topnav" aria-label="主导航">
+      <a href="index.html">学习地图</a>
+      <a href="contents.html">全部目录</a>
+      <a href="search.html">搜索</a>
+      <a href="audit.html">内容审计</a>
+      <a href="about.html" class="nav-about">使用说明</a>
+    </nav>
+    <div class="mini-progress" title="总学习进度">
+      <span class="mini-bar" aria-hidden="true"><i data-mini-bar></i></span>
+      <span data-mini-text>0/47</span>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <div class="page-head">
+      <div class="crumbs"><a href="index.html">学习地图</a> <span aria-hidden="true">/</span> <span>阶段 7</span></div>
+      <div class="kicker">Stage 07 · Frontier &amp; Practice</div>
+      <h1>前沿产品与工程范式</h1>
+      <p class="lede">
+        这一阶段变化最快，也最容易踩坑：产品名、版本、定价隔几周就变。
+        学习重点不是记住入口，而是理解它们背后的模式——<b>验证闭环、循环预算、权限边界</b>，再用这三把尺子去评估任何新产品。
+      </p>
+      <div class="chips">
+        <span class="chip accent">9 节</span>
+        <span class="chip">约 3 小时</span>
+        <span class="chip">前置：阶段 4–6</span>
+        <span class="chip plain">产品信息需自行核实</span>
+      </div>
+      <div class="stage-progress">
+        <b>本阶段进度</b>
+        <span class="bar" aria-hidden="true"><i data-stage-bar="7"></i></span>
+        <b data-stage-label="7">0 / 9</b>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap layout">
+    <nav class="toc" aria-label="本阶段目录">
+      <details open>
+        <summary>本阶段目录<span class="toc-current">选择小节跳转</span></summary>
+        <div class="toc-content">
+          <ol>
+            <li><a href="#s7-1"><span class="n">7.1</span><span>Vibe Coding</span></a></li>
+            <li><a href="#s7-2"><span class="n">7.2</span><span>Harness Engineering</span></a></li>
+            <li><a href="#s7-3"><span class="n">7.3</span><span>Loop Engineering</span></a></li>
+            <li><a href="#s7-4"><span class="n">7.4</span><span>OpenClaw 教程</span></a></li>
+            <li><a href="#s7-5"><span class="n">7.5</span><span>OpenClaw 快速上手</span></a></li>
+            <li><a href="#s7-6"><span class="n">7.6</span><span>WorkBuddy</span></a></li>
+            <li><a href="#s7-7"><span class="n">7.7</span><span>Hermes Agent</span></a></li>
+            <li><a href="#s7-8"><span class="n">7.8</span><span>Pi Coding Agent</span></a></li>
+            <li><a href="#s7-9"><span class="n">7.9</span><span>DuMate（搭子）</span></a></li>
+          </ol>
+          <p class="toc-done">产品类内容建议「读模式 + 查官网」，不要背操作步骤。</p>
+        </div>
+      </details>
+    </nav>
+
+    <div>
+      <div class="callout warn">
+        <svg aria-hidden="true"><use href="#i-alert"/></svg>
+        <p><b>本阶段的信息分级：</b>「模式与风险」是有依据的结论；「安装命令 / 端口 / 版本要求 / 定价」属于会变化的信息，
+          站内一律以原文表述为线索，<b>执行前请对照官方文档</b>，不要直接复制到生产环境。</p>
+      </div>
+
+      <article class="lesson" id="s7-1">
+        <div class="lesson-head">
+          <span class="lesson-badge">7.1</span>
+          <h2>Vibe Coding：把「写」交给 AI，把「验收」留给自己</h2>
+        </div>
+        <div class="lesson-tags">
+          <span class="chip accent">约 25 分钟</span>
+          <span class="chip plain">范式</span>
+          <a class="origin" href="https://www.runoob.com/ai-agent/vibe-coding-start.html" target="_blank" rel="noopener">对照原文 ↗</a>
+        </div>
+        <div class="fields">
+          <div class="field goal">
+            <h3><svg aria-hidden="true"><use href="#i-target"/></svg>学习目标</h3>
+            <p>用自然语言驱动 AI 完成一个小工具，并为其写出可执行的验收清单。</p>
+          </div>
+          <div class="field">
+            <h3><svg aria-hidden="true"><use href="#i-book"/></svg>前置知识</h3>
+            <p>会运行命令行程序；能读懂基础 Python/JS。</p>
+          </div>
+          <div class="field wide">
+            <h3><svg aria-hidden="true"><use href="#i-list"/></svg>核心要点</h3>
+            <ul>
+              <li>流程是「描述需求 → 生成 → 审查 → 测试 → 迭代」，不是「描述完就上线」。</li>
+              <li>AI 生成的代码必须能解释：看不懂的部分就是未来的故障点。</li>
+              <li>小步提交、每步可运行，比一次性生成 2000 行更容易回滚。</li>
+              <li>安全边界：不让它接触生产密钥/生产库；依赖要审查来源与许可证。</li>
+              <li>「能跑」和「正确」是两件事，验收标准要在生成前写。</li>
+            </ul>
+          </div>
+          <div class="field task wide">
+            <h3><svg aria-hidden="true"><use href="#i-wrench"/></svg>动手任务（25 分钟）</h3>
+            <p>让 AI 生成一个 100 行内的本地工具（例如 CSV 去重），先写 5 条验收测试（空文件、重复行、含逗号字段、大文件、编码异常），再让它实现并逐条跑通。记录它第一次失败的那条。</p>
+          </div>
+          <div class="field check wide">
+            <h3><svg aria-hidden="true"><use href="#i-check"/></svg>自检</h3>
+            <div class="qa">
+              <details>
+                <summary>Vibe Coding 最大的风险是什么？</summary>
+                <div class="a">把「看起来能跑」的代码直接放进生产：缺少边界处理、安全校验与测试，出问题时又没人理解实现。降低风险靠小步、测试与代码审查，而不是更会写提示。</div>
+              </details>
+              <details>
+                <summary>什么任务不适合 Vibe Coding？</summary>
+                <div class="a">涉及资金、权限、隐私、并发一致性或强合规的逻辑。这类代码需要明确设计、评审与测试，AI 可以辅助，但不能替代责任。</div>
+              </details>
+            </div>
+          </div>
+        </div>
+        <div class="lesson-actions">
+          <button class="done-btn" type="button" data-done-id="s7-1" aria-pressed="false">
+            <span class="dot" aria-hidden="true"><svg><use href="#i-check"/></svg></span>
+            <span class="label">标记完成</span>
+          </button>
+          <span class="meta-note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-6.html#s6-7"><span class="dir">← 上一节</span><span class="t">6.7 GraphRAG：什么问题上它才值得</span></a>
+          <a class="next" href="stage-7.html#s7-2"><span class="dir">下一节 →</span><span class="t">7.2 Harness Engineering：模型之外的一切</span></a>
+        </nav>
+</article>
+
+      <article class="lesson" id="s7-2">
+        <div class="lesson-head">
+          <span class="lesson-badge">7.2</span>
+          <h2>Harness Engineering：模型之外的一切</h2>
+        </div>
+        <div class="lesson-tags">
+          <span class="chip accent">约 25 分钟</span>
+          <span class="chip plain">工程方法</span>
+          <a class="origin" href="https://www.runoob.com/ai-agent/harness-engineering.html" target="_blank" rel="noopener">对照原文 ↗</a>
+        </div>
+        <div class="fields">
+          <div class="field goal">
+            <h3><svg aria-hidden="true"><use href="#i-target"/></svg>学习目标</h3>
+            <p>说出 harness 的四个组成部分，并给自己的项目加一个「执行 → 验证 → 回传」的反馈环。</p>
+          </div>
+          <div class="field">
+            <h3><svg aria-hidden="true"><use href="#i-book"/></svg>前置知识</h3>
+            <p>5.4 的循环；基本的测试概念。</p>
+          </div>
+          <div class="field wide">
+            <h3><svg aria-hidden="true"><use href="#i-list"/></svg>核心要点</h3>
+            <ul>
+              <li>harness = 提示 + 工具 + 上下文 + 验证 + 权限控制 + 可观测性，即「模型外围的整套系统」。</li>
+              <li>它的核心作用不是让模型更聪明，而是让错误更早暴露、让行为更可预测。</li>
+              <li>验证器（测试、lint、类型检查、schema 校验）比提示词更能提升可靠性。</li>
+              <li>权限分层与沙箱让「能做什么」可控，而不是依赖模型自觉。</li>
+              <li>原文引用的效率数据属于二手统计，<b>不要当作基准</b>；关注方法，不背数字。</li>
+            </ul>
+          </div>
+          <div class="field task wide">
+            <h3><svg aria-hidden="true"><use href="#i-wrench"/></svg>动手任务（25 分钟）</h3>
+            <p>给你的 Agent 加一个最小反馈环：修改文件 → 运行测试 → 失败则把错误信息回传给模型 → 再修一次。要求最多重试 2 轮，超过就停止并输出「改了哪些文件 / 还剩什么错误」。</p>
+          </div>
+          <div class="field check wide">
+            <h3><svg aria-hidden="true"><use href="#i-check"/></svg>自检</h3>
+            <div class="qa">
+              <details>
+                <summary>Harness 与 Prompt Engineering 是什么关系？</summary>
+                <div class="a">提示工程是 harness 的一部分，关注「怎么说」；harness 还关注给什么工具、如何验证、权限多大、出错怎么恢复。后者更接近系统工程。</div>
+              </details>
+              <details>
+                <summary>为什么「验证」比「更好的提示」更可靠？</summary>
+                <div class="a">提示只能影响概率，验证能给出确定的是/否信号。有了可执行验证，模型的自修复才有依据；没有验证的自我反思，往往只是换个说法。</div>
+              </details>
+            </div>
+          </div>
+        </div>
+        <div class="lesson-actions">
+          <button class="done-btn" type="button" data-done-id="s7-2" aria-pressed="false">
+            <span class="dot" aria-hidden="true"><svg><use href="#i-check"/></svg></span>
+            <span class="label">标记完成</span>
+          </button>
+          <span class="meta-note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-7.html#s7-1"><span class="dir">← 上一节</span><span class="t">7.1 Vibe Coding：把「写」交给 AI，把「验收」留给自己</span></a>
+          <a class="next" href="stage-7.html#s7-3"><span class="dir">下一节 →</span><span class="t">7.3 Loop Engineering：让循环有预算、有出口</span></a>
+        </nav>
+</article>
+
+      <article class="lesson" id="s7-3">
+        <div class="lesson-head">
+          <span class="lesson-badge">7.3</span>
+          <h2>Loop Engineering：让循环有预算、有出口</h2>
+        </div>
+        <div class="lesson-tags">
+          <span class="chip accent">约 25 分钟</span>
+          <span class="chip plain">工程方法</span>
+          <a class="origin" href="https://www.runoob.com/ai-agent/loop-engineering.html" target="_blank" rel="noopener">对照原文 ↗</a>
+        </div>
+        <div class="fields">
+          <div class="field goal">
+            <h3><svg aria-hidden="true"><use href="#i-target"/></svg>学习目标</h3>
+            <p>为长任务设计一份循环规格：目标、每轮动作、评估信号、停止条件、预算、升级路径。</p>
+          </div>
+          <div class="field">
+            <h3><svg aria-hidden="true"><use href="#i-book"/></svg>前置知识</h3>
+            <p>7.2 的反馈环；5.6 的停机条件。</p>
+          </div>
+          <div class="field wide">
+            <h3><svg aria-hidden="true"><use href="#i-list"/></svg>核心要点</h3>
+            <ul>
+              <li>循环必须有<b>可测量的评估信号</b>，否则只是重复劳动。</li>
+              <li>预算是多维的：轮次、时间、费用、外部 API 配额；任一耗尽都要优雅退出。</li>
+              <li>人工检查点放在「不可逆动作」之前，而不是事后。</li>
+              <li>防止目标漂移：每轮把原始目标与验收标准重新注入，或做一次一致性检查。</li>
+              <li>产出中间产物（日志、diff、报告），让失败也有价值。</li>
+            </ul>
+          </div>
+          <div class="field task wide">
+            <h3><svg aria-hidden="true"><use href="#i-wrench"/></svg>动手任务（25 分钟）</h3>
+            <p>写一张 loop 规格表：目标 / 每轮动作 / 评估信号 / 停止条件 / 预算（轮次+费用）/ 升级路径。以一个「修复失败的测试」任务为例，预算设为 5 轮、2 元，写清超预算后的交付物。</p>
+          </div>
+          <div class="field check wide">
+            <h3><svg aria-hidden="true"><use href="#i-check"/></svg>自检</h3>
+            <div class="qa">
+              <details>
+                <summary>没有评估信号的循环会怎样？</summary>
+                <div class="a">模型只能凭「感觉」判断是否变好，可能在无关改动上反复打转，甚至把原本正确的部分改坏。评估信号可以是测试、指标、人工打分或规则校验。</div>
+              </details>
+              <details>
+                <summary>预算耗尽时应该怎么结束？</summary>
+                <div class="a">不要静默失败。输出已完成的部分、当前阻塞、下一步建议，并保留可复现的中间状态，让人可以接手。</div>
+              </details>
+            </div>
+          </div>
+        </div>
+        <div class="lesson-actions">
+          <button class="done-btn" type="button" data-done-id="s7-3" aria-pressed="false">
+            <span class="dot" aria-hidden="true"><svg><use href="#i-check"/></svg></span>
+            <span class="label">标记完成</span>
+          </button>
+          <span class="meta-note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-7.html#s7-2"><span class="dir">← 上一节</span><span class="t">7.2 Harness Engineering：模型之外的一切</span></a>
+          <a class="next" href="stage-7.html#s7-4"><span class="dir">下一节 →</span><span class="t">7.4 OpenClaw：个人 Agent 的能力与攻击面</span></a>
+        </nav>
+</article>
+
+      <article class="lesson" id="s7-4">
+        <div class="lesson-head">
+          <span class="lesson-badge">7.4</span>
+          <h2>OpenClaw：个人 Agent 的能力与攻击面</h2>
+        </div>
+        <div class="lesson-tags">
+          <span class="chip accent">约 25 分钟</span>
+          <span class="chip plain">产品 + 安全</span>
+          <a class="origin" href="https://www.runoob.com/ai-agent/openclaw-clawdbot-tutorial.html" target="_blank" rel="noopener">对照原文 ↗</a>
+        </div>
+        <div class="fields">
+          <div class="field goal">
+            <h3><svg aria-hidden="true"><use href="#i-target"/></svg>学习目标</h3>
+            <p>说清这类「个人助理型 Agent」的组成（Gateway / 渠道 / 技能）以及它为什么是高权限系统。</p>
+          </div>
+          <div class="field">
+            <h3><svg aria-hidden="true"><use href="#i-book"/></svg>前置知识</h3>
+            <p>阶段 8 的工具集成（可先略读）；基本的安全意识。</p>
+          </div>
+          <div class="field wide">
+            <h3><svg aria-hidden="true"><use href="#i-list"/></svg>核心要点</h3>
+            <ul>
+              <li>运行在你的机器上、接入聊天渠道、能执行命令与读写文件——等于把终端权限交给一个会被内容影响的模型。</li>
+              <li>主要风险不是「模型失控」，而是<b>提示注入 + 高权限工具</b>的组合：一条恶意网页/消息就可能触发操作。</li>
+              <li>隔离优先：独立账号、容器/虚拟机、最小授权目录、密钥不落地。</li>
+              <li>所有写操作要可审计、可回滚；高风险动作加确认。</li>
+              <li>产品更名、安装方式、版本要求变化频繁，站内不复述具体命令，<b>以官方仓库为准</b>。</li>
+            </ul>
+          </div>
+          <div class="field task wide">
+            <h3><svg aria-hidden="true"><use href="#i-wrench"/></svg>动手任务（25 分钟）</h3>
+            <p>列出你打算授予它的 3 项权限（如读某个目录、执行 shell、访问浏览器登录态），逐项写：最坏情况、如何降权、如何发现异常。写不出「最坏情况」的权限就先不要给。</p>
+          </div>
+          <div class="field check wide">
+            <h3><svg aria-hidden="true"><use href="#i-check"/></svg>自检</h3>
+            <div class="qa">
+              <details>
+                <summary>为什么个人 Agent 的提示注入风险比聊天机器人高？</summary>
+                <div class="a">聊天机器人最多说错话；个人 Agent 能真正执行操作。它读取的网页、邮件、文件都可能携带指令，一旦与工具权限结合，就会从「说错」变成「做错」。</div>
+              </details>
+              <details>
+                <summary>最简单的降权手段是什么？</summary>
+                <div class="a">给它一个专用工作目录和专用账号，只授予该目录读写；默认不接 shell，需要时再临时开启，并对每次开启留日志。</div>
+              </details>
+            </div>
+          </div>
+        </div>
+        <div class="lesson-actions">
+          <button class="done-btn" type="button" data-done-id="s7-4" aria-pressed="false">
+            <span class="dot" aria-hidden="true"><svg><use href="#i-check"/></svg></span>
+            <span class="label">标记完成</span>
+          </button>
+          <span class="meta-note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-7.html#s7-3"><span class="dir">← 上一节</span><span class="t">7.3 Loop Engineering：让循环有预算、有出口</span></a>
+          <a class="next" href="stage-7.html#s7-5"><span class="dir">下一节 →</span><span class="t">7.5 OpenClaw 快速上手：先隔离，再安装</span></a>
+        </nav>
+</article>
+
+      <article class="lesson" id="s7-5">
+        <div class="lesson-head">
+          <span class="lesson-badge">7.5</span>
+          <h2>OpenClaw 快速上手：先隔离，再安装</h2>
+        </div>
+        <div class="lesson-tags">
+          <span class="chip accent">约 20 分钟</span>
+          <span class="chip plain">操作 + 安全</span>
+          <a class="origin" href="https://www.runoob.com/ai-agent/openclaw-quickstart.html" target="_blank" rel="noopener">对照原文 ↗</a>
+        </div>
+        <div class="fields">
+          <div class="field goal">
+            <h3><svg aria-hidden="true"><use href="#i-target"/></svg>学习目标</h3>
+            <p>在隔离环境中完成安装与启动，掌握 3 条排错命令，并能解释每条命令的作用。</p>
+          </div>
+          <div class="field">
+            <h3><svg aria-hidden="true"><use href="#i-book"/></svg>前置知识</h3>
+            <p>7.4；会用终端与容器/虚拟机。</p>
+          </div>
+          <div class="field wide">
+            <h3><svg aria-hidden="true"><use href="#i-list"/></svg>核心要点</h3>
+            <ul>
+              <li>一键安装脚本要先读再跑；不确定时下载后本地执行，便于审查。</li>
+              <li>Gateway 是常驻进程：关注端口占用、日志位置、开机自启与崩溃重启。</li>
+              <li>认证信息与渠道 token 放在环境变量或密钥管理里，不要写进配置文件提交。</li>
+              <li>先用测试账号/测试频道验证，再接入真实账号。</li>
+              <li>卸载要能清理干净：进程、服务、配置、缓存、授权。</li>
+            </ul>
+          </div>
+          <div class="field task wide">
+            <h3><svg aria-hidden="true"><use href="#i-wrench"/></svg>动手任务（20 分钟）</h3>
+            <p>在容器或虚拟机中按官方文档安装并启动 gateway，记录 3 条排错命令（查看状态、看日志、处理端口占用）及各自的输出含义。不要在主工作机上裸跑。</p>
+          </div>
+          <div class="field check wide">
+            <h3><svg aria-hidden="true"><use href="#i-check"/></svg>自检</h3>
+            <div class="qa">
+              <details>
+                <summary>为什么不建议在主力机上直接运行？</summary>
+                <div class="a">它能读写文件、执行命令、访问登录态；一旦被注入或配置错误，影响的是你全部数据。隔离环境能把损失限制在一个可丢弃的范围。</div>
+              </details>
+              <details>
+                <summary>安装脚本的主要风险是什么？</summary>
+                <div class="a">供应链风险：脚本可能在你不注意时下载额外二进制、写入 shell 配置或请求过高权限。先读脚本、校验来源、限制网络与权限，是基本操作。</div>
+              </details>
+            </div>
+          </div>
+        </div>
+        <div class="lesson-actions">
+          <button class="done-btn" type="button" data-done-id="s7-5" aria-pressed="false">
+            <span class="dot" aria-hidden="true"><svg><use href="#i-check"/></svg></span>
+            <span class="label">标记完成</span>
+          </button>
+          <span class="meta-note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-7.html#s7-4"><span class="dir">← 上一节</span><span class="t">7.4 OpenClaw：个人 Agent 的能力与攻击面</span></a>
+          <a class="next" href="stage-7.html#s7-6"><span class="dir">下一节 →</span><span class="t">7.6 WorkBuddy：桌面办公 Agent 的验收方法</span></a>
+        </nav>
+</article>
+
+      <article class="lesson" id="s7-6">
+        <div class="lesson-head">
+          <span class="lesson-badge">7.6</span>
+          <h2>WorkBuddy：桌面办公 Agent 的验收方法</h2>
+        </div>
+        <div class="lesson-tags">
+          <span class="chip accent">约 20 分钟</span>
+          <span class="chip plain">产品</span>
+          <a class="origin" href="https://www.runoob.com/ai-agent/workbuddy-usage.html" target="_blank" rel="noopener">对照原文 ↗</a>
+        </div>
+        <div class="fields">
+          <div class="field goal">
+            <h3><svg aria-hidden="true"><use href="#i-target"/></svg>学习目标</h3>
+            <p>用一个真实办公任务测试桌面 Agent，并建立「产物必验收」的习惯。</p>
+          </div>
+          <div class="field">
+            <h3><svg aria-hidden="true"><use href="#i-book"/></svg>前置知识</h3>
+            <p>4.2 平台选型；会用 Excel/文档。</p>
+          </div>
+          <div class="field wide">
+            <h3><svg aria-hidden="true"><use href="#i-list"/></svg>核心要点</h3>
+            <ul>
+              <li>任务描述要包含：输入范围、输出格式、验收标准、禁止事项。</li>
+              <li>工作区隔离，避免它遍历整个硬盘或覆盖原文件。</li>
+              <li>表格类产物必须抽查：行数、合计、空值、日期格式、公式是否被写成静态值。</li>
+              <li>「能生成 PPT/文档」不等于「内容正确」，结构与事实都要复核。</li>
+              <li>产品能力、可用平台与登录方式以官方页面为准，本页不复述。</li>
+            </ul>
+          </div>
+          <div class="field task wide">
+            <h3><svg aria-hidden="true"><use href="#i-wrench"/></svg>动手任务（20 分钟）</h3>
+            <p>准备 3 个 Excel（含重复项与空值），让它汇总成一个表并生成一句结论。然后人工核对 3 个数字：总行数、金额合计、去重后条数。记录它错在哪一步。</p>
+          </div>
+          <div class="field check wide">
+            <h3><svg aria-hidden="true"><use href="#i-check"/></svg>自检</h3>
+            <div class="qa">
+              <details>
+                <summary>为什么桌面 Agent 的产物必须人工验收？</summary>
+                <div class="a">它可能在无声无息中改变口径：漏掉隐藏行、把文本当数字、覆盖公式。错误看起来完全正常，只有抽查关键数字才能发现。</div>
+              </details>
+              <details>
+                <summary>哪些任务不该交给它？</summary>
+                <div class="a">不可逆操作（批量删除/覆盖）、涉密数据、需要专业判断的合规与财务结论。它可以做初稿和重复劳动，责任仍在你。</div>
+              </details>
+            </div>
+          </div>
+        </div>
+        <div class="lesson-actions">
+          <button class="done-btn" type="button" data-done-id="s7-6" aria-pressed="false">
+            <span class="dot" aria-hidden="true"><svg><use href="#i-check"/></svg></span>
+            <span class="label">标记完成</span>
+          </button>
+          <span class="meta-note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-7.html#s7-5"><span class="dir">← 上一节</span><span class="t">7.5 OpenClaw 快速上手：先隔离，再安装</span></a>
+          <a class="next" href="stage-7.html#s7-7"><span class="dir">下一节 →</span><span class="t">7.7 Hermes Agent：持久记忆的收益与污染</span></a>
+        </nav>
+</article>
+
+      <article class="lesson" id="s7-7">
+        <div class="lesson-head">
+          <span class="lesson-badge">7.7</span>
+          <h2>Hermes Agent：持久记忆的收益与污染</h2>
+        </div>
+        <div class="lesson-tags">
+          <span class="chip accent">约 20 分钟</span>
+          <span class="chip plain">产品 + 记忆</span>
+          <a class="origin" href="https://www.runoob.com/ai-agent/hermes-agent.html" target="_blank" rel="noopener">对照原文 ↗</a>
+        </div>
+        <div class="fields">
+          <div class="field goal">
+            <h3><svg aria-hidden="true"><use href="#i-target"/></svg>学习目标</h3>
+            <p>判断「跨会话记忆」在你的场景里是资产还是负债，并写出记忆管理规则。</p>
+          </div>
+          <div class="field">
+            <h3><svg aria-hidden="true"><use href="#i-book"/></svg>前置知识</h3>
+            <p>5.3 记忆系统设计。</p>
+          </div>
+          <div class="field wide">
+            <h3><svg aria-hidden="true"><use href="#i-list"/></svg>核心要点</h3>
+            <ul>
+              <li>持久记忆让偏好与上下文延续，但也把一次性错误变成长期偏见。</li>
+              <li>记忆需要「查看 / 纠正 / 删除」入口，否则用户无法自证清白。</li>
+              <li>敏感信息默认不记：证件、密钥、健康、财务、他人隐私。</li>
+              <li>记忆越多，检索噪声越大；要定期衰减、合并、过期。</li>
+              <li>能执行终端/浏览器操作的产品，记忆与权限叠加后风险更高。</li>
+            </ul>
+          </div>
+          <div class="field task wide">
+            <h3><svg aria-hidden="true"><use href="#i-wrench"/></svg>动手任务（20 分钟）</h3>
+            <p>写两张清单：希望它记住的 5 条（如语言偏好、项目背景）、绝不存储的 3 条（如证件号、客户名单）。再为「记错了」设计一个 1 分钟能完成的纠正流程。</p>
+          </div>
+          <div class="field check wide">
+            <h3><svg aria-hidden="true"><use href="#i-check"/></svg>自检</h3>
+            <div class="qa">
+              <details>
+                <summary>记忆越多越好吗？</summary>
+                <div class="a">不是。无关记忆会干扰检索、增加成本，并可能让模型把旧偏好套到新任务上。有效记忆需要筛选、时效和冲突处理。</div>
+              </details>
+              <details>
+                <summary>如何发现记忆被污染？</summary>
+                <div class="a">定期抽查「它认为关于我的事实」，与真实情况比对；观察输出是否出现莫名偏好或过时信息。提供一键导出与清空能力。</div>
+              </details>
+            </div>
+          </div>
+        </div>
+        <div class="lesson-actions">
+          <button class="done-btn" type="button" data-done-id="s7-7" aria-pressed="false">
+            <span class="dot" aria-hidden="true"><svg><use href="#i-check"/></svg></span>
+            <span class="label">标记完成</span>
+          </button>
+          <span class="meta-note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-7.html#s7-6"><span class="dir">← 上一节</span><span class="t">7.6 WorkBuddy：桌面办公 Agent 的验收方法</span></a>
+          <a class="next" href="stage-7.html#s7-8"><span class="dir">下一节 →</span><span class="t">7.8 Pi Coding Agent：原语组合与 diff 审查</span></a>
+        </nav>
+</article>
+
+      <article class="lesson" id="s7-8">
+        <div class="lesson-head">
+          <span class="lesson-badge">7.8</span>
+          <h2>Pi Coding Agent：原语组合与 diff 审查</h2>
+        </div>
+        <div class="lesson-tags">
+          <span class="chip accent">约 25 分钟</span>
+          <span class="chip plain">终端 Agent</span>
+          <a class="origin" href="https://www.runoob.com/ai-agent/pi-coding-agent.html" target="_blank" rel="noopener">对照原文 ↗</a>
+        </div>
+        <div class="fields">
+          <div class="field goal">
+            <h3><svg aria-hidden="true"><use href="#i-target"/></svg>学习目标</h3>
+            <p>用终端编码 Agent 完成一个小改动，并建立「逐条 review diff」的工作习惯。</p>
+          </div>
+          <div class="field">
+            <h3><svg aria-hidden="true"><use href="#i-book"/></svg>前置知识</h3>
+            <p>Git 基础；能在终端里运行测试。</p>
+          </div>
+          <div class="field wide">
+            <h3><svg aria-hidden="true"><use href="#i-list"/></svg>核心要点</h3>
+            <ul>
+              <li>设计哲学是「原语而非功能」：read / edit / bash 等基础能力，加上扩展组合出工作流。</li>
+              <li>没有内置计划模式/待办，不等于不能做——用文件写计划、用扩展补流程。</li>
+              <li>沙箱与权限确认取决于运行环境，默认假设它能执行任意命令。</li>
+              <li>每轮改动后看 diff、跑测试、再继续；不要让它连续改十个文件才检查。</li>
+              <li>把「验收命令」写进任务描述，比事后人工找问题更省时间。</li>
+            </ul>
+          </div>
+          <div class="field task wide">
+            <h3><svg aria-hidden="true"><use href="#i-wrench"/></svg>动手任务（25 分钟）</h3>
+            <p>在一个测试仓库里让它「给某个函数补边界处理并新增两个测试」，要求它每完成一步就停下。你逐条 review diff，故意驳回一次不合理改动，观察它如何调整。</p>
+          </div>
+          <div class="field check wide">
+            <h3><svg aria-hidden="true"><use href="#i-check"/></svg>自检</h3>
+            <div class="qa">
+              <details>
+                <summary>为什么「不内置计划模式」不是缺陷？</summary>
+                <div class="a">计划可以写成仓库里的 markdown，既可见又可版本化；把它做成内置功能反而限制组合方式。关键是你自己要建立「先计划、后执行」的流程。</div>
+              </details>
+              <details>
+                <summary>终端 Agent 最大的风险是什么？</summary>
+                <div class="a">它拥有真实执行权限：误删文件、装恶意依赖、运行破坏性命令。要用独立分支/容器、限制目录、审查命令，并保留可恢复的备份。</div>
+              </details>
+            </div>
+          </div>
+        </div>
+        <div class="lesson-actions">
+          <button class="done-btn" type="button" data-done-id="s7-8" aria-pressed="false">
+            <span class="dot" aria-hidden="true"><svg><use href="#i-check"/></svg></span>
+            <span class="label">标记完成</span>
+          </button>
+          <span class="meta-note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-7.html#s7-7"><span class="dir">← 上一节</span><span class="t">7.7 Hermes Agent：持久记忆的收益与污染</span></a>
+          <a class="next" href="stage-7.html#s7-9"><span class="dir">下一节 →</span><span class="t">7.9 DuMate（搭子）：桌面办公的适用边界</span></a>
+        </nav>
+</article>
+
+      <article class="lesson" id="s7-9">
+        <div class="lesson-head">
+          <span class="lesson-badge">7.9</span>
+          <h2>DuMate（搭子）：桌面办公的适用边界</h2>
+        </div>
+        <div class="lesson-tags">
+          <span class="chip accent">约 20 分钟</span>
+          <span class="chip plain">产品</span>
+          <a class="origin" href="https://www.runoob.com/ai-agent/dumate-usages.html" target="_blank" rel="noopener">对照原文 ↗</a>
+        </div>
+        <div class="fields">
+          <div class="field goal">
+            <h3><svg aria-hidden="true"><use href="#i-target"/></svg>学习目标</h3>
+            <p>评估「桌面级办公 Agent」是否适合你的工作流，并划出不该交给它的任务。</p>
+          </div>
+          <div class="field">
+            <h3><svg aria-hidden="true"><use href="#i-book"/></svg>前置知识</h3>
+            <p>7.6 的验收方法。</p>
+          </div>
+          <div class="field wide">
+            <h3><svg aria-hidden="true"><use href="#i-list"/></svg>核心要点</h3>
+            <ul>
+              <li>典型能力：文件整理、Excel 处理、PPT/文档生成、浏览器操作；核心价值是「交付文件」而非「给建议」。</li>
+              <li>工作区是最小权限边界：只开放任务需要的目录。</li>
+              <li>任务越模糊，返工越多；把「做成什么样」写成可检查的条件。</li>
+              <li>支持的系统/芯片、登录方式、额度与定价会变化，<b>以官网为准</b>。</li>
+              <li>先做「可回滚的小任务」，再考虑批量与自动化。</li>
+            </ul>
+          </div>
+          <div class="field task wide">
+            <h3><svg aria-hidden="true"><use href="#i-wrench"/></svg>动手任务（20 分钟）</h3>
+            <p>列 3 个你想交给它的任务，分别标注「可自动 / 需人工复核 / 不该交给它」，并为「需复核」的那类写 3 条检查项。写不出检查项的任务，先不要自动化。</p>
+          </div>
+          <div class="field check wide">
+            <h3><svg aria-hidden="true"><use href="#i-check"/></svg>自检</h3>
+            <div class="qa">
+              <details>
+                <summary>哪类任务不该交给桌面 Agent？</summary>
+                <div class="a">不可逆且影响面大的（批量删除、覆盖合同）、涉密或受监管的数据、需要专业判断并承担责任的结论。它可以参与，但不能成为唯一执行者。</div>
+              </details>
+              <details>
+                <summary>如何判断一个任务是否「描述清楚」？</summary>
+                <div class="a">看能否写出验收条件：输出文件名、字段、行数、格式、必须保持不变的內容。写不出来，说明你自己还没想清楚。</div>
+              </details>
+            </div>
+          </div>
+        </div>
+        <div class="lesson-actions">
+          <button class="done-btn" type="button" data-done-id="s7-9" aria-pressed="false">
+            <span class="dot" aria-hidden="true"><svg><use href="#i-check"/></svg></span>
+            <span class="label">标记完成</span>
+          </button>
+          <span class="meta-note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-7.html#s7-8"><span class="dir">← 上一节</span><span class="t">7.8 Pi Coding Agent：原语组合与 diff 审查</span></a>
+          <a class="next" href="stage-8.html#s8-1"><span class="dir">下一节 →</span><span class="t">8.1 多智能体系统：分工、通信、协调</span></a>
+        </nav>
+</article>
+
+      <nav class="pager" aria-label="阶段翻页">
+        <a href="stage-6.html"><span class="dir">← 上一阶段</span><span class="t">阶段 6 · 框架与平台</span></a>
+        <a class="next" href="stage-8.html"><span class="dir">下一阶段 →</span><span class="t">阶段 8 · 多智能体与生产化</span></a>
+      </nav>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-in">
+      <div>
+        <p>蓝本：<a href="https://www.runoob.com/ai-agent/ai-agent-tutorial.html" target="_blank" rel="noopener">runoob · AI Agent 教程</a>。个人本地学习用途，不复制原文全文、不用于商业分发。</p>
+        <p class="small">审计时间 2026-10；产品与 API 信息请以官方文档为准。</p>
+      </div>
+      <div>
+        <h3>继续</h3>
+        <ul>
+          <li><a href="stage-8.html">阶段 8 · 生产化</a></li>
+          <li><a href="audit.html">内容审计台账</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>说明</h3>
+        <ul>
+          <li><a href="about.html">来源与版权</a></li>
+          <li><a href="about.html#verify">待核实清单</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">离线可用 · 无外部请求 · 进度仅保存在本机</div>
+  </div>
+</footer>
+<script src="assets/app.js"></script>
+</body>
+</html>

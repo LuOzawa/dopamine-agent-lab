@@ -1,0 +1,9 @@
+模式：固定模型响应；真实 LangChain 工具循环
+问题：北京天气；(2+3)*6
+  工具 weather: 22°C 晴
+  工具 calculate: 30
+  消息类型：human → ai → tool → ai → tool → ai
+问题：上海天气；8/2
+  工具 weather: 25°C 多云
+  工具 calculate: 4.0
+  消息类型：human → ai → tool → ai → tool → ai

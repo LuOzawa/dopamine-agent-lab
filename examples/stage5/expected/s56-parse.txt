@@ -1,0 +1,7 @@
+mode=offline（确定性故障注入）
+turn=1 tool=list_docs args={broken result={"ok": false, "error": "invalid_json", "message": "参数必须是合法 JSON 对象，请修正后重试。"}
+turn=2 tool=list_docs args={broken result={"ok": false, "error": "invalid_json", "message": "参数必须是合法 JSON 对象，请修正后重试。"}
+status=parse_error turns=2 tool_calls=2 tokens=0
+已完成工具：无
+未完成：列出文档，读取 setup.md，说明配置方法。
+建议下一步：检查错误记录，缩小任务或修正参数后重跑。

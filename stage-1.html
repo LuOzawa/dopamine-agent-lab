@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>阶段 1 · 认知地图 | Dopamine Agent Lab</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-accent="violet">
+<a class="skip" href="#main">跳到主要内容</a>
+<div class="read-progress" aria-hidden="true"></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01" stroke-width="3"/></symbol>
+  <symbol id="i-wrench" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0 5 5L20 11l-8.5 8.5a2.1 2.1 0 0 1-3-3L17 8l-.3-1.7z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v18H6.5A2.5 2.5 0 0 0 4 23z"/><path d="M4 18.5h16"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 16H3z"/><path d="M12 9v5M12 17.5h.01"/></symbol>
+</svg>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true"><svg><use href="#i-spark"/></svg></span>
+      <span>Dopamine Agent Lab</span>
+    </a>
+    <nav class="topnav" aria-label="主导航">
+      <a href="index.html">学习地图</a>
+      <a href="contents.html">全部目录</a>
+      <a href="search.html">搜索</a>
+      <a href="audit.html">内容审计</a>
+      <a href="about.html" class="nav-about">使用说明</a>
+    </nav>
+    <div class="mini-progress" title="总学习进度">
+      <span class="mini-bar" aria-hidden="true"><i data-mini-bar></i></span>
+      <span data-mini-text>0/47</span>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <div class="page-head">
+      <div class="crumbs"><a href="index.html">学习地图</a> <span aria-hidden="true">/</span> <span>阶段 1</span></div>
+      <div class="kicker">Stage 01 · Fundamentals</div>
+      <h1>认知地图：Agent 到底是什么</h1>
+      <p class="lede">
+        这一阶段不写代码，目标是建立一套「不会被营销话术带跑」的判断力：
+        能区分 Agent 与聊天机器人、说清四个核心部件的职责、把新名词归位，并解释一次 Agent 调用为什么可能失控。
+      </p>
+      <div class="chips">
+        <span class="chip accent">4 节</span>
+        <span class="chip">约 1.5 小时</span>
+        <span class="chip">前置：无</span>
+        <span class="chip plain">建议顺序学习</span>
+      </div>
+      <div class="stage-progress">
+        <b>本阶段进度</b>
+        <span class="bar" aria-hidden="true"><i data-stage-bar="1"></i></span>
+        <b data-stage-label="1">0 / 4</b>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap layout">
+    <nav class="toc" aria-label="本阶段目录">
+      <details open>
+        <summary>本阶段目录<span class="toc-current">选择小节跳转</span></summary>
+        <div class="toc-content">
+          <ol>
+            <li><a href="#s1-1"><span class="n">1.1</span><span>AI Agent 简介</span></a></li>
+            <li><a href="#s1-2"><span class="n">1.2</span><span>核心组件</span></a></li>
+            <li><a href="#s1-3"><span class="n">1.3</span><span>术语地图</span></a></li>
+            <li><a href="#s1-4"><span class="n">1.4</span><span>工作原理</span></a></li>
+          </ol>
+          <p class="toc-done">完成一节就点卡片底部「标记完成」，进度只存本机。</p>
+        </div>
+      </details>
+    </nav>
+
+    <div>
+      <div class="callout info">
+        <svg aria-hidden="true"><use href="#i-alert"/></svg>
+        <p><b>本阶段判定标准：</b>学完不看笔记，能对朋友用 2 分钟讲清「Agent 和 ChatGPT 差在哪」，并举例说明什么任务不该交给 Agent。</p>
+      </div>
+
+      <article class="lesson" id="s1-1">
+        <div class="lesson-head">
+          <span class="lesson-badge">1.1</span>
+          <h2>AI Agent 简介：从「回答」到「交付」</h2>
+        </div>
+        <div class="lesson-tags">
+          <span class="chip accent">约 25 分钟</span>
+          <span class="chip plain">概念</span>
+          <a class="origin" href="https://www.runoob.com/ai-agent/ai-agent-intro.html" target="_blank" rel="noopener">对照原文 ↗</a>
+        </div>
+        <div class="fields">
+          <div class="field goal">
+            <h3><svg aria-hidden="true"><use href="#i-target"/></svg>学习目标</h3>
+            <p>用自己的话区分「聊天机器人」和「Agent」，并说出 Agent = 模型 + 规划 + 工具 + 记忆这条公式里每一部分的作用。</p>
+          </div>
+          <div class="field">
+            <h3><svg aria-hidden="true"><use href="#i-book"/></svg>前置知识</h3>
+            <p>无。只需要知道「大模型可以对话」这件事。</p>
+          </div>
+          <div class="field wide">
+            <h3><svg aria-hidden="true"><use href="#i-list"/></svg>核心要点</h3>
+            <ul>
+              <li><b>输出物不同：</b>普通 LLM 产出「内容」，Agent 产出「结果」——它会调用工具把事做完，而不只是告诉你步骤。</li>
+              <li><b>四个部件是能力清单，不是必选清单：</b>简单 Agent 可能只有模型 + 工具；长期记忆、复杂规划、多 Agent 都是按需叠加。</li>
+              <li><b>ReAct 是常见实现，不是唯一定义：</b>「推理 → 行动 → 观察」循环之外，还有预规划、工作流编排、直接工具调用等形态。</li>
+              <li><b>边界模糊：</b>现代聊天应用也能调工具，所以「是不是 Agent」不如问「自主度多高、权限多大、失败谁兜底」。</li>
+              <li><b>风险来自权限：</b>能读文件、发邮件、执行命令，才可能造成真实损失；讨论 Agent 必须同时讨论授权与审计。</li>
+            </ul>
+          </div>
+          <div class="field task wide">
+            <h3><svg aria-hidden="true"><use href="#i-wrench"/></svg>动手任务（20–30 分钟）</h3>
+            <p>拿「分析最近三个月销售数据并生成报告」这个任务，画一张双栏流程图：左边是普通 LLM 应用，右边是 Agent。用三种颜色标出「人做的事 / 模型做的事 / 工具做的事」，并在右侧写出至少 2 个可能失败的环节（例如文件读不到、图表数字错）。</p>
+          </div>
+          <div class="field check wide">
+            <h3><svg aria-hidden="true"><use href="#i-check"/></svg>自检</h3>
+            <div class="qa">
+              <details>
+                <summary>Agent 一定要有向量数据库或长期记忆吗？</summary>
+                <div class="a">不一定。长期记忆解决的是「跨会话保持信息」，一次性任务（改格式、查一次数据）只需要当前上下文。把可选能力当成必选，会让架构和成本无谓膨胀。</div>
+              </details>
+              <details>
+                <summary>为什么说「是不是 Agent」这个问题本身不够好？</summary>
+                <div class="a">因为产品形态在融合。更有用的问法是：它能自主决定哪些步骤？被授予了哪些工具与数据权限？出错时有没有人工确认和回滚？这三点决定了它的实际风险与价值。</div>
+              </details>
+            </div>
+          </div>
+        </div>
+        <div class="lesson-actions">
+          <button class="done-btn" type="button" data-done-id="s1-1" aria-pressed="false">
+            <span class="dot" aria-hidden="true"><svg><use href="#i-check"/></svg></span>
+            <span class="label">标记完成</span>
+          </button>
+          <span class="meta-note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="index.html"><span class="dir">← 起点</span><span class="t">学习地图</span></a>
+          <a class="next" href="stage-1.html#s1-2"><span class="dir">下一节 →</span><span class="t">1.2 核心组件：每个部件坏了会怎样</span></a>
+        </nav>
+</article>
+
+      <article class="lesson" id="s1-2">
+        <div class="lesson-head">
+          <span class="lesson-badge">1.2</span>
+          <h2>核心组件：每个部件坏了会怎样</h2>
+        </div>
+        <div class="lesson-tags">
+          <span class="chip accent">约 25 分钟</span>
+          <span class="chip plain">概念</span>
+          <a class="origin" href="https://www.runoob.com/ai-agent/ai-agent-core.html" target="_blank" rel="noopener">对照原文 ↗</a>
+        </div>
+        <div class="fields">
+          <div class="field goal">
+            <h3><svg aria-hidden="true"><use href="#i-target"/></svg>学习目标</h3>
+            <p>画出 Agent 的组件图，并为每个组件写出「它失效时的典型症状」，建立排错直觉。</p>
+          </div>
+          <div class="field">
+            <h3><svg aria-hidden="true"><use href="#i-book"/></svg>前置知识</h3>
+            <p>1.1 的 Agent 定义。</p>
+          </div>
+          <div class="field wide">
+            <h3><svg aria-hidden="true"><use href="#i-list"/></svg>核心要点</h3>
+            <ul>
+              <li><b>感知层</b>接收用户输入、环境状态和工具返回；<b>模型</b>负责理解与决策；<b>工具</b>负责真正执行。</li>
+              <li><b>状态 / 记忆</b>记录任务进度与中间结果；<b>执行控制（Runtime）</b>负责调度、重试、终止和错误处理。</li>
+              <li>执行控制最容易被忽略：没有最大轮次、超时和终止条件，Agent 会死循环并持续烧钱。</li>
+              <li>典型失败模式要背下来：工具报错未捕获、上下文溢出、循环不终止、记忆写入脏数据、权限过大。</li>
+              <li>组件划分是逻辑划分，不是部署划分：小项目里「记忆」可能只是一个 JSON 文件。</li>
+            </ul>
+          </div>
+          <div class="field task wide">
+            <h3><svg aria-hidden="true"><use href="#i-wrench"/></svg>动手任务（20 分钟）</h3>
+            <p>针对「读取 Excel → 统计各地区销售额 → 生成柱状图 → 保存报告」任务，做一张 6 行表格，列为：组件 / 输入 / 输出 / 失败症状 / 兜底动作。至少写出 3 个失败症状，例如「文件路径错误 → 工具返回异常 → 让模型换路径或询问用户」。</p>
+          </div>
+          <div class="field check wide">
+            <h3><svg aria-hidden="true"><use href="#i-check"/></svg>自检</h3>
+            <div class="qa">
+              <details>
+                <summary>如果去掉「执行控制」会发生什么？</summary>
+                <div class="a">模型可能反复调用同一个工具、在工具报错后无限重试，或者任务已完成仍继续行动。执行控制提供轮次上限、超时、错误分类、终止判断与人工接管，是成本与安全的第一道闸。</div>
+              </details>
+              <details>
+                <summary>为什么「记忆」常常是故障源？</summary>
+                <div class="a">因为写入没有筛选、读取没有相关性排序，旧信息会污染当前决策；错误记忆还会被反复强化。设计记忆时要同时定义写入条件、读取条件、冲突合并和过期删除。</div>
+              </details>
+            </div>
+          </div>
+        </div>
+        <div class="lesson-actions">
+          <button class="done-btn" type="button" data-done-id="s1-2" aria-pressed="false">
+            <span class="dot" aria-hidden="true"><svg><use href="#i-check"/></svg></span>
+            <span class="label">标记完成</span>
+          </button>
+          <span class="meta-note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-1.html#s1-1"><span class="dir">← 上一节</span><span class="t">1.1 AI Agent 简介：从「回答」到「交付」</span></a>
+          <a class="next" href="stage-1.html#s1-3"><span class="dir">下一节 →</span><span class="t">1.3 术语地图：把新名词放回它该在的层</span></a>
+        </nav>
+</article>
+
+      <article class="lesson" id="s1-3">
+        <div class="lesson-head">
+          <span class="lesson-badge">1.3</span>
+          <h2>术语地图：把新名词放回它该在的层</h2>
+        </div>
+        <div class="lesson-tags">
+          <span class="chip accent">约 20 分钟</span>
+          <span class="chip plain">概念</span>
+          <a class="origin" href="https://www.runoob.com/ai-agent/ai-terminology.html" target="_blank" rel="noopener">对照原文 ↗</a>
+        </div>
+        <div class="fields">
+          <div class="field goal">
+            <h3><svg aria-hidden="true"><use href="#i-target"/></svg>学习目标</h3>
+            <p>看到一个陌生术语时，能判断它属于「工程范式 / 协议 / 框架 / 产品能力」中的哪一类，而不是被缩写唬住。</p>
+          </div>
+          <div class="field">
+            <h3><svg aria-hidden="true"><use href="#i-book"/></svg>前置知识</h3>
+            <p>1.1、1.2。</p>
+          </div>
+          <div class="field wide">
+            <h3><svg aria-hidden="true"><use href="#i-list"/></svg>核心要点</h3>
+            <ul>
+              <li>工程范式的演进线索：<b>Prompt（怎么问）→ Context（给什么）→ Harness（怎么组织能力）→ Loop（怎么持续产出）</b>。它们是叠加关系，不是替代关系。</li>
+              <li><b>MCP</b> 解决「模型 / Agent 如何标准化接入工具与数据」；<b>A2A</b> 解决「Agent 之间如何发现与协作」。两者层次不同，不能混为一谈。</li>
+              <li><b>框架 ≠ 平台</b>：LangChain / LangGraph 是代码库；Dify / n8n 是可视化平台；CrewAI 介于两者之间。</li>
+              <li>术语漂移很快，同一缩写在不同厂商口径下可能不同。写方案时给出处，别只写缩写。</li>
+              <li>「Agentic」「自主」是程度词，不是开关；评审时要求对方给出具体自主边界。</li>
+            </ul>
+          </div>
+          <div class="field task wide">
+            <h3><svg aria-hidden="true"><use href="#i-wrench"/></svg>动手任务（20 分钟）</h3>
+            <p>把原文术语表里的词做成 4 张卡片：范式、协议、框架/库、产品。每类至少 3 个词，每个词写一句「它解决什么问题」。做完后遮住解释，只看词复述。</p>
+          </div>
+          <div class="field check wide">
+            <h3><svg aria-hidden="true"><use href="#i-check"/></svg>自检</h3>
+            <div class="qa">
+              <details>
+                <summary>MCP 和 A2A 是竞争关系吗？</summary>
+                <div class="a">不是。MCP 面向「Agent ↔ 工具/数据源」的接入标准化，A2A 面向「Agent ↔ Agent」的协作与任务委派。一个系统可以同时使用两者。</div>
+              </details>
+              <details>
+                <summary>为什么不能只凭术语判断一个产品是不是 Agent？</summary>
+                <div class="a">术语是营销素材，能力要看权限与自主度：它能否自行选择步骤、调用哪些工具、失败后能否恢复、有没有人工确认。没有这些信息，「Agent」只是标签。</div>
+              </details>
+            </div>
+          </div>
+        </div>
+        <div class="lesson-actions">
+          <button class="done-btn" type="button" data-done-id="s1-3" aria-pressed="false">
+            <span class="dot" aria-hidden="true"><svg><use href="#i-check"/></svg></span>
+            <span class="label">标记完成</span>
+          </button>
+          <span class="meta-note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-1.html#s1-2"><span class="dir">← 上一节</span><span class="t">1.2 核心组件：每个部件坏了会怎样</span></a>
+          <a class="next" href="stage-1.html#s1-4"><span class="dir">下一节 →</span><span class="t">1.4 工作原理：一次调用的完整链路</span></a>
+        </nav>
+</article>
+
+      <article class="lesson" id="s1-4">
+        <div class="lesson-head">
+          <span class="lesson-badge">1.4</span>
+          <h2>工作原理：一次调用的完整链路</h2>
+        </div>
+        <div class="lesson-tags">
+          <span class="chip accent">约 25 分钟</span>
+          <span class="chip plain">概念 + 伪代码</span>
+          <a class="origin" href="https://www.runoob.com/ai-agent/ai-agent-working-principle.html" target="_blank" rel="noopener">对照原文 ↗</a>
+        </div>
+        <div class="fields">
+          <div class="field goal">
+            <h3><svg aria-hidden="true"><use href="#i-target"/></svg>学习目标</h3>
+            <p>把「输入 → 思考 → 工具 → 观察 → 判断」讲成一条完整链路，并指出至少 3 个必须设置的终止条件。</p>
+          </div>
+          <div class="field">
+            <h3><svg aria-hidden="true"><use href="#i-book"/></svg>前置知识</h3>
+            <p>1.2 的组件职责。</p>
+          </div>
+          <div class="field wide">
+            <h3><svg aria-hidden="true"><use href="#i-list"/></svg>核心要点</h3>
+            <ul>
+              <li>Agent 的本质是一个<b>带终止条件的循环</b>，而不是一次更长的提示。</li>
+              <li>每轮工具结果都会回写上下文，所以上下文会持续膨胀——这是长任务最主要的瓶颈。</li>
+              <li>循环必须同时有：最大轮次、超时 / 预算、任务完成判定、连续失败判定、人工接管出口。</li>
+              <li>Agent 类型（反应式 / 规划式 / 混合 / 多 Agent）的差别，本质是「计划在什么时候产生、由谁维护」。</li>
+              <li>可观测性要记录每轮的输入摘要、工具名与参数、返回摘要、耗时与 token，否则无法复盘。</li>
+            </ul>
+          </div>
+          <div class="field task wide">
+            <h3><svg aria-hidden="true"><use href="#i-wrench"/></svg>动手任务（25 分钟）</h3>
+            <p>先不看任何框架，用伪代码写 12 行 <code>run(task)</code>：初始化上下文 → 循环 → 让模型选择动作 → 执行工具 → 追加观察 → 判断是否结束。然后在旁边标注 3 个终止条件和 1 个人工接管点。</p>
+          </div>
+          <div class="field check wide">
+            <h3><svg aria-hidden="true"><use href="#i-check"/></svg>自检</h3>
+            <div class="qa">
+              <details>
+                <summary>为什么「最大轮次」是必需项而不是优化项？</summary>
+                <div class="a">模型无法保证一定收敛：它可能重复无效动作、在错误信息上反复尝试，或把已完成任务当成未完成。没有轮次上限，成本和延迟都不可控。</div>
+              </details>
+              <details>
+                <summary>工具结果回写上下文，会带来什么连锁问题？</summary>
+                <div class="a">上下文增长导致成本上升、关键指令被稀释、模型开始遗忘最初目标。对应策略是结果截断、摘要压缩、结构化状态和子 Agent 隔离。</div>
+              </details>
+            </div>
+          </div>
+        </div>
+        <div class="lesson-actions">
+          <button class="done-btn" type="button" data-done-id="s1-4" aria-pressed="false">
+            <span class="dot" aria-hidden="true"><svg><use href="#i-check"/></svg></span>
+            <span class="label">标记完成</span>
+          </button>
+          <span class="meta-note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-1.html#s1-3"><span class="dir">← 上一节</span><span class="t">1.3 术语地图：把新名词放回它该在的层</span></a>
+          <a class="next" href="stage-2.html#s2-1"><span class="dir">下一节 →</span><span class="t">2.1 AI 底层架构：把概念放进五层</span></a>
+        </nav>
+</article>
+
+      <nav class="pager" aria-label="阶段翻页">
+        <a href="index.html"><span class="dir">← 返回</span><span class="t">学习地图</span></a>
+        <a class="next" href="stage-2.html"><span class="dir">下一阶段 →</span><span class="t">阶段 2 · 模型与提示</span></a>
+      </nav>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-in">
+      <div>
+        <p>蓝本：<a href="https://www.runoob.com/ai-agent/ai-agent-tutorial.html" target="_blank" rel="noopener">runoob · AI Agent 教程</a>。个人本地学习用途，不复制原文全文、不用于商业分发。</p>
+        <p class="small">审计时间 2026-10；产品与 API 信息请以官方文档为准。</p>
+      </div>
+      <div>
+        <h3>继续</h3>
+        <ul>
+          <li><a href="stage-2.html">阶段 2 · 模型与提示</a></li>
+          <li><a href="audit.html">内容审计台账</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>说明</h3>
+        <ul>
+          <li><a href="about.html">来源与版权</a></li>
+          <li><a href="about.html#verify">待核实清单</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">离线可用 · 无外部请求 · 进度仅保存在本机</div>
+  </div>
+</footer>
+<script src="assets/app.js"></script>
+</body>
+</html>

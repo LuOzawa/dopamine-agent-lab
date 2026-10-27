@@ -1,0 +1,6 @@
+mode=offline（脚本驱动器，非模型推理）
+turn=1 tool=get_weather args={"city":""} result={"ok": false, "error": "ValueError", "message": "city 不能为空；演示城市为北京或上海。"}
+turn=2 tool=get_weather args={"city":"北京"} result={"ok": true, "data": {"city": "北京", "temperature_c": 22, "source": "固定教学数据，非实时天气"}}
+turn=3 tool=calculate args={"expression":"(12+3)*2"} result={"ok": true, "data": {"value": 30}}
+status=completed turns=4 tool_calls=3 tokens=0
+北京 22°C（固定教学数据）；计算结果 30。

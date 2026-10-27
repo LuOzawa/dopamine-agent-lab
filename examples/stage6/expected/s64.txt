@@ -1,0 +1,8 @@
+实际工具：write_todos → read_file → ls → read_file → read_file → read_file → write_file → write_todos
+待办：completed
+状态文件 /summary.md：
+# 学习摘要
+
+先离线验证，再接入模型；密钥不公开；测试应覆盖失败与停止条件。
+
+宿主磁盘未写入；模型响应为固定脚本，缺文件恢复路径为预设。

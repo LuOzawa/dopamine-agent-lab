@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>全部目录 · 对照原文左侧栏 | Dopamine Agent Lab</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-accent="violet">
+<a class="skip" href="#main">跳到主要内容</a>
+<div class="read-progress" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true" style="display:grid;place-items:center;font-weight:800">D</span>
+      <span>Dopamine Agent Lab</span>
+    </a>
+    <nav class="topnav" aria-label="主导航">
+      <a href="index.html">学习地图</a>
+      <a href="contents.html" aria-current="page">全部目录</a>
+      <a href="search.html">搜索</a>
+      <a href="audit.html">内容审计</a>
+      <a href="about.html" class="nav-about">使用说明</a>
+    </nav>
+    <div class="mini-progress" title="总学习进度">
+      <span class="mini-bar" aria-hidden="true"><i data-mini-bar></i></span>
+      <span data-mini-text>0/47</span>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="doc">
+  <div class="kicker">Catalog · 对照原文 leftcolumn</div>
+  <h1>全部章节</h1>
+  <p class="lede">原文左侧栏 <code>#leftcolumn</code> 是 3 个分组、48 个链接（教程首页 + 47 章）。
+    本站全部收录，没有漏章；这一页保留原文顺序，并标出每章在本站属于哪个阶段。</p>
+  <div class="chips" style="margin-bottom:24px">
+    <span class="chip accent">48 项</span>
+    <span class="chip">3 个原文分组</span>
+    <span class="chip">47 章 + 教程首页</span>
+    <span class="chip plain">0 缺失</span>
+  </div>
+
+  <div class="callout update">
+    <p><b>为什么两边顺序不同：</b>原文是「概念 → 工具 → Python 实现」；本站按学习递进重排为 8 阶段（概念 → 模型 → 推理/知识 → 架构 → 动手 → 框架 → 前沿 → 生产）。
+      内容没有增删，只是同一章在两边的位置不同。想按原文查，用这一页；想按学习路径走，用<a href="index.html">学习地图</a>。</p>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <caption>目录保真度对照</caption>
+      <thead><tr><th style="width:150px">维度</th><th style="width:210px">原文 leftcolumn</th><th>本站处理</th></tr></thead>
+      <tbody>
+        <tr><td>章节数量</td><td>47 章 + 教程首页</td><td>47 章全部收录，首页指向学习地图；0 缺失</td></tr>
+        <tr><td>分组</td><td>3 组（首段无标题 / 智能体工具 / Python 实现智能体）</td><td>保留在本页；学习路径另分 8 阶段</td></tr>
+        <tr><td>顺序</td><td>概念 → 工具 → Python</td><td>学习路径重排；本页保留原文顺序</td></tr>
+        <tr><td>内容深度</td><td>完整正文、代码、截图</td><td>导读 + 五字段 + 审计；正文以原文链接为准</td></tr>
+        <tr><td>导航</td><td>每页常驻左侧栏</td><td>阶段内目录 + 本页全站目录 + 顶部入口</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="catalog-tools">
+    <label for="catalog-q">搜索章节</label>
+    <input id="catalog-q" type="search" placeholder="输入章节名、工具名，如 MCP / RAG / OpenClaw" autocomplete="off">
+    <span id="catalog-count" class="catalog-count" aria-live="polite">48 项</span>
+    <a class="btn sm" href="search.html">搜正文 →</a>
+    <a class="btn sm" href="frameworks.html">选型矩阵</a>
+  </div>
+  <p id="catalog-empty" class="catalog-empty" hidden>没有匹配的章节。试试更短的关键词，或直接看<a href="index.html">学习地图</a>。</p>
+
+  <div class="catalog">
+
+      <section class="catalog-group" data-group-block="g1">
+        <header>
+          <div>
+            <h2>基础概念（原文首段，无分组标题）</h2>
+            <p>原文未加分组标题，共 15 项：教程首页 + 14 个概念章节。</p>
+          </div>
+          <span class="group-meta"><b data-group-done="g1">0</b> / 14 已完成</span>
+        </header>
+        <ol class="chapter-list">
+
+          <li class="chapter-row" data-title="AI Agent(智能体) 教程">
+            <span class="idx">01</span>
+            <a class="chapter-main" href="index.html">AI Agent(智能体) 教程</a>
+            <span class="stage-tag" style="background:#FFF3C4">学习地图</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/ai-agent-tutorial.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done is-na" aria-hidden="true">·</span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s1-1" data-group="g1" data-title="AI Agent 简介">
+            <span class="idx">02</span>
+            <a class="chapter-main" href="stage-1.html#s1-1">AI Agent 简介</a>
+            <span class="stage-tag" style="background:#F1E9FF">阶段 1</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/ai-agent-intro.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s1-2" data-group="g1" data-title="AI Agent 核心组件">
+            <span class="idx">03</span>
+            <a class="chapter-main" href="stage-1.html#s1-2">AI Agent 核心组件</a>
+            <span class="stage-tag" style="background:#F1E9FF">阶段 1</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/ai-agent-core.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s1-3" data-group="g1" data-title="AI Agent 术语">
+            <span class="idx">04</span>
+            <a class="chapter-main" href="stage-1.html#s1-3">AI Agent 术语</a>
+            <span class="stage-tag" style="background:#F1E9FF">阶段 1</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/ai-terminology.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s1-4" data-group="g1" data-title="AI Agent 工作原理">
+            <span class="idx">05</span>
+            <a class="chapter-main" href="stage-1.html#s1-4">AI Agent 工作原理</a>
+            <span class="stage-tag" style="background:#F1E9FF">阶段 1</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/ai-agent-working-principle.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s2-1" data-group="g1" data-title="AI 底层架构">
+            <span class="idx">06</span>
+            <a class="chapter-main" href="stage-2.html#s2-1">AI 底层架构</a>
+            <span class="stage-tag" style="background:#FFE7F2">阶段 2</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/ai-architecture.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s2-2" data-group="g1" data-title="大语言模型基础">
+            <span class="idx">07</span>
+            <a class="chapter-main" href="stage-2.html#s2-2">大语言模型基础</a>
+            <span class="stage-tag" style="background:#FFE7F2">阶段 2</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/ai-agent-llm.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s2-3" data-group="g1" data-title="大模型多模态">
+            <span class="idx">08</span>
+            <a class="chapter-main" href="stage-2.html#s2-3">大模型多模态</a>
+            <span class="stage-tag" style="background:#FFE7F2">阶段 2</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/llm-multimodal.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s2-4" data-group="g1" data-title="提示词工程">
+            <span class="idx">09</span>
+            <a class="chapter-main" href="stage-2.html#s2-4">提示词工程</a>
+            <span class="stage-tag" style="background:#FFE7F2">阶段 2</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/prompt-engineering.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s2-5" data-group="g1" data-title="Token (词元)">
+            <span class="idx">10</span>
+            <a class="chapter-main" href="stage-2.html#s2-5">Token (词元)</a>
+            <span class="stage-tag" style="background:#FFE7F2">阶段 2</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/token-intro.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s3-1" data-group="g1" data-title="推理与规划">
+            <span class="idx">11</span>
+            <a class="chapter-main" href="stage-3.html#s3-1">推理与规划</a>
+            <span class="stage-tag" style="background:#DCFBFF">阶段 3</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/reasoning-planning.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s3-2" data-group="g1" data-title="向量数据库">
+            <span class="idx">12</span>
+            <a class="chapter-main" href="stage-3.html#s3-2">向量数据库</a>
+            <span class="stage-tag" style="background:#DCFBFF">阶段 3</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/vector-database.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s3-3" data-group="g1" data-title="RAG 与知识检索">
+            <span class="idx">13</span>
+            <a class="chapter-main" href="stage-3.html#s3-3">RAG 与知识检索</a>
+            <span class="stage-tag" style="background:#DCFBFF">阶段 3</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/retrieval-augmented-generation.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s3-4" data-group="g1" data-title="Agent 上下文工程">
+            <span class="idx">14</span>
+            <a class="chapter-main" href="stage-3.html#s3-4">Agent 上下文工程</a>
+            <span class="stage-tag" style="background:#DCFBFF">阶段 3</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/agent-context-engineering.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s4-1" data-group="g1" data-title="Agent 架构">
+            <span class="idx">15</span>
+            <a class="chapter-main" href="stage-4.html#s4-1">Agent 架构</a>
+            <span class="stage-tag" style="background:#EEFFCB">阶段 4</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/agent-architecture.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+        </ol>
+      </section>
+
+      <section class="catalog-group" data-group-block="g2">
+        <header>
+          <div>
+            <h2>智能体工具</h2>
+            <p>原文分组标题「智能体工具」，共 19 项。</p>
+          </div>
+          <span class="group-meta"><b data-group-done="g2">0</b> / 19 已完成</span>
+        </header>
+        <ol class="chapter-list">
+
+          <li class="chapter-row" data-chapter="s4-2" data-group="g2" data-title="第一个 AI Agent">
+            <span class="idx">16</span>
+            <a class="chapter-main" href="stage-4.html#s4-2">第一个 AI Agent</a>
+            <span class="stage-tag" style="background:#EEFFCB">阶段 4</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/first-ai-agent.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s7-9" data-group="g2" data-title="AI 智能体（DuMate）">
+            <span class="idx">17</span>
+            <a class="chapter-main" href="stage-7.html#s7-9">AI 智能体（DuMate）</a>
+            <span class="stage-tag" style="background:#E8E7FF">阶段 7</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/dumate-usages.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s7-4" data-group="g2" data-title="OpenClaw (Clawdbot) 教程">
+            <span class="idx">18</span>
+            <a class="chapter-main" href="stage-7.html#s7-4">OpenClaw (Clawdbot) 教程</a>
+            <span class="stage-tag" style="background:#E8E7FF">阶段 7</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/openclaw-clawdbot-tutorial.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s7-5" data-group="g2" data-title="OpenClaw 快速上手">
+            <span class="idx">19</span>
+            <a class="chapter-main" href="stage-7.html#s7-5">OpenClaw 快速上手</a>
+            <span class="stage-tag" style="background:#E8E7FF">阶段 7</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/openclaw-quickstart.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s7-6" data-group="g2" data-title="WorkBuddy 入门教程">
+            <span class="idx">20</span>
+            <a class="chapter-main" href="stage-7.html#s7-6">WorkBuddy 入门教程</a>
+            <span class="stage-tag" style="background:#E8E7FF">阶段 7</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/workbuddy-usage.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s4-3" data-group="g2" data-title="AI 工作流">
+            <span class="idx">21</span>
+            <a class="chapter-main" href="stage-4.html#s4-3">AI 工作流</a>
+            <span class="stage-tag" style="background:#EEFFCB">阶段 4</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/ai-workflow.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s6-3" data-group="g2" data-title="CrewAI 构建智能体">
+            <span class="idx">22</span>
+            <a class="chapter-main" href="stage-6.html#s6-3">CrewAI 构建智能体</a>
+            <span class="stage-tag" style="background:#FFF3C4">阶段 6</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/crewai-agent.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s6-1" data-group="g2" data-title="LangChain 制作智能体">
+            <span class="idx">23</span>
+            <a class="chapter-main" href="stage-6.html#s6-1">LangChain 制作智能体</a>
+            <span class="stage-tag" style="background:#FFF3C4">阶段 6</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/langchain-agent.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s6-2" data-group="g2" data-title="LangGraph 入门教程">
+            <span class="idx">24</span>
+            <a class="chapter-main" href="stage-6.html#s6-2">LangGraph 入门教程</a>
+            <span class="stage-tag" style="background:#FFF3C4">阶段 6</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/langgraph-quick-start.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s6-4" data-group="g2" data-title="Deep Agents 入门教程">
+            <span class="idx">25</span>
+            <a class="chapter-main" href="stage-6.html#s6-4">Deep Agents 入门教程</a>
+            <span class="stage-tag" style="background:#FFF3C4">阶段 6</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/deep-agents-usage.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s6-7" data-group="g2" data-title="GraphRAG 入门教程">
+            <span class="idx">26</span>
+            <a class="chapter-main" href="stage-6.html#s6-7">GraphRAG 入门教程</a>
+            <span class="stage-tag" style="background:#FFF3C4">阶段 6</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/graphrag-usage.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s7-2" data-group="g2" data-title="Harness Engineering">
+            <span class="idx">27</span>
+            <a class="chapter-main" href="stage-7.html#s7-2">Harness Engineering</a>
+            <span class="stage-tag" style="background:#E8E7FF">阶段 7</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/harness-engineering.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s7-7" data-group="g2" data-title="Hermes Agent">
+            <span class="idx">28</span>
+            <a class="chapter-main" href="stage-7.html#s7-7">Hermes Agent</a>
+            <span class="stage-tag" style="background:#E8E7FF">阶段 7</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/hermes-agent.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s7-3" data-group="g2" data-title="Loop Engineering">
+            <span class="idx">29</span>
+            <a class="chapter-main" href="stage-7.html#s7-3">Loop Engineering</a>
+            <span class="stage-tag" style="background:#E8E7FF">阶段 7</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/loop-engineering.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s7-1" data-group="g2" data-title="Vibe Coding">
+            <span class="idx">30</span>
+            <a class="chapter-main" href="stage-7.html#s7-1">Vibe Coding</a>
+            <span class="stage-tag" style="background:#E8E7FF">阶段 7</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/vibe-coding-start.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s6-5" data-group="g2" data-title="Dify 入门教程">
+            <span class="idx">31</span>
+            <a class="chapter-main" href="stage-6.html#s6-5">Dify 入门教程</a>
+            <span class="stage-tag" style="background:#FFF3C4">阶段 6</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/dify-usage.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s6-6" data-group="g2" data-title="n8n 入门教程">
+            <span class="idx">32</span>
+            <a class="chapter-main" href="stage-6.html#s6-6">n8n 入门教程</a>
+            <span class="stage-tag" style="background:#FFF3C4">阶段 6</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/n8n-usage.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s7-8" data-group="g2" data-title="Pi Coding Agent">
+            <span class="idx">33</span>
+            <a class="chapter-main" href="stage-7.html#s7-8">Pi Coding Agent</a>
+            <span class="stage-tag" style="background:#E8E7FF">阶段 7</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/pi-coding-agent.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s8-8" data-group="g2" data-title="AI 3D (Blender)">
+            <span class="idx">34</span>
+            <a class="chapter-main" href="stage-8.html#s8-8">AI 3D (Blender)</a>
+            <span class="stage-tag" style="background:#D9F5F0">阶段 8</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/ai-3d-blender.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+        </ol>
+      </section>
+
+      <section class="catalog-group" data-group-block="g3">
+        <header>
+          <div>
+            <h2>Python 实现智能体</h2>
+            <p>原文分组标题「Python 实现智能体」，共 14 项；其中「推理与规划」「RAG 与知识检索」与概念组同名，本站加「Python 实现」后缀以便区分。</p>
+          </div>
+          <span class="group-meta"><b data-group-done="g3">0</b> / 14 已完成</span>
+        </header>
+        <ol class="chapter-list">
+
+          <li class="chapter-row" data-chapter="s5-4" data-group="g3" data-title="Python 实现 AI Agent">
+            <span class="idx">35</span>
+            <a class="chapter-main" href="stage-5.html#s5-4">Python 实现 AI Agent</a>
+            <span class="stage-tag" style="background:#FFEAD9">阶段 5</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/python-ai-agent.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s5-2" data-group="g3" data-title="工具调用">
+            <span class="idx">36</span>
+            <a class="chapter-main" href="stage-5.html#s5-2">工具调用</a>
+            <span class="stage-tag" style="background:#FFEAD9">阶段 5</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/ai-agent-function-calling.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s5-3" data-group="g3" data-title="记忆系统">
+            <span class="idx">37</span>
+            <a class="chapter-main" href="stage-5.html#s5-3">记忆系统</a>
+            <span class="stage-tag" style="background:#FFEAD9">阶段 5</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/ai-agent-memory-system-design.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s5-1" data-group="g3" data-title="Python 智能体环境配置">
+            <span class="idx">38</span>
+            <a class="chapter-main" href="stage-5.html#s5-1">Python 智能体环境配置</a>
+            <span class="stage-tag" style="background:#FFEAD9">阶段 5</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/ai-agent-python-setup.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s5-5" data-group="g3" data-title="AI Agent 问答实例">
+            <span class="idx">39</span>
+            <a class="chapter-main" href="stage-5.html#s5-5">AI Agent 问答实例</a>
+            <span class="stage-tag" style="background:#FFEAD9">阶段 5</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/ai-agent-answer-demo.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s5-6" data-group="g3" data-title="推理与规划（Python 实现）">
+            <span class="idx">40</span>
+            <a class="chapter-main" href="stage-5.html#s5-6">推理与规划（Python 实现）</a>
+            <span class="stage-tag" style="background:#FFEAD9">阶段 5</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/python-reasoning-planning.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s5-7" data-group="g3" data-title="RAG 与知识检索（Python 实现）">
+            <span class="idx">41</span>
+            <a class="chapter-main" href="stage-5.html#s5-7">RAG 与知识检索（Python 实现）</a>
+            <span class="stage-tag" style="background:#FFEAD9">阶段 5</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/python-rag.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s8-1" data-group="g3" data-title="多智能体系统">
+            <span class="idx">42</span>
+            <a class="chapter-main" href="stage-8.html#s8-1">多智能体系统</a>
+            <span class="stage-tag" style="background:#D9F5F0">阶段 8</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/multi-agent-system.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s8-2" data-group="g3" data-title="工具与外部集成">
+            <span class="idx">43</span>
+            <a class="chapter-main" href="stage-8.html#s8-2">工具与外部集成</a>
+            <span class="stage-tag" style="background:#D9F5F0">阶段 8</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/tools-integration.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s8-3" data-group="g3" data-title="多模态 Agent">
+            <span class="idx">44</span>
+            <a class="chapter-main" href="stage-8.html#s8-3">多模态 Agent</a>
+            <span class="stage-tag" style="background:#D9F5F0">阶段 8</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/multimodal-agent.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s8-4" data-group="g3" data-title="评估、安全与对齐">
+            <span class="idx">45</span>
+            <a class="chapter-main" href="stage-8.html#s8-4">评估、安全与对齐</a>
+            <span class="stage-tag" style="background:#D9F5F0">阶段 8</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/evaluation-safety-alignment.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s8-5" data-group="g3" data-title="生产部署与工程化">
+            <span class="idx">46</span>
+            <a class="chapter-main" href="stage-8.html#s8-5">生产部署与工程化</a>
+            <span class="stage-tag" style="background:#D9F5F0">阶段 8</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/production-deployment.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s8-6" data-group="g3" data-title="垂直应用场景">
+            <span class="idx">47</span>
+            <a class="chapter-main" href="stage-8.html#s8-6">垂直应用场景</a>
+            <span class="stage-tag" style="background:#D9F5F0">阶段 8</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/vertical-applications.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+          <li class="chapter-row" data-chapter="s8-7" data-group="g3" data-title="Hugging Face Transformers">
+            <span class="idx">48</span>
+            <a class="chapter-main" href="stage-8.html#s8-7">Hugging Face Transformers</a>
+            <span class="stage-tag" style="background:#D9F5F0">阶段 8</span>
+            <a class="chapter-src" href="https://www.runoob.com/ai-agent/hugging-face-transformers.html" target="_blank" rel="noopener">原文 ↗</a>
+            <span class="chapter-done" aria-hidden="true"></span>
+          </li>
+
+        </ol>
+      </section>
+  </div>
+
+  <div class="callout info">
+    <p><b>还差什么：</b>就目录而言，47 章已经齐了；真正没有镜像的是原文的<b>完整正文、代码段与操作截图</b>——这是刻意的版权与定位选择。
+      如果你需要某一章的完整代码卡片，可以按<a href="about.html#add">新增一节</a>的方式补在本站，而不是复制全文。</p>
+  </div>
+
+  <nav class="pager" aria-label="翻页">
+    <a href="index.html"><span class="dir">← 返回</span><span class="t">学习地图</span></a>
+    <a class="next" href="audit.html"><span class="dir">下一页 →</span><span class="t">内容审计台账</span></a>
+  </nav>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-in">
+      <div>
+        <p>蓝本：<a href="https://www.runoob.com/ai-agent/ai-agent-tutorial.html" target="_blank" rel="noopener">runoob · AI Agent 教程</a>。个人本地学习用途，不复制原文全文、不用于商业分发。</p>
+        <p class="small">审计时间 2026-10；产品与 API 信息请以官方文档为准。</p>
+      </div>
+      <div>
+        <h3>学习</h3>
+        <ul>
+          <li><a href="index.html">学习地图</a></li>
+          <li><a href="stage-1.html">阶段 1 · 认知地图</a></li>
+          <li><a href="stage-5.html">阶段 5 · 亲手构建</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>说明</h3>
+        <ul>
+          <li><a href="audit.html">内容审计台账</a></li>
+          <li><a href="about.html">来源与版权</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">离线可用 · 无外部请求 · 进度仅保存在本机</div>
+  </div>
+</footer>
+<script src="assets/app.js"></script>
+</body>
+</html>

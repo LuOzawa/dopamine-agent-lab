@@ -1,0 +1,9 @@
+mode=offline（词频向量 + 原文摘录，非语义模型）
+index=built chunks=6
+问题 | 命中来源 | 引用/拒答 | 验收
+实验推荐哪个 Python 版本？ | setup.md | 引用有效 | PASS
+API 密钥存放在哪里？ | setup.md | 引用有效 | PASS
+如何保存学习进度？ | learning.md | 引用有效 | PASS
+Agent 重复同一个动作时怎么办？ | safety.md | 引用有效 | PASS
+火星最高的山峰叫什么？ | 无 | 拒答 | PASS
+通过 5/5（固定教学集，不代表通用准确率）

@@ -1,0 +1,5 @@
+n8n 2.44.7：真实工作流；容器断网；模型输出为固定样本
+valid → success：学习站提供分阶段课程。
+malformed → fallback：生成结果格式错误，请稍后重试。
+missing-field → fallback：生成结果格式错误，请稍后重试。
+3/3 分支验收通过；容器退出即删除数据库

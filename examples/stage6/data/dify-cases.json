@@ -1,0 +1,5 @@
+[
+  {"query":"如何查找课程？","response":{"answer":"使用搜索入口输入关键词，或从阶段目录选择小节。","metadata":{"retriever_resources":[{"document_name":"faq.md","content":"使用搜索入口输入关键词，或在当前阶段目录中选择小节。"}]}}},
+  {"query":"进度如何保存，换设备后还能继续吗？","response":{"answer":"进度保存在当前浏览器；换设备不会自动同步。","metadata":{"retriever_resources":[{"document_name":"faq.md","segment_id":"faq-2"},{"document_name":"faq.md","segment_id":"faq-3"}]}}},
+  {"query":"明天北京会下雨吗？","response":{"answer":"资料不足，无法回答天气问题。","metadata":{"retriever_resources":[]}}}
+]

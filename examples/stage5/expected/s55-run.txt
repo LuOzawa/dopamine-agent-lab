@@ -1,0 +1,9 @@
+mode=offline（固定 setup.md 演示；自定义问题请使用 --live）
+turn=1 tool=list_docs args={} result={"ok": true, "data": {"files": ["learning.md", "safety.md", "setup.md"]}}
+turn=2 tool=read_doc args={"name":"setup.md"} result={"ok": true, "data": {"source": "setup.md", "text": "# 环境\n本实验推荐 Python 3.11，使用虚拟环境隔离依赖。\n\nAPI 密钥存放在 .env 中，.env 必须加入 .gitignore，不要提交到仓库。\n"}}
+status=completed turns=3 tool_calls=2 tokens=0
+# 环境
+本实验推荐 Python 3.11，使用虚拟环境隔离依赖。
+
+API 密钥存放在 .env 中，.env 必须加入 .gitignore，不要提交到仓库。
+来源：setup.md

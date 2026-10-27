@@ -1,0 +1,5 @@
+暂停：next=answer；检索=2 次
+恢复：密钥放在 .env，不提交到版本库。
+暂停：next=answer；检索=2 次
+恢复：资料不足，停止检索。
+存储：进程内 InMemorySaver；退出进程后不保留
