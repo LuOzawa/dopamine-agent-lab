@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>阶段 2 · 配置与形态 | DeepSeek Harness 学习手册</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">跳到主要内容</a>
+<div class="read-progress" aria-hidden="true"></div>
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html" aria-label="DeepSeek Harness 学习手册首页">
+      <span class="brand-mark" aria-hidden="true">H</span>
+      <span class="brand-text">DeepSeek Harness<small>学习手册 · 2026</small></span>
+    </a>
+    <nav class="topnav" aria-label="主导航">
+      <a href="index.html">阅读路径</a>
+      <a href="contents.html">全部章节</a>
+      <a href="search.html">搜索</a>
+      <a href="audit.html" class="nav-secondary">审计</a>
+      <a href="about.html" class="nav-secondary">说明</a>
+    </nav>
+    <div class="mini-progress" title="总进度">
+      <span class="mini-bar" aria-hidden="true"><i data-mini-bar></i></span>
+      <span data-mini-text>0/33</span>
+    </div>
+  </div>
+</header>
+<main id="main">
+  <div class="page-head">
+    <div class="wrap">
+      <div class="crumbs"><a href="index.html">阅读路径</a> / <span>阶段 2</span></div>
+      <div class="kicker">Chapter 02 · Configuration</div>
+      <h1>配置与形态</h1>
+      <p class="lede">模型、Python SDK、插件安装、自动化、多模态与四种运行模式。</p>
+      <div class="meta-line"><span>6 节 · 约 2.5 小时 · 前置：阶段 1</span><span>每节含目标 / 前置 / 要点 / 任务 / 自检</span></div>
+      <div class="stage-progress">
+        <span>本阶段进度</span>
+        <span class="bar" aria-hidden="true"><i data-stage-bar="2"></i></span>
+        <b data-stage-label="2">0 / 6</b>
+      </div>
+    </div>
+  </div>
+  <div class="wrap layout">
+    <nav class="toc" aria-label="本阶段目录">
+        <h2>本阶段目录</h2>
+        <ol><li><a href="#s2-1"><span class="n">2.1</span><span>模型配置：官方、目录与自定义端点</span></a></li>
+<li><a href="#s2-2"><span class="n">2.2</span><span>Python SDK：把 Agent 放进程序</span></a></li>
+<li><a href="#s2-3"><span class="n">2.3</span><span>插件：查找、安装、验证</span></a></li>
+<li><a href="#s2-4"><span class="n">2.4</span><span>自动化任务：会话级提醒</span></a></li>
+<li><a href="#s2-5"><span class="n">2.5</span><span>多模态：图片输入与视觉模型</span></a></li>
+<li><a href="#s2-6"><span class="n">2.6</span><span>四种运行模式：标准 / PTC / 极简 / 创造</span></a></li></ol>
+        <p class="toc-note">完成一节就点卡片底部「标记完成」，进度只存本机。</p>
+      </nav>
+    <div>
+            <article class="lesson" id="s2-1">
+        <div class="lesson-head">
+          <span class="lesson-no">2.1</span>
+          <h2>模型配置：官方、目录与自定义端点</h2>
+        </div>
+        <div class="lesson-meta">
+          <span>约 35 分钟</span><span>配置</span>
+          <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-model-providers.html" target="_blank" rel="noopener">原文 ↗</a>
+        </div>
+        <div class="block">
+          <div class="label">学习目标</div>
+          <p>配好官方 + 一个自定义提供方，并说清密钥存在哪里、Provider ID 为什么不能改。</p>
+        </div>
+        <div class="block">
+          <div class="label">前置知识</div>
+          <p>完成 1.4；有一个可用的模型端点。</p>
+        </div>
+        <div class="block">
+          <div class="label">核心要点</div>
+          <ol><li>三类提供方：DeepSeek 官方、已安装目录（Anthropic、OpenAI、Kimi、GLM 等）、自定义 OpenAI 兼容端点。</li>
+<li>密钥是只写的，保存在 <code>$DSH_HOME/.credentials.yaml</code>；配置文件只保留凭据引用。</li>
+<li>自定义提供方要填 Provider ID（永久）、baseURL、协议（<code>openai-completions</code> / <code>openai-responses</code> / <code>anthropic-messages</code>）与至少一个模型。</li>
+<li>模型目录可以跟随发布列表，也可以手动维护；自定义视觉模型必须显式声明图片输入，否则发图会在发送前被拒绝。</li>
+<li>推理等级由适配器/目录声明；自定义网关注意 <code>thinkingFormat</code>、<code>supportsDeveloperRole</code>、<code>maxTokensField</code> 等兼容项。</li></ol>
+        </div>
+        <div class="block task">
+          <div class="label">动手任务</div>
+          <p>配置官方 + 一个自定义提供方。记录：协议、baseURL、模型名、Provider ID。然后故意填错一次 baseURL，观察错误发生在保存、请求还是模型选择阶段。</p>
+        </div>
+        <div class="block check">
+          <div class="label">自检</div>
+          <div class="qa"><details><summary>Provider ID 为什么不能改？</summary><div class="a">它会被请求、已保存会话、模型默认值与凭据引用使用；改名会让旧记录找不到提供方。需要改名时，新增一个提供方并删除旧的。</div></details>
+<details><summary>密钥会写进配置文件吗？</summary><div class="a">不会。真实密钥存 <code>.credentials.yaml</code>，配置里是引用；环境变量与已存凭据同名时，已存凭据优先。</div></details></div>
+        </div>
+        <div class="lesson-foot">
+          <button class="done-btn" type="button" data-done-id="s2-1" aria-pressed="false">
+            <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
+          </button>
+          <span class="note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-1.html#s1-4"><span class="dir">上一节</span><span class="t">1.4 第一次 Web UI：从启动到只读任务</span></a>
+          <a class="next" href="stage-2.html#s2-2"><span class="dir">下一节</span><span class="t">2.2 Python SDK：把 Agent 放进程序</span></a>
+        </nav>
+      </article>      <article class="lesson" id="s2-2">
+        <div class="lesson-head">
+          <span class="lesson-no">2.2</span>
+          <h2>Python SDK：把 Agent 放进程序</h2>
+        </div>
+        <div class="lesson-meta">
+          <span>约 40 分钟</span><span>集成</span>
+          <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-python-sdk.html" target="_blank" rel="noopener">原文 ↗</a>
+        </div>
+        <div class="block">
+          <div class="label">学习目标</div>
+          <p>用 SDK 在 Python 里跑一次任务，并读懂 workspace 与 dsh_home 的隔离。</p>
+        </div>
+        <div class="block">
+          <div class="label">前置知识</div>
+          <p>Python 3.10+、Git、一个隔离工作区。</p>
+        </div>
+        <div class="block">
+          <div class="label">核心要点</div>
+          <ol><li>安装：<code>python -m pip install deepseek-harness-sdk</code>；SDK 自带运行时，不需要系统 Node.js。</li>
+<li><code>DeepSeekHarness</code> 是上下文管理器：进入时延迟启动内置运行时，退出时释放；同一个 harness 可以多次 <code>run</code>。</li>
+<li><code>workspace</code> 与 <code>dsh_home</code> 必须是绝对路径；SDK 不会静默读取 <code>~/.dsh</code>。</li>
+<li>复用同一个 session id 会保留该会话的 Bash 进程，包括工作目录、环境变量与 shell 函数。</li>
+<li>日志落在 <code>$dsh_home/sessions/</code> 的 JSONL；profile 与插件也保存在 dsh_home 内。</li></ol>
+        </div>
+        <div class="block task">
+          <div class="label">动手任务</div>
+          <p>跑通仓库的 minimal.py，或写一个 20 行包装。然后检查：生成的 profile 名称、JSONL 路径、第一次与第二次 run 的 Bash 工作目录是否延续。</p>
+        </div>
+        <div class="block check">
+          <div class="label">自检</div>
+          <div class="qa"><details><summary>为什么要隔离 dsh_home？</summary><div class="a">它保存 profile、插件与会话日志，属于可写状态；用专用目录能避免污染日常配置，也方便测试后整个删除。</div></details>
+<details><summary>session 复用有什么风险？</summary><div class="a">上一次的 cd、export 与 shell 函数会延续，可能让下一次调用在错误目录或错误凭据下运行。需要干净环境时换 session id。</div></details></div>
+        </div>
+        <div class="lesson-foot">
+          <button class="done-btn" type="button" data-done-id="s2-2" aria-pressed="false">
+            <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
+          </button>
+          <span class="note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-2.html#s2-1"><span class="dir">上一节</span><span class="t">2.1 模型配置：官方、目录与自定义端点</span></a>
+          <a class="next" href="stage-2.html#s2-3"><span class="dir">下一节</span><span class="t">2.3 插件：查找、安装、验证</span></a>
+        </nav>
+      </article>      <article class="lesson" id="s2-3">
+        <div class="lesson-head">
+          <span class="lesson-no">2.3</span>
+          <h2>插件：查找、安装、验证</h2>
+        </div>
+        <div class="lesson-meta">
+          <span>约 30 分钟</span><span>插件</span>
+          <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-plugins.html" target="_blank" rel="noopener">原文 ↗</a>
+        </div>
+        <div class="block">
+          <div class="label">学习目标</div>
+          <p>安装一个插件，并用四个检查点验证它真的生效，而不是只看到「安装成功」。</p>
+        </div>
+        <div class="block">
+          <div class="label">前置知识</div>
+          <p>完成 1.4；知道 profile 与 bundle 的概念。</p>
+        </div>
+        <div class="block">
+          <div class="label">核心要点</div>
+          <ol><li>基础能力已由当前 profile 提供，不需要为首次任务重复安装文件、Shell、模型接入。</li>
+<li>发现页的索引校验只证明格式有效，不代表官方审核了作者、代码或安全性；安装前核对来源、版本、兼容性。</li>
+<li>CLI：<code>dsh plugin --profile web add 包名@版本</code>；只有声明 <code>dsh.bundle</code> 的包才贡献配置层。</li>
+<li>四个验证点：兼容性、配置加载（dump-config）、依赖就绪、实际能力（工具被调用 / UI 完成任务）。</li>
+<li>安装成功不等于已加载；普通依赖可以安装成功，但不会激活任何能力。</li></ol>
+        </div>
+        <div class="block task">
+          <div class="label">动手任务</div>
+          <p>安装或开发一个 hello 插件，逐项通过四个验证点。然后故意安装一个没有 <code>dsh.bundle</code> 的普通包，确认它只是依赖、没有层标记。</p>
+        </div>
+        <div class="block check">
+          <div class="label">自检</div>
+          <div class="qa"><details><summary>发现页能刷新就安全吗？</summary><div class="a">不是。索引源只提供标题、作者、版本等元数据；代码是否可信要自己看仓库、权限与构建脚本。</div></details>
+<details><summary>安装后 UI 没入口，先查什么？</summary><div class="a">先看 dump-config 是否包含该层，再看依赖是否就绪（是否停在 PENDING），最后才看 UI。安装成功不代表加载成功。</div></details></div>
+        </div>
+        <div class="lesson-foot">
+          <button class="done-btn" type="button" data-done-id="s2-3" aria-pressed="false">
+            <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
+          </button>
+          <span class="note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-2.html#s2-2"><span class="dir">上一节</span><span class="t">2.2 Python SDK：把 Agent 放进程序</span></a>
+          <a class="next" href="stage-2.html#s2-4"><span class="dir">下一节</span><span class="t">2.4 自动化任务：会话级提醒</span></a>
+        </nav>
+      </article>      <article class="lesson" id="s2-4">
+        <div class="lesson-head">
+          <span class="lesson-no">2.4</span>
+          <h2>自动化任务：会话级提醒</h2>
+        </div>
+        <div class="lesson-meta">
+          <span>约 30 分钟</span><span>自动化</span>
+          <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-schedule.html" target="_blank" rel="noopener">原文 ↗</a>
+        </div>
+        <div class="block">
+          <div class="label">学习目标</div>
+          <p>创建一个定时提醒，并说清投递语义、时区与不支持的操作。</p>
+        </div>
+        <div class="block">
+          <div class="label">前置知识</div>
+          <p>标准 / PTC / 创造模式；模型已配置。</p>
+        </div>
+        <div class="block">
+          <div class="label">核心要点</div>
+          <ol><li>在会话里用一句话创建；模型调用 <code>schedule_create</code> / <code>schedule_list</code> / <code>schedule_update</code> / <code>schedule_delete</code> 四个工具。</li>
+<li>六类规则：After、At、Every、Daily、Weekly、cron；涉及本地时间的规则要带 IANA 时区。</li>
+<li>投递总是回到创建它的会话，不新建会话；宿主关闭时调度停止，重启后补投逾期的一次性提醒或最近一次重复任务。</li>
+<li>没有暂停开关；删除会移除历史，但不会删除原对话；投递不保证恰好一次。</li>
+<li>极简模式没有这些工具与时钟上下文；子代理也被 deny，无法创建提醒。</li></ol>
+        </div>
+        <div class="block task">
+          <div class="label">动手任务</div>
+          <p>创建一个「每天 23:00 提醒我查看天气」的任务，核对频率与时区；修改一次时间；再删除。记录页面上「已投递」与「已完成」的区别。</p>
+        </div>
+        <div class="block check">
+          <div class="label">自检</div>
+          <div class="qa"><details><summary>为什么模型需要当前时间？</summary><div class="a">模型本身不知道「现在几点」，没有时钟上下文就无法把「每天晚上 11 点」换算成正确规则；时区也要显式提供。</div></details>
+<details><summary>能把它当 cron 用吗？</summary><div class="a">不建议。它绑定会话、没有外部通知渠道、不保证执行成功；对外通知类任务应把它当触发器，让 Agent 先检查再执行。</div></details></div>
+        </div>
+        <div class="lesson-foot">
+          <button class="done-btn" type="button" data-done-id="s2-4" aria-pressed="false">
+            <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
+          </button>
+          <span class="note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-2.html#s2-3"><span class="dir">上一节</span><span class="t">2.3 插件：查找、安装、验证</span></a>
+          <a class="next" href="stage-2.html#s2-5"><span class="dir">下一节</span><span class="t">2.5 多模态：图片输入与视觉模型</span></a>
+        </nav>
+      </article>      <article class="lesson" id="s2-5">
+        <div class="lesson-head">
+          <span class="lesson-no">2.5</span>
+          <h2>多模态：图片输入与视觉模型</h2>
+        </div>
+        <div class="lesson-meta">
+          <span>约 30 分钟</span><span>多模态</span>
+          <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-modality.html" target="_blank" rel="noopener">原文 ↗</a>
+        </div>
+        <div class="block">
+          <div class="label">学习目标</div>
+          <p>用视觉模型读一张图表，并知道三种图片传法与输入类型声明。</p>
+        </div>
+        <div class="block">
+          <div class="label">前置知识</div>
+          <p>完成 2.1；有一个支持视觉的模型。</p>
+        </div>
+        <div class="block">
+          <div class="label">核心要点</div>
+          <ol><li>图片先被视觉编码器切成 patch 并转成向量，再与文本 token 拼成同一序列；图片会消耗 token。</li>
+<li>三种传法：base64 内联、外部 URL、Files API；分别对应「一次性小图 / 已有图床 / 多次复用」。</li>
+<li>三种 API 风格：Chat Completions、Anthropic Messages、OpenAI Responses；图文混合输入都支持。</li>
+<li>自定义提供方的模型默认按纯文本处理，必须显式勾选图片输入，否则附加图片会在发送前被拒绝。</li>
+<li>多模态不是 OCR 替代品；金额、坐标、表格逐格还原等高风险读数要人工复核。</li></ol>
+        </div>
+        <div class="block task">
+          <div class="label">动手任务</div>
+          <p>传一张带坐标轴的图表，让它提取 3 个数据点，再追问「你最不确定的读数是哪一个，为什么」。对照你自己读图的结果，记录偏差来源。</p>
+        </div>
+        <div class="block check">
+          <div class="label">自检</div>
+          <div class="qa"><details><summary>为什么一定要声明输入类型？</summary><div class="a">没有环节能询问端点接受哪些模态，dsh 采取「先声明后使用」；未声明的模型收到图片会在发送前被拒绝。</div></details>
+<details><summary>什么时候该用专用 OCR？</summary><div class="a">需要精确坐标、逐格还原表格、票据字段抽取时，专用文档解析或 OCR 更稳定、更便宜，也更容易审计。</div></details></div>
+        </div>
+        <div class="lesson-foot">
+          <button class="done-btn" type="button" data-done-id="s2-5" aria-pressed="false">
+            <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
+          </button>
+          <span class="note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-2.html#s2-4"><span class="dir">上一节</span><span class="t">2.4 自动化任务：会话级提醒</span></a>
+          <a class="next" href="stage-2.html#s2-6"><span class="dir">下一节</span><span class="t">2.6 四种运行模式：标准 / PTC / 极简 / 创造</span></a>
+        </nav>
+      </article>      <article class="lesson" id="s2-6">
+        <div class="lesson-head">
+          <span class="lesson-no">2.6</span>
+          <h2>四种运行模式：标准 / PTC / 极简 / 创造</h2>
+        </div>
+        <div class="lesson-meta">
+          <span>约 30 分钟</span><span>模式</span>
+          <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-modes.html" target="_blank" rel="noopener">原文 ↗</a>
+        </div>
+        <div class="block">
+          <div class="label">学习目标</div>
+          <p>为四类任务选择模式，并解释切换模式改变的是插件组合，不是模型权限。</p>
+        </div>
+        <div class="block">
+          <div class="label">前置知识</div>
+          <p>完成 1.4。</p>
+        </div>
+        <div class="block">
+          <div class="label">核心要点</div>
+          <ol><li>模式 = 一组预设插件，不是能力等级：标准干活、PTC 编排、极简测量、创造改造。</li>
+<li>PTC 把工具收拢为 <code>run_code</code>，模型写一段 TypeScript 程序组合调用；只读调用可并行（教程口径默认 10 路），写操作按提交顺序。</li>
+<li>极简模式只保留持久 bash 与 <code>str_replace_editor</code>，用于评测模型、复现问题，不是低配电脑的轻量版。</li>
+<li>创造模式继承标准能力，并增加运行时检查、内存中试验插件与 preset 创作指引。</li>
+<li>切换预设不改变文件权限；权限与沙箱是另一套策略，必须单独设置。</li></ol>
+        </div>
+        <div class="block task">
+          <div class="label">动手任务</div>
+          <p>为四个任务各选一种模式并写一句理由 + 一个风险：修一个 bug、批量重构 20 个文件、比较两个模型的编码能力、给团队做一套自定义预设。</p>
+        </div>
+        <div class="block check">
+          <div class="label">自检</div>
+          <div class="qa"><details><summary>PTC 省的是什么？</summary><div class="a">省上下文：多步工具调用的中间结果留在程序里，只有返回值与日志回到对话；代价是模型要会写程序，调试也更复杂。</div></details>
+<details><summary>极简模式适合日常吗？</summary><div class="a">不适合。它是刻意做减法的评测环境，只保留两个工具；日常任务用标准模式，需要编排时再上 PTC。</div></details></div>
+        </div>
+        <div class="lesson-foot">
+          <button class="done-btn" type="button" data-done-id="s2-6" aria-pressed="false">
+            <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
+          </button>
+          <span class="note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-2.html#s2-5"><span class="dir">上一节</span><span class="t">2.5 多模态：图片输入与视觉模型</span></a>
+          <a class="next" href="stage-3.html#s3-1"><span class="dir">下一节</span><span class="t">3.1 第一个插件：apply(ctx) 与三种形态</span></a>
+        </nav>
+      </article>
+      <nav class="pager" aria-label="阶段翻页">
+        <a href="stage-1.html"><span class="dir">上一章</span><span class="t">认识与安装</span></a>
+        <a class="next" href="stage-3.html"><span class="dir">下一章</span><span class="t">插件基础</span></a>
+      </nav>
+    </div>
+  </div>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-in">
+      <div>
+        <p>蓝本：<a href="https://www.runoob.com/deepseek-harness/deepseek-harness-tutorial.html" target="_blank" rel="noopener">runoob · DeepSeek Harness 教程</a>。本站为学习导读与审计，不复制原文全文；原文版权归原站点所有。</p>
+        <p>代码 MIT；本站原创文字 CC BY-NC-SA 4.0（<a href="../LICENSE">LICENSE</a> / <a href="../LICENSE-CONTENT.md">LICENSE-CONTENT</a>）。审计时间 2026-10，产品处于预览版，信息以官方为准。</p>
+      </div>
+      <div>
+        <h3>阅读</h3>
+        <ul>
+          <li><a href="index.html">阅读路径</a></li>
+          <li><a href="contents.html">全部章节</a></li>
+          <li><a href="search.html">全文搜索</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>文档</h3>
+        <ul>
+          <li><a href="audit.html">内容审计</a></li>
+          <li><a href="about.html">来源、许可与维护</a></li>
+          <li><a href="../index.html">返回 AI Agent 学习站</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">离线可用 · 无外部请求 · 进度仅保存在本机</div>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

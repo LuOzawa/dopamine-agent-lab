@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>阶段 5 · 实战与发布 | DeepSeek Harness 学习手册</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">跳到主要内容</a>
+<div class="read-progress" aria-hidden="true"></div>
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html" aria-label="DeepSeek Harness 学习手册首页">
+      <span class="brand-mark" aria-hidden="true">H</span>
+      <span class="brand-text">DeepSeek Harness<small>学习手册 · 2026</small></span>
+    </a>
+    <nav class="topnav" aria-label="主导航">
+      <a href="index.html">阅读路径</a>
+      <a href="contents.html">全部章节</a>
+      <a href="search.html">搜索</a>
+      <a href="audit.html" class="nav-secondary">审计</a>
+      <a href="about.html" class="nav-secondary">说明</a>
+    </nav>
+    <div class="mini-progress" title="总进度">
+      <span class="mini-bar" aria-hidden="true"><i data-mini-bar></i></span>
+      <span data-mini-text>0/33</span>
+    </div>
+  </div>
+</header>
+<main id="main">
+  <div class="page-head">
+    <div class="wrap">
+      <div class="crumbs"><a href="index.html">阅读路径</a> / <span>阶段 5</span></div>
+      <div class="kicker">Chapter 05 · Build & Ship</div>
+      <h1>实战与发布</h1>
+      <p class="lede">把能力拆成三角色，接任意模型，打成可安装、可分发的组合包。</p>
+      <div class="meta-line"><span>6 节 · 约 3 小时 · 前置：阶段 4</span><span>每节含目标 / 前置 / 要点 / 任务 / 自检</span></div>
+      <div class="stage-progress">
+        <span>本阶段进度</span>
+        <span class="bar" aria-hidden="true"><i data-stage-bar="5"></i></span>
+        <b data-stage-label="5">0 / 6</b>
+      </div>
+    </div>
+  </div>
+  <div class="wrap layout">
+    <nav class="toc" aria-label="本阶段目录">
+        <h2>本阶段目录</h2>
+        <ol><li><a href="#s5-1"><span class="n">5.1</span><span>实战：写一个可替换的能力</span></a></li>
+<li><a href="#s5-2"><span class="n">5.2</span><span>LLM 适配器：接入任意模型</span></a></li>
+<li><a href="#s5-3"><span class="n">5.3</span><span>StreamChunk 协议与错误处理</span></a></li>
+<li><a href="#s5-4"><span class="n">5.4</span><span>组合包 bundle 与 profile</span></a></li>
+<li><a href="#s5-5"><span class="n">5.5</span><span>安装插件与配置加载顺序</span></a></li>
+<li><a href="#s5-6"><span class="n">5.6</span><span>发布插件：npm、tarball 与 Git</span></a></li></ol>
+        <p class="toc-note">完成一节就点卡片底部「标记完成」，进度只存本机。</p>
+      </nav>
+    <div>
+            <article class="lesson" id="s5-1">
+        <div class="lesson-head">
+          <span class="lesson-no">5.1</span>
+          <h2>实战：写一个可替换的能力</h2>
+        </div>
+        <div class="lesson-meta">
+          <span>约 50 分钟</span><span>实战</span>
+          <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-build-capability.html" target="_blank" rel="noopener">原文 ↗</a>
+        </div>
+        <div class="block">
+          <div class="label">学习目标</div>
+          <p>按 Definition → Provider → Consumer 实现 myCap，并在 cordis.yml 中组合加载。</p>
+        </div>
+        <div class="block">
+          <div class="label">前置知识</div>
+          <p>完成 4.4 与 3.5。</p>
+        </div>
+        <div class="block">
+          <div class="label">核心要点</div>
+          <ol><li>Definition：抽象类继承 Service，声明 <code>execute(request)</code> 与 Request/Result 类型。</li>
+<li>Provider：继承抽象类实现 execute，通过 <code>ctx.plugin(MyCapLocal)</code> 注册实现。</li>
+<li>Consumer：用 <code>defineTool</code> 暴露工具，<code>inject: ['tools', 'myCap']</code>。</li>
+<li>组合：cordis.yml 同时加载 Provider 与 Consumer；模型只认识工具名，不认识服务。</li>
+<li>数据流：模型 → Consumer → Definition → Provider；换 Provider 时前两层不动。</li></ol>
+        </div>
+        <div class="block task">
+          <div class="label">动手任务</div>
+          <p>实现一个把输入转大写的 myCap：三个包、一个工具、一次真实调用。然后写第二个 Provider（例如加前缀），只改 cordis.yml 完成替换。</p>
+        </div>
+        <div class="block check">
+          <div class="label">自检</div>
+          <div class="qa"><details><summary>为什么 Consumer 不直接 import Provider？</summary><div class="a">直接依赖实现会让替换 Provider 时被迫改 Consumer；依赖 Definition 才能保持接口稳定。</div></details>
+<details><summary>Provider 注册为什么用 ctx.plugin？</summary><div class="a">它把实现类作为一个子插件加载，服务注册与清理都纳入 Fiber 生命周期。</div></details></div>
+        </div>
+        <div class="lesson-foot">
+          <button class="done-btn" type="button" data-done-id="s5-1" aria-pressed="false">
+            <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
+          </button>
+          <span class="note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-4.html#s4-4"><span class="dir">上一节</span><span class="t">4.4 能力三角色：Definition / Provider / Consumer</span></a>
+          <a class="next" href="stage-5.html#s5-2"><span class="dir">下一节</span><span class="t">5.2 LLM 适配器：接入任意模型</span></a>
+        </nav>
+      </article>      <article class="lesson" id="s5-2">
+        <div class="lesson-head">
+          <span class="lesson-no">5.2</span>
+          <h2>LLM 适配器：接入任意模型</h2>
+        </div>
+        <div class="lesson-meta">
+          <span>约 45 分钟</span><span>模型</span>
+          <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-llm-adapter.html" target="_blank" rel="noopener">原文 ↗</a>
+        </div>
+        <div class="block">
+          <div class="label">学习目标</div>
+          <p>实现最小 LlmAdapter，把自定义端点接入 dsh，并知道哪些字段不能静默丢弃。</p>
+        </div>
+        <div class="block">
+          <div class="label">前置知识</div>
+          <p>完成 4.1；了解流式 API。</p>
+        </div>
+        <div class="block">
+          <div class="label">核心要点</div>
+          <ol><li>继承 <code>LlmAdapter</code>，实现 <code>async *stream(options)</code>，逐片产出 StreamChunk。</li>
+<li><code>GenerateOptions</code> 包含 provider、model、messages、system、tools、reasoning、signal 等字段。</li>
+<li>用 <code>ctx.llm.registerAdapter(['my-provider'], adapter)</code> 绑定路由。</li>
+<li>不支持的字段要抛带稳定 code 的 <code>LlmError</code>，不能静默丢弃，否则模型会拿到残缺结果。</li>
+<li>可选覆写 <code>listModels()</code> / <code>resolveModel()</code>，提供模型与 reasoning 元数据。</li></ol>
+        </div>
+        <div class="block task">
+          <div class="label">动手任务</div>
+          <p>写一个 mock adapter：不调用真实 API，产出固定文本 + usage + finish。注册到 <code>my-provider</code>，在会话里选它并跑一次。再故意不实现 tools 字段，确认会报错而不是静默忽略。</p>
+        </div>
+        <div class="block check">
+          <div class="label">自检</div>
+          <div class="qa"><details><summary>agent-loop 依赖适配器的什么？</summary><div class="a">它只消费提供方无关的流式生成服务与 StreamChunk 协议，不关心底层是哪家 API。</div></details>
+<details><summary>为什么要保留 <code>signal</code>？</summary><div class="a">取消与资源释放要靠它完全停稳；不传 signal 会让中止后仍有请求或进程残留。</div></details></div>
+        </div>
+        <div class="lesson-foot">
+          <button class="done-btn" type="button" data-done-id="s5-2" aria-pressed="false">
+            <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
+          </button>
+          <span class="note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-5.html#s5-1"><span class="dir">上一节</span><span class="t">5.1 实战：写一个可替换的能力</span></a>
+          <a class="next" href="stage-5.html#s5-3"><span class="dir">下一节</span><span class="t">5.3 StreamChunk 协议与错误处理</span></a>
+        </nav>
+      </article>      <article class="lesson" id="s5-3">
+        <div class="lesson-head">
+          <span class="lesson-no">5.3</span>
+          <h2>StreamChunk 协议与错误处理</h2>
+        </div>
+        <div class="lesson-meta">
+          <span>约 40 分钟</span><span>协议</span>
+          <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-stream-chunk.html" target="_blank" rel="noopener">原文 ↗</a>
+        </div>
+        <div class="block">
+          <div class="label">学习目标</div>
+          <p>按协议产出分片，并用 LlmError 表达传输与协议故障。</p>
+        </div>
+        <div class="block">
+          <div class="label">前置知识</div>
+          <p>完成 5.2。</p>
+        </div>
+        <div class="block">
+          <div class="label">核心要点</div>
+          <ol><li>顺序：block-start → delta → block-end → usage → finish；文本与工具调用各走一遍。</li>
+<li>index 从 0 递增；text-delta 与 tool-call-delta 都要带所属块 index，块之间不要交叉。</li>
+<li>五条硬规则：start/end 成对、index 递增、argumentsDelta 是原始 JSON 增量、usage 在 finish 前、finish 必须最后。</li>
+<li>错误用带稳定 code 的 <code>LlmError</code>；每个 HTTP 请求合并 <code>attributionHeaders()</code>，并把 <code>options.signal</code> 传给 fetch。</li>
+<li>取消要完全停稳：不能只发 abort 就返回，要等待资源释放。</li></ol>
+        </div>
+        <div class="block task">
+          <div class="label">动手任务</div>
+          <p>用 <code>exampleChunks</code> 写一个 mock stream，让消费方解析出文本与工具调用；再故意在 finish 后追加一个 chunk，确认消费方报错。</p>
+        </div>
+        <div class="block check">
+          <div class="label">自检</div>
+          <div class="qa"><details><summary>finish 之后还能发 chunk 吗？</summary><div class="a">不能。finish 必须是最后一个分片，之后任何分片都会破坏协议。</div></details>
+<details><summary>为什么 usage 必须在 finish 前？</summary><div class="a">usage 是本次生成的用量事实，finish 是结束信号；先报告用量再结束，消费方才能完整记账。</div></details></div>
+        </div>
+        <div class="lesson-foot">
+          <button class="done-btn" type="button" data-done-id="s5-3" aria-pressed="false">
+            <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
+          </button>
+          <span class="note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-5.html#s5-2"><span class="dir">上一节</span><span class="t">5.2 LLM 适配器：接入任意模型</span></a>
+          <a class="next" href="stage-5.html#s5-4"><span class="dir">下一节</span><span class="t">5.4 组合包 bundle 与 profile</span></a>
+        </nav>
+      </article>      <article class="lesson" id="s5-4">
+        <div class="lesson-head">
+          <span class="lesson-no">5.4</span>
+          <h2>组合包 bundle 与 profile</h2>
+        </div>
+        <div class="lesson-meta">
+          <span>约 35 分钟</span><span>分发</span>
+          <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-bundle-profile.html" target="_blank" rel="noopener">原文 ↗</a>
+        </div>
+        <div class="block">
+          <div class="label">学习目标</div>
+          <p>区分 bundle 与 profile，并做出一个可安装的组合包。</p>
+        </div>
+        <div class="block">
+          <div class="label">前置知识</div>
+          <p>完成 3.2。</p>
+        </div>
+        <div class="block">
+          <div class="label">核心要点</div>
+          <ol><li>bundle 是附带配置层的 npm 包，manifest 声明 <code>dsh.bundle.patch</code>，回答「贡献什么」。</li>
+<li>profile 是 <code>$DSH_HOME/profiles/&lt;name&gt;</code> 下的启动配置，manifest 声明 <code>dsh.profile.bundles</code>，回答「由哪些 bundle 按什么顺序组成」。</li>
+<li>没有东西同时是两者；profile 由 <code>dsh plugin</code> 创建维护，不需要手写。</li>
+<li>bundle 的 patch 用包名引用插件，安装后由 Node 模块解析找到；用相对源码路径只适合本地 --patch。</li>
+<li>没有 <code>dsh.bundle</code> 声明的包仍然能安装，但只是普通依赖，不激活任何层。</li></ol>
+        </div>
+        <div class="block task">
+          <div class="label">动手任务</div>
+          <p>做 hello-plugin bundle：package.json 声明 dsh.bundle、cordis.patch.yml 用包名、index.js 导出 apply。装进 demo profile，dump-config 看到 <code># == dsh-hello-plugin</code> 层。</p>
+        </div>
+        <div class="block check">
+          <div class="label">自检</div>
+          <div class="qa"><details><summary>bundle 与 profile 的 manifest 分别是什么？</summary><div class="a">bundle 用 <code>dsh.bundle.patch</code> 声明贡献的 patch 文件；profile 用 <code>dsh.profile.bundles</code> 声明有序的 bundle 列表。</div></details>
+<details><summary>为什么 patch 里用包名？</summary><div class="a">安装后 pnpm 把包链接到 node_modules，Node 的模块解析能按包名找到代码；源码路径只适用于本地 overlay。</div></details></div>
+        </div>
+        <div class="lesson-foot">
+          <button class="done-btn" type="button" data-done-id="s5-4" aria-pressed="false">
+            <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
+          </button>
+          <span class="note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-5.html#s5-3"><span class="dir">上一节</span><span class="t">5.3 StreamChunk 协议与错误处理</span></a>
+          <a class="next" href="stage-5.html#s5-5"><span class="dir">下一节</span><span class="t">5.5 安装插件与配置加载顺序</span></a>
+        </nav>
+      </article>      <article class="lesson" id="s5-5">
+        <div class="lesson-head">
+          <span class="lesson-no">5.5</span>
+          <h2>安装插件与配置加载顺序</h2>
+        </div>
+        <div class="lesson-meta">
+          <span>约 35 分钟</span><span>配置</span>
+          <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-install-load-order.html" target="_blank" rel="noopener">原文 ↗</a>
+        </div>
+        <div class="block">
+          <div class="label">学习目标</div>
+          <p>说清四层配置叠加顺序，并用 dump-config 验证某一层来自哪里。</p>
+        </div>
+        <div class="block">
+          <div class="label">前置知识</div>
+          <p>完成 5.4。</p>
+        </div>
+        <div class="block">
+          <div class="label">核心要点</div>
+          <ol><li>顺序：profile 的 bundles 列表 → profile 的 cordis.patch.yml → home 级 patch → 每个 <code>--patch</code> overlay。</li>
+<li>后应用的层按行胜出；patch 按 id 整行替换整个 config，不是深度合并。</li>
+<li>覆盖一行时必须重述该行需要的所有键，否则丢掉未写的键。</li>
+<li><code>dsh plugin --profile demo add/remove</code> 管理依赖与 bundles；<code>--dump-config</code> 打印叠加后的完整配置树。</li>
+<li>用户可以在自己的 profile patch 里覆盖你的行，不需要改你的包。</li></ol>
+        </div>
+        <div class="block task">
+          <div class="label">动手任务</div>
+          <p>把 hello 装进 demo，dump-config 找到层标记；再在 profile patch 里覆盖同一行的某个键，确认整行替换的效果（未写的键丢失）。</p>
+        </div>
+        <div class="block check">
+          <div class="label">自检</div>
+          <div class="qa"><details><summary>为什么是整行替换而不是深度合并？</summary><div class="a">整行替换让「最终生效值」可预测、可审计；深度合并会让某个键来自哪一层变得难以追踪。代价是必须重述所有键。</div></details>
+<details><summary>怎么确认配置真的生效？</summary><div class="a">用 <code>dsh --profile demo --dump-config</code> 看最终树与层标记，再启动验证实际能力；不要只看安装命令成功。</div></details></div>
+        </div>
+        <div class="lesson-foot">
+          <button class="done-btn" type="button" data-done-id="s5-5" aria-pressed="false">
+            <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
+          </button>
+          <span class="note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-5.html#s5-4"><span class="dir">上一节</span><span class="t">5.4 组合包 bundle 与 profile</span></a>
+          <a class="next" href="stage-5.html#s5-6"><span class="dir">下一节</span><span class="t">5.6 发布插件：npm、tarball 与 Git</span></a>
+        </nav>
+      </article>      <article class="lesson" id="s5-6">
+        <div class="lesson-head">
+          <span class="lesson-no">5.6</span>
+          <h2>发布插件：npm、tarball 与 Git</h2>
+        </div>
+        <div class="lesson-meta">
+          <span>约 35 分钟</span><span>发布</span>
+          <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-publish.html" target="_blank" rel="noopener">原文 ↗</a>
+        </div>
+        <div class="block">
+          <div class="label">学习目标</div>
+          <p>选对三种分发方式，并避免 Git 安装的构建授权坑。</p>
+        </div>
+        <div class="block">
+          <div class="label">前置知识</div>
+          <p>完成 5.4 / 5.5。</p>
+        </div>
+        <div class="block">
+          <div class="label">核心要点</div>
+          <ol><li>npm 与 tarball 分发预构建产物，用户安装时不需要构建授权。</li>
+<li>Git 安装拉的是源码：作者要提供自包含的 <code>prepare</code>，用户要在 <code>pnpm-workspace.yaml</code> 里 <code>allowBuilds</code> 授权。</li>
+<li>构建脚本会在用户机器上执行，且不在 Agent 沙箱内；只给可信源码授权。</li>
+<li>Git 安装要锁 commit（<code>github:you/plugin#sha</code>），防止默认分支变化。</li>
+<li>发布前核对 <code>files</code>、<code>main</code>、<code>dsh.bundle</code>，确认用户拿到的是可加载的产物。</li></ol>
+        </div>
+        <div class="block task">
+          <div class="label">动手任务</div>
+          <p>用 <code>pnpm pack</code> 打一个 tarball，在干净 profile 里安装并验证工具可调用；再对比 Git 安装第一次失败的提示，写出授权修复步骤。</p>
+        </div>
+        <div class="block check">
+          <div class="label">自检</div>
+          <div class="qa"><details><summary>为什么 Git 安装 TypeScript 包会失败？</summary><div class="a">Git 拉的是源码，没有任何环节自动运行 build，TypeScript 包没有 lib/ 输出；作者要提供 prepare，用户要允许构建。</div></details>
+<details><summary>哪种方式最适合普通用户？</summary><div class="a">npm 或 tarball：分发预构建产物，用户零构建授权，安装路径最短。</div></details></div>
+        </div>
+        <div class="lesson-foot">
+          <button class="done-btn" type="button" data-done-id="s5-6" aria-pressed="false">
+            <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
+          </button>
+          <span class="note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-5.html#s5-5"><span class="dir">上一节</span><span class="t">5.5 安装插件与配置加载顺序</span></a>
+          <a class="next" href="stage-6.html#s6-1"><span class="dir">下一节</span><span class="t">6.1 工具执行流水线与权限门禁</span></a>
+        </nav>
+      </article>
+      <nav class="pager" aria-label="阶段翻页">
+        <a href="stage-4.html"><span class="dir">上一章</span><span class="t">服务、隔离与事件</span></a>
+        <a class="next" href="stage-6.html"><span class="dir">下一章</span><span class="t">运行与生产</span></a>
+      </nav>
+    </div>
+  </div>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-in">
+      <div>
+        <p>蓝本：<a href="https://www.runoob.com/deepseek-harness/deepseek-harness-tutorial.html" target="_blank" rel="noopener">runoob · DeepSeek Harness 教程</a>。本站为学习导读与审计，不复制原文全文；原文版权归原站点所有。</p>
+        <p>代码 MIT；本站原创文字 CC BY-NC-SA 4.0（<a href="../LICENSE">LICENSE</a> / <a href="../LICENSE-CONTENT.md">LICENSE-CONTENT</a>）。审计时间 2026-10，产品处于预览版，信息以官方为准。</p>
+      </div>
+      <div>
+        <h3>阅读</h3>
+        <ul>
+          <li><a href="index.html">阅读路径</a></li>
+          <li><a href="contents.html">全部章节</a></li>
+          <li><a href="search.html">全文搜索</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>文档</h3>
+        <ul>
+          <li><a href="audit.html">内容审计</a></li>
+          <li><a href="about.html">来源、许可与维护</a></li>
+          <li><a href="../index.html">返回 AI Agent 学习站</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">离线可用 · 无外部请求 · 进度仅保存在本机</div>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

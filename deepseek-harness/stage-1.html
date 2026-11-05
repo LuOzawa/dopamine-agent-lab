@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>阶段 1 · 认识与安装 | DeepSeek Harness 学习手册</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">跳到主要内容</a>
+<div class="read-progress" aria-hidden="true"></div>
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html" aria-label="DeepSeek Harness 学习手册首页">
+      <span class="brand-mark" aria-hidden="true">H</span>
+      <span class="brand-text">DeepSeek Harness<small>学习手册 · 2026</small></span>
+    </a>
+    <nav class="topnav" aria-label="主导航">
+      <a href="index.html">阅读路径</a>
+      <a href="contents.html">全部章节</a>
+      <a href="search.html">搜索</a>
+      <a href="audit.html" class="nav-secondary">审计</a>
+      <a href="about.html" class="nav-secondary">说明</a>
+    </nav>
+    <div class="mini-progress" title="总进度">
+      <span class="mini-bar" aria-hidden="true"><i data-mini-bar></i></span>
+      <span data-mini-text>0/33</span>
+    </div>
+  </div>
+</header>
+<main id="main">
+  <div class="page-head">
+    <div class="wrap">
+      <div class="crumbs"><a href="index.html">阅读路径</a> / <span>阶段 1</span></div>
+      <div class="kicker">Chapter 01 · Orientation</div>
+      <h1>认识与安装</h1>
+      <p class="lede">先确认它解决什么问题，再选一条安装路线跑通。不写插件，但决定后面顺不顺。</p>
+      <div class="meta-line"><span>4 节 · 约 1.5 小时 · 前置：无</span><span>每节含目标 / 前置 / 要点 / 任务 / 自检</span></div>
+      <div class="stage-progress">
+        <span>本阶段进度</span>
+        <span class="bar" aria-hidden="true"><i data-stage-bar="1"></i></span>
+        <b data-stage-label="1">0 / 4</b>
+      </div>
+    </div>
+  </div>
+  <div class="wrap layout">
+    <nav class="toc" aria-label="本阶段目录">
+        <h2>本阶段目录</h2>
+        <ol><li><a href="#s1-1"><span class="n">1.1</span><span>Agent = Model + Harness</span></a></li>
+<li><a href="#s1-2"><span class="n">1.2</span><span>安装：四条路线怎么选</span></a></li>
+<li><a href="#s1-3"><span class="n">1.3</span><span>桌面版：先用只读任务验收</span></a></li>
+<li><a href="#s1-4"><span class="n">1.4</span><span>第一次 Web UI：从启动到只读任务</span></a></li></ol>
+        <p class="toc-note">完成一节就点卡片底部「标记完成」，进度只存本机。</p>
+      </nav>
+    <div>
+            <article class="lesson" id="s1-1">
+        <div class="lesson-head">
+          <span class="lesson-no">1.1</span>
+          <h2>Agent = Model + Harness</h2>
+        </div>
+        <div class="lesson-meta">
+          <span>约 25 分钟</span><span>定位</span>
+          <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-intro.html" target="_blank" rel="noopener">原文 ↗</a>
+        </div>
+        <div class="block">
+          <div class="label">学习目标</div>
+          <p>用一句话解释 dsh 的定位，并说出「一切皆插件」在运行时到底意味着什么。</p>
+        </div>
+        <div class="block">
+          <div class="label">前置知识</div>
+          <p>无。知道 API Key 与命令行即可。</p>
+        </div>
+        <div class="block">
+          <div class="label">核心要点</div>
+          <ol><li>DeepSeek Harness（dsh）是 DeepSeek 开源的 Agent Harness，MIT 许可、TypeScript 编写，目前是 0.2.x 预览版；它不训练模型，而是组织模型运行的环境。</li>
+<li>Cordis 内核只负责插件的加载、卸载与依赖管理；模型、工具、会话、沙箱、存储、循环、调度、UI 都由插件提供。</li>
+<li>官方公式是 Agent = Model + Harness；四种运行模式只是四组预设插件，不是能力等级。</li>
+<li>可观测性是核心差异：模型看到的系统提示、思维链、工具调用与结果都写入仅追加会话日志，历史从日志派生，可回放与分叉。</li>
+<li>模型无关：DeepSeek 官方端点、已收录的目录提供方、自定义 OpenAI 兼容端点都可以接入。</li></ol>
+        </div>
+        <div class="block task">
+          <div class="label">动手任务</div>
+          <p>画一张「模型 / Harness / 工作区」三层图，在 Harness 层列出至少 6 个可替换部件（如工具、会话、沙箱、存储、循环、UI），并圈出你最想替换的一个，写一句原因。</p>
+        </div>
+        <div class="block check">
+          <div class="label">自检</div>
+          <div class="qa"><details><summary>它和 LangChain 这类框架有什么区别？</summary><div class="a">LangChain 是帮助「构建」Agent 的库；dsh 是「运行」Agent 的完整 Harness，连会话、沙箱、审批、UI、调度都做成可替换插件。前者回答怎么搭，后者回答怎么稳定运行和替换能力。</div></details>
+<details><summary>预览版意味着什么？</summary><div class="a">0.x 版本可能有破坏兼容性的变更。学习时跟文档走，真正部署要锁定版本、保留配置与插件清单，并在升级前看迁移说明。</div></details></div>
+        </div>
+        <div class="lesson-foot">
+          <button class="done-btn" type="button" data-done-id="s1-1" aria-pressed="false">
+            <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
+          </button>
+          <span class="note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="index.html"><span class="dir">起点</span><span class="t">阅读路径</span></a>
+          <a class="next" href="stage-1.html#s1-2"><span class="dir">下一节</span><span class="t">1.2 安装：四条路线怎么选</span></a>
+        </nav>
+      </article>      <article class="lesson" id="s1-2">
+        <div class="lesson-head">
+          <span class="lesson-no">1.2</span>
+          <h2>安装：四条路线怎么选</h2>
+        </div>
+        <div class="lesson-meta">
+          <span>约 30 分钟</span><span>安装</span>
+          <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-install.html" target="_blank" rel="noopener">原文 ↗</a>
+        </div>
+        <div class="block">
+          <div class="label">学习目标</div>
+          <p>根据操作系统与技术栈选一条安装路线，并完成一次可验证的启动。</p>
+        </div>
+        <div class="block">
+          <div class="label">前置知识</div>
+          <p>会用终端；npm/源码路线需要 Node.js 24.9 或更高版本。</p>
+        </div>
+        <div class="block">
+          <div class="label">核心要点</div>
+          <ol><li>桌面版：Windows 64 位、macOS Apple 芯片，免装 Node，适合日常办公与文件处理。</li>
+<li>npm：全局安装后用 <code>dsh web</code>，或直接 <code>npx @deepseek-ai/dsh web</code>；默认地址 <code>http://127.0.0.1:3080</code>。</li>
+<li>源码：Node 24.9+、Git、pnpm；依次执行 <code>pnpm install</code>、<code>pnpm run build</code>、<code>pnpm dsh web</code>。</li>
+<li>Python SDK：Python 3.10+，自带运行时，不需要系统 Node；适合把 Agent 接进 Python 程序。</li>
+<li>预览版阶段，安装包、命令与界面都可能变化；生产使用要锁定版本，不要把「最新」当默认。</li></ol>
+        </div>
+        <div class="block task">
+          <div class="label">动手任务</div>
+          <p>做一张路线表：操作系统 / 技术栈 / 是否需要 Node / 启动命令 / 验证点。只选一条真正执行，并记录版本号与失败信息。</p>
+        </div>
+        <div class="block check">
+          <div class="label">自检</div>
+          <div class="qa"><details><summary>Node 22 还能用吗？</summary><div class="a">教程要求 Node.js 24.9 或更高，并明确说旧版 Node 22 已不再支持。升级前先确认依赖与系统环境；不要用「能启动」代替版本要求。</div></details>
+<details><summary>桌面版和 Web UI 是两套东西吗？</summary><div class="a">是同一产品的不同入口：桌面版是本地应用窗口，Web UI 由命令启动后用浏览器访问。核心能力可能接近，但 Node 依赖、插件入口与后台行为不同。</div></details></div>
+        </div>
+        <div class="lesson-foot">
+          <button class="done-btn" type="button" data-done-id="s1-2" aria-pressed="false">
+            <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
+          </button>
+          <span class="note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-1.html#s1-1"><span class="dir">上一节</span><span class="t">1.1 Agent = Model + Harness</span></a>
+          <a class="next" href="stage-1.html#s1-3"><span class="dir">下一节</span><span class="t">1.3 桌面版：先用只读任务验收</span></a>
+        </nav>
+      </article>      <article class="lesson" id="s1-3">
+        <div class="lesson-head">
+          <span class="lesson-no">1.3</span>
+          <h2>桌面版：先用只读任务验收</h2>
+        </div>
+        <div class="lesson-meta">
+          <span>约 25 分钟</span><span>上手</span>
+          <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-desktop.html" target="_blank" rel="noopener">原文 ↗</a>
+        </div>
+        <div class="block">
+          <div class="label">学习目标</div>
+          <p>用桌面版完成一次只读工作区分析，并检查它实际读了哪些文件。</p>
+        </div>
+        <div class="block">
+          <div class="label">前置知识</div>
+          <p>完成 1.2；准备一个专用测试目录。</p>
+        </div>
+        <div class="block">
+          <div class="label">核心要点</div>
+          <ol><li>安装后先配置模型，再选择工作区；第一次不要用生产目录、密钥目录或含隐私的文件夹。</li>
+<li>首个任务只读：分析目录结构、说明文件用途，明确禁止修改、删除与安装。</li>
+<li>文件编辑、命令执行与后台任务可能改变本地数据；能力范围取决于当前版本与已安装插件。</li>
+<li>桌面版提供插件入口与工作区管理，但具体审批行为以当前版本为准。</li>
+<li>安装包要核对来源与签名；不要为了安装而关闭系统安全防护。</li></ol>
+        </div>
+        <div class="block task">
+          <div class="label">动手任务</div>
+          <p>在测试目录里让桌面版分析目录结构，记录三件事：它读了哪些文件、有没有越界、有没有出现审批提示。再故意要求修改一个文件，观察权限边界。</p>
+        </div>
+        <div class="block check">
+          <div class="label">自检</div>
+          <div class="qa"><details><summary>为什么第一次不能用生产目录？</summary><div class="a">Agent 可能执行命令或改文件，错误不可逆；测试目录能把损失限制在可丢弃的范围内，也方便对照它实际读了什么。</div></details>
+<details><summary>桌面版能代替 Web UI 吗？</summary><div class="a">对日常任务通常可以；但插件开发、查看终端日志、调试配置树仍更适合 Web UI / 源码方式。两者是入口差异，不是能力等级。</div></details></div>
+        </div>
+        <div class="lesson-foot">
+          <button class="done-btn" type="button" data-done-id="s1-3" aria-pressed="false">
+            <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
+          </button>
+          <span class="note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-1.html#s1-2"><span class="dir">上一节</span><span class="t">1.2 安装：四条路线怎么选</span></a>
+          <a class="next" href="stage-1.html#s1-4"><span class="dir">下一节</span><span class="t">1.4 第一次 Web UI：从启动到只读任务</span></a>
+        </nav>
+      </article>      <article class="lesson" id="s1-4">
+        <div class="lesson-head">
+          <span class="lesson-no">1.4</span>
+          <h2>第一次 Web UI：从启动到只读任务</h2>
+        </div>
+        <div class="lesson-meta">
+          <span>约 30 分钟</span><span>上手</span>
+          <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-start.html" target="_blank" rel="noopener">原文 ↗</a>
+        </div>
+        <div class="block">
+          <div class="label">学习目标</div>
+          <p>独立完成启动、模型配置、工作区选择与首条只读任务，并能定位常见失败。</p>
+        </div>
+        <div class="block">
+          <div class="label">前置知识</div>
+          <p>完成 1.2；准备 DeepSeek 账号或 API Key。</p>
+        </div>
+        <div class="block">
+          <div class="label">核心要点</div>
+          <ol><li>启动：<code>npx @deepseek-ai/dsh@latest web</code>；端口冲突用 <code>--port 8080</code>，或 <code>--port 0</code> 让系统选空闲端口。</li>
+<li>首次要登录或填 API Key；全新的 Web UI 不会自动选中工作区，未选中时输入框不可用。</li>
+<li>预设（标准 / PTC / 极简 / 创造）决定插件组合；权限模式（只读 / 工作区写 / 完全 / 自动审查）决定文件与命令边界，两者独立。</li>
+<li>第一条任务先只读，并要求它说明实际读取了哪个文件；去工具记录里核对路径，而不是只看回答。</li>
+<li>页面能打开只说明本地服务成功；401、无响应、无法发送分别对应凭据、模型、工作区三类问题。</li></ol>
+        </div>
+        <div class="block task">
+          <div class="label">动手任务</div>
+          <p>跑一条只读任务：「读取当前工作区的 README.md，概括项目用途，只读，不创建/修改/删除文件，并说明实际读取的路径。」记录四个检查点：页面、工作区、模型、工具记录。</p>
+        </div>
+        <div class="block check">
+          <div class="label">自检</div>
+          <div class="qa"><details><summary>为什么输入框不可用？</summary><div class="a">最常见是没有选中工作区，其次是模型未配置或凭据无效。先看工作区选择器与模型设置，不要反复重装。</div></details>
+<details><summary>只读提示词能保证不写文件吗？</summary><div class="a">不能。提示词是任务约束，真正的边界由权限模式与沙箱策略决定；验证时要看工具记录和实际文件状态。</div></details></div>
+        </div>
+        <div class="lesson-foot">
+          <button class="done-btn" type="button" data-done-id="s1-4" aria-pressed="false">
+            <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
+          </button>
+          <span class="note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-1.html#s1-3"><span class="dir">上一节</span><span class="t">1.3 桌面版：先用只读任务验收</span></a>
+          <a class="next" href="stage-2.html#s2-1"><span class="dir">下一节</span><span class="t">2.1 模型配置：官方、目录与自定义端点</span></a>
+        </nav>
+      </article>
+      <nav class="pager" aria-label="阶段翻页">
+        <a href="index.html"><span class="dir">上一章</span><span class="t">阅读路径</span></a>
+        <a class="next" href="stage-2.html"><span class="dir">下一章</span><span class="t">配置与形态</span></a>
+      </nav>
+    </div>
+  </div>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-in">
+      <div>
+        <p>蓝本：<a href="https://www.runoob.com/deepseek-harness/deepseek-harness-tutorial.html" target="_blank" rel="noopener">runoob · DeepSeek Harness 教程</a>。本站为学习导读与审计，不复制原文全文；原文版权归原站点所有。</p>
+        <p>代码 MIT；本站原创文字 CC BY-NC-SA 4.0（<a href="../LICENSE">LICENSE</a> / <a href="../LICENSE-CONTENT.md">LICENSE-CONTENT</a>）。审计时间 2026-10，产品处于预览版，信息以官方为准。</p>
+      </div>
+      <div>
+        <h3>阅读</h3>
+        <ul>
+          <li><a href="index.html">阅读路径</a></li>
+          <li><a href="contents.html">全部章节</a></li>
+          <li><a href="search.html">全文搜索</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>文档</h3>
+        <ul>
+          <li><a href="audit.html">内容审计</a></li>
+          <li><a href="about.html">来源、许可与维护</a></li>
+          <li><a href="../index.html">返回 AI Agent 学习站</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">离线可用 · 无外部请求 · 进度仅保存在本机</div>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

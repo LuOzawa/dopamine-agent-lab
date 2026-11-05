@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>说明 | DeepSeek Harness 学习手册</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">跳到主要内容</a>
+<div class="read-progress" aria-hidden="true"></div>
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html" aria-label="DeepSeek Harness 学习手册首页">
+      <span class="brand-mark" aria-hidden="true">H</span>
+      <span class="brand-text">DeepSeek Harness<small>学习手册 · 2026</small></span>
+    </a>
+    <nav class="topnav" aria-label="主导航">
+      <a href="index.html">阅读路径</a>
+      <a href="contents.html">全部章节</a>
+      <a href="search.html">搜索</a>
+      <a href="audit.html" class="nav-secondary">审计</a>
+      <a href="about.html" class="nav-secondary" aria-current="page">说明</a>
+    </nav>
+    <div class="mini-progress" title="总进度">
+      <span class="mini-bar" aria-hidden="true"><i data-mini-bar></i></span>
+      <span data-mini-text>0/33</span>
+    </div>
+  </div>
+</header>
+<main id="main" class="doc">
+  <div class="kicker">About · Usage · Maintenance</div>
+  <h1>说明</h1>
+  <p class="lede">这一页写清四件事：本站基于什么假设、怎么打开与维护、设计令牌怎么改、哪些内容必须自行核实。</p>
+
+  <h2 id="open"><span class="no">01</span>打开方式</h2>
+  <p>本站是纯静态页面，不需要安装、服务器或联网。保持 <code>deepseek-harness/</code> 与 <code>assets/</code> 同级，双击 <code>index.html</code> 即可。</p>
+  <div class="callout warn"><p>如果样式丢失，通常是把 HTML 单独移动了位置；页面引用的是 <code>assets/style.css</code> 相对路径。</p></div>
+
+  <h2 id="assumptions"><span class="no">02</span>假设声明</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th style="width:160px">输入项</th><th style="width:240px">采用的假设</th><th>影响</th></tr></thead>
+      <tbody>
+        <tr><td>蓝本</td><td>runoob DeepSeek Harness 教程的 34 个条目</td><td>不增删主题；章节顺序按学习路径重排，原文分组保留在「全部章节」</td></tr>
+        <tr><td>学习者</td><td>有编程经验、无 dsh 实战经验</td><td>不教 TypeScript 语法；插件 API 从最小示例讲起</td></tr>
+        <tr><td>规模与时长</td><td>33 节、6 章、约 15 小时</td><td>每节 20–50 分钟；动手任务控制在可一次完成的范围</td></tr>
+        <tr><td>运行环境</td><td>本地现代浏览器，离线优先</td><td>零外部字体/CDN；搜索索引本地加载</td></tr>
+        <tr><td>视觉</td><td>正式文档风格：纸白、墨蓝、黄铜；衬线标题 + 无衬线正文</td><td>高饱和只作强调；正文对比度 ≥ 4.5:1</td></tr>
+        <tr><td>时效</td><td>审计时间 2026-10，产品处于 0.2.x 预览版</td><td>版本、模型名、benchmark 标「待核实」；以官方为准</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="tokens"><span class="no">03</span>设计说明</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>令牌</th><th>值</th><th>用途</th><th>对比度</th></tr></thead>
+      <tbody>
+        <tr><td><code>--ink</code></td><td>#14202B</td><td>正文、标题</td><td>15.8:1（on #FBFAF6）</td></tr>
+        <tr><td><code>--muted</code></td><td>#5D6A76</td><td>次要文字</td><td>5.3:1</td></tr>
+        <tr><td><code>--brass-deep</code></td><td>#6F5522</td><td>标签、强调文字</td><td>6.7:1</td></tr>
+        <tr><td><code>--teal</code></td><td>#0F5A5A</td><td>链接、完成态</td><td>7.6:1</td></tr>
+        <tr><td><code>--navy</code></td><td>#0C1722</td><td>封面</td><td>白字 18.1:1</td></tr>
+        <tr><td><code>--rule</code></td><td>#D8DDE1</td><td>发丝线</td><td>非文字元素</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h3>版式与动效</h3>
+  <ul>
+    <li>标题用衬线（宋体 / Noto Serif SC），正文用无衬线；正文 16.5px / 行高 1.8。</li>
+    <li>无阴影、2px 圆角、1px 发丝线；层级靠字号、留白与黄铜细线，而不是颜色堆叠。</li>
+    <li>动效只有 160ms 的颜色/下划线变化；<code>prefers-reduced-motion</code> 下关闭。</li>
+    <li>表格移动端横向滚动；课程卡片在窄屏单列；触控目标 ≥ 40px。</li>
+  </ul>
+
+  <h2 id="source"><span class="no">04</span>来源、许可与维护</h2>
+  <ul>
+    <li><b>蓝本：</b><a href="https://www.runoob.com/deepseek-harness/deepseek-harness-tutorial.html" target="_blank" rel="noopener">runoob · DeepSeek Harness 教程</a>，版权归原站点/原作者。本站不复制原文全文，只做导读、任务与审计，每节保留原文链接。</li>
+    <li><b>许可：</b>代码 MIT；本站原创文字（学习路径、要点、任务、审计、说明）采用 CC BY-NC-SA 4.0。详见 <a href="../LICENSE">LICENSE</a> 与 <a href="../LICENSE-CONTENT.md">LICENSE-CONTENT.md</a>；原文与第三方内容不在本站授权范围。</li>
+    <li><b>生成：</b>页面与搜索索引由 <code>tools/build.py</code> 生成；修改课程数据后重新运行即可。</li>
+    <li><b>维护：</b>新增一节需要补五字段、更新 <code>STAGE_LESSONS</code> 与前后篇；搜索索引会随构建自动重建。</li>
+  </ul>
+
+  <h2 id="verify"><span class="no">05</span>必须自行核实的清单</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th style="width:210px">内容</th><th>核实什么</th><th style="width:190px">去哪查</th></tr></thead>
+      <tbody>
+        <tr><td>Node / Python 版本</td><td>Node 24.9+ 是否仍是硬性要求；Python SDK 支持矩阵</td><td>官方安装页、npm/PyPI 元数据</td></tr>
+        <tr><td>模型与计费</td><td>视觉模型名、单图 token 上限、benchmark 数字</td><td>DeepSeek 模型页与 API 文档</td></tr>
+        <tr><td>插件 API</td><td><code>defineTool</code>、<code>ctx.effect</code>、<code>ctx.llm</code> 的当前签名</td><td>仓库类型定义与官方文档</td></tr>
+        <tr><td>沙箱与审批</td><td>enforcement 平台差异、审批结果语义</td><td>官方安全文档</td></tr>
+        <tr><td>发布时间</td><td>「2026 年 8 月开源」等时间线</td><td>官方公告 / GitHub Releases</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <nav class="pager">
+    <a href="audit.html"><span class="dir">上一页</span><span class="t">内容审计</span></a>
+    <a class="next" href="index.html"><span class="dir">回到</span><span class="t">阅读路径</span></a>
+  </nav>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-in">
+      <div>
+        <p>蓝本：<a href="https://www.runoob.com/deepseek-harness/deepseek-harness-tutorial.html" target="_blank" rel="noopener">runoob · DeepSeek Harness 教程</a>。本站为学习导读与审计，不复制原文全文；原文版权归原站点所有。</p>
+        <p>代码 MIT；本站原创文字 CC BY-NC-SA 4.0（<a href="../LICENSE">LICENSE</a> / <a href="../LICENSE-CONTENT.md">LICENSE-CONTENT</a>）。审计时间 2026-10，产品处于预览版，信息以官方为准。</p>
+      </div>
+      <div>
+        <h3>阅读</h3>
+        <ul>
+          <li><a href="index.html">阅读路径</a></li>
+          <li><a href="contents.html">全部章节</a></li>
+          <li><a href="search.html">全文搜索</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>文档</h3>
+        <ul>
+          <li><a href="audit.html">内容审计</a></li>
+          <li><a href="about.html">来源、许可与维护</a></li>
+          <li><a href="../index.html">返回 AI Agent 学习站</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">离线可用 · 无外部请求 · 进度仅保存在本机</div>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

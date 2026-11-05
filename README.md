@@ -1,7 +1,9 @@
 # Dopamine Agent Lab
 
-以 [runoob · AI Agent（智能体）教程](https://www.runoob.com/ai-agent/ai-agent-tutorial.html) 为蓝本重构的**本地学习站**：
-8 个阶段、47 个带「目标 / 前置 / 要点 / 动手 / 自检」的学习小节，附内容时效审计、更新对照与维护指引。
+以 runoob 教程为蓝本重构的**本地学习站**，包含两门课：
+
+- **AI Agent 学习站**：47 节 / 8 阶段，多巴胺风格，附审计、全文搜索与框架矩阵。
+- **DeepSeek Harness 手册**：33 节 / 6 章，正式文档风格，从安装、插件到沙箱与复盘。
 
 > 个人学习项目：代码 MIT，原创文字 CC BY-NC-SA 4.0。不复制原文全文；每节保留原文链接，版权归原站点所有。
 
@@ -14,6 +16,17 @@
 | 全文搜索 | 框架与工具矩阵 |
 |---|---|
 | ![全文搜索](docs/preview-search.png) | ![框架矩阵](docs/preview-frameworks.png) |
+
+![DeepSeek Harness 手册](docs/preview-dsh.png)
+
+## 两门课
+
+| 课程 | 入口 | 风格 | 规模 |
+|---|---|---|---|
+| AI Agent 学习站 | [`index.html`](index.html) | 多巴胺 / 贴纸感 | 47 节 · 8 阶段 |
+| DeepSeek Harness 手册 | [`deepseek-harness/index.html`](deepseek-harness/index.html) | 正式文档 / 纸白墨蓝 | 33 节 · 6 章 |
+
+两门课共用同一套 MIT + CC BY-NC-SA 4.0 许可；各自有独立的 `assets/`、搜索索引与构建脚本。
 
 ## 打开方式
 
@@ -39,6 +52,10 @@ ai-agent-learning/
 ├── search.html         全文搜索：按关键词定位到小节与句子
 ├── audit.html          审计台账（47 行）+ 更新对照表 + 方法说明
 ├── about.html          假设声明、设计令牌、维护指引、待核实清单
+├── deepseek-harness/   第二门课：DeepSeek Harness 手册（33 节，正式文档风格）
+│   ├── index.html / stage-1..6.html / contents / search / audit / about
+│   ├── assets/         独立设计令牌、进度与搜索
+│   └── tools/build.py  课程数据 + 页面/索引生成
 ├── LICENSE             MIT（代码）
 ├── LICENSE-CONTENT.md  原创文字许可与署名说明（CC BY-NC-SA 4.0）
 ├── LICENSE-CC-BY-NC-SA-4.0.txt  CC BY-NC-SA 4.0 完整法律文本

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>阶段 3 · 插件基础 | DeepSeek Harness 学习手册</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">跳到主要内容</a>
+<div class="read-progress" aria-hidden="true"></div>
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html" aria-label="DeepSeek Harness 学习手册首页">
+      <span class="brand-mark" aria-hidden="true">H</span>
+      <span class="brand-text">DeepSeek Harness<small>学习手册 · 2026</small></span>
+    </a>
+    <nav class="topnav" aria-label="主导航">
+      <a href="index.html">阅读路径</a>
+      <a href="contents.html">全部章节</a>
+      <a href="search.html">搜索</a>
+      <a href="audit.html" class="nav-secondary">审计</a>
+      <a href="about.html" class="nav-secondary">说明</a>
+    </nav>
+    <div class="mini-progress" title="总进度">
+      <span class="mini-bar" aria-hidden="true"><i data-mini-bar></i></span>
+      <span data-mini-text>0/33</span>
+    </div>
+  </div>
+</header>
+<main id="main">
+  <div class="page-head">
+    <div class="wrap">
+      <div class="crumbs"><a href="index.html">阅读路径</a> / <span>阶段 3</span></div>
+      <div class="kicker">Chapter 03 · Plugin Basics</div>
+      <h1>插件基础</h1>
+      <p class="lede">从 apply(ctx) 到生命周期：写出可加载、可清理、可配置的插件。</p>
+      <div class="meta-line"><span>8 节 · 约 3.5 小时 · 前置：阶段 2</span><span>每节含目标 / 前置 / 要点 / 任务 / 自检</span></div>
+      <div class="stage-progress">
+        <span>本阶段进度</span>
+        <span class="bar" aria-hidden="true"><i data-stage-bar="3"></i></span>
+        <b data-stage-label="3">0 / 8</b>
+      </div>
+    </div>
+  </div>
+  <div class="wrap layout">
+    <nav class="toc" aria-label="本阶段目录">
+        <h2>本阶段目录</h2>
+        <ol><li><a href="#s3-1"><span class="n">3.1</span><span>第一个插件：apply(ctx) 与三种形态</span></a></li>
+<li><a href="#s3-2"><span class="n">3.2</span><span>加载本地插件：cordis.yml + --patch</span></a></li>
+<li><a href="#s3-3"><span class="n">3.3</span><span>自动清理：ctx.effect 与资源账本</span></a></li>
+<li><a href="#s3-4"><span class="n">3.4</span><span>声明依赖：inject 与可选服务</span></a></li>
+<li><a href="#s3-5"><span class="n">3.5</span><span>第一个工具：defineTool</span></a></li>
+<li><a href="#s3-6"><span class="n">3.6</span><span>插件配置：Config 与 Schemastery</span></a></li>
+<li><a href="#s3-7"><span class="n">3.7</span><span>生命周期：Fiber 状态机</span></a></li>
+<li><a href="#s3-8"><span class="n">3.8</span><span>依赖驱动加载与嵌套上下文</span></a></li></ol>
+        <p class="toc-note">完成一节就点卡片底部「标记完成」，进度只存本机。</p>
+      </nav>
+    <div>
+            <article class="lesson" id="s3-1">
+        <div class="lesson-head">
+          <span class="lesson-no">3.1</span>
+          <h2>第一个插件：apply(ctx) 与三种形态</h2>
+        </div>
+        <div class="lesson-meta">
+          <span>约 35 分钟</span><span>插件</span>
+          <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-first-plugin.html" target="_blank" rel="noopener">原文 ↗</a>
+        </div>
+        <div class="block">
+          <div class="label">学习目标</div>
+          <p>写出最小插件，理解 ctx 的作用，并避开 default export 丢 inject 的坑。</p>
+        </div>
+        <div class="block">
+          <div class="label">前置知识</div>
+          <p>源码安装完成；会 TypeScript 基础。</p>
+        </div>
+        <div class="block">
+          <div class="label">核心要点</div>
+          <ol><li>插件导出 <code>name</code> 与 <code>apply(ctx)</code>；框架加载时调用 apply，ctx 既是注册入口也是资源账本。</li>
+<li>三种形态：函数、对象、Service 子类；大多数插件用函数形式，需要提供服务时用类形式。</li>
+<li>对象形态不要再写 <code>export default apply</code>：Loader 会取 default 裸函数，命名空间上的 inject 会整个丢失（官方复盘 0001）。</li>
+<li>本地开发时插件路径必须是绝对路径；相对路径不会被 Loader 按预期解析。</li>
+<li>apply 里不要做长时间阻塞；重活应注册成工具或后台任务。</li></ol>
+        </div>
+        <div class="block task">
+          <div class="label">动手任务</div>
+          <p>写一个 hello-plugin，加载时打印日志；再改成对象形态并声明 <code>inject: ['tools']</code>，用 dump-config 或日志确认 inject 没有丢。</p>
+        </div>
+        <div class="block check">
+          <div class="label">自检</div>
+          <div class="qa"><details><summary>ctx 到底是什么？</summary><div class="a">框架传给插件的上下文对象：你通过它注册事件、工具、服务，它也记录这些注册，卸载时按作用域清理。</div></details>
+<details><summary>为什么 default export 会丢 inject？</summary><div class="a">Loader 优先取模块的 default 导出；如果 default 是裸函数，命名空间上声明的 name/inject 不会被一起取走，插件就在空依赖下启动。</div></details></div>
+        </div>
+        <div class="lesson-foot">
+          <button class="done-btn" type="button" data-done-id="s3-1" aria-pressed="false">
+            <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
+          </button>
+          <span class="note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-2.html#s2-6"><span class="dir">上一节</span><span class="t">2.6 四种运行模式：标准 / PTC / 极简 / 创造</span></a>
+          <a class="next" href="stage-3.html#s3-2"><span class="dir">下一节</span><span class="t">3.2 加载本地插件：cordis.yml + --patch</span></a>
+        </nav>
+      </article>      <article class="lesson" id="s3-2">
+        <div class="lesson-head">
+          <span class="lesson-no">3.2</span>
+          <h2>加载本地插件：cordis.yml + --patch</h2>
+        </div>
+        <div class="lesson-meta">
+          <span>约 30 分钟</span><span>插件</span>
+          <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-load-plugin.html" target="_blank" rel="noopener">原文 ↗</a>
+        </div>
+        <div class="block">
+          <div class="label">学习目标</div>
+          <p>用 patch overlay 把本地插件加载进 Web UI，并解释 profile 与 patch 的分工。</p>
+        </div>
+        <div class="block">
+          <div class="label">前置知识</div>
+          <p>完成 3.1；有源码仓库。</p>
+        </div>
+        <div class="block">
+          <div class="label">核心要点</div>
+          <ol><li><code>cordis.yml</code> 是 patch overlay；<code>insert</code> 用于插入插件行。</li>
+<li><code>name</code> 写绝对路径；patch 文件只贡献配置，不改变 Loader 解析模块路径的 profile 目录。</li>
+<li>启动：<code>pnpm dsh web --patch ./scratch-plugin/cordis.yml</code>。</li>
+<li>profile 决定应用由哪些组合包组成；patch 只是在启动时叠加的一层。</li>
+<li>交付给别人时改用组合包（bundle），不要让用户手改绝对路径。</li></ol>
+        </div>
+        <div class="block task">
+          <div class="label">动手任务</div>
+          <p>加载 hello 插件，确认三件事：终端出现加载日志、插件列表能看到它、dump-config 里有对应层。然后把插件路径改成相对路径，观察失败。</p>
+        </div>
+        <div class="block check">
+          <div class="label">自检</div>
+          <div class="qa"><details><summary>为什么必须是绝对路径？</summary><div class="a">Loader 解析模块时以 profile 目录为基准，相对路径会指到错误位置；patch 本身不会改变这个基准。</div></details>
+<details><summary>--patch 和 bundle 怎么选？</summary><div class="a">本地开发调试用 --patch；要分发给别人、需要版本与依赖管理时用 bundle。</div></details></div>
+        </div>
+        <div class="lesson-foot">
+          <button class="done-btn" type="button" data-done-id="s3-2" aria-pressed="false">
+            <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
+          </button>
+          <span class="note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-3.html#s3-1"><span class="dir">上一节</span><span class="t">3.1 第一个插件：apply(ctx) 与三种形态</span></a>
+          <a class="next" href="stage-3.html#s3-3"><span class="dir">下一节</span><span class="t">3.3 自动清理：ctx.effect 与资源账本</span></a>
+        </nav>
+      </article>      <article class="lesson" id="s3-3">
+        <div class="lesson-head">
+          <span class="lesson-no">3.3</span>
+          <h2>自动清理：ctx.effect 与资源账本</h2>
+        </div>
+        <div class="lesson-meta">
+          <span>约 30 分钟</span><span>生命周期</span>
+          <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-effects.html" target="_blank" rel="noopener">原文 ↗</a>
+        </div>
+        <div class="block">
+          <div class="label">学习目标</div>
+          <p>用 ctx.effect 管理定时器等外部资源，并验证插件卸载后资源真的停止。</p>
+        </div>
+        <div class="block">
+          <div class="label">前置知识</div>
+          <p>完成 3.1 / 3.2。</p>
+        </div>
+        <div class="block">
+          <div class="label">核心要点</div>
+          <ol><li>通过 ctx 注册的监听、工具、LLM 适配器会自动撤销；卸载时按注册顺序的逆序清理。</li>
+<li>定时器、网络连接等不在自动列表里的资源，用 <code>ctx.effect(() =&gt; disposer)</code> 显式清理。</li>
+<li>异步 disposer 会并发执行，不保证逐个完成；有顺序依赖的清理步骤要放进同一个 effect，由它串行等待。</li>
+<li>先注册后清理：后注册的资源先被清理。</li>
+<li>资源泄漏的典型症状是重复监听、重复注册、卸载后仍有输出。</li></ol>
+        </div>
+        <div class="block task">
+          <div class="label">动手任务</div>
+          <p>写一个每 5 秒打印心跳的插件，加载后卸载；观察 15 秒内是否还有输出。再把定时器改成不返回 disposer，复现泄漏。</p>
+        </div>
+        <div class="block check">
+          <div class="label">自检</div>
+          <div class="qa"><details><summary>通过 ctx 注册的定时器还要手动 clearInterval 吗？</summary><div class="a">如果定时器是通过 <code>ctx.effect</code> 创建并返回 disposer，不需要；直接使用 Node API 创建而不交给 ctx 的，框架不一定能追踪。</div></details>
+<details><summary>为什么清理顺序重要？</summary><div class="a">后注册的资源可能依赖先注册的资源；逆序清理能先拆掉上层依赖，再释放底层资源。</div></details></div>
+        </div>
+        <div class="lesson-foot">
+          <button class="done-btn" type="button" data-done-id="s3-3" aria-pressed="false">
+            <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
+          </button>
+          <span class="note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-3.html#s3-2"><span class="dir">上一节</span><span class="t">3.2 加载本地插件：cordis.yml + --patch</span></a>
+          <a class="next" href="stage-3.html#s3-4"><span class="dir">下一节</span><span class="t">3.4 声明依赖：inject 与可选服务</span></a>
+        </nav>
+      </article>      <article class="lesson" id="s3-4">
+        <div class="lesson-head">
+          <span class="lesson-no">3.4</span>
+          <h2>声明依赖：inject 与可选服务</h2>
+        </div>
+        <div class="lesson-meta">
+          <span>约 30 分钟</span><span>依赖</span>
+          <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-inject.html" target="_blank" rel="noopener">原文 ↗</a>
+        </div>
+        <div class="block">
+          <div class="label">学习目标</div>
+          <p>区分必需依赖与可选依赖，并解释服务消失后插件为什么会自动重载。</p>
+        </div>
+        <div class="block">
+          <div class="label">前置知识</div>
+          <p>完成 3.1。</p>
+        </div>
+        <div class="block">
+          <div class="label">核心要点</div>
+          <ol><li><code>export const inject = ['tools']</code> 声明必需依赖；服务未就绪时 Fiber 停在 PENDING，不执行 apply。</li>
+<li>可选依赖不写 inject，在使用处用 <code>ctx.get('metrics')</code> 查询，可能得到 undefined。</li>
+<li>运行中必需服务消失 → 依赖它的插件自动 dispose；服务回来 → 自动重新加载。</li>
+<li>自动重载不等于恢复运行时数据；需要保留的状态要外置。</li>
+<li>内置服务：<code>ctx.tools</code>（工具）、<code>ctx.llm</code>（模型）、<code>ctx.agents</code>（子智能体）。</li></ol>
+        </div>
+        <div class="block task">
+          <div class="label">动手任务</div>
+          <p>给插件加一个可选的 metrics 依赖：没有服务时正常加载并跳过记录；有服务时调用 <code>record</code>。再用 dump-config 确认依赖声明。</p>
+        </div>
+        <div class="block check">
+          <div class="label">自检</div>
+          <div class="qa"><details><summary>PENDING 是错误吗？</summary><div class="a">不是。它表示插件已声明但依赖未就绪；依赖一直不来就一直等。若配置错误则会进入 FAILED，两者要分开看。</div></details>
+<details><summary>自动重载会保留内存状态吗？</summary><div class="a">不会。重载创建新的 Fiber，旧注册被清理；需要延续的状态放数据库、文件或外部服务。</div></details></div>
+        </div>
+        <div class="lesson-foot">
+          <button class="done-btn" type="button" data-done-id="s3-4" aria-pressed="false">
+            <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
+          </button>
+          <span class="note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-3.html#s3-3"><span class="dir">上一节</span><span class="t">3.3 自动清理：ctx.effect 与资源账本</span></a>
+          <a class="next" href="stage-3.html#s3-5"><span class="dir">下一节</span><span class="t">3.5 第一个工具：defineTool</span></a>
+        </nav>
+      </article>      <article class="lesson" id="s3-5">
+        <div class="lesson-head">
+          <span class="lesson-no">3.5</span>
+          <h2>第一个工具：defineTool</h2>
+        </div>
+        <div class="lesson-meta">
+          <span>约 35 分钟</span><span>工具</span>
+          <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-define-tool.html" target="_blank" rel="noopener">原文 ↗</a>
+        </div>
+        <div class="block">
+          <div class="label">学习目标</div>
+          <p>用 defineTool 定义 greet 工具，让模型真正调用，并理解 schema 如何进入提示词。</p>
+        </div>
+        <div class="block">
+          <div class="label">前置知识</div>
+          <p>完成 3.4；tools 服务可用。</p>
+        </div>
+        <div class="block">
+          <div class="label">核心要点</div>
+          <ol><li>字段：<code>name</code>、<code>description</code>、<code>parameters</code>、<code>output.schema</code>、<code>output.render</code>、<code>execute</code>。</li>
+<li>schema 会自动组装进模型提示词；description 决定模型「什么时候选它」，parameters 决定「怎么填」。</li>
+<li>execute 返回规范值；render 把规范值转成模型可见内容，两者解耦，同一规范值可以有不同渲染。</li>
+<li>参数在进入策略前已被冻结；工具层不要再改写参数，历史、审计与执行必须一致。</li>
+<li>高风险工具要配权限门禁或审批，不要只靠 description 里写「请小心」。</li></ol>
+        </div>
+        <div class="block task">
+          <div class="label">动手任务</div>
+          <p>写一个 <code>word_count</code> 工具：输入文本，返回字符数与词数；测试空串、超长文本、缺参数三种情况，记录错误是否可读。</p>
+        </div>
+        <div class="block check">
+          <div class="label">自检</div>
+          <div class="qa"><details><summary>规范值和渲染内容有什么区别？</summary><div class="a">规范值是 execute 返回、output.schema 声明的结构化值；渲染内容是模型看到的形式。前者用于校验与审计，后者用于展示。</div></details>
+<details><summary>模型怎么知道要调用 greet？</summary><div class="a">name、description、parameters、output 会自动进入提示词；模型根据这些信息判断是否调用、传什么参数。</div></details></div>
+        </div>
+        <div class="lesson-foot">
+          <button class="done-btn" type="button" data-done-id="s3-5" aria-pressed="false">
+            <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
+          </button>
+          <span class="note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-3.html#s3-4"><span class="dir">上一节</span><span class="t">3.4 声明依赖：inject 与可选服务</span></a>
+          <a class="next" href="stage-3.html#s3-6"><span class="dir">下一节</span><span class="t">3.6 插件配置：Config 与 Schemastery</span></a>
+        </nav>
+      </article>      <article class="lesson" id="s3-6">
+        <div class="lesson-head">
+          <span class="lesson-no">3.6</span>
+          <h2>插件配置：Config 与 Schemastery</h2>
+        </div>
+        <div class="lesson-meta">
+          <span>约 30 分钟</span><span>配置</span>
+          <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-plugin-config.html" target="_blank" rel="noopener">原文 ↗</a>
+        </div>
+        <div class="block">
+          <div class="label">学习目标</div>
+          <p>用 Config 接口 + 同名 schema 接收配置，并让非法配置在加载时失败。</p>
+        </div>
+        <div class="block">
+          <div class="label">前置知识</div>
+          <p>完成 3.5。</p>
+        </div>
+        <div class="block">
+          <div class="label">核心要点</div>
+          <ol><li>导出同名 <code>Config</code> 接口与 Schemastery schema；默认值写在 schema 字段上。</li>
+<li><code>apply(ctx, config)</code> 的第二个参数就是校验后的配置。</li>
+<li>必填、枚举、范围等约束在 schema 表达；非法配置会让插件加载失败并给出明确错误。</li>
+<li>原则：凡是不同部署可能取不同值的参数，都定义成配置字段，不要硬编码。</li>
+<li>配置变更会触发 HMR；重载会清理旧注册，注意别把运行时状态只放在内存。</li></ol>
+        </div>
+        <div class="block task">
+          <div class="label">动手任务</div>
+          <p>给 greet 加 <code>greeting</code> 与 <code>maxRetries</code> 两个配置：测默认值、cordis.yml 覆盖、非法类型三组，确认错误发生在加载时。</p>
+        </div>
+        <div class="block check">
+          <div class="label">自检</div>
+          <div class="qa"><details><summary>为什么不能导出普通对象作为 Config？</summary><div class="a">Cordis 要求 Standard Schema 接口，普通对象没有校验与默认值能力，加载时不会按预期处理。</div></details>
+<details><summary>HMR 会保留插件状态吗？</summary><div class="a">不会自动保留。热替换会卸载旧实例、加载新实例；需要延续的状态要外置或显式持久化。</div></details></div>
+        </div>
+        <div class="lesson-foot">
+          <button class="done-btn" type="button" data-done-id="s3-6" aria-pressed="false">
+            <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
+          </button>
+          <span class="note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-3.html#s3-5"><span class="dir">上一节</span><span class="t">3.5 第一个工具：defineTool</span></a>
+          <a class="next" href="stage-3.html#s3-7"><span class="dir">下一节</span><span class="t">3.7 生命周期：Fiber 状态机</span></a>
+        </nav>
+      </article>      <article class="lesson" id="s3-7">
+        <div class="lesson-head">
+          <span class="lesson-no">3.7</span>
+          <h2>生命周期：Fiber 状态机</h2>
+        </div>
+        <div class="lesson-meta">
+          <span>约 35 分钟</span><span>生命周期</span>
+          <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-lifecycle.html" target="_blank" rel="noopener">原文 ↗</a>
+        </div>
+        <div class="block">
+          <div class="label">学习目标</div>
+          <p>说出 Fiber 的状态流转，并能用状态区分「缺依赖」与「加载失败」。</p>
+        </div>
+        <div class="block">
+          <div class="label">前置知识</div>
+          <p>完成 3.4。</p>
+        </div>
+        <div class="block">
+          <div class="label">核心要点</div>
+          <ol><li>状态：PENDING → LOADING → ACTIVE → UNLOADING → DISPOSED；初始化异常进入 FAILED。</li>
+<li>一个插件模块可以有多个 Fiber：同一插件在不同上下文中加载，各自有独立生命周期。</li>
+<li>Fiber 保存校验后的配置、服务依赖与注册资源；卸载时执行清理。</li>
+<li>依赖未满足停在 PENDING；配置/初始化错误进入 FAILED，不能都当成缺依赖。</li>
+<li>自动重载是新 Fiber，不是恢复旧内存。</li></ol>
+        </div>
+        <div class="block task">
+          <div class="label">动手任务</div>
+          <p>在插件里打印 <code>ctx.fiber.state</code>。分别制造「缺依赖」与「配置类型错误」，记录两次状态与日志差异。</p>
+        </div>
+        <div class="block check">
+          <div class="label">自检</div>
+          <div class="qa"><details><summary>PENDING 和 FAILED 怎么区分？</summary><div class="a">PENDING 是等待依赖，通常日志安静；FAILED 是初始化或配置校验抛错，会有明确错误。先看错误信息，不要盲目加依赖。</div></details>
+<details><summary>卸载时资源按什么顺序清理？</summary><div class="a">按注册顺序的逆序撤销；异步 disposer 并发执行，有顺序要求的清理要放进同一个 effect。</div></details></div>
+        </div>
+        <div class="lesson-foot">
+          <button class="done-btn" type="button" data-done-id="s3-7" aria-pressed="false">
+            <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
+          </button>
+          <span class="note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-3.html#s3-6"><span class="dir">上一节</span><span class="t">3.6 插件配置：Config 与 Schemastery</span></a>
+          <a class="next" href="stage-3.html#s3-8"><span class="dir">下一节</span><span class="t">3.8 依赖驱动加载与嵌套上下文</span></a>
+        </nav>
+      </article>      <article class="lesson" id="s3-8">
+        <div class="lesson-head">
+          <span class="lesson-no">3.8</span>
+          <h2>依赖驱动加载与嵌套上下文</h2>
+        </div>
+        <div class="lesson-meta">
+          <span>约 30 分钟</span><span>依赖</span>
+          <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-nested-reload.html" target="_blank" rel="noopener">原文 ↗</a>
+        </div>
+        <div class="block">
+          <div class="label">学习目标</div>
+          <p>用依赖表达加载顺序，用 ctx.plugin 创建子插件，并验证子插件随父卸载。</p>
+        </div>
+        <div class="block">
+          <div class="label">前置知识</div>
+          <p>完成 3.7。</p>
+        </div>
+        <div class="block">
+          <div class="label">核心要点</div>
+          <ol><li>加载顺序由服务依赖决定，不需要手写 setTimeout 或启动编排。</li>
+<li>服务替换会触发依赖插件自动重载；旧监听、工具、适配器不会残留。</li>
+<li><code>ctx.plugin(child)</code> 创建子 Fiber：继承父上下文，但有独立生命周期。</li>
+<li>子插件随父插件卸载；适合按功能分组，不要用它逃避依赖声明。</li>
+<li>自动重载防止调用已不存在的服务，也会让旧状态丢失。</li></ol>
+        </div>
+        <div class="block task">
+          <div class="label">动手任务</div>
+          <p>写一个父插件，在 apply 里 <code>ctx.plugin(child)</code> 注册子插件；子插件注册一个工具。卸载父插件后，确认工具消失、子 Fiber 也 disposed。</p>
+        </div>
+        <div class="block check">
+          <div class="label">自检</div>
+          <div class="qa"><details><summary>依赖驱动加载解决了什么？</summary><div class="a">它把「谁先启动」从人工编排变成声明式依赖：服务就绪才加载，服务消失就卸载，服务回来再重载。</div></details>
+<details><summary>子插件能独立卸载吗？</summary><div class="a">子 Fiber 有独立生命周期，可以由父上下文管理；父插件卸载时子插件一定被处置。</div></details></div>
+        </div>
+        <div class="lesson-foot">
+          <button class="done-btn" type="button" data-done-id="s3-8" aria-pressed="false">
+            <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
+          </button>
+          <span class="note">进度保存在本机浏览器</span>
+        </div>
+        <nav class="chapter-nav" aria-label="章节翻页">
+          <a class="prev" href="stage-3.html#s3-7"><span class="dir">上一节</span><span class="t">3.7 生命周期：Fiber 状态机</span></a>
+          <a class="next" href="stage-4.html#s4-1"><span class="dir">下一节</span><span class="t">4.1 服务与依赖：Service 基类</span></a>
+        </nav>
+      </article>
+      <nav class="pager" aria-label="阶段翻页">
+        <a href="stage-2.html"><span class="dir">上一章</span><span class="t">配置与形态</span></a>
+        <a class="next" href="stage-4.html"><span class="dir">下一章</span><span class="t">服务、隔离与事件</span></a>
+      </nav>
+    </div>
+  </div>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-in">
+      <div>
+        <p>蓝本：<a href="https://www.runoob.com/deepseek-harness/deepseek-harness-tutorial.html" target="_blank" rel="noopener">runoob · DeepSeek Harness 教程</a>。本站为学习导读与审计，不复制原文全文；原文版权归原站点所有。</p>
+        <p>代码 MIT；本站原创文字 CC BY-NC-SA 4.0（<a href="../LICENSE">LICENSE</a> / <a href="../LICENSE-CONTENT.md">LICENSE-CONTENT</a>）。审计时间 2026-10，产品处于预览版，信息以官方为准。</p>
+      </div>
+      <div>
+        <h3>阅读</h3>
+        <ul>
+          <li><a href="index.html">阅读路径</a></li>
+          <li><a href="contents.html">全部章节</a></li>
+          <li><a href="search.html">全文搜索</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>文档</h3>
+        <ul>
+          <li><a href="audit.html">内容审计</a></li>
+          <li><a href="about.html">来源、许可与维护</a></li>
+          <li><a href="../index.html">返回 AI Agent 学习站</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">离线可用 · 无外部请求 · 进度仅保存在本机</div>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

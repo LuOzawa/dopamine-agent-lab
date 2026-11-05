@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>阅读路径 | DeepSeek Harness 学习手册</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">跳到主要内容</a>
+<div class="read-progress" aria-hidden="true"></div>
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html" aria-label="DeepSeek Harness 学习手册首页">
+      <span class="brand-mark" aria-hidden="true">H</span>
+      <span class="brand-text">DeepSeek Harness<small>学习手册 · 2026</small></span>
+    </a>
+    <nav class="topnav" aria-label="主导航">
+      <a href="index.html" aria-current="page">阅读路径</a>
+      <a href="contents.html">全部章节</a>
+      <a href="search.html">搜索</a>
+      <a href="audit.html" class="nav-secondary">审计</a>
+      <a href="about.html" class="nav-secondary">说明</a>
+    </nav>
+    <div class="mini-progress" title="总进度">
+      <span class="mini-bar" aria-hidden="true"><i data-mini-bar></i></span>
+      <span data-mini-text>0/33</span>
+    </div>
+  </div>
+</header>
+<main id="main">
+  <section class="cover">
+    <div class="wrap">
+      <div class="eyebrow">DeepSeek Harness · 学习手册</div>
+      <h1>从安装到插件，<br><em>把 Agent 当作基础设施来读</em></h1>
+      <p class="deck">以 runoob 的 DeepSeek Harness 教程为蓝本，重排为 6 章、33 节。
+        每节给出目标、前置、要点、动手任务与自检；每条事实标注审计状态，不确定的部分明确写「待核实」。
+        离线可用，双击 HTML 即可阅读。</p>
+      <div class="cover-meta">
+        <div><b>33</b><span>学习小节</span></div>
+        <div><b>6</b><span>章</span></div>
+        <div><b>34</b><span>原文条目</span></div>
+        <div><b>2026-10</b><span>审计时间</span></div>
+      </div>
+      <div class="cover-actions">
+        <a class="btn btn-primary" href="stage-1.html">开始阅读</a>
+        <a class="btn btn-ghost" href="audit.html">先看审计</a>
+        <a class="btn btn-ghost" href="contents.html">全部章节</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Reading Path</div>
+          <h2>六章，从认识它到敢上线</h2>
+          <p>章节之间是递进关系，但不必严格按顺序：要装插件可以直接从第 3 章开始，做安全评估可以直接看第 6 章。</p>
+        </div>
+        <a class="btn btn sm" href="contents.html">按原文目录查</a>
+      </div>
+      <div class="path-table">
+        <a class="path-row" href="stage-1.html">
+      <span class="path-no">01</span>
+      <span><span class="path-title">认识与安装</span><div class="path-desc">先确认它解决什么问题，再选一条安装路线跑通。不写插件，但决定后面顺不顺。</div></span>
+      <span class="path-meta">4 节 · 约 1.5 小时</span>
+      <span class="path-arrow">进入 →</span>
+    </a>
+<a class="path-row" href="stage-2.html">
+      <span class="path-no">02</span>
+      <span><span class="path-title">配置与形态</span><div class="path-desc">模型、Python SDK、插件安装、自动化、多模态与四种运行模式。</div></span>
+      <span class="path-meta">6 节 · 约 2.5 小时</span>
+      <span class="path-arrow">进入 →</span>
+    </a>
+<a class="path-row" href="stage-3.html">
+      <span class="path-no">03</span>
+      <span><span class="path-title">插件基础</span><div class="path-desc">从 apply(ctx) 到生命周期：写出可加载、可清理、可配置的插件。</div></span>
+      <span class="path-meta">8 节 · 约 3.5 小时</span>
+      <span class="path-arrow">进入 →</span>
+    </a>
+<a class="path-row" href="stage-4.html">
+      <span class="path-no">04</span>
+      <span><span class="path-title">服务、隔离与事件</span><div class="path-desc">插件之间如何协作：服务、作用域、事件分发与能力三角色。</div></span>
+      <span class="path-meta">4 节 · 约 2 小时</span>
+      <span class="path-arrow">进入 →</span>
+    </a>
+<a class="path-row" href="stage-5.html">
+      <span class="path-no">05</span>
+      <span><span class="path-title">实战与发布</span><div class="path-desc">把能力拆成三角色，接任意模型，打成可安装、可分发的组合包。</div></span>
+      <span class="path-meta">6 节 · 约 3 小时</span>
+      <span class="path-arrow">进入 →</span>
+    </a>
+<a class="path-row" href="stage-6.html">
+      <span class="path-no">06</span>
+      <span><span class="path-title">运行与生产</span><div class="path-desc">工具流水线、沙箱与审批、会话日志、防御性编程与事故复盘。</div></span>
+      <span class="path-meta">5 节 · 约 2.5 小时</span>
+      <span class="path-arrow">进入 →</span>
+    </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Three Routes</div>
+          <h2>四条阅读路线</h2>
+          <p>时间有限时，按目标选一条；每条路线都能在半天内形成一个可验证的闭环。</p>
+        </div>
+      </div>
+      <div class="two-col">
+        <div class="panel">
+          <h3>快速上手</h3>
+          <p>先跑起来，再理解架构。</p>
+          <ul>
+            <li><a href="stage-1.html#s1-2">1.2 安装</a> → <a href="stage-1.html#s1-4">1.4 Web UI</a></li>
+            <li><a href="stage-2.html#s2-1">2.1 模型配置</a> → <a href="stage-2.html#s2-6">2.6 运行模式</a></li>
+            <li>产出：一次只读任务 + 一份权限配置</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>插件开发</h3>
+          <p>从 apply(ctx) 写到可安装的 bundle。</p>
+          <ul>
+            <li><a href="stage-3.html#s3-1">3.1 第一个插件</a> → <a href="stage-3.html#s3-5">3.5 defineTool</a></li>
+            <li><a href="stage-4.html#s4-4">4.4 能力三角色</a> → <a href="stage-5.html#s5-1">5.1 实战</a> → <a href="stage-5.html#s5-6">5.6 发布</a></li>
+            <li>产出：一个可安装、可替换 Provider 的能力包</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>生产与安全</h3>
+          <p>把「能跑」变成「敢用」。</p>
+          <ul>
+            <li><a href="stage-6.html#s6-1">6.1 工具流水线</a> → <a href="stage-6.html#s6-2">6.2 沙箱与审批</a></li>
+            <li><a href="stage-6.html#s6-3">6.3 会话日志</a> → <a href="stage-6.html#s6-4">6.4 防御性编程</a> → <a href="stage-6.html#s6-5">6.5 复盘</a></li>
+            <li>产出：一张权限边界表 + 一份失败关闭检查单</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>研究视角</h3>
+          <p>关心事件流、配置树与可回放性。</p>
+          <ul>
+            <li><a href="stage-4.html#s4-3">4.3 事件系统</a> → <a href="stage-4.html#s4-2">4.2 隔离与 scope</a></li>
+            <li><a href="stage-6.html#s6-3">6.3 会话日志</a> → <a href="stage-5.html#s5-4">5.4 bundle/profile</a></li>
+            <li>产出：一份可复现的配置树 + 一次回放记录</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Audit First</div>
+          <h2>先看审计，再照抄命令</h2>
+          <p>审计覆盖 33 节。整体与当前 0.2.x 预览版一致；具体版本、模型名与 benchmark 需要单独核实。</p>
+        </div>
+        <a class="btn btn sm" href="audit.html">完整台账</a>
+      </div>
+      <div class="audit-strip">
+        <div class="ok"><b>29</b><span>仍然成立</span></div>
+        <div class="old"><b>0</b><span>表述过时</span></div>
+        <div class="add"><b>1</b><span>建议补充</span></div>
+        <div class="todo"><b>3</b><span>存疑待核实</span></div>
+      </div>
+      <div class="callout warn" style="margin-top:24px">
+        <p><b>最该先核实的三件事：</b>① Node.js 24.9+ 的硬性要求；② 视觉模型名与单图 token 上限；③「2026 年 8 月开源」等时间与 benchmark 数字。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="kicker">How to Use</div>
+          <h2>怎么读这一站</h2>
+        </div>
+      </div>
+      <div class="two-col">
+        <div class="panel">
+          <h3>每节五件事</h3>
+          <p>先看目标和前置，判断要不要学；读要点；必须做动手任务；用自检两问验证；最后标记完成。</p>
+          <p class="small muted">完成进度只写入本机 localStorage。</p>
+        </div>
+        <div class="panel">
+          <h3>与原文的关系</h3>
+          <p>本站不复制原文全文，只做导读、任务与审计；每节保留原文链接。遇到冲突，以官方文档与原文为准。</p>
+          <p class="small muted">原文 34 个条目全部覆盖，0 漏章。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-in">
+      <div>
+        <p>蓝本：<a href="https://www.runoob.com/deepseek-harness/deepseek-harness-tutorial.html" target="_blank" rel="noopener">runoob · DeepSeek Harness 教程</a>。本站为学习导读与审计，不复制原文全文；原文版权归原站点所有。</p>
+        <p>代码 MIT；本站原创文字 CC BY-NC-SA 4.0（<a href="../LICENSE">LICENSE</a> / <a href="../LICENSE-CONTENT.md">LICENSE-CONTENT</a>）。审计时间 2026-10，产品处于预览版，信息以官方为准。</p>
+      </div>
+      <div>
+        <h3>阅读</h3>
+        <ul>
+          <li><a href="index.html">阅读路径</a></li>
+          <li><a href="contents.html">全部章节</a></li>
+          <li><a href="search.html">全文搜索</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>文档</h3>
+        <ul>
+          <li><a href="audit.html">内容审计</a></li>
+          <li><a href="about.html">来源、许可与维护</a></li>
+          <li><a href="../index.html">返回 AI Agent 学习站</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">离线可用 · 无外部请求 · 进度仅保存在本机</div>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
