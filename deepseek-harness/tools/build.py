@@ -808,7 +808,7 @@ def toc_html(stage):
     return f'''<nav class="toc" aria-label="本阶段目录">
         <h2>本阶段目录</h2>
         <ol>{items}</ol>
-        <p class="toc-note">完成一节就点卡片底部「标记完成」，进度只存本机。</p>
+        <p class="toc-note">完成一节就点小节底部「标记完成」，进度只存本机。</p>
       </nav>'''
 
 def mobile_toc_html(stage):
@@ -832,7 +832,7 @@ def header(active):
   <div class="topbar-in">
     <a class="brand" href="index.html" aria-label="DeepSeek Harness 学习手册首页">
       <span class="brand-mark" aria-hidden="true">H</span>
-      <span class="brand-text">DeepSeek Harness<small>学习手册 · 2026</small></span>
+      <span class="brand-text">DeepSeek Harness<small>学习手册</small></span>
     </a>
     <nav class="topnav" aria-label="主导航">
       <a href="index.html"{cur("index")}>阅读路径</a>
@@ -886,7 +886,7 @@ def page(title, active, body, script=""):
 <title>{title} | DeepSeek Harness 学习手册</title>
 <link rel="stylesheet" href="assets/style.css">
 </head>
-<body>
+<body class="page-{active or 'lesson'}">
 <a class="skip" href="#main">跳到主要内容</a>
 <div class="read-progress" aria-hidden="true"></div>
 {header(active)}
@@ -947,96 +947,84 @@ counts = {k: sum(1 for x in L if x["status"] == k) for k in STATUS_LABEL}
 path_rows = "\n".join(
     f'''<a class="path-row" href="stage-{s["n"]}.html">
       <span class="path-no">{s["n"]:02d}</span>
-      <span><span class="path-title">{s["title"]}</span><div class="path-desc">{s["lede"]}</div></span>
-      <span class="path-meta">{len(STAGE_LESSONS[s["n"]])} 节 · 约 {s["hours"]} 小时</span>
-      <span class="path-arrow">进入 →</span>
+      <span class="path-title">{s["title"]}<span class="sr-only">：{s["lede"]}，约 {s["hours"]} 小时</span></span>
+      <span class="path-meta">{len(STAGE_LESSONS[s["n"]])} 节</span>
+      <span class="path-arrow" aria-hidden="true">→</span>
     </a>''' for s in STAGES)
 resume_json = json.dumps([dict(id=x['id'], num=x['num'], title=x['title'], url=x['url']) for x in L], ensure_ascii=False).replace('<', '\\u003c')
 body = f'''<main id="main">
   <section class="cover">
-    <div class="wrap">
-      <div class="eyebrow">DeepSeek Harness · 学习手册</div>
-      <h1>从安装到插件，<br><em>把 Agent 当作基础设施来读</em></h1>
-      <p class="deck">以 runoob 的 DeepSeek Harness 教程为蓝本，重排为 6 章、{TOTAL} 节。
-        每节给出目标、前置、要点、动手任务与自检；按小节显示审计状态、依据与日期，存疑的要求明确写「待核实」。
-        离线可用，双击 HTML 即可阅读。</p>
-      <div class="cover-meta">
-        <div><b>{TOTAL}</b><span>学习小节</span></div>
-        <div><b>6</b><span>章</span></div>
-        <div><b>{TOTAL + 1}</b><span>原文条目</span></div>
-        <div><b>2026-10</b><span>审计时间</span></div>
-      </div>
+    <div class="wrap cover-grid">
+      <div class="cover-intro">
+      <h1>从安装到插件，<br>读懂 Agent 的运行方式。</h1>
+      <p class="deck">六章，{TOTAL} 节。每节都有目标、动手任务与自检。</p>
+      <p class="cover-description">这是一份面向开发者的 DeepSeek Harness 学习手册，系统讲解从环境安装、配置与运行形态，到插件开发、服务与事件、实战与发布，以及面向生产的运行方法，帮助你循序渐进地掌握 Agent 的搭建与实践。</p>
       <div class="cover-actions">
-        <a class="btn btn-primary" href="stage-1.html#s1-1" data-resume>开始阅读</a>
-        <a class="btn btn-ghost" href="audit.html">先看审计</a>
-        <a class="btn btn-ghost" href="contents.html">全部章节</a>
+        <a class="btn btn-primary" href="stage-1.html#s1-1" data-resume data-resume-compact aria-describedby="resume-note">开始阅读</a>
+        <div class="cover-progress"><span>学习进度</span><div><b data-progress-count>0</b><span> / {TOTAL} 节</span></div></div>
       </div>
-      <p class="resume-note" data-resume-note>从第 1 节开始，也可以按下方路线选择章节。</p>
+      <p class="resume-note sr-only" id="resume-note" data-resume-note>从第 1 节开始，也可以按下方路线选择章节。</p>
+      <p class="cover-dates"><a href="audit.html">内容审计：{AUDIT_DATE}</a><span aria-hidden="true">｜</span><a href="about.html">示例与说明：{EXAMPLE_DATE}</a></p>
       <script type="application/json" id="resume-lessons">{resume_json}</script>
+      </div>
+      <nav class="cover-catalog" aria-labelledby="cover-catalog-title">
+        <h2 id="cover-catalog-title">本册目录</h2>
+        <div class="path-table">{path_rows}</div>
+      </nav>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section routes-section">
     <div class="wrap">
       <div class="section-head">
         <div>
-          <div class="kicker">Reading Path</div>
-          <h2>六章，从认识它到敢上线</h2>
-          <p>章节之间是递进关系，但不必严格按顺序：要装插件可以直接从第 3 章开始，做安全评估可以直接看第 6 章。</p>
-        </div>
-        <a class="btn btn sm" href="contents.html">按原文目录查</a>
-      </div>
-      <div class="path-table">
-        {path_rows}
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap">
-      <div class="section-head">
-        <div>
-          <div class="kicker">Four Routes</div>
-          <h2>四条阅读路线</h2>
-          <p>时间有限时，按目标选一条；每条路线都能在半天内形成一个可验证的闭环。</p>
+          <h2>按你的目标，选一条路</h2>
         </div>
       </div>
-      <div class="two-col">
-        <div class="panel">
-          <h3>快速上手</h3>
-          <p>先跑起来，再理解架构。</p>
+      <div class="reading-routes">
+        <div class="route">
+          <h3><a href="stage-1.html#s1-2">快速上手 <span aria-hidden="true">→</span></a></h3>
+          <p>用最短路径完成安装、配置与基本运行，尽快跑通一个 Agent。</p>
+          <details><summary>查看路线</summary>
           <ul>
             <li><a href="stage-1.html#s1-2">1.2 安装</a> → <a href="stage-1.html#s1-4">1.4 Web UI</a></li>
             <li><a href="stage-2.html#s2-1">2.1 模型配置</a> → <a href="stage-2.html#s2-6">2.6 运行模式</a></li>
             <li>产出：一次只读任务 + 一份权限配置</li>
           </ul>
+          </details>
         </div>
-        <div class="panel">
-          <h3>插件开发</h3>
-          <p>从 apply(ctx) 写到可安装的 bundle。</p>
+        <div class="route">
+          <h3><a href="stage-3.html#s3-1">插件开发 <span aria-hidden="true">→</span></a></h3>
+          <p>从示例进入插件开发，掌握插件结构、接口与调试方法。</p>
+          <details><summary>查看路线</summary>
           <ul>
             <li><a href="stage-3.html#s3-1">3.1 第一个插件</a> → <a href="stage-3.html#s3-5">3.5 defineTool</a></li>
             <li><a href="stage-4.html#s4-4">4.4 能力三角色</a> → <a href="stage-5.html#s5-1">5.1 实战</a> → <a href="stage-5.html#s5-6">5.6 发布</a></li>
             <li>产出：一个可安装、可替换 Provider 的能力包</li>
           </ul>
+          </details>
         </div>
-        <div class="panel">
-          <h3>生产与安全</h3>
-          <p>把「能跑」变成「敢用」。</p>
+        <div class="route">
+          <h3><a href="stage-6.html#s6-1">生产与安全 <span aria-hidden="true">→</span></a></h3>
+          <p>了解服务部署、隔离与事件机制，并关注运行中的安全与稳定性。</p>
+          <details><summary>查看路线</summary>
           <ul>
             <li><a href="stage-6.html#s6-1">6.1 工具流水线</a> → <a href="stage-6.html#s6-2">6.2 沙箱与审批</a></li>
             <li><a href="stage-6.html#s6-3">6.3 会话日志</a> → <a href="stage-6.html#s6-4">6.4 防御性编程</a> → <a href="stage-6.html#s6-5">6.5 复盘</a></li>
             <li>产出：一张权限边界表 + 一份失败关闭检查单</li>
           </ul>
+          </details>
         </div>
-        <div class="panel">
-          <h3>研究视角</h3>
-          <p>关心事件流、配置树与可回放性。</p>
+        <div class="route">
+          <h3><a href="stage-4.html#s4-3">研究视角 <span aria-hidden="true">→</span></a></h3>
+          <p>从原理、设计与扩展性出发，系统理解 Agent 的能力边界与实践方向。</p>
+          <details><summary>查看路线</summary>
           <ul>
             <li><a href="stage-4.html#s4-3">4.3 事件系统</a> → <a href="stage-4.html#s4-2">4.2 隔离与 scope</a></li>
             <li><a href="stage-6.html#s6-3">6.3 会话日志</a> → <a href="stage-5.html#s5-4">5.4 bundle/profile</a></li>
             <li>产出：一份可复现的配置树 + 一次回放记录</li>
           </ul>
+          </details>
         </div>
       </div>
     </div>
@@ -1046,7 +1034,6 @@ body = f'''<main id="main">
     <div class="wrap">
       <div class="section-head">
         <div>
-          <div class="kicker">Audit First</div>
           <h2>先看审计，再照抄命令</h2>
           <p>审计覆盖 {TOTAL} 节。整体与当前 0.2.x 预览版一致；具体版本、模型名与 benchmark 需要单独核实。</p>
         </div>
@@ -1068,7 +1055,6 @@ body = f'''<main id="main">
     <div class="wrap">
       <div class="section-head">
         <div>
-          <div class="kicker">How to Use</div>
           <h2>怎么读这一站</h2>
         </div>
       </div>
@@ -1272,7 +1258,7 @@ body = f'''<main id="main" class="doc">
         <tr><td>学习者</td><td>有编程经验、无 dsh 实战经验</td><td>不教 TypeScript 语法；插件 API 从最小示例讲起</td></tr>
         <tr><td>规模与时长</td><td>{TOTAL} 节、6 章、约 15 小时</td><td>每节 20–50 分钟；动手任务控制在可一次完成的范围</td></tr>
         <tr><td>运行环境</td><td>本地现代浏览器，离线优先</td><td>零外部字体/CDN；搜索索引本地加载</td></tr>
-        <tr><td>视觉</td><td>正式文档风格：纸白、墨蓝、黄铜；衬线标题 + 无衬线正文</td><td>高饱和只作强调；正文对比度 ≥ 4.5:1</td></tr>
+        <tr><td>视觉</td><td>编辑式手册：纸白、墨色、黄铜；衬线标题 + 无衬线正文</td><td>首页导读与目录分栏，四条路线并列；正文以留白、细线组织层级</td></tr>
         <tr><td>时效</td><td>审计时间 2026-10，产品处于 0.2.x 预览版</td><td>版本、模型名、benchmark 标「待核实」；以官方为准</td></tr>
       </tbody>
     </table>
@@ -1297,7 +1283,7 @@ body = f'''<main id="main" class="doc">
     <li>标题用衬线（宋体 / Noto Serif SC），正文用无衬线；正文 16.5px / 行高 1.8。</li>
     <li>无阴影、2px 圆角、1px 发丝线；层级靠字号、留白与黄铜细线，而不是颜色堆叠。</li>
     <li>动效只有 160ms 的颜色/下划线变化；<code>prefers-reduced-motion</code> 下关闭。</li>
-    <li>表格移动端横向滚动；课程卡片在窄屏单列；触控目标 ≥ 40px。</li>
+    <li>首页在窄屏按导读、目录、路线依次排列；章节页提供折叠目录，表格在自身区域横向滚动。</li>
   </ul>
 
   <h2 id="source"><span class="no">04</span>来源、许可与维护</h2>

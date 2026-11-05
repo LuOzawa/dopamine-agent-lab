@@ -68,6 +68,29 @@ let browser;
   assert.equal(await page.locator('[data-resume]').textContent(), '开始阅读');
   console.log('PASS resume: new reader, previous unfinished, next unfinished, all done and invalid records');
 
+  await page.setViewportSize({ width: 1487, height: 1058 });
+  assert.equal(await page.locator('.cover-catalog .path-row').count(), 6);
+  assert.equal(await page.locator('.reading-routes .route').count(), 4);
+  assert(await page.locator('.cover h1').evaluate(el => el.getBoundingClientRect().height <= parseFloat(getComputedStyle(el).lineHeight) * 2.1), 'desktop headline must fit two lines');
+  for (const summary of await page.locator('.route summary').all()) {
+    await summary.focus(); await page.keyboard.press('Enter');
+  }
+  assert.equal(await page.locator('.route details[open]').count(), 4);
+  assert.equal(await page.locator('.route details a:visible').count(), 18);
+  await page.locator('.route details a[href="stage-1.html#s1-2"]').click();
+  assert.equal(new URL(page.url()).hash, '#s1-2');
+  await page.goto(base + '/contents.html');
+  const catalogTotal = await page.locator('.chapter-row').count();
+  await page.locator('#catalog-q').fill('SDK');
+  assert.equal(await page.locator('.chapter-row:visible').count(), 1);
+  assert.equal(await page.locator('#catalog-count').textContent(), '1 项');
+  await page.locator('#catalog-q').fill('不存在的章节xyz');
+  assert.equal(await page.locator('.chapter-row:visible').count(), 0);
+  assert(await page.locator('#catalog-empty').isVisible());
+  await page.locator('#catalog-q').fill('');
+  assert.equal(await page.locator('.chapter-row:visible').count(), catalogTotal);
+  console.log('PASS redesigned home: two-line heading, 6 chapters, 4 keyboard routes, preserved links and catalog filtering');
+
   const blockedContext = await browser.newContext({ reducedMotion: 'reduce' });
   await blockedContext.addInitScript(() => {
     const original = Storage.prototype.setItem;

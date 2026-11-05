@@ -1,6 +1,6 @@
 # DeepSeek Harness 学习手册
 
-以 [runoob · DeepSeek Harness 教程](https://www.runoob.com/deepseek-harness/deepseek-harness-tutorial.html) 为蓝本的本地学习站：6 章、33 节，正式文档风格。
+以 [runoob · DeepSeek Harness 教程](https://www.runoob.com/deepseek-harness/deepseek-harness-tutorial.html) 为蓝本的本地学习站：6 章、33 节，采用编辑式手册风格（纸白、墨色衬线标题、黄铜细节）。
 
 ## 打开
 
@@ -43,3 +43,5 @@ node tools/check-ui.cjs
 ```
 
 可用 `PLAYWRIGHT_MODULE` 指定 Playwright 模块路径，`CHROME_PATH` 指定浏览器路径。检查覆盖进度保存、审计入口、移动端目录、搜索边界和直接打开 HTML；使用临时浏览器配置，不读取个人浏览器数据。
+
+选定的视觉参考保存在 `design/reference.png`；对照报告见 `design-qa.md`。本地启动 `python3 -m http.server 8765 --bind 127.0.0.1` 后，可运行 `node tools/capture-design.cjs` 重新生成桌面、移动端和并排对照截图（使用上述 Playwright 配置）。

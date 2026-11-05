@@ -96,6 +96,9 @@
     document.querySelectorAll("[data-mini-text]").forEach(function (el) {
       el.textContent = Math.min(all, TOTAL) + "/" + TOTAL;
     });
+    document.querySelectorAll("[data-progress-count]").forEach(function (el) {
+      el.textContent = Math.min(all, TOTAL);
+    });
   }
 
   function renderResume() {
@@ -107,7 +110,10 @@
     var started = !!state._lastRead || lessons.some(function (lesson) { return state[lesson.id]; });
     var target = remaining.find(function (lesson) { return lesson.id === state._lastRead; }) || remaining[0];
     link.href = target ? target.url : "contents.html";
-    link.textContent = !target ? "全部完成 · 回顾章节" : started ? "继续阅读：" + target.num + " " + target.title : "开始阅读";
+    var title = target && (link.hasAttribute("data-resume-compact") ? target.title.split("：")[0] : target.title);
+    link.textContent = !target ? "全部完成 · 回顾章节" : started ? "继续阅读：" + target.num + " " + title : "开始阅读";
+    if (target) link.setAttribute("aria-label", (started ? "继续阅读：" : "开始阅读：") + target.num + " " + target.title);
+    else link.removeAttribute("aria-label");
     var note = document.querySelector("[data-resume-note]");
     if (note) note.textContent = !target ? "33 节已全部完成，可从目录重新温习。" : started ? "优先返回上次未完成的小节；已完成时转到阅读顺序中首个未完成小节。" : "从第 1 节开始，也可以按下方路线选择章节。";
   }
