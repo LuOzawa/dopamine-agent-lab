@@ -28,6 +28,7 @@
     </div>
   </div>
 </header>
+<div class="storage-notice" data-storage-notice role="status" hidden></div>
 <main id="main">
   <div class="page-head">
     <div class="wrap">
@@ -43,6 +44,17 @@
       </div>
     </div>
   </div>
+  <nav class="mobile-toc" aria-label="本章目录">
+    <details>
+      <summary><span>本章目录</span><span class="toc-current" data-toc-current>2.1 模型配置：官方、目录与自定义端点</span></summary>
+      <ol><li><a href="#s2-1"><span class="n">2.1</span> <span>模型配置：官方、目录与自定义端点</span></a></li>
+<li><a href="#s2-2"><span class="n">2.2</span> <span>Python SDK：把 Agent 放进程序</span></a></li>
+<li><a href="#s2-3"><span class="n">2.3</span> <span>插件：查找、安装、验证</span></a></li>
+<li><a href="#s2-4"><span class="n">2.4</span> <span>自动化任务：会话级提醒</span></a></li>
+<li><a href="#s2-5"><span class="n">2.5</span> <span>多模态：图片输入与视觉模型</span></a></li>
+<li><a href="#s2-6"><span class="n">2.6</span> <span>四种运行模式：标准 / PTC / 极简 / 创造</span></a></li></ol>
+    </details>
+  </nav>
   <div class="wrap layout">
     <nav class="toc" aria-label="本阶段目录">
         <h2>本阶段目录</h2>
@@ -55,7 +67,7 @@
         <p class="toc-note">完成一节就点卡片底部「标记完成」，进度只存本机。</p>
       </nav>
     <div>
-            <article class="lesson" id="s2-1">
+            <article class="lesson" id="s2-1" tabindex="-1">
         <div class="lesson-head">
           <span class="lesson-no">2.1</span>
           <h2>模型配置：官方、目录与自定义端点</h2>
@@ -63,7 +75,12 @@
         <div class="lesson-meta">
           <span>约 35 分钟</span><span>配置</span>
           <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-model-providers.html" target="_blank" rel="noopener">原文 ↗</a>
+          <a class="status ok" href="audit.html#audit-s2-1">仍然成立</a>
         </div>
+        <details class="lesson-audit">
+          <summary>审计依据 · <time datetime="2026-10">2026-10</time></summary>
+          <p>提供方类型与存储路径来自教程；模型列表与可用模型以当前端点返回为准。 <a href="audit.html#audit-s2-1">查看本节审计记录</a></p>
+        </details>
         <div class="block">
           <div class="label">学习目标</div>
           <p>配好官方 + 一个自定义提供方，并说清密钥存在哪里、Provider ID 为什么不能改。</p>
@@ -84,6 +101,27 @@
           <div class="label">动手任务</div>
           <p>配置官方 + 一个自定义提供方。记录：协议、baseURL、模型名、Provider ID。然后故意填错一次 baseURL，观察错误发生在保存、请求还是模型选择阶段。</p>
         </div>
+        <section class="block practice" aria-labelledby="s2-1-practice">
+          <h3 id="s2-1-practice">跟着做</h3>
+          <p>下面是自定义文本模型的配置示例。先在隔离的测试 profile 中操作；gateway.example 和 your-model-id 都是占位值，必须替换。</p>
+          <ol><li>从模型设置打开当前 profile 的配置文件，并先备份。</li><li>把示例字段合并到现有 llm-pi-ai 配置；保留已有 providers 与其它字段，不要直接覆盖整份配置。</li><li>让启动 dsh 的进程获得 STUDY_GATEWAY_KEY 环境变量，或通过模型设置保存凭据；密钥不写入示例。</li><li>保存后选中 study-gateway 下的实际模型，发送一条简短文本请求。</li></ol>
+          <div class="code-example">
+          <div class="code-head"><span id="s2-1-code-1-label">cordis.patch.yml · 提供方配置</span><button class="copy-btn" type="button" data-copy="s2-1-code-1" aria-label="复制：cordis.patch.yml · 提供方配置" hidden>复制代码</button></div>
+          <pre tabindex="0" aria-labelledby="s2-1-code-1-label"><code id="s2-1-code-1" class="language-yaml">- id: llm-pi-ai
+  config:
+    providers:
+      study-gateway:
+        api: openai-completions
+        baseURL: https://gateway.example/v1
+        apiKeyEnv: STUDY_GATEWAY_KEY
+        models:
+          - id: your-model-id
+            input: [text]</code></pre>
+        </div>
+          <h4>预期结果</h4><p>模型选择器中能选中配置的模型，且一次真实请求成功返回。能保存配置本身不代表连接成功。</p>
+          <details class="practice-errors"><summary>没有得到预期结果？</summary><ul><li>MISSING_CREDENTIAL：检查启动进程是否获得环境变量，或重新保存凭据。</li><li>UNKNOWN_MODEL：确认模型 ID 与端点提供的名称完全一致。</li><li>连接或协议错误：替换示例地址，核对网关是否提供 Chat Completions 协议。</li></ul></details>
+          <p class="example-source">文档对照：<time datetime="2026-11-05">2026-11-05</time> · <a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/user/guide/providers.md#image-input" target="_blank" rel="noopener">官方示例与说明</a>。示例未在你的环境或真实模型端点运行。</p>
+        </section>
         <div class="block check">
           <div class="label">自检</div>
           <div class="qa"><details><summary>Provider ID 为什么不能改？</summary><div class="a">它会被请求、已保存会话、模型默认值与凭据引用使用；改名会让旧记录找不到提供方。需要改名时，新增一个提供方并删除旧的。</div></details>
@@ -93,13 +131,13 @@
           <button class="done-btn" type="button" data-done-id="s2-1" aria-pressed="false">
             <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
           </button>
-          <span class="note">进度保存在本机浏览器</span>
+          <span class="note" data-progress-note>进度保存在本机浏览器</span>
         </div>
         <nav class="chapter-nav" aria-label="章节翻页">
           <a class="prev" href="stage-1.html#s1-4"><span class="dir">上一节</span><span class="t">1.4 第一次 Web UI：从启动到只读任务</span></a>
           <a class="next" href="stage-2.html#s2-2"><span class="dir">下一节</span><span class="t">2.2 Python SDK：把 Agent 放进程序</span></a>
         </nav>
-      </article>      <article class="lesson" id="s2-2">
+      </article>      <article class="lesson" id="s2-2" tabindex="-1">
         <div class="lesson-head">
           <span class="lesson-no">2.2</span>
           <h2>Python SDK：把 Agent 放进程序</h2>
@@ -107,7 +145,12 @@
         <div class="lesson-meta">
           <span>约 40 分钟</span><span>集成</span>
           <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-python-sdk.html" target="_blank" rel="noopener">原文 ↗</a>
+          <a class="status ok" href="audit.html#audit-s2-2">仍然成立</a>
         </div>
+        <details class="lesson-audit">
+          <summary>审计依据 · <time datetime="2026-10">2026-10</time></summary>
+          <p>PyPI 包存在（0.2.1rc2，requires Python &gt;=3.10）；API 细节以 &lt;code&gt;deepseek_harness&lt;/code&gt; 当前类型为准。 <a href="audit.html#audit-s2-2">查看本节审计记录</a></p>
+        </details>
         <div class="block">
           <div class="label">学习目标</div>
           <p>用 SDK 在 Python 里跑一次任务，并读懂 workspace 与 dsh_home 的隔离。</p>
@@ -128,6 +171,7 @@
           <div class="label">动手任务</div>
           <p>跑通仓库的 minimal.py，或写一个 20 行包装。然后检查：生成的 profile 名称、JSONL 路径、第一次与第二次 run 的 Bash 工作目录是否延续。</p>
         </div>
+        
         <div class="block check">
           <div class="label">自检</div>
           <div class="qa"><details><summary>为什么要隔离 dsh_home？</summary><div class="a">它保存 profile、插件与会话日志，属于可写状态；用专用目录能避免污染日常配置，也方便测试后整个删除。</div></details>
@@ -137,13 +181,13 @@
           <button class="done-btn" type="button" data-done-id="s2-2" aria-pressed="false">
             <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
           </button>
-          <span class="note">进度保存在本机浏览器</span>
+          <span class="note" data-progress-note>进度保存在本机浏览器</span>
         </div>
         <nav class="chapter-nav" aria-label="章节翻页">
           <a class="prev" href="stage-2.html#s2-1"><span class="dir">上一节</span><span class="t">2.1 模型配置：官方、目录与自定义端点</span></a>
           <a class="next" href="stage-2.html#s2-3"><span class="dir">下一节</span><span class="t">2.3 插件：查找、安装、验证</span></a>
         </nav>
-      </article>      <article class="lesson" id="s2-3">
+      </article>      <article class="lesson" id="s2-3" tabindex="-1">
         <div class="lesson-head">
           <span class="lesson-no">2.3</span>
           <h2>插件：查找、安装、验证</h2>
@@ -151,7 +195,12 @@
         <div class="lesson-meta">
           <span>约 30 分钟</span><span>插件</span>
           <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-plugins.html" target="_blank" rel="noopener">原文 ↗</a>
+          <a class="status ok" href="audit.html#audit-s2-3">仍然成立</a>
         </div>
+        <details class="lesson-audit">
+          <summary>审计依据 · <time datetime="2026-10">2026-10</time></summary>
+          <p>安装命令与验证思路与教程一致；索引源与插件市场状态会变化。 <a href="audit.html#audit-s2-3">查看本节审计记录</a></p>
+        </details>
         <div class="block">
           <div class="label">学习目标</div>
           <p>安装一个插件，并用四个检查点验证它真的生效，而不是只看到「安装成功」。</p>
@@ -172,6 +221,7 @@
           <div class="label">动手任务</div>
           <p>安装或开发一个 hello 插件，逐项通过四个验证点。然后故意安装一个没有 <code>dsh.bundle</code> 的普通包，确认它只是依赖、没有层标记。</p>
         </div>
+        
         <div class="block check">
           <div class="label">自检</div>
           <div class="qa"><details><summary>发现页能刷新就安全吗？</summary><div class="a">不是。索引源只提供标题、作者、版本等元数据；代码是否可信要自己看仓库、权限与构建脚本。</div></details>
@@ -181,13 +231,13 @@
           <button class="done-btn" type="button" data-done-id="s2-3" aria-pressed="false">
             <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
           </button>
-          <span class="note">进度保存在本机浏览器</span>
+          <span class="note" data-progress-note>进度保存在本机浏览器</span>
         </div>
         <nav class="chapter-nav" aria-label="章节翻页">
           <a class="prev" href="stage-2.html#s2-2"><span class="dir">上一节</span><span class="t">2.2 Python SDK：把 Agent 放进程序</span></a>
           <a class="next" href="stage-2.html#s2-4"><span class="dir">下一节</span><span class="t">2.4 自动化任务：会话级提醒</span></a>
         </nav>
-      </article>      <article class="lesson" id="s2-4">
+      </article>      <article class="lesson" id="s2-4" tabindex="-1">
         <div class="lesson-head">
           <span class="lesson-no">2.4</span>
           <h2>自动化任务：会话级提醒</h2>
@@ -195,7 +245,12 @@
         <div class="lesson-meta">
           <span>约 30 分钟</span><span>自动化</span>
           <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-schedule.html" target="_blank" rel="noopener">原文 ↗</a>
+          <a class="status ok" href="audit.html#audit-s2-4">仍然成立</a>
         </div>
+        <details class="lesson-audit">
+          <summary>审计依据 · <time datetime="2026-10">2026-10</time></summary>
+          <p>调度规则与投递语义来自教程；具体保留窗口与 UI 以当前版本为准。 <a href="audit.html#audit-s2-4">查看本节审计记录</a></p>
+        </details>
         <div class="block">
           <div class="label">学习目标</div>
           <p>创建一个定时提醒，并说清投递语义、时区与不支持的操作。</p>
@@ -216,6 +271,7 @@
           <div class="label">动手任务</div>
           <p>创建一个「每天 23:00 提醒我查看天气」的任务，核对频率与时区；修改一次时间；再删除。记录页面上「已投递」与「已完成」的区别。</p>
         </div>
+        
         <div class="block check">
           <div class="label">自检</div>
           <div class="qa"><details><summary>为什么模型需要当前时间？</summary><div class="a">模型本身不知道「现在几点」，没有时钟上下文就无法把「每天晚上 11 点」换算成正确规则；时区也要显式提供。</div></details>
@@ -225,13 +281,13 @@
           <button class="done-btn" type="button" data-done-id="s2-4" aria-pressed="false">
             <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
           </button>
-          <span class="note">进度保存在本机浏览器</span>
+          <span class="note" data-progress-note>进度保存在本机浏览器</span>
         </div>
         <nav class="chapter-nav" aria-label="章节翻页">
           <a class="prev" href="stage-2.html#s2-3"><span class="dir">上一节</span><span class="t">2.3 插件：查找、安装、验证</span></a>
           <a class="next" href="stage-2.html#s2-5"><span class="dir">下一节</span><span class="t">2.5 多模态：图片输入与视觉模型</span></a>
         </nav>
-      </article>      <article class="lesson" id="s2-5">
+      </article>      <article class="lesson" id="s2-5" tabindex="-1">
         <div class="lesson-head">
           <span class="lesson-no">2.5</span>
           <h2>多模态：图片输入与视觉模型</h2>
@@ -239,7 +295,12 @@
         <div class="lesson-meta">
           <span>约 30 分钟</span><span>多模态</span>
           <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-modality.html" target="_blank" rel="noopener">原文 ↗</a>
+          <a class="status todo" href="audit.html#audit-s2-5">存疑待核实</a>
         </div>
+        <details class="lesson-audit" open>
+          <summary>审计依据 · <time datetime="2026-10">2026-10</time></summary>
+          <p>视觉模型名、单图 token 上限与 benchmark 数字无法独立确证；以 DeepSeek 官方模型页与 API 文档为准。 <a href="audit.html#audit-s2-5">查看本节审计记录</a></p>
+        </details>
         <div class="block">
           <div class="label">学习目标</div>
           <p>用视觉模型读一张图表，并知道三种图片传法与输入类型声明。</p>
@@ -260,6 +321,7 @@
           <div class="label">动手任务</div>
           <p>传一张带坐标轴的图表，让它提取 3 个数据点，再追问「你最不确定的读数是哪一个，为什么」。对照你自己读图的结果，记录偏差来源。</p>
         </div>
+        
         <div class="block check">
           <div class="label">自检</div>
           <div class="qa"><details><summary>为什么一定要声明输入类型？</summary><div class="a">没有环节能询问端点接受哪些模态，dsh 采取「先声明后使用」；未声明的模型收到图片会在发送前被拒绝。</div></details>
@@ -269,13 +331,13 @@
           <button class="done-btn" type="button" data-done-id="s2-5" aria-pressed="false">
             <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
           </button>
-          <span class="note">进度保存在本机浏览器</span>
+          <span class="note" data-progress-note>进度保存在本机浏览器</span>
         </div>
         <nav class="chapter-nav" aria-label="章节翻页">
           <a class="prev" href="stage-2.html#s2-4"><span class="dir">上一节</span><span class="t">2.4 自动化任务：会话级提醒</span></a>
           <a class="next" href="stage-2.html#s2-6"><span class="dir">下一节</span><span class="t">2.6 四种运行模式：标准 / PTC / 极简 / 创造</span></a>
         </nav>
-      </article>      <article class="lesson" id="s2-6">
+      </article>      <article class="lesson" id="s2-6" tabindex="-1">
         <div class="lesson-head">
           <span class="lesson-no">2.6</span>
           <h2>四种运行模式：标准 / PTC / 极简 / 创造</h2>
@@ -283,7 +345,12 @@
         <div class="lesson-meta">
           <span>约 30 分钟</span><span>模式</span>
           <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-modes.html" target="_blank" rel="noopener">原文 ↗</a>
+          <a class="status todo" href="audit.html#audit-s2-6">存疑待核实</a>
         </div>
+        <details class="lesson-audit" open>
+          <summary>审计依据 · <time datetime="2026-10">2026-10</time></summary>
+          <p>「2026 年 8 月开源」等时间与 PTC 并行上限来自教程，未在公开元数据中确证；以官方发布说明为准。 <a href="audit.html#audit-s2-6">查看本节审计记录</a></p>
+        </details>
         <div class="block">
           <div class="label">学习目标</div>
           <p>为四类任务选择模式，并解释切换模式改变的是插件组合，不是模型权限。</p>
@@ -295,7 +362,7 @@
         <div class="block">
           <div class="label">核心要点</div>
           <ol><li>模式 = 一组预设插件，不是能力等级：标准干活、PTC 编排、极简测量、创造改造。</li>
-<li>PTC 把工具收拢为 <code>run_code</code>，模型写一段 TypeScript 程序组合调用；只读调用可并行（教程口径默认 10 路），写操作按提交顺序。</li>
+<li>PTC 把工具收拢为 <code>run_code</code>，模型写一段 TypeScript 程序组合调用；只读调用可并行（教程所称「默认 10 路」待核实，以所用版本为准），写操作按提交顺序。</li>
 <li>极简模式只保留持久 bash 与 <code>str_replace_editor</code>，用于评测模型、复现问题，不是低配电脑的轻量版。</li>
 <li>创造模式继承标准能力，并增加运行时检查、内存中试验插件与 preset 创作指引。</li>
 <li>切换预设不改变文件权限；权限与沙箱是另一套策略，必须单独设置。</li></ol>
@@ -304,6 +371,7 @@
           <div class="label">动手任务</div>
           <p>为四个任务各选一种模式并写一句理由 + 一个风险：修一个 bug、批量重构 20 个文件、比较两个模型的编码能力、给团队做一套自定义预设。</p>
         </div>
+        
         <div class="block check">
           <div class="label">自检</div>
           <div class="qa"><details><summary>PTC 省的是什么？</summary><div class="a">省上下文：多步工具调用的中间结果留在程序里，只有返回值与日志回到对话；代价是模型要会写程序，调试也更复杂。</div></details>
@@ -313,7 +381,7 @@
           <button class="done-btn" type="button" data-done-id="s2-6" aria-pressed="false">
             <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
           </button>
-          <span class="note">进度保存在本机浏览器</span>
+          <span class="note" data-progress-note>进度保存在本机浏览器</span>
         </div>
         <nav class="chapter-nav" aria-label="章节翻页">
           <a class="prev" href="stage-2.html#s2-5"><span class="dir">上一节</span><span class="t">2.5 多模态：图片输入与视觉模型</span></a>
@@ -332,7 +400,7 @@
     <div class="footer-in">
       <div>
         <p>蓝本：<a href="https://www.runoob.com/deepseek-harness/deepseek-harness-tutorial.html" target="_blank" rel="noopener">runoob · DeepSeek Harness 教程</a>。本站为学习导读与审计，不复制原文全文；原文版权归原站点所有。</p>
-        <p>代码 MIT；本站原创文字 CC BY-NC-SA 4.0（<a href="../LICENSE">LICENSE</a> / <a href="../LICENSE-CONTENT.md">LICENSE-CONTENT</a>）。审计时间 2026-10，产品处于预览版，信息以官方为准。</p>
+        <p>代码 MIT；本站原创文字 CC BY-NC-SA 4.0（<a href="LICENSE">LICENSE</a> / <a href="LICENSE-CONTENT.md">LICENSE-CONTENT</a>）。审计时间 2026-10，产品处于预览版，信息以官方为准。</p>
       </div>
       <div>
         <h3>阅读</h3>
@@ -347,7 +415,7 @@
         <ul>
           <li><a href="audit.html">内容审计</a></li>
           <li><a href="about.html">来源、许可与维护</a></li>
-          <li><a href="../index.html">返回 AI Agent 学习站</a></li>
+          <li><a href="https://luozawa.github.io/dopamine-agent-lab/">返回 AI Agent 学习站</a></li>
         </ul>
       </div>
     </div>

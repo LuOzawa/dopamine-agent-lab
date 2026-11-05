@@ -28,6 +28,7 @@
     </div>
   </div>
 </header>
+<div class="storage-notice" data-storage-notice role="status" hidden></div>
 <main id="main" class="doc">
   <div class="kicker">Audit Ledger · 2026-10</div>
   <h1>内容审计</h1>
@@ -61,7 +62,7 @@
     <table>
       <caption>按本站阅读顺序排列；链接指向原文</caption>
       <thead><tr><th style="width:40px">#</th><th style="width:200px">章节</th><th style="width:96px">状态</th><th style="width:100px">影响范围</th><th style="width:60px">严重度</th><th style="width:60px">优先级</th><th>依据 / 说明</th></tr></thead>
-      <tbody><tr>
+      <tbody><tr id="audit-s1-1">
       <td>1</td>
       <td><a href="https://www.runoob.com/deepseek-harness/deepseek-harness-intro.html" target="_blank" rel="noopener">Agent = Model + Harness</a></td>
       <td><span class="status ok">仍然成立</span></td>
@@ -69,7 +70,7 @@
       <td><span class="status p2">—</span></td>
       <td>与 npm 0.2.1-rc.5、PyPI 0.2.1rc2 的预览状态一致；MIT 许可已在 npm 元数据核对。</td>
     </tr>
-<tr>
+<tr id="audit-s1-2">
       <td>2</td>
       <td><a href="https://www.runoob.com/deepseek-harness/deepseek-harness-install.html" target="_blank" rel="noopener">安装：四条路线怎么选</a></td>
       <td><span class="status todo">存疑待核实</span></td>
@@ -77,7 +78,7 @@
       <td><span class="status p2">P2</span></td>
       <td>npm 包存在（0.2.1-rc.5），但 npm 元数据未声明 engines；Node 24.9+ 与「Node 22 不再支持」需以官方安装页为准。</td>
     </tr>
-<tr>
+<tr id="audit-s1-3">
       <td>3</td>
       <td><a href="https://www.runoob.com/deepseek-harness/deepseek-harness-desktop.html" target="_blank" rel="noopener">桌面版：先用只读任务验收</a></td>
       <td><span class="status ok">仍然成立</span></td>
@@ -85,7 +86,7 @@
       <td><span class="status p2">—</span></td>
       <td>平台与安装包信息来自教程；具体界面与审批行为会随预览版变化，以官网为准。</td>
     </tr>
-<tr>
+<tr id="audit-s1-4">
       <td>4</td>
       <td><a href="https://www.runoob.com/deepseek-harness/deepseek-harness-start.html" target="_blank" rel="noopener">第一次 Web UI：从启动到只读任务</a></td>
       <td><span class="status ok">仍然成立</span></td>
@@ -93,7 +94,7 @@
       <td><span class="status p2">—</span></td>
       <td>端口、工作区与权限说明与教程一致；具体 UI 文案可能随版本变化。</td>
     </tr>
-<tr>
+<tr id="audit-s2-1">
       <td>5</td>
       <td><a href="https://www.runoob.com/deepseek-harness/deepseek-harness-model-providers.html" target="_blank" rel="noopener">模型配置：官方、目录与自定义端点</a></td>
       <td><span class="status ok">仍然成立</span></td>
@@ -101,7 +102,7 @@
       <td><span class="status p2">—</span></td>
       <td>提供方类型与存储路径来自教程；模型列表与可用模型以当前端点返回为准。</td>
     </tr>
-<tr>
+<tr id="audit-s2-2">
       <td>6</td>
       <td><a href="https://www.runoob.com/deepseek-harness/deepseek-harness-python-sdk.html" target="_blank" rel="noopener">Python SDK：把 Agent 放进程序</a></td>
       <td><span class="status ok">仍然成立</span></td>
@@ -109,7 +110,7 @@
       <td><span class="status p2">—</span></td>
       <td>PyPI 包存在（0.2.1rc2，requires Python >=3.10）；API 细节以 <code>deepseek_harness</code> 当前类型为准。</td>
     </tr>
-<tr>
+<tr id="audit-s2-3">
       <td>7</td>
       <td><a href="https://www.runoob.com/deepseek-harness/deepseek-harness-plugins.html" target="_blank" rel="noopener">插件：查找、安装、验证</a></td>
       <td><span class="status ok">仍然成立</span></td>
@@ -117,7 +118,7 @@
       <td><span class="status p2">—</span></td>
       <td>安装命令与验证思路与教程一致；索引源与插件市场状态会变化。</td>
     </tr>
-<tr>
+<tr id="audit-s2-4">
       <td>8</td>
       <td><a href="https://www.runoob.com/deepseek-harness/deepseek-harness-schedule.html" target="_blank" rel="noopener">自动化任务：会话级提醒</a></td>
       <td><span class="status ok">仍然成立</span></td>
@@ -125,7 +126,7 @@
       <td><span class="status p2">—</span></td>
       <td>调度规则与投递语义来自教程；具体保留窗口与 UI 以当前版本为准。</td>
     </tr>
-<tr>
+<tr id="audit-s2-5">
       <td>9</td>
       <td><a href="https://www.runoob.com/deepseek-harness/deepseek-harness-modality.html" target="_blank" rel="noopener">多模态：图片输入与视觉模型</a></td>
       <td><span class="status todo">存疑待核实</span></td>
@@ -133,7 +134,7 @@
       <td><span class="status p2">P2</span></td>
       <td>视觉模型名、单图 token 上限与 benchmark 数字无法独立确证；以 DeepSeek 官方模型页与 API 文档为准。</td>
     </tr>
-<tr>
+<tr id="audit-s2-6">
       <td>10</td>
       <td><a href="https://www.runoob.com/deepseek-harness/deepseek-harness-modes.html" target="_blank" rel="noopener">四种运行模式：标准 / PTC / 极简 / 创造</a></td>
       <td><span class="status todo">存疑待核实</span></td>
@@ -141,7 +142,7 @@
       <td><span class="status p2">P2</span></td>
       <td>「2026 年 8 月开源」等时间与 PTC 并行上限来自教程，未在公开元数据中确证；以官方发布说明为准。</td>
     </tr>
-<tr>
+<tr id="audit-s3-1">
       <td>11</td>
       <td><a href="https://www.runoob.com/deepseek-harness/deepseek-harness-first-plugin.html" target="_blank" rel="noopener">第一个插件：apply(ctx) 与三种形态</a></td>
       <td><span class="status ok">仍然成立</span></td>
@@ -149,7 +150,7 @@
       <td><span class="status p2">—</span></td>
       <td>与教程及官方事故复盘 0001 的描述一致。</td>
     </tr>
-<tr>
+<tr id="audit-s3-2">
       <td>12</td>
       <td><a href="https://www.runoob.com/deepseek-harness/deepseek-harness-load-plugin.html" target="_blank" rel="noopener">加载本地插件：cordis.yml + --patch</a></td>
       <td><span class="status ok">仍然成立</span></td>
@@ -157,7 +158,7 @@
       <td><span class="status p2">—</span></td>
       <td>路径与 patch 行为来自教程；不同版本的 Loader 报错文案可能不同。</td>
     </tr>
-<tr>
+<tr id="audit-s3-3">
       <td>13</td>
       <td><a href="https://www.runoob.com/deepseek-harness/deepseek-harness-effects.html" target="_blank" rel="noopener">自动清理：ctx.effect 与资源账本</a></td>
       <td><span class="status ok">仍然成立</span></td>
@@ -165,7 +166,7 @@
       <td><span class="status p2">—</span></td>
       <td>清理机制与异步处置器行为来自教程；具体 disposer 调度以 Cordis 当前实现为准。</td>
     </tr>
-<tr>
+<tr id="audit-s3-4">
       <td>14</td>
       <td><a href="https://www.runoob.com/deepseek-harness/deepseek-harness-inject.html" target="_blank" rel="noopener">声明依赖：inject 与可选服务</a></td>
       <td><span class="status ok">仍然成立</span></td>
@@ -173,7 +174,7 @@
       <td><span class="status p2">—</span></td>
       <td>必需/可选依赖与服务消失行为与教程一致。</td>
     </tr>
-<tr>
+<tr id="audit-s3-5">
       <td>15</td>
       <td><a href="https://www.runoob.com/deepseek-harness/deepseek-harness-define-tool.html" target="_blank" rel="noopener">第一个工具：defineTool</a></td>
       <td><span class="status ok">仍然成立</span></td>
@@ -181,7 +182,7 @@
       <td><span class="status p2">—</span></td>
       <td>defineTool 字段与行为来自教程；复杂 schema 能力以 <code>@deepseek-ai/dsh-tools</code> 类型为准。</td>
     </tr>
-<tr>
+<tr id="audit-s3-6">
       <td>16</td>
       <td><a href="https://www.runoob.com/deepseek-harness/deepseek-harness-plugin-config.html" target="_blank" rel="noopener">插件配置：Config 与 Schemastery</a></td>
       <td><span class="status ok">仍然成立</span></td>
@@ -189,7 +190,7 @@
       <td><span class="status p2">—</span></td>
       <td>Config/schema 约定与 HMR 行为来自教程。</td>
     </tr>
-<tr>
+<tr id="audit-s3-7">
       <td>17</td>
       <td><a href="https://www.runoob.com/deepseek-harness/deepseek-harness-lifecycle.html" target="_blank" rel="noopener">生命周期：Fiber 状态机</a></td>
       <td><span class="status ok">仍然成立</span></td>
@@ -197,7 +198,7 @@
       <td><span class="status p2">—</span></td>
       <td>状态机与清理顺序来自教程；Cordis 后续版本可能增加状态。</td>
     </tr>
-<tr>
+<tr id="audit-s3-8">
       <td>18</td>
       <td><a href="https://www.runoob.com/deepseek-harness/deepseek-harness-nested-reload.html" target="_blank" rel="noopener">依赖驱动加载与嵌套上下文</a></td>
       <td><span class="status ok">仍然成立</span></td>
@@ -205,7 +206,7 @@
       <td><span class="status p2">—</span></td>
       <td>依赖驱动与子上下文行为来自教程；重载语义以 Cordis 当前实现为准。</td>
     </tr>
-<tr>
+<tr id="audit-s4-1">
       <td>19</td>
       <td><a href="https://www.runoob.com/deepseek-harness/deepseek-harness-services.html" target="_blank" rel="noopener">服务与依赖：Service 基类</a></td>
       <td><span class="status ok">仍然成立</span></td>
@@ -213,7 +214,7 @@
       <td><span class="status p2">—</span></td>
       <td>Service 基类与声明合并来自教程；内置服务清单以仓库生成文档为准。</td>
     </tr>
-<tr>
+<tr id="audit-s4-2">
       <td>20</td>
       <td><a href="https://www.runoob.com/deepseek-harness/deepseek-harness-isolation-scope.html" target="_blank" rel="noopener">服务隔离、scope 与工具过滤</a></td>
       <td><span class="status ok">仍然成立</span></td>
@@ -221,7 +222,7 @@
       <td><span class="status p2">—</span></td>
       <td>隔离与 scope 语义来自教程；lineage 字段与 restriction 行为以当前版本为准。</td>
     </tr>
-<tr>
+<tr id="audit-s4-3">
       <td>21</td>
       <td><a href="https://www.runoob.com/deepseek-harness/deepseek-harness-events.html" target="_blank" rel="noopener">事件系统：五种分发模式</a></td>
       <td><span class="status add">建议补充</span></td>
@@ -229,7 +230,7 @@
       <td><span class="status p2">P2</span></td>
       <td>教程自己指出官方文档把 waterfall 标为「不 await」，但示例普遍 await；建议补充一段明确的版本差异说明。</td>
     </tr>
-<tr>
+<tr id="audit-s4-4">
       <td>22</td>
       <td><a href="https://www.runoob.com/deepseek-harness/deepseek-harness-capability-seams.html" target="_blank" rel="noopener">能力三角色：Definition / Provider / Consumer</a></td>
       <td><span class="status ok">仍然成立</span></td>
@@ -237,7 +238,7 @@
       <td><span class="status p2">—</span></td>
       <td>三角色划分与 Bash 示例来自教程；具体包名以当前仓库为准。</td>
     </tr>
-<tr>
+<tr id="audit-s5-1">
       <td>23</td>
       <td><a href="https://www.runoob.com/deepseek-harness/deepseek-harness-build-capability.html" target="_blank" rel="noopener">实战：写一个可替换的能力</a></td>
       <td><span class="status ok">仍然成立</span></td>
@@ -245,7 +246,7 @@
       <td><span class="status p2">—</span></td>
       <td>代码骨架与包结构来自教程；类型导入路径以当前仓库为准。</td>
     </tr>
-<tr>
+<tr id="audit-s5-2">
       <td>24</td>
       <td><a href="https://www.runoob.com/deepseek-harness/deepseek-harness-llm-adapter.html" target="_blank" rel="noopener">LLM 适配器：接入任意模型</a></td>
       <td><span class="status ok">仍然成立</span></td>
@@ -253,7 +254,7 @@
       <td><span class="status p2">—</span></td>
       <td>适配器骨架与字段表来自教程；具体类型以 <code>@deepseek-ai/dsh-llm</code> 为准。</td>
     </tr>
-<tr>
+<tr id="audit-s5-3">
       <td>25</td>
       <td><a href="https://www.runoob.com/deepseek-harness/deepseek-harness-stream-chunk.html" target="_blank" rel="noopener">StreamChunk 协议与错误处理</a></td>
       <td><span class="status ok">仍然成立</span></td>
@@ -261,7 +262,7 @@
       <td><span class="status p2">—</span></td>
       <td>五条规则与错误处理来自教程；分片字段以 <code>@deepseek-ai/dsh-llm</code> 类型为准。</td>
     </tr>
-<tr>
+<tr id="audit-s5-4">
       <td>26</td>
       <td><a href="https://www.runoob.com/deepseek-harness/deepseek-harness-bundle-profile.html" target="_blank" rel="noopener">组合包 bundle 与 profile</a></td>
       <td><span class="status ok">仍然成立</span></td>
@@ -269,7 +270,7 @@
       <td><span class="status p2">—</span></td>
       <td>manifest 键与目录结构来自教程；字段以当前 dsh CLI 为准。</td>
     </tr>
-<tr>
+<tr id="audit-s5-5">
       <td>27</td>
       <td><a href="https://www.runoob.com/deepseek-harness/deepseek-harness-install-load-order.html" target="_blank" rel="noopener">安装插件与配置加载顺序</a></td>
       <td><span class="status ok">仍然成立</span></td>
@@ -277,7 +278,7 @@
       <td><span class="status p2">—</span></td>
       <td>四层顺序与按行替换来自教程；具体输出格式以当前 CLI 为准。</td>
     </tr>
-<tr>
+<tr id="audit-s5-6">
       <td>28</td>
       <td><a href="https://www.runoob.com/deepseek-harness/deepseek-harness-publish.html" target="_blank" rel="noopener">发布插件：npm、tarball 与 Git</a></td>
       <td><span class="status ok">仍然成立</span></td>
@@ -285,7 +286,7 @@
       <td><span class="status p2">—</span></td>
       <td>三种方式与 allowBuilds 流程来自教程；pnpm 版本行为以官方文档为准。</td>
     </tr>
-<tr>
+<tr id="audit-s6-1">
       <td>29</td>
       <td><a href="https://www.runoob.com/deepseek-harness/deepseek-harness-tool-pipeline.html" target="_blank" rel="noopener">工具执行流水线与权限门禁</a></td>
       <td><span class="status ok">仍然成立</span></td>
@@ -293,7 +294,7 @@
       <td><span class="status p2">—</span></td>
       <td>流水线顺序与决策类型来自教程；钩子 API 以当前 dsh-tools 类型为准。</td>
     </tr>
-<tr>
+<tr id="audit-s6-2">
       <td>30</td>
       <td><a href="https://www.runoob.com/deepseek-harness/deepseek-harness-sandbox-approval.html" target="_blank" rel="noopener">沙箱与审批：失败关闭</a></td>
       <td><span class="status ok">仍然成立</span></td>
@@ -301,7 +302,7 @@
       <td><span class="status p2">—</span></td>
       <td>沙箱模式、enforcement 与审批结果来自教程；平台差异以官方安全文档为准。</td>
     </tr>
-<tr>
+<tr id="audit-s6-3">
       <td>31</td>
       <td><a href="https://www.runoob.com/deepseek-harness/deepseek-harness-session-turn.html" target="_blank" rel="noopener">会话日志与轮次生命周期</a></td>
       <td><span class="status ok">仍然成立</span></td>
@@ -309,7 +310,7 @@
       <td><span class="status p2">—</span></td>
       <td>会话事件与投影规则来自教程；事件字段以当前 SessionEvent 类型为准。</td>
     </tr>
-<tr>
+<tr id="audit-s6-4">
       <td>32</td>
       <td><a href="https://www.runoob.com/deepseek-harness/deeseek-harness-defensive-patterns.html" target="_blank" rel="noopener">防御性编程：五个边界模式</a></td>
       <td><span class="status ok">仍然成立</span></td>
@@ -317,7 +318,7 @@
       <td><span class="status p2">—</span></td>
       <td>五个模式与示例来自教程；原文标题拼写为「DeeSeek」，本站更正为 DeepSeek。</td>
     </tr>
-<tr>
+<tr id="audit-s6-5">
       <td>33</td>
       <td><a href="https://www.runoob.com/deepseek-harness/deeseek-harness-postmortem.html" target="_blank" rel="noopener">事故复盘与工程文化</a></td>
       <td><span class="status ok">仍然成立</span></td>
@@ -338,8 +339,8 @@
 
   <h2><span class="no">04</span>建议的更新顺序</h2>
   <ol>
-    <li>把 1.2 的 Node 版本要求改成「以官方安装页为准」，并补充如何验证 <code>node -v</code> 与锁版本。</li>
-    <li>把 2.5 的模型名、token 与对比数字加上「截至日期」，避免把实验模型当长期事实。</li>
+    <li>1.2 已将 Node 版本要求标为「待核实」，补充 <code>node -v</code> 检查方法；后续仍需核对所选版本的官方安装文档。</li>
+    <li>2.5 已在正文展开模型名、token 与对比数字的待核实说明，并标出既有审计日期；补齐官方证据后再更新结论。</li>
     <li>在 4.3 明确 waterfall 的 await 差异：官方文档说「不 await」，示例普遍 await，读代码时以类型签名为准。</li>
   </ol>
 
@@ -353,7 +354,7 @@
     <div class="footer-in">
       <div>
         <p>蓝本：<a href="https://www.runoob.com/deepseek-harness/deepseek-harness-tutorial.html" target="_blank" rel="noopener">runoob · DeepSeek Harness 教程</a>。本站为学习导读与审计，不复制原文全文；原文版权归原站点所有。</p>
-        <p>代码 MIT；本站原创文字 CC BY-NC-SA 4.0（<a href="../LICENSE">LICENSE</a> / <a href="../LICENSE-CONTENT.md">LICENSE-CONTENT</a>）。审计时间 2026-10，产品处于预览版，信息以官方为准。</p>
+        <p>代码 MIT；本站原创文字 CC BY-NC-SA 4.0（<a href="LICENSE">LICENSE</a> / <a href="LICENSE-CONTENT.md">LICENSE-CONTENT</a>）。审计时间 2026-10，产品处于预览版，信息以官方为准。</p>
       </div>
       <div>
         <h3>阅读</h3>
@@ -368,7 +369,7 @@
         <ul>
           <li><a href="audit.html">内容审计</a></li>
           <li><a href="about.html">来源、许可与维护</a></li>
-          <li><a href="../index.html">返回 AI Agent 学习站</a></li>
+          <li><a href="https://luozawa.github.io/dopamine-agent-lab/">返回 AI Agent 学习站</a></li>
         </ul>
       </div>
     </div>

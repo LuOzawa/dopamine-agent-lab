@@ -12,6 +12,8 @@ import pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 BASE = "https://www.runoob.com/deepseek-harness/"
+# Existing audit snapshot, not the date on which HTML happens to be rebuilt.
+AUDIT_DATE = "2026-10"
 
 STAGES = [
     dict(n=1, title="认识与安装", en="Orientation", lede="先确认它解决什么问题，再选一条安装路线跑通。不写插件，但决定后面顺不顺。", hours="1.5"),
@@ -50,17 +52,17 @@ add(id="s1-1", stage=1, num="1.1", title="Agent = Model + Harness", tag="定位"
 add(id="s1-2", stage=1, num="1.2", title="安装：四条路线怎么选", tag="安装", dur="约 30 分钟",
     src="deepseek-harness-install.html",
     goal="根据操作系统与技术栈选一条安装路线，并完成一次可验证的启动。",
-    pre="会用终端；npm/源码路线需要 Node.js 24.9 或更高版本。",
+    pre="会用终端；npm/源码路线的 Node.js 版本要求待核实，以所选 dsh 版本的官方安装文档为准。先用 <code>node -v</code> 查看本机版本。",
     points=[
         "桌面版：Windows 64 位、macOS Apple 芯片，免装 Node，适合日常办公与文件处理。",
         "npm：全局安装后用 <code>dsh web</code>，或直接 <code>npx @deepseek-ai/dsh web</code>；默认地址 <code>http://127.0.0.1:3080</code>。",
-        "源码：Node 24.9+、Git、pnpm；依次执行 <code>pnpm install</code>、<code>pnpm run build</code>、<code>pnpm dsh web</code>。",
+        "源码：准备 Git、pnpm 与符合官方安装文档要求的 Node.js；教程所写「Node 24.9+」待核实。依次执行 <code>pnpm install</code>、<code>pnpm run build</code>、<code>pnpm dsh web</code>。",
         "Python SDK：Python 3.10+，自带运行时，不需要系统 Node；适合把 Agent 接进 Python 程序。",
         "预览版阶段，安装包、命令与界面都可能变化；生产使用要锁定版本，不要把「最新」当默认。",
     ],
     task="做一张路线表：操作系统 / 技术栈 / 是否需要 Node / 启动命令 / 验证点。只选一条真正执行，并记录版本号与失败信息。",
     qa=[
-        ("Node 22 还能用吗？", "教程要求 Node.js 24.9 或更高，并明确说旧版 Node 22 已不再支持。升级前先确认依赖与系统环境；不要用「能启动」代替版本要求。"),
+        ("Node 22 还能用吗？", "待核实：教程声称需要 Node.js 24.9+、不再支持 Node 22，但现有审计未能独立确认。先用 node -v 查看版本，再查所选 dsh 版本的官方安装文档；不要仅凭教程或一次启动成功判断兼容性。"),
         ("桌面版和 Web UI 是两套东西吗？", "是同一产品的不同入口：桌面版是本地应用窗口，Web UI 由命令启动后用浏览器访问。核心能力可能接近，但 Node 依赖、插件入口与后台行为不同。"),
     ],
     status="todo", impact="版本要求", sev="中", prio="P2",
@@ -206,7 +208,7 @@ add(id="s2-6", stage=2, num="2.6", title="四种运行模式：标准 / PTC / �
     pre="完成 1.4。",
     points=[
         "模式 = 一组预设插件，不是能力等级：标准干活、PTC 编排、极简测量、创造改造。",
-        "PTC 把工具收拢为 <code>run_code</code>，模型写一段 TypeScript 程序组合调用；只读调用可并行（教程口径默认 10 路），写操作按提交顺序。",
+        "PTC 把工具收拢为 <code>run_code</code>，模型写一段 TypeScript 程序组合调用；只读调用可并行（教程所称「默认 10 路」待核实，以所用版本为准），写操作按提交顺序。",
         "极简模式只保留持久 bash 与 <code>str_replace_editor</code>，用于评测模型、复现问题，不是低配电脑的轻量版。",
         "创造模式继承标准能力，并增加运行时检查、内存中试验插件与 preset 创作指引。",
         "切换预设不改变文件权限；权限与沙箱是另一套策略，必须单独设置。",
@@ -660,6 +662,48 @@ add(id="s6-5", stage=6, num="6.5", title="事故复盘与工程文化", tag="工
     status="ok", impact="工程文化", sev="中", prio="—",
     note="四问、四个案例与测试分层来自教程；原文标题拼写为「DeeSeek」，本站更正。")
 
+# 实操独立于既有审计快照；日期表示文档对照时间，不表示已在真实端点运行。
+EXAMPLE_DATE = "2026-11-05"
+OFFICIAL = "https://github.com/deepseek-ai/deepseek-harness/blob/master/"
+EXAMPLES = {
+    "s1-2": dict(
+        intro="首次体验采用官方 npm 启动路线。在终端逐行运行；首次运行会下载软件包。Node 版本仍按所选版本的官方要求确认。",
+        steps=["先检查 Node 与 npm 是否可用。", "启动后保留终端，按终端显示的地址打开 Web UI；结束时按 Ctrl+C。", "记录实际安装版本；需要复现或部署时显式指定已核实的版本。"],
+        blocks=[("终端 · 首次启动", "sh", "node -v\nnpm --version\nnpx @deepseek-ai/dsh web")],
+        expected="前两行打印版本号；启动命令输出本地服务地址，默认端口为 3080。打开地址后应看到 Web UI。",
+        errors=["找不到 node/npm：先安装符合官方要求的 Node.js，再重新打开终端。", "下载失败：检查终端的网络或 npm registry 配置，记录完整错误。", "地址无法打开：确认启动进程仍在运行，并使用终端实际输出的地址。"],
+        source=OFFICIAL + "README.md#run"),
+    "s1-4": dict(
+        intro="Web UI 启动后，用一条可验证的只读任务检查工作区、模型与工具是否连通。",
+        steps=["选择含 README.md 的测试工作区，配置并选择模型。", "将权限设置为只读，然后发送下面的任务。", "打开工具记录，核对读取路径与回答中的依据。"],
+        blocks=[("发送给 Agent 的任务", "text", "请读取当前工作区的 README.md，概括项目用途。\n只读，不创建、修改或删除文件。\n请列出实际读取的路径，并给出支持结论的原文片段。\n如果文件不存在，请说明，不要猜测。")],
+        expected="回答给出真实路径与可对照的摘要；工具记录包含读取操作。README.md 不存在时应明确报告。",
+        errors=["无法发送：先检查工作区和模型是否已选择。", "认证失败：在模型设置中核对凭据。", "回答没有读取记录：追问工具证据，不能只凭自然语言回答判定成功。"],
+        source=OFFICIAL + "docs/user/guide/providers.md"),
+    "s2-1": dict(
+        intro="下面是自定义文本模型的配置示例。先在隔离的测试 profile 中操作；gateway.example 和 your-model-id 都是占位值，必须替换。",
+        steps=["从模型设置打开当前 profile 的配置文件，并先备份。", "把示例字段合并到现有 llm-pi-ai 配置；保留已有 providers 与其它字段，不要直接覆盖整份配置。", "让启动 dsh 的进程获得 STUDY_GATEWAY_KEY 环境变量，或通过模型设置保存凭据；密钥不写入示例。", "保存后选中 study-gateway 下的实际模型，发送一条简短文本请求。"],
+        blocks=[("cordis.patch.yml · 提供方配置", "yaml", "- id: llm-pi-ai\n  config:\n    providers:\n      study-gateway:\n        api: openai-completions\n        baseURL: https://gateway.example/v1\n        apiKeyEnv: STUDY_GATEWAY_KEY\n        models:\n          - id: your-model-id\n            input: [text]")],
+        expected="模型选择器中能选中配置的模型，且一次真实请求成功返回。能保存配置本身不代表连接成功。",
+        errors=["MISSING_CREDENTIAL：检查启动进程是否获得环境变量，或重新保存凭据。", "UNKNOWN_MODEL：确认模型 ID 与端点提供的名称完全一致。", "连接或协议错误：替换示例地址，核对网关是否提供 Chat Completions 协议。"],
+        source=OFFICIAL + "docs/user/guide/providers.md#image-input"),
+    "s3-1": dict(
+        intro="从已完成安装和构建的官方源码目录开始。这个插件只输出加载日志，不依赖模型或 API Key。",
+        steps=["在源码根目录创建 scratch-plugin/src 目录。", "将下面的完整模块保存为 scratch-plugin/src/study-plugin.ts。", "接着按 3.2 的配置加载它；仅保存文件不会自动加载插件。"],
+        blocks=[("scratch-plugin/src/study-plugin.ts", "ts", "export const name = 'study-plugin'\n\nexport function apply() {\n  console.log('[study-plugin] ready')\n}")],
+        expected="完成 3.2 的加载后，终端出现 [study-plugin] ready。当前示例没有注册工具，工具列表不增加条目。",
+        errors=["没有日志：先检查是否传入 3.2 的 patch 文件。", "模块无法解析：确认文件名与配置中的绝对路径一致。", "只有文件保存成功：继续完成加载步骤，再判断插件是否工作。"],
+        source=OFFICIAL + "docs/user/develop/basic/index.md"),
+    "s3-2": dict(
+        intro="延续 3.1 的 study-plugin.ts。在官方源码根目录执行 pwd，取得实际绝对路径，并替换 YAML 中的 /absolute/path/to/deepseek-harness。",
+        steps=["将第一段保存为 scratch-plugin/cordis.yml，替换绝对路径前缀。", "在已构建的源码根目录执行第二段命令。", "查看终端加载日志，再核对 Web UI。"],
+        blocks=[("scratch-plugin/cordis.yml", "yaml", "- insert:\n    - id: study-hello\n      name: '/absolute/path/to/deepseek-harness/scratch-plugin/src/study-plugin.ts'"),
+                ("终端 · 加载插件", "sh", "pnpm dsh web --patch ./scratch-plugin/cordis.yml")],
+        expected="终端输出 [study-plugin] ready，Web UI 能打开；停止该次启动后，插件不会凭此 patch 自动加入其它启动配置。",
+        errors=["模块不存在：确认替换了 /absolute/path/to/deepseek-harness，并检查文件确实存在。", "YAML 解析失败：使用空格缩进，不要混入 Tab。", "缺少构建产物：先在官方源码目录完成 pnpm install 和 pnpm run build。"],
+        source=OFFICIAL + "docs/user/develop/basic/index.md#register-it-in-cordisyml"),
+}
+
 # ── 元数据与审计 ─────────────────────────────────────────────────────────
 for i, x in enumerate(L, 1):
     x["index"] = i
@@ -673,6 +717,27 @@ STATUS_LABEL = {"ok": "仍然成立", "old": "表述过时", "add": "建议补�
 
 def esc(s):
     return html.escape(str(s), quote=True)
+
+def example_html(x):
+    example = EXAMPLES.get(x["id"])
+    if not example:
+        return ""
+    blocks = []
+    for i, (label, language, code) in enumerate(example["blocks"], 1):
+        code_id = f'{x["id"]}-code-{i}'
+        blocks.append(f'''<div class="code-example">
+          <div class="code-head"><span id="{code_id}-label">{esc(label)}</span><button class="copy-btn" type="button" data-copy="{code_id}" aria-label="复制：{esc(label)}" hidden>复制代码</button></div>
+          <pre tabindex="0" aria-labelledby="{code_id}-label"><code id="{code_id}" class="language-{language}">{esc(code)}</code></pre>
+        </div>''')
+    return f'''<section class="block practice" aria-labelledby="{x["id"]}-practice">
+          <h3 id="{x["id"]}-practice">跟着做</h3>
+          <p>{esc(example["intro"])}</p>
+          <ol>{''.join(f'<li>{esc(step)}</li>' for step in example['steps'])}</ol>
+          {''.join(blocks)}
+          <h4>预期结果</h4><p>{esc(example["expected"])}</p>
+          <details class="practice-errors"><summary>没有得到预期结果？</summary><ul>{''.join(f'<li>{esc(error)}</li>' for error in example['errors'])}</ul></details>
+          <p class="example-source">文档对照：<time datetime="{EXAMPLE_DATE}">{EXAMPLE_DATE}</time> · <a href="{esc(example["source"])}" target="_blank" rel="noopener">官方示例与说明</a>。示例未在你的环境或真实模型端点运行。</p>
+        </section>'''
 
 def lesson_html(x, prev, nxt):
     points = "\n".join(f"<li>{p}</li>" for p in x["points"])
@@ -688,7 +753,7 @@ def lesson_html(x, prev, nxt):
         next_html = f'<a class="next" href="{nxt["url"]}"><span class="dir">下一节</span><span class="t">{esc(nxt["num"] + " " + nxt["title"])}</span></a>'
     else:
         next_html = '<a class="next" href="audit.html"><span class="dir">完成</span><span class="t">内容审计</span></a>'
-    return f'''      <article class="lesson" id="{x["id"]}">
+    return f'''      <article class="lesson" id="{x["id"]}" tabindex="-1">
         <div class="lesson-head">
           <span class="lesson-no">{x["num"]}</span>
           <h2>{x["title"]}</h2>
@@ -696,7 +761,12 @@ def lesson_html(x, prev, nxt):
         <div class="lesson-meta">
           <span>{x["dur"]}</span><span>{x["tag"]}</span>
           <a href="{x["source_url"]}" target="_blank" rel="noopener">原文 ↗</a>
+          <a class="status {x["status"]}" href="audit.html#audit-{x["id"]}">{STATUS_LABEL[x["status"]]}</a>
         </div>
+        <details class="lesson-audit"{' open' if x['status'] != 'ok' else ''}>
+          <summary>审计依据 · <time datetime="{AUDIT_DATE}">{AUDIT_DATE}</time></summary>
+          <p>{esc(x["note"])} <a href="audit.html#audit-{x["id"]}">查看本节审计记录</a></p>
+        </details>
         <div class="block">
           <div class="label">学习目标</div>
           <p>{x["goal"]}</p>
@@ -713,6 +783,7 @@ def lesson_html(x, prev, nxt):
           <div class="label">动手任务</div>
           <p>{x["task"]}</p>
         </div>
+        {example_html(x)}
         <div class="block check">
           <div class="label">自检</div>
           <div class="qa">{qa}</div>
@@ -721,7 +792,7 @@ def lesson_html(x, prev, nxt):
           <button class="done-btn" type="button" data-done-id="{x["id"]}" aria-pressed="false">
             <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
           </button>
-          <span class="note">进度保存在本机浏览器</span>
+          <span class="note" data-progress-note>进度保存在本机浏览器</span>
         </div>
         <nav class="chapter-nav" aria-label="章节翻页">
           {prev_html}
@@ -739,6 +810,20 @@ def toc_html(stage):
         <ol>{items}</ol>
         <p class="toc-note">完成一节就点卡片底部「标记完成」，进度只存本机。</p>
       </nav>'''
+
+def mobile_toc_html(stage):
+    lessons = STAGE_LESSONS[stage]
+    items = "\n".join(
+        f'<li><a href="#{x["id"]}"><span class="n">{x["num"]}</span> <span>{esc(x["title"])}</span></a></li>'
+        for x in lessons
+    )
+    first = lessons[0]
+    return f'''<nav class="mobile-toc" aria-label="本章目录">
+    <details>
+      <summary><span>本章目录</span><span class="toc-current" data-toc-current>{first["num"]} {esc(first["title"])}</span></summary>
+      <ol>{items}</ol>
+    </details>
+  </nav>'''
 
 def header(active):
     def cur(k):
@@ -769,7 +854,7 @@ def footer():
     <div class="footer-in">
       <div>
         <p>蓝本：<a href="{BASE}deepseek-harness-tutorial.html" target="_blank" rel="noopener">runoob · DeepSeek Harness 教程</a>。本站为学习导读与审计，不复制原文全文；原文版权归原站点所有。</p>
-        <p>代码 MIT；本站原创文字 CC BY-NC-SA 4.0（<a href="../LICENSE">LICENSE</a> / <a href="../LICENSE-CONTENT.md">LICENSE-CONTENT</a>）。审计时间 2026-10，产品处于预览版，信息以官方为准。</p>
+        <p>代码 MIT；本站原创文字 CC BY-NC-SA 4.0（<a href="LICENSE">LICENSE</a> / <a href="LICENSE-CONTENT.md">LICENSE-CONTENT</a>）。审计时间 2026-10，产品处于预览版，信息以官方为准。</p>
       </div>
       <div>
         <h3>阅读</h3>
@@ -784,7 +869,7 @@ def footer():
         <ul>
           <li><a href="audit.html">内容审计</a></li>
           <li><a href="about.html">来源、许可与维护</a></li>
-          <li><a href="../index.html">返回 AI Agent 学习站</a></li>
+          <li><a href="https://luozawa.github.io/dopamine-agent-lab/">返回 AI Agent 学习站</a></li>
         </ul>
       </div>
     </div>
@@ -805,6 +890,7 @@ def page(title, active, body, script=""):
 <a class="skip" href="#main">跳到主要内容</a>
 <div class="read-progress" aria-hidden="true"></div>
 {header(active)}
+<div class="storage-notice" data-storage-notice role="status" hidden></div>
 {body}
 {footer()}
 {script}
@@ -842,6 +928,7 @@ for s in STAGES:
       </div>
     </div>
   </div>
+  {mobile_toc_html(s["n"])}
   <div class="wrap layout">
     {toc_html(s["n"])}
     <div>
@@ -864,13 +951,14 @@ path_rows = "\n".join(
       <span class="path-meta">{len(STAGE_LESSONS[s["n"]])} 节 · 约 {s["hours"]} 小时</span>
       <span class="path-arrow">进入 →</span>
     </a>''' for s in STAGES)
+resume_json = json.dumps([dict(id=x['id'], num=x['num'], title=x['title'], url=x['url']) for x in L], ensure_ascii=False).replace('<', '\\u003c')
 body = f'''<main id="main">
   <section class="cover">
     <div class="wrap">
       <div class="eyebrow">DeepSeek Harness · 学习手册</div>
       <h1>从安装到插件，<br><em>把 Agent 当作基础设施来读</em></h1>
       <p class="deck">以 runoob 的 DeepSeek Harness 教程为蓝本，重排为 6 章、{TOTAL} 节。
-        每节给出目标、前置、要点、动手任务与自检；每条事实标注审计状态，不确定的部分明确写「待核实」。
+        每节给出目标、前置、要点、动手任务与自检；按小节显示审计状态、依据与日期，存疑的要求明确写「待核实」。
         离线可用，双击 HTML 即可阅读。</p>
       <div class="cover-meta">
         <div><b>{TOTAL}</b><span>学习小节</span></div>
@@ -879,10 +967,12 @@ body = f'''<main id="main">
         <div><b>2026-10</b><span>审计时间</span></div>
       </div>
       <div class="cover-actions">
-        <a class="btn btn-primary" href="stage-1.html">开始阅读</a>
+        <a class="btn btn-primary" href="stage-1.html#s1-1" data-resume>开始阅读</a>
         <a class="btn btn-ghost" href="audit.html">先看审计</a>
         <a class="btn btn-ghost" href="contents.html">全部章节</a>
       </div>
+      <p class="resume-note" data-resume-note>从第 1 节开始，也可以按下方路线选择章节。</p>
+      <script type="application/json" id="resume-lessons">{resume_json}</script>
     </div>
   </section>
 
@@ -906,7 +996,7 @@ body = f'''<main id="main">
     <div class="wrap">
       <div class="section-head">
         <div>
-          <div class="kicker">Three Routes</div>
+          <div class="kicker">Four Routes</div>
           <h2>四条阅读路线</h2>
           <p>时间有限时，按目标选一条；每条路线都能在半天内形成一个可验证的闭环。</p>
         </div>
@@ -1061,7 +1151,7 @@ body = f'''<main id="main" class="doc">
 # ── 审计 ─────────────────────────────────────────────────────────────────
 top3 = [x for x in L if x["status"] != "ok"][:3]
 rows = "\n".join(
-    f'''<tr>
+    f'''<tr id="audit-{x["id"]}">
       <td>{x["index"]}</td>
       <td><a href="{x["source_url"]}" target="_blank" rel="noopener">{x["title"]}</a></td>
       <td><span class="status {x["status"]}">{STATUS_LABEL[x["status"]]}</span></td>
@@ -1117,8 +1207,8 @@ body = f'''<main id="main" class="doc">
 
   <h2><span class="no">04</span>建议的更新顺序</h2>
   <ol>
-    <li>把 1.2 的 Node 版本要求改成「以官方安装页为准」，并补充如何验证 <code>node -v</code> 与锁版本。</li>
-    <li>把 2.5 的模型名、token 与对比数字加上「截至日期」，避免把实验模型当长期事实。</li>
+    <li>1.2 已将 Node 版本要求标为「待核实」，补充 <code>node -v</code> 检查方法；后续仍需核对所选版本的官方安装文档。</li>
+    <li>2.5 已在正文展开模型名、token 与对比数字的待核实说明，并标出既有审计日期；补齐官方证据后再更新结论。</li>
     <li>在 4.3 明确 waterfall 的 await 差异：官方文档说「不 await」，示例普遍 await，读代码时以类型签名为准。</li>
   </ol>
 
@@ -1153,7 +1243,7 @@ body = f'''<main id="main" class="doc">
   </div>
   <div class="search-results" id="search-results"></div>
   <div class="search-empty" id="search-empty" hidden>没有匹配结果。试试更短的关键词，或换一个同义词。</div>
-  <div class="search-empty" id="search-idle">搜索范围：{TOTAL} 节的标题、目标、要点、任务与自检答案；不包含原文全文。想按原文目录查，用 <a href="contents.html">全部章节</a>。</div>
+  <div class="search-empty" id="search-idle">搜索范围：{TOTAL} 节的标题、目标、要点、任务、自检与实操示例（含代码和排错）；不包含原文全文。想按原文目录查，用 <a href="contents.html">全部章节</a>。</div>
   <noscript><div class="callout warn"><p>搜索需要启用 JavaScript。你仍然可以通过 <a href="contents.html">全部章节</a> 浏览。</p></div></noscript>
   <nav class="pager">
     <a href="contents.html"><span class="dir">上一页</span><span class="t">全部章节</span></a>
@@ -1169,7 +1259,8 @@ body = f'''<main id="main" class="doc">
   <p class="lede">这一页写清四件事：本站基于什么假设、怎么打开与维护、设计令牌怎么改、哪些内容必须自行核实。</p>
 
   <h2 id="open"><span class="no">01</span>打开方式</h2>
-  <p>本站是纯静态页面，不需要安装、服务器或联网。保持 <code>deepseek-harness/</code> 与 <code>assets/</code> 同级，双击 <code>index.html</code> 即可。</p>
+  <p>本站是纯静态页面，不需要安装、服务器或联网。保持 <code>index.html</code> 与 <code>assets/</code> 在 <code>deepseek-harness/</code> 目录内同级，双击 <code>index.html</code> 即可。阅读手册可离线进行；安装软件、访问模型端点和打开外部文档需要联网。</p>
+  <p>首页会返回上次未完成的小节；该节完成后，推荐按阅读顺序排在最前的未完成小节。阅读位置与完成进度保存在当前浏览器；若存储失败，页面会持续提示「本次进度未保存」。不同浏览器、不同访问地址或直接打开文件时，记录可能不互通。</p>
   <div class="callout warn"><p>如果样式丢失，通常是把 HTML 单独移动了位置；页面引用的是 <code>assets/style.css</code> 相对路径。</p></div>
 
   <h2 id="assumptions"><span class="no">02</span>假设声明</h2>
@@ -1212,7 +1303,7 @@ body = f'''<main id="main" class="doc">
   <h2 id="source"><span class="no">04</span>来源、许可与维护</h2>
   <ul>
     <li><b>蓝本：</b><a href="{BASE}deepseek-harness-tutorial.html" target="_blank" rel="noopener">runoob · DeepSeek Harness 教程</a>，版权归原站点/原作者。本站不复制原文全文，只做导读、任务与审计，每节保留原文链接。</li>
-    <li><b>许可：</b>代码 MIT；本站原创文字（学习路径、要点、任务、审计、说明）采用 CC BY-NC-SA 4.0。详见 <a href="../LICENSE">LICENSE</a> 与 <a href="../LICENSE-CONTENT.md">LICENSE-CONTENT.md</a>；原文与第三方内容不在本站授权范围。</li>
+    <li><b>许可：</b>代码 MIT；本站原创文字（学习路径、要点、任务、审计、说明）采用 CC BY-NC-SA 4.0。详见 <a href="LICENSE">LICENSE</a> 与 <a href="LICENSE-CONTENT.md">LICENSE-CONTENT.md</a>；原文与第三方内容不在本站授权范围。</li>
     <li><b>生成：</b>页面与搜索索引由 <code>tools/build.py</code> 生成；修改课程数据后重新运行即可。</li>
     <li><b>维护：</b>新增一节需要补五字段、更新 <code>STAGE_LESSONS</code> 与前后篇；搜索索引会随构建自动重建。</li>
   </ul>
@@ -1246,11 +1337,17 @@ for x in L:
     sents += [("任务", x["task"])]
     for q, a in x["qa"]:
         sents += [("自检", q), ("答案", a)]
+    example = EXAMPLES.get(x["id"])
+    if example:
+        sents += [("实操", example["intro"]), ("预期", example["expected"])]
+        sents += [("步骤", step) for step in example["steps"]]
+        sents += [("排错", error) for error in example["errors"]]
+        sents += [("示例代码", code) for _, _, code in example["blocks"]]
     # 去标签、去重
     clean = []
     seen = set()
     for k, t in sents:
-        t = html.unescape(re.sub(r"<[^>]+>", "", t)).strip()
+        t = (t if k == "示例代码" else html.unescape(re.sub(r"<[^>]+>", "", t))).strip()
         if t and t not in seen:
             seen.add(t)
             clean.append({"k": k, "t": t})

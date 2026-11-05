@@ -5,20 +5,47 @@
   var KEY = "dsh-handbook:v1";
   var STAGE_TOTAL = { 1: 4, 2: 6, 3: 8, 4: 4, 5: 6, 6: 5 };
   var TOTAL = Object.keys(STAGE_TOTAL).reduce(function (n, k) { return n + STAGE_TOTAL[k]; }, 0);
+  var storageProblem = "";
   var state = load();
 
   function load() {
     try {
       var raw = localStorage.getItem(KEY);
       var obj = raw ? JSON.parse(raw) : {};
-      return obj && typeof obj === "object" ? obj : {};
-    } catch (e) { return {}; }
+      if (!obj || typeof obj !== "object" || Array.isArray(obj)) throw new Error("Invalid progress");
+      var clean = {};
+      Object.keys(obj).forEach(function (id) { if (validId(id) && obj[id] === true) clean[id] = true; });
+      if (validId(obj._lastRead)) clean._lastRead = obj._lastRead;
+      return clean;
+    } catch (e) {
+      storageProblem = "无法读取已保存的学习进度；当前仅显示本次阅读状态。";
+      return {};
+    }
   }
   function save() {
-    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+    try {
+      localStorage.setItem(KEY, JSON.stringify(state));
+      storageProblem = "";
+      renderStorage();
+      return true;
+    } catch (e) {
+      storageProblem = "本次进度未保存：浏览器存储不可用或空间不足，刷新或关闭页面后可能丢失。";
+      renderStorage();
+      return false;
+    }
+  }
+  function renderStorage() {
+    var notice = document.querySelector("[data-storage-notice]");
+    if (notice) { notice.textContent = storageProblem; notice.hidden = !storageProblem; }
+    document.querySelectorAll("[data-progress-note]").forEach(function (el) {
+      el.textContent = storageProblem ? "仅本次有效 · 进度未保存" : "进度保存在本机浏览器";
+    });
   }
   function pct(a, b) { return b ? Math.round((a / b) * 100) : 0; }
-  function validId(id) { return /^s[1-6]-\d+$/.test(id); }
+  function validId(id) {
+    var match = typeof id === "string" && id.match(/^s([1-6])-([1-9]\d*)$/);
+    return !!match && Number(match[2]) <= STAGE_TOTAL[match[1]];
+  }
   function stageDone(n) {
     var c = 0;
     Object.keys(state).forEach(function (k) {
@@ -43,6 +70,7 @@
   }
 
   function render() {
+    renderStorage(); renderResume();
     document.querySelectorAll("[data-done-id]").forEach(function (btn) {
       var id = btn.getAttribute("data-done-id");
       var done = !!state[id];
@@ -56,8 +84,7 @@
     document.querySelectorAll("[data-stage-bar]").forEach(function (bar) {
       var n = Number(bar.getAttribute("data-stage-bar"));
       var c = stageDone(n);
-      var fill = bar.querySelector("i");
-      if (fill) fill.style.width = pct(c, STAGE_TOTAL[n]) + "%";
+      bar.style.width = pct(c, STAGE_TOTAL[n]) + "%";
       var lab = document.querySelector('[data-stage-label="' + n + '"]');
       if (lab) lab.textContent = c + " / " + STAGE_TOTAL[n];
     });
@@ -71,14 +98,29 @@
     });
   }
 
+  function renderResume() {
+    var link = document.querySelector("[data-resume]");
+    var data = document.getElementById("resume-lessons");
+    if (!link || !data) return;
+    var lessons = JSON.parse(data.textContent);
+    var remaining = lessons.filter(function (lesson) { return !state[lesson.id]; });
+    var started = !!state._lastRead || lessons.some(function (lesson) { return state[lesson.id]; });
+    var target = remaining.find(function (lesson) { return lesson.id === state._lastRead; }) || remaining[0];
+    link.href = target ? target.url : "contents.html";
+    link.textContent = !target ? "全部完成 · 回顾章节" : started ? "继续阅读：" + target.num + " " + target.title : "开始阅读";
+    var note = document.querySelector("[data-resume-note]");
+    if (note) note.textContent = !target ? "33 节已全部完成，可从目录重新温习。" : started ? "优先返回上次未完成的小节；已完成时转到阅读顺序中首个未完成小节。" : "从第 1 节开始，也可以按下方路线选择章节。";
+  }
+
   document.addEventListener("click", function (e) {
     var btn = e.target.closest("[data-done-id]");
     if (btn) {
       var id = btn.getAttribute("data-done-id");
       state[id] = !state[id];
       if (!state[id]) delete state[id];
-      save(); render();
-      if (state[id]) {
+      var saved = save(); render();
+      if (!saved) toast("本次进度未保存");
+      else if (state[id]) {
         var n = Number((id.match(/^s(\d)-/) || [])[1]);
         var c = stageDone(n);
         toast(c === STAGE_TOTAL[n] ? "第 " + n + " 章全部完成" : "已标记完成 · 本章 " + c + "/" + STAGE_TOTAL[n]);
@@ -87,24 +129,67 @@
     }
     var reset = e.target.closest("[data-reset]");
     if (reset && window.confirm("确定清空本机学习进度？")) {
-      state = {}; save(); render(); toast("进度已清空");
+      state = {}; var cleared = save(); render();
+      toast(cleared ? "进度已清空" : "本次清空未保存，原记录可能仍在浏览器中");
     }
   });
 
   function initToc() {
-    var links = Array.prototype.slice.call(document.querySelectorAll(".toc a[href^='#']"));
-    if (!links.length || !("IntersectionObserver" in window)) return;
-    var map = {};
-    links.forEach(function (a) { map[a.getAttribute("href").slice(1)] = a; });
-    var sections = links.map(function (a) { return document.getElementById(a.getAttribute("href").slice(1)); }).filter(Boolean);
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (!en.isIntersecting) return;
-        links.forEach(function (a) { a.classList.remove("active"); });
-        if (map[en.target.id]) map[en.target.id].classList.add("active");
+    var links = Array.prototype.slice.call(document.querySelectorAll(".toc a[href^='#'], .mobile-toc a[href^='#']"));
+    var sections = Array.prototype.slice.call(document.querySelectorAll(".lesson[id]"));
+    if (!links.length || !sections.length) return;
+    var mobile = document.querySelector(".mobile-toc");
+    var disclosure = mobile && mobile.querySelector("details");
+    var current = document.querySelector("[data-toc-current]");
+    var lastActive = null;
+    function activate(id) {
+      links.forEach(function (a) {
+        var active = a.getAttribute("href") === "#" + id;
+        a.classList.toggle("active", active);
+        if (active) a.setAttribute("aria-current", "location");
+        else a.removeAttribute("aria-current");
+        if (active && current) current.textContent = Array.prototype.map.call(a.children, function (span) { return span.textContent.trim(); }).join(" ");
       });
-    }, { rootMargin: "-18% 0px -68% 0px", threshold: 0 });
-    sections.forEach(function (s) { io.observe(s); });
+      if (lastActive !== id) {
+        lastActive = id;
+        state._lastRead = id;
+        save();
+      }
+    }
+    var pending = false;
+    function update() {
+      pending = false;
+      var header = document.querySelector(".topbar");
+      var offset = (header ? header.getBoundingClientRect().height : 0) + 24;
+      if (mobile && mobile.getClientRects().length) {
+        offset += mobile.querySelector("summary").getBoundingClientRect().height;
+      }
+      var id = sections[0].id;
+      sections.forEach(function (section) {
+        if (section.getBoundingClientRect().top <= offset + 1) id = section.id;
+      });
+      activate(id);
+    }
+    function schedule() {
+      if (!pending) { pending = true; window.requestAnimationFrame(update); }
+    }
+    links.forEach(function (a) {
+      a.addEventListener("click", function () {
+        var id = a.getAttribute("href").slice(1);
+        if (disclosure && mobile.contains(a)) {
+          disclosure.open = false;
+          document.getElementById(id).focus({ preventScroll: true });
+        }
+        activate(id);
+      });
+    });
+    document.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    window.addEventListener("hashchange", schedule);
+    window.addEventListener("pageshow", schedule);
+    var initialId = window.location.hash.slice(1);
+    if (sections.some(function (section) { return section.id === initialId; })) activate(initialId);
+    else update();
   }
 
   function initReadBar() {
@@ -163,11 +248,17 @@
     }
     function escapeRe(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
     function highlight(text, terms) {
-      var out = escapeHtml(text);
-      terms.slice().sort(function (a, b) { return b.length - a.length; }).forEach(function (t) {
-        out = out.replace(new RegExp("(" + escapeRe(escapeHtml(t)) + ")", "gi"), "<mark>$1</mark>");
+      // Match plain text once; escape each fragment before adding markup.
+      var words = terms.filter(Boolean).sort(function (a, b) { return b.length - a.length; });
+      if (!words.length) return escapeHtml(text);
+      var re = new RegExp(words.map(escapeRe).join("|"), "gi");
+      var out = "", cursor = 0;
+      text.replace(re, function (match, offset) {
+        out += escapeHtml(text.slice(cursor, offset)) + "<mark>" + escapeHtml(match) + "</mark>";
+        cursor = offset + match.length;
+        return match;
       });
-      return out;
+      return out + escapeHtml(text.slice(cursor));
     }
     function clip(text, terms) {
       if (text.length <= 150) return text;
@@ -180,6 +271,12 @@
     function render(raw) {
       var q = (raw || "").trim();
       var terms = q.toLowerCase().split(/\s+/).filter(Boolean);
+      try {
+        var u = new URL(window.location.href);
+        if (q) u.searchParams.set("q", q);
+        else u.searchParams.delete("q");
+        history.replaceState(null, "", u);
+      } catch (e) {}
       if (!terms.length) {
         results.innerHTML = ""; count.textContent = "输入关键词开始";
         empty.hidden = true; if (idle) idle.hidden = false;
@@ -201,7 +298,7 @@
       });
       hits.sort(function (a, b) { return b.score - a.score || a.l.stage - b.l.stage; });
       var html = "", total = 0;
-      hits.slice(0, 30).forEach(function (h) {
+      hits.forEach(function (h) {
         var snips = h.snips.slice(0, 2);
         if (!snips.length) {
           snips = h.l.sentences.filter(function (s) {
@@ -210,7 +307,7 @@
           }).slice(0, 2);
           if (!snips.length) snips = h.l.sentences.slice(0, 1);
         }
-        total += Math.max(1, snips.length);
+        total += snips.length;
         html += '<a class="search-result" href="' + h.l.url + '">' +
           '<div class="sr-head"><span class="sr-stage">阶段 ' + h.l.stage + "</span>" +
           '<span class="sr-title">' + highlight(h.l.title, terms) + "</span></div>" +
@@ -220,13 +317,8 @@
           }).join("") + "</a>";
       });
       results.innerHTML = html;
-      count.textContent = hits.length ? hits.length + " 节 · 约 " + total + " 处" : "0 节";
+      count.textContent = hits.length ? hits.length + " 节 · 展示 " + total + " 条摘要" : "0 节";
       empty.hidden = hits.length > 0;
-      try {
-        var u = new URL(window.location.href);
-        u.searchParams.set("q", q);
-        history.replaceState(null, "", u);
-      } catch (e) {}
     }
     input.addEventListener("input", function () { render(input.value); });
     var form = document.getElementById("search-form");
@@ -241,10 +333,38 @@
     if (initial) { input.value = initial; render(initial); } else { render(""); }
   }
 
+  function initCopy() {
+    document.querySelectorAll("[data-copy]").forEach(function (button) {
+      button.hidden = false;
+      button.addEventListener("click", async function () {
+        var code = document.getElementById(button.getAttribute("data-copy"));
+        if (!code) return;
+        button.disabled = true;
+        try {
+          if (!navigator.clipboard || !navigator.clipboard.writeText) throw new Error("Clipboard unavailable");
+          await navigator.clipboard.writeText(code.textContent);
+          toast("代码已复制");
+        } catch (e) {
+          var range = document.createRange();
+          range.selectNodeContents(code);
+          var selection = window.getSelection();
+          selection.removeAllRanges(); selection.addRange(range);
+          var copied = false;
+          try { copied = document.execCommand("copy"); } catch (err) {}
+          if (copied) { selection.removeAllRanges(); toast("代码已复制"); }
+          else toast("自动复制失败，代码已选中；请按 Ctrl+C 或 ⌘C 复制");
+        } finally { button.disabled = false; }
+      });
+    });
+  }
+
   function init() {
-    render(); initToc(); initReadBar(); initCatalog(); initSearch();
+    render(); initToc(); initReadBar(); initCatalog(); initSearch(); initCopy();
     window.addEventListener("storage", function (e) {
-      if (e.key === KEY) { state = load(); render(); initCatalog(); }
+      if (e.key === KEY || e.key === null) { storageProblem = ""; state = load(); render(); initCatalog(); }
+    });
+    window.addEventListener("pageshow", function (e) {
+      if (e.persisted) { storageProblem = ""; state = load(); render(); }
     });
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);

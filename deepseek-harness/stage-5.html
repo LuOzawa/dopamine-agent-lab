@@ -28,6 +28,7 @@
     </div>
   </div>
 </header>
+<div class="storage-notice" data-storage-notice role="status" hidden></div>
 <main id="main">
   <div class="page-head">
     <div class="wrap">
@@ -43,6 +44,17 @@
       </div>
     </div>
   </div>
+  <nav class="mobile-toc" aria-label="本章目录">
+    <details>
+      <summary><span>本章目录</span><span class="toc-current" data-toc-current>5.1 实战：写一个可替换的能力</span></summary>
+      <ol><li><a href="#s5-1"><span class="n">5.1</span> <span>实战：写一个可替换的能力</span></a></li>
+<li><a href="#s5-2"><span class="n">5.2</span> <span>LLM 适配器：接入任意模型</span></a></li>
+<li><a href="#s5-3"><span class="n">5.3</span> <span>StreamChunk 协议与错误处理</span></a></li>
+<li><a href="#s5-4"><span class="n">5.4</span> <span>组合包 bundle 与 profile</span></a></li>
+<li><a href="#s5-5"><span class="n">5.5</span> <span>安装插件与配置加载顺序</span></a></li>
+<li><a href="#s5-6"><span class="n">5.6</span> <span>发布插件：npm、tarball 与 Git</span></a></li></ol>
+    </details>
+  </nav>
   <div class="wrap layout">
     <nav class="toc" aria-label="本阶段目录">
         <h2>本阶段目录</h2>
@@ -55,7 +67,7 @@
         <p class="toc-note">完成一节就点卡片底部「标记完成」，进度只存本机。</p>
       </nav>
     <div>
-            <article class="lesson" id="s5-1">
+            <article class="lesson" id="s5-1" tabindex="-1">
         <div class="lesson-head">
           <span class="lesson-no">5.1</span>
           <h2>实战：写一个可替换的能力</h2>
@@ -63,7 +75,12 @@
         <div class="lesson-meta">
           <span>约 50 分钟</span><span>实战</span>
           <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-build-capability.html" target="_blank" rel="noopener">原文 ↗</a>
+          <a class="status ok" href="audit.html#audit-s5-1">仍然成立</a>
         </div>
+        <details class="lesson-audit">
+          <summary>审计依据 · <time datetime="2026-10">2026-10</time></summary>
+          <p>代码骨架与包结构来自教程；类型导入路径以当前仓库为准。 <a href="audit.html#audit-s5-1">查看本节审计记录</a></p>
+        </details>
         <div class="block">
           <div class="label">学习目标</div>
           <p>按 Definition → Provider → Consumer 实现 myCap，并在 cordis.yml 中组合加载。</p>
@@ -84,6 +101,7 @@
           <div class="label">动手任务</div>
           <p>实现一个把输入转大写的 myCap：三个包、一个工具、一次真实调用。然后写第二个 Provider（例如加前缀），只改 cordis.yml 完成替换。</p>
         </div>
+        
         <div class="block check">
           <div class="label">自检</div>
           <div class="qa"><details><summary>为什么 Consumer 不直接 import Provider？</summary><div class="a">直接依赖实现会让替换 Provider 时被迫改 Consumer；依赖 Definition 才能保持接口稳定。</div></details>
@@ -93,13 +111,13 @@
           <button class="done-btn" type="button" data-done-id="s5-1" aria-pressed="false">
             <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
           </button>
-          <span class="note">进度保存在本机浏览器</span>
+          <span class="note" data-progress-note>进度保存在本机浏览器</span>
         </div>
         <nav class="chapter-nav" aria-label="章节翻页">
           <a class="prev" href="stage-4.html#s4-4"><span class="dir">上一节</span><span class="t">4.4 能力三角色：Definition / Provider / Consumer</span></a>
           <a class="next" href="stage-5.html#s5-2"><span class="dir">下一节</span><span class="t">5.2 LLM 适配器：接入任意模型</span></a>
         </nav>
-      </article>      <article class="lesson" id="s5-2">
+      </article>      <article class="lesson" id="s5-2" tabindex="-1">
         <div class="lesson-head">
           <span class="lesson-no">5.2</span>
           <h2>LLM 适配器：接入任意模型</h2>
@@ -107,7 +125,12 @@
         <div class="lesson-meta">
           <span>约 45 分钟</span><span>模型</span>
           <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-llm-adapter.html" target="_blank" rel="noopener">原文 ↗</a>
+          <a class="status ok" href="audit.html#audit-s5-2">仍然成立</a>
         </div>
+        <details class="lesson-audit">
+          <summary>审计依据 · <time datetime="2026-10">2026-10</time></summary>
+          <p>适配器骨架与字段表来自教程；具体类型以 &lt;code&gt;@deepseek-ai/dsh-llm&lt;/code&gt; 为准。 <a href="audit.html#audit-s5-2">查看本节审计记录</a></p>
+        </details>
         <div class="block">
           <div class="label">学习目标</div>
           <p>实现最小 LlmAdapter，把自定义端点接入 dsh，并知道哪些字段不能静默丢弃。</p>
@@ -128,6 +151,7 @@
           <div class="label">动手任务</div>
           <p>写一个 mock adapter：不调用真实 API，产出固定文本 + usage + finish。注册到 <code>my-provider</code>，在会话里选它并跑一次。再故意不实现 tools 字段，确认会报错而不是静默忽略。</p>
         </div>
+        
         <div class="block check">
           <div class="label">自检</div>
           <div class="qa"><details><summary>agent-loop 依赖适配器的什么？</summary><div class="a">它只消费提供方无关的流式生成服务与 StreamChunk 协议，不关心底层是哪家 API。</div></details>
@@ -137,13 +161,13 @@
           <button class="done-btn" type="button" data-done-id="s5-2" aria-pressed="false">
             <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
           </button>
-          <span class="note">进度保存在本机浏览器</span>
+          <span class="note" data-progress-note>进度保存在本机浏览器</span>
         </div>
         <nav class="chapter-nav" aria-label="章节翻页">
           <a class="prev" href="stage-5.html#s5-1"><span class="dir">上一节</span><span class="t">5.1 实战：写一个可替换的能力</span></a>
           <a class="next" href="stage-5.html#s5-3"><span class="dir">下一节</span><span class="t">5.3 StreamChunk 协议与错误处理</span></a>
         </nav>
-      </article>      <article class="lesson" id="s5-3">
+      </article>      <article class="lesson" id="s5-3" tabindex="-1">
         <div class="lesson-head">
           <span class="lesson-no">5.3</span>
           <h2>StreamChunk 协议与错误处理</h2>
@@ -151,7 +175,12 @@
         <div class="lesson-meta">
           <span>约 40 分钟</span><span>协议</span>
           <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-stream-chunk.html" target="_blank" rel="noopener">原文 ↗</a>
+          <a class="status ok" href="audit.html#audit-s5-3">仍然成立</a>
         </div>
+        <details class="lesson-audit">
+          <summary>审计依据 · <time datetime="2026-10">2026-10</time></summary>
+          <p>五条规则与错误处理来自教程；分片字段以 &lt;code&gt;@deepseek-ai/dsh-llm&lt;/code&gt; 类型为准。 <a href="audit.html#audit-s5-3">查看本节审计记录</a></p>
+        </details>
         <div class="block">
           <div class="label">学习目标</div>
           <p>按协议产出分片，并用 LlmError 表达传输与协议故障。</p>
@@ -172,6 +201,7 @@
           <div class="label">动手任务</div>
           <p>用 <code>exampleChunks</code> 写一个 mock stream，让消费方解析出文本与工具调用；再故意在 finish 后追加一个 chunk，确认消费方报错。</p>
         </div>
+        
         <div class="block check">
           <div class="label">自检</div>
           <div class="qa"><details><summary>finish 之后还能发 chunk 吗？</summary><div class="a">不能。finish 必须是最后一个分片，之后任何分片都会破坏协议。</div></details>
@@ -181,13 +211,13 @@
           <button class="done-btn" type="button" data-done-id="s5-3" aria-pressed="false">
             <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
           </button>
-          <span class="note">进度保存在本机浏览器</span>
+          <span class="note" data-progress-note>进度保存在本机浏览器</span>
         </div>
         <nav class="chapter-nav" aria-label="章节翻页">
           <a class="prev" href="stage-5.html#s5-2"><span class="dir">上一节</span><span class="t">5.2 LLM 适配器：接入任意模型</span></a>
           <a class="next" href="stage-5.html#s5-4"><span class="dir">下一节</span><span class="t">5.4 组合包 bundle 与 profile</span></a>
         </nav>
-      </article>      <article class="lesson" id="s5-4">
+      </article>      <article class="lesson" id="s5-4" tabindex="-1">
         <div class="lesson-head">
           <span class="lesson-no">5.4</span>
           <h2>组合包 bundle 与 profile</h2>
@@ -195,7 +225,12 @@
         <div class="lesson-meta">
           <span>约 35 分钟</span><span>分发</span>
           <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-bundle-profile.html" target="_blank" rel="noopener">原文 ↗</a>
+          <a class="status ok" href="audit.html#audit-s5-4">仍然成立</a>
         </div>
+        <details class="lesson-audit">
+          <summary>审计依据 · <time datetime="2026-10">2026-10</time></summary>
+          <p>manifest 键与目录结构来自教程；字段以当前 dsh CLI 为准。 <a href="audit.html#audit-s5-4">查看本节审计记录</a></p>
+        </details>
         <div class="block">
           <div class="label">学习目标</div>
           <p>区分 bundle 与 profile，并做出一个可安装的组合包。</p>
@@ -216,6 +251,7 @@
           <div class="label">动手任务</div>
           <p>做 hello-plugin bundle：package.json 声明 dsh.bundle、cordis.patch.yml 用包名、index.js 导出 apply。装进 demo profile，dump-config 看到 <code># == dsh-hello-plugin</code> 层。</p>
         </div>
+        
         <div class="block check">
           <div class="label">自检</div>
           <div class="qa"><details><summary>bundle 与 profile 的 manifest 分别是什么？</summary><div class="a">bundle 用 <code>dsh.bundle.patch</code> 声明贡献的 patch 文件；profile 用 <code>dsh.profile.bundles</code> 声明有序的 bundle 列表。</div></details>
@@ -225,13 +261,13 @@
           <button class="done-btn" type="button" data-done-id="s5-4" aria-pressed="false">
             <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
           </button>
-          <span class="note">进度保存在本机浏览器</span>
+          <span class="note" data-progress-note>进度保存在本机浏览器</span>
         </div>
         <nav class="chapter-nav" aria-label="章节翻页">
           <a class="prev" href="stage-5.html#s5-3"><span class="dir">上一节</span><span class="t">5.3 StreamChunk 协议与错误处理</span></a>
           <a class="next" href="stage-5.html#s5-5"><span class="dir">下一节</span><span class="t">5.5 安装插件与配置加载顺序</span></a>
         </nav>
-      </article>      <article class="lesson" id="s5-5">
+      </article>      <article class="lesson" id="s5-5" tabindex="-1">
         <div class="lesson-head">
           <span class="lesson-no">5.5</span>
           <h2>安装插件与配置加载顺序</h2>
@@ -239,7 +275,12 @@
         <div class="lesson-meta">
           <span>约 35 分钟</span><span>配置</span>
           <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-install-load-order.html" target="_blank" rel="noopener">原文 ↗</a>
+          <a class="status ok" href="audit.html#audit-s5-5">仍然成立</a>
         </div>
+        <details class="lesson-audit">
+          <summary>审计依据 · <time datetime="2026-10">2026-10</time></summary>
+          <p>四层顺序与按行替换来自教程；具体输出格式以当前 CLI 为准。 <a href="audit.html#audit-s5-5">查看本节审计记录</a></p>
+        </details>
         <div class="block">
           <div class="label">学习目标</div>
           <p>说清四层配置叠加顺序，并用 dump-config 验证某一层来自哪里。</p>
@@ -260,6 +301,7 @@
           <div class="label">动手任务</div>
           <p>把 hello 装进 demo，dump-config 找到层标记；再在 profile patch 里覆盖同一行的某个键，确认整行替换的效果（未写的键丢失）。</p>
         </div>
+        
         <div class="block check">
           <div class="label">自检</div>
           <div class="qa"><details><summary>为什么是整行替换而不是深度合并？</summary><div class="a">整行替换让「最终生效值」可预测、可审计；深度合并会让某个键来自哪一层变得难以追踪。代价是必须重述所有键。</div></details>
@@ -269,13 +311,13 @@
           <button class="done-btn" type="button" data-done-id="s5-5" aria-pressed="false">
             <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
           </button>
-          <span class="note">进度保存在本机浏览器</span>
+          <span class="note" data-progress-note>进度保存在本机浏览器</span>
         </div>
         <nav class="chapter-nav" aria-label="章节翻页">
           <a class="prev" href="stage-5.html#s5-4"><span class="dir">上一节</span><span class="t">5.4 组合包 bundle 与 profile</span></a>
           <a class="next" href="stage-5.html#s5-6"><span class="dir">下一节</span><span class="t">5.6 发布插件：npm、tarball 与 Git</span></a>
         </nav>
-      </article>      <article class="lesson" id="s5-6">
+      </article>      <article class="lesson" id="s5-6" tabindex="-1">
         <div class="lesson-head">
           <span class="lesson-no">5.6</span>
           <h2>发布插件：npm、tarball 与 Git</h2>
@@ -283,7 +325,12 @@
         <div class="lesson-meta">
           <span>约 35 分钟</span><span>发布</span>
           <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-publish.html" target="_blank" rel="noopener">原文 ↗</a>
+          <a class="status ok" href="audit.html#audit-s5-6">仍然成立</a>
         </div>
+        <details class="lesson-audit">
+          <summary>审计依据 · <time datetime="2026-10">2026-10</time></summary>
+          <p>三种方式与 allowBuilds 流程来自教程；pnpm 版本行为以官方文档为准。 <a href="audit.html#audit-s5-6">查看本节审计记录</a></p>
+        </details>
         <div class="block">
           <div class="label">学习目标</div>
           <p>选对三种分发方式，并避免 Git 安装的构建授权坑。</p>
@@ -304,6 +351,7 @@
           <div class="label">动手任务</div>
           <p>用 <code>pnpm pack</code> 打一个 tarball，在干净 profile 里安装并验证工具可调用；再对比 Git 安装第一次失败的提示，写出授权修复步骤。</p>
         </div>
+        
         <div class="block check">
           <div class="label">自检</div>
           <div class="qa"><details><summary>为什么 Git 安装 TypeScript 包会失败？</summary><div class="a">Git 拉的是源码，没有任何环节自动运行 build，TypeScript 包没有 lib/ 输出；作者要提供 prepare，用户要允许构建。</div></details>
@@ -313,7 +361,7 @@
           <button class="done-btn" type="button" data-done-id="s5-6" aria-pressed="false">
             <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
           </button>
-          <span class="note">进度保存在本机浏览器</span>
+          <span class="note" data-progress-note>进度保存在本机浏览器</span>
         </div>
         <nav class="chapter-nav" aria-label="章节翻页">
           <a class="prev" href="stage-5.html#s5-5"><span class="dir">上一节</span><span class="t">5.5 安装插件与配置加载顺序</span></a>
@@ -332,7 +380,7 @@
     <div class="footer-in">
       <div>
         <p>蓝本：<a href="https://www.runoob.com/deepseek-harness/deepseek-harness-tutorial.html" target="_blank" rel="noopener">runoob · DeepSeek Harness 教程</a>。本站为学习导读与审计，不复制原文全文；原文版权归原站点所有。</p>
-        <p>代码 MIT；本站原创文字 CC BY-NC-SA 4.0（<a href="../LICENSE">LICENSE</a> / <a href="../LICENSE-CONTENT.md">LICENSE-CONTENT</a>）。审计时间 2026-10，产品处于预览版，信息以官方为准。</p>
+        <p>代码 MIT；本站原创文字 CC BY-NC-SA 4.0（<a href="LICENSE">LICENSE</a> / <a href="LICENSE-CONTENT.md">LICENSE-CONTENT</a>）。审计时间 2026-10，产品处于预览版，信息以官方为准。</p>
       </div>
       <div>
         <h3>阅读</h3>
@@ -347,7 +395,7 @@
         <ul>
           <li><a href="audit.html">内容审计</a></li>
           <li><a href="about.html">来源、许可与维护</a></li>
-          <li><a href="../index.html">返回 AI Agent 学习站</a></li>
+          <li><a href="https://luozawa.github.io/dopamine-agent-lab/">返回 AI Agent 学习站</a></li>
         </ul>
       </div>
     </div>

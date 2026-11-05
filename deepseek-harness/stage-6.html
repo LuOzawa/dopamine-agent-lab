@@ -28,6 +28,7 @@
     </div>
   </div>
 </header>
+<div class="storage-notice" data-storage-notice role="status" hidden></div>
 <main id="main">
   <div class="page-head">
     <div class="wrap">
@@ -43,6 +44,16 @@
       </div>
     </div>
   </div>
+  <nav class="mobile-toc" aria-label="本章目录">
+    <details>
+      <summary><span>本章目录</span><span class="toc-current" data-toc-current>6.1 工具执行流水线与权限门禁</span></summary>
+      <ol><li><a href="#s6-1"><span class="n">6.1</span> <span>工具执行流水线与权限门禁</span></a></li>
+<li><a href="#s6-2"><span class="n">6.2</span> <span>沙箱与审批：失败关闭</span></a></li>
+<li><a href="#s6-3"><span class="n">6.3</span> <span>会话日志与轮次生命周期</span></a></li>
+<li><a href="#s6-4"><span class="n">6.4</span> <span>防御性编程：五个边界模式</span></a></li>
+<li><a href="#s6-5"><span class="n">6.5</span> <span>事故复盘与工程文化</span></a></li></ol>
+    </details>
+  </nav>
   <div class="wrap layout">
     <nav class="toc" aria-label="本阶段目录">
         <h2>本阶段目录</h2>
@@ -54,7 +65,7 @@
         <p class="toc-note">完成一节就点卡片底部「标记完成」，进度只存本机。</p>
       </nav>
     <div>
-            <article class="lesson" id="s6-1">
+            <article class="lesson" id="s6-1" tabindex="-1">
         <div class="lesson-head">
           <span class="lesson-no">6.1</span>
           <h2>工具执行流水线与权限门禁</h2>
@@ -62,7 +73,12 @@
         <div class="lesson-meta">
           <span>约 45 分钟</span><span>运行时</span>
           <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-tool-pipeline.html" target="_blank" rel="noopener">原文 ↗</a>
+          <a class="status ok" href="audit.html#audit-s6-1">仍然成立</a>
         </div>
+        <details class="lesson-audit">
+          <summary>审计依据 · <time datetime="2026-10">2026-10</time></summary>
+          <p>流水线顺序与决策类型来自教程；钩子 API 以当前 dsh-tools 类型为准。 <a href="audit.html#audit-s6-1">查看本节审计记录</a></p>
+        </details>
         <div class="block">
           <div class="label">学习目标</div>
           <p>说出一次工具调用的完整环节，并用 pre-execute / guard 做权限门禁。</p>
@@ -83,6 +99,7 @@
           <div class="label">动手任务</div>
           <p>写 permission-gate：命中 <code>fs_write</code> 或参数包含 <code>.env</code> 时 deny，否则 next()。验证被拒绝的调用返回可读错误，而工具主体没有执行。</p>
         </div>
+        
         <div class="block check">
           <div class="label">自检</div>
           <div class="qa"><details><summary>guard 为什么没有 allow？</summary><div class="a">它是不变式的最终防线，只允许缩减权限；如果能有 allow，后注册的监听器就能推翻前面的拒绝。</div></details>
@@ -92,13 +109,13 @@
           <button class="done-btn" type="button" data-done-id="s6-1" aria-pressed="false">
             <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
           </button>
-          <span class="note">进度保存在本机浏览器</span>
+          <span class="note" data-progress-note>进度保存在本机浏览器</span>
         </div>
         <nav class="chapter-nav" aria-label="章节翻页">
           <a class="prev" href="stage-5.html#s5-6"><span class="dir">上一节</span><span class="t">5.6 发布插件：npm、tarball 与 Git</span></a>
           <a class="next" href="stage-6.html#s6-2"><span class="dir">下一节</span><span class="t">6.2 沙箱与审批：失败关闭</span></a>
         </nav>
-      </article>      <article class="lesson" id="s6-2">
+      </article>      <article class="lesson" id="s6-2" tabindex="-1">
         <div class="lesson-head">
           <span class="lesson-no">6.2</span>
           <h2>沙箱与审批：失败关闭</h2>
@@ -106,7 +123,12 @@
         <div class="lesson-meta">
           <span>约 45 分钟</span><span>安全</span>
           <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-sandbox-approval.html" target="_blank" rel="noopener">原文 ↗</a>
+          <a class="status ok" href="audit.html#audit-s6-2">仍然成立</a>
         </div>
+        <details class="lesson-audit">
+          <summary>审计依据 · <time datetime="2026-10">2026-10</time></summary>
+          <p>沙箱模式、enforcement 与审批结果来自教程；平台差异以官方安全文档为准。 <a href="audit.html#audit-s6-2">查看本节审计记录</a></p>
+        </details>
         <div class="block">
           <div class="label">学习目标</div>
           <p>解释 sandbox 与 approval 的分工，并验证「无后端/无应答者 = 拒绝」。</p>
@@ -127,6 +149,7 @@
           <div class="label">动手任务</div>
           <p>在 read-only 下跑一条写入命令，记录拒绝路径；切到 workspace-write 再试。然后模拟审批无应答者，确认结果是拒绝而不是放行。</p>
         </div>
+        
         <div class="block check">
           <div class="label">自检</div>
           <div class="qa"><details><summary>partial enforcement 怎么处理？</summary><div class="a">要求绝对边界时按「不够」处理，拒绝执行或向上暴露差异；不能把部分管控当成完整边界。</div></details>
@@ -136,13 +159,13 @@
           <button class="done-btn" type="button" data-done-id="s6-2" aria-pressed="false">
             <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
           </button>
-          <span class="note">进度保存在本机浏览器</span>
+          <span class="note" data-progress-note>进度保存在本机浏览器</span>
         </div>
         <nav class="chapter-nav" aria-label="章节翻页">
           <a class="prev" href="stage-6.html#s6-1"><span class="dir">上一节</span><span class="t">6.1 工具执行流水线与权限门禁</span></a>
           <a class="next" href="stage-6.html#s6-3"><span class="dir">下一节</span><span class="t">6.3 会话日志与轮次生命周期</span></a>
         </nav>
-      </article>      <article class="lesson" id="s6-3">
+      </article>      <article class="lesson" id="s6-3" tabindex="-1">
         <div class="lesson-head">
           <span class="lesson-no">6.3</span>
           <h2>会话日志与轮次生命周期</h2>
@@ -150,7 +173,12 @@
         <div class="lesson-meta">
           <span>约 45 分钟</span><span>可观测</span>
           <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-session-turn.html" target="_blank" rel="noopener">原文 ↗</a>
+          <a class="status ok" href="audit.html#audit-s6-3">仍然成立</a>
         </div>
+        <details class="lesson-audit">
+          <summary>审计依据 · <time datetime="2026-10">2026-10</time></summary>
+          <p>会话事件与投影规则来自教程；事件字段以当前 SessionEvent 类型为准。 <a href="audit.html#audit-s6-3">查看本节审计记录</a></p>
+        </details>
         <div class="block">
           <div class="label">学习目标</div>
           <p>解释「模型可见即已记录」，并从 JSONL 还原一次轮次。</p>
@@ -171,6 +199,7 @@
           <div class="label">动手任务</div>
           <p>解析一段 JSONL：列出 turn/start、step/start、tool/call、tool/result 与最终 assistant/message；再用 <code>deriveMessages()</code> 的规则解释哪些事件不会进历史。</p>
         </div>
+        
         <div class="block check">
           <div class="label">自检</div>
           <div class="qa"><details><summary>为什么历史不单独存？</summary><div class="a">单独存储会出现两份真源，回放/分叉/检索容易不一致；从同一份事件日志派生，才能保证可重建。</div></details>
@@ -180,13 +209,13 @@
           <button class="done-btn" type="button" data-done-id="s6-3" aria-pressed="false">
             <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
           </button>
-          <span class="note">进度保存在本机浏览器</span>
+          <span class="note" data-progress-note>进度保存在本机浏览器</span>
         </div>
         <nav class="chapter-nav" aria-label="章节翻页">
           <a class="prev" href="stage-6.html#s6-2"><span class="dir">上一节</span><span class="t">6.2 沙箱与审批：失败关闭</span></a>
           <a class="next" href="stage-6.html#s6-4"><span class="dir">下一节</span><span class="t">6.4 防御性编程：五个边界模式</span></a>
         </nav>
-      </article>      <article class="lesson" id="s6-4">
+      </article>      <article class="lesson" id="s6-4" tabindex="-1">
         <div class="lesson-head">
           <span class="lesson-no">6.4</span>
           <h2>防御性编程：五个边界模式</h2>
@@ -194,7 +223,12 @@
         <div class="lesson-meta">
           <span>约 40 分钟</span><span>工程</span>
           <a href="https://www.runoob.com/deepseek-harness/deeseek-harness-defensive-patterns.html" target="_blank" rel="noopener">原文 ↗</a>
+          <a class="status ok" href="audit.html#audit-s6-4">仍然成立</a>
         </div>
+        <details class="lesson-audit">
+          <summary>审计依据 · <time datetime="2026-10">2026-10</time></summary>
+          <p>五个模式与示例来自教程；原文标题拼写为「DeeSeek」，本站更正为 DeepSeek。 <a href="audit.html#audit-s6-4">查看本节审计记录</a></p>
+        </details>
         <div class="block">
           <div class="label">学习目标</div>
           <p>应用五个防御模式，避免一个边界情况拖垮整个 Agent。</p>
@@ -215,6 +249,7 @@
           <div class="label">动手任务</div>
           <p>给一个子进程封装加三个独立字段（timedOut / signal / exitCode），写三条断言：超时但 exitCode=0、被信号终止、正常退出。再故意让一个回调抛错，确认主流程继续。</p>
         </div>
+        
         <div class="block check">
           <div class="label">自检</div>
           <div class="qa"><details><summary>为什么 exitCode=0 仍可能超时？</summary><div class="a">进程可能捕获了终止信号并以 0 退出；只看退出码会把「被强杀但掩盖了」误判为成功。</div></details>
@@ -224,13 +259,13 @@
           <button class="done-btn" type="button" data-done-id="s6-4" aria-pressed="false">
             <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
           </button>
-          <span class="note">进度保存在本机浏览器</span>
+          <span class="note" data-progress-note>进度保存在本机浏览器</span>
         </div>
         <nav class="chapter-nav" aria-label="章节翻页">
           <a class="prev" href="stage-6.html#s6-3"><span class="dir">上一节</span><span class="t">6.3 会话日志与轮次生命周期</span></a>
           <a class="next" href="stage-6.html#s6-5"><span class="dir">下一节</span><span class="t">6.5 事故复盘与工程文化</span></a>
         </nav>
-      </article>      <article class="lesson" id="s6-5">
+      </article>      <article class="lesson" id="s6-5" tabindex="-1">
         <div class="lesson-head">
           <span class="lesson-no">6.5</span>
           <h2>事故复盘与工程文化</h2>
@@ -238,7 +273,12 @@
         <div class="lesson-meta">
           <span>约 35 分钟</span><span>工程</span>
           <a href="https://www.runoob.com/deepseek-harness/deeseek-harness-postmortem.html" target="_blank" rel="noopener">原文 ↗</a>
+          <a class="status ok" href="audit.html#audit-s6-5">仍然成立</a>
         </div>
+        <details class="lesson-audit">
+          <summary>审计依据 · <time datetime="2026-10">2026-10</time></summary>
+          <p>四问、四个案例与测试分层来自教程；原文标题拼写为「DeeSeek」，本站更正。 <a href="audit.html#audit-s6-5">查看本节审计记录</a></p>
+        </details>
         <div class="block">
           <div class="label">学习目标</div>
           <p>用「四问」写一份复盘，并说明为什么 100% 覆盖率仍会漏掉集成 bug。</p>
@@ -259,6 +299,7 @@
           <div class="label">动手任务</div>
           <p>选一个你遇到的 bug，按四问写 300 字复盘；至少补一条可执行防护（测试、规则或类型约束），并说明它能拦住哪一类复发。</p>
         </div>
+        
         <div class="block check">
           <div class="label">自检</div>
           <div class="qa"><details><summary>为什么 100% 覆盖率仍漏 bug？</summary><div class="a">覆盖率只证明行被执行；如果测试都走 mock 或手动挂载，真实入口、真实 Loader、真实浏览器路径可能从未被覆盖。</div></details>
@@ -268,7 +309,7 @@
           <button class="done-btn" type="button" data-done-id="s6-5" aria-pressed="false">
             <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
           </button>
-          <span class="note">进度保存在本机浏览器</span>
+          <span class="note" data-progress-note>进度保存在本机浏览器</span>
         </div>
         <nav class="chapter-nav" aria-label="章节翻页">
           <a class="prev" href="stage-6.html#s6-4"><span class="dir">上一节</span><span class="t">6.4 防御性编程：五个边界模式</span></a>
@@ -287,7 +328,7 @@
     <div class="footer-in">
       <div>
         <p>蓝本：<a href="https://www.runoob.com/deepseek-harness/deepseek-harness-tutorial.html" target="_blank" rel="noopener">runoob · DeepSeek Harness 教程</a>。本站为学习导读与审计，不复制原文全文；原文版权归原站点所有。</p>
-        <p>代码 MIT；本站原创文字 CC BY-NC-SA 4.0（<a href="../LICENSE">LICENSE</a> / <a href="../LICENSE-CONTENT.md">LICENSE-CONTENT</a>）。审计时间 2026-10，产品处于预览版，信息以官方为准。</p>
+        <p>代码 MIT；本站原创文字 CC BY-NC-SA 4.0（<a href="LICENSE">LICENSE</a> / <a href="LICENSE-CONTENT.md">LICENSE-CONTENT</a>）。审计时间 2026-10，产品处于预览版，信息以官方为准。</p>
       </div>
       <div>
         <h3>阅读</h3>
@@ -302,7 +343,7 @@
         <ul>
           <li><a href="audit.html">内容审计</a></li>
           <li><a href="about.html">来源、许可与维护</a></li>
-          <li><a href="../index.html">返回 AI Agent 学习站</a></li>
+          <li><a href="https://luozawa.github.io/dopamine-agent-lab/">返回 AI Agent 学习站</a></li>
         </ul>
       </div>
     </div>

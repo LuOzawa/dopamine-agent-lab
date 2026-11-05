@@ -28,6 +28,7 @@
     </div>
   </div>
 </header>
+<div class="storage-notice" data-storage-notice role="status" hidden></div>
 <main id="main">
   <div class="page-head">
     <div class="wrap">
@@ -43,6 +44,19 @@
       </div>
     </div>
   </div>
+  <nav class="mobile-toc" aria-label="本章目录">
+    <details>
+      <summary><span>本章目录</span><span class="toc-current" data-toc-current>3.1 第一个插件：apply(ctx) 与三种形态</span></summary>
+      <ol><li><a href="#s3-1"><span class="n">3.1</span> <span>第一个插件：apply(ctx) 与三种形态</span></a></li>
+<li><a href="#s3-2"><span class="n">3.2</span> <span>加载本地插件：cordis.yml + --patch</span></a></li>
+<li><a href="#s3-3"><span class="n">3.3</span> <span>自动清理：ctx.effect 与资源账本</span></a></li>
+<li><a href="#s3-4"><span class="n">3.4</span> <span>声明依赖：inject 与可选服务</span></a></li>
+<li><a href="#s3-5"><span class="n">3.5</span> <span>第一个工具：defineTool</span></a></li>
+<li><a href="#s3-6"><span class="n">3.6</span> <span>插件配置：Config 与 Schemastery</span></a></li>
+<li><a href="#s3-7"><span class="n">3.7</span> <span>生命周期：Fiber 状态机</span></a></li>
+<li><a href="#s3-8"><span class="n">3.8</span> <span>依赖驱动加载与嵌套上下文</span></a></li></ol>
+    </details>
+  </nav>
   <div class="wrap layout">
     <nav class="toc" aria-label="本阶段目录">
         <h2>本阶段目录</h2>
@@ -57,7 +71,7 @@
         <p class="toc-note">完成一节就点卡片底部「标记完成」，进度只存本机。</p>
       </nav>
     <div>
-            <article class="lesson" id="s3-1">
+            <article class="lesson" id="s3-1" tabindex="-1">
         <div class="lesson-head">
           <span class="lesson-no">3.1</span>
           <h2>第一个插件：apply(ctx) 与三种形态</h2>
@@ -65,7 +79,12 @@
         <div class="lesson-meta">
           <span>约 35 分钟</span><span>插件</span>
           <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-first-plugin.html" target="_blank" rel="noopener">原文 ↗</a>
+          <a class="status ok" href="audit.html#audit-s3-1">仍然成立</a>
         </div>
+        <details class="lesson-audit">
+          <summary>审计依据 · <time datetime="2026-10">2026-10</time></summary>
+          <p>与教程及官方事故复盘 0001 的描述一致。 <a href="audit.html#audit-s3-1">查看本节审计记录</a></p>
+        </details>
         <div class="block">
           <div class="label">学习目标</div>
           <p>写出最小插件，理解 ctx 的作用，并避开 default export 丢 inject 的坑。</p>
@@ -86,6 +105,22 @@
           <div class="label">动手任务</div>
           <p>写一个 hello-plugin，加载时打印日志；再改成对象形态并声明 <code>inject: ['tools']</code>，用 dump-config 或日志确认 inject 没有丢。</p>
         </div>
+        <section class="block practice" aria-labelledby="s3-1-practice">
+          <h3 id="s3-1-practice">跟着做</h3>
+          <p>从已完成安装和构建的官方源码目录开始。这个插件只输出加载日志，不依赖模型或 API Key。</p>
+          <ol><li>在源码根目录创建 scratch-plugin/src 目录。</li><li>将下面的完整模块保存为 scratch-plugin/src/study-plugin.ts。</li><li>接着按 3.2 的配置加载它；仅保存文件不会自动加载插件。</li></ol>
+          <div class="code-example">
+          <div class="code-head"><span id="s3-1-code-1-label">scratch-plugin/src/study-plugin.ts</span><button class="copy-btn" type="button" data-copy="s3-1-code-1" aria-label="复制：scratch-plugin/src/study-plugin.ts" hidden>复制代码</button></div>
+          <pre tabindex="0" aria-labelledby="s3-1-code-1-label"><code id="s3-1-code-1" class="language-ts">export const name = &#x27;study-plugin&#x27;
+
+export function apply() {
+  console.log(&#x27;[study-plugin] ready&#x27;)
+}</code></pre>
+        </div>
+          <h4>预期结果</h4><p>完成 3.2 的加载后，终端出现 [study-plugin] ready。当前示例没有注册工具，工具列表不增加条目。</p>
+          <details class="practice-errors"><summary>没有得到预期结果？</summary><ul><li>没有日志：先检查是否传入 3.2 的 patch 文件。</li><li>模块无法解析：确认文件名与配置中的绝对路径一致。</li><li>只有文件保存成功：继续完成加载步骤，再判断插件是否工作。</li></ul></details>
+          <p class="example-source">文档对照：<time datetime="2026-11-05">2026-11-05</time> · <a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/user/develop/basic/index.md" target="_blank" rel="noopener">官方示例与说明</a>。示例未在你的环境或真实模型端点运行。</p>
+        </section>
         <div class="block check">
           <div class="label">自检</div>
           <div class="qa"><details><summary>ctx 到底是什么？</summary><div class="a">框架传给插件的上下文对象：你通过它注册事件、工具、服务，它也记录这些注册，卸载时按作用域清理。</div></details>
@@ -95,13 +130,13 @@
           <button class="done-btn" type="button" data-done-id="s3-1" aria-pressed="false">
             <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
           </button>
-          <span class="note">进度保存在本机浏览器</span>
+          <span class="note" data-progress-note>进度保存在本机浏览器</span>
         </div>
         <nav class="chapter-nav" aria-label="章节翻页">
           <a class="prev" href="stage-2.html#s2-6"><span class="dir">上一节</span><span class="t">2.6 四种运行模式：标准 / PTC / 极简 / 创造</span></a>
           <a class="next" href="stage-3.html#s3-2"><span class="dir">下一节</span><span class="t">3.2 加载本地插件：cordis.yml + --patch</span></a>
         </nav>
-      </article>      <article class="lesson" id="s3-2">
+      </article>      <article class="lesson" id="s3-2" tabindex="-1">
         <div class="lesson-head">
           <span class="lesson-no">3.2</span>
           <h2>加载本地插件：cordis.yml + --patch</h2>
@@ -109,7 +144,12 @@
         <div class="lesson-meta">
           <span>约 30 分钟</span><span>插件</span>
           <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-load-plugin.html" target="_blank" rel="noopener">原文 ↗</a>
+          <a class="status ok" href="audit.html#audit-s3-2">仍然成立</a>
         </div>
+        <details class="lesson-audit">
+          <summary>审计依据 · <time datetime="2026-10">2026-10</time></summary>
+          <p>路径与 patch 行为来自教程；不同版本的 Loader 报错文案可能不同。 <a href="audit.html#audit-s3-2">查看本节审计记录</a></p>
+        </details>
         <div class="block">
           <div class="label">学习目标</div>
           <p>用 patch overlay 把本地插件加载进 Web UI，并解释 profile 与 patch 的分工。</p>
@@ -130,6 +170,23 @@
           <div class="label">动手任务</div>
           <p>加载 hello 插件，确认三件事：终端出现加载日志、插件列表能看到它、dump-config 里有对应层。然后把插件路径改成相对路径，观察失败。</p>
         </div>
+        <section class="block practice" aria-labelledby="s3-2-practice">
+          <h3 id="s3-2-practice">跟着做</h3>
+          <p>延续 3.1 的 study-plugin.ts。在官方源码根目录执行 pwd，取得实际绝对路径，并替换 YAML 中的 /absolute/path/to/deepseek-harness。</p>
+          <ol><li>将第一段保存为 scratch-plugin/cordis.yml，替换绝对路径前缀。</li><li>在已构建的源码根目录执行第二段命令。</li><li>查看终端加载日志，再核对 Web UI。</li></ol>
+          <div class="code-example">
+          <div class="code-head"><span id="s3-2-code-1-label">scratch-plugin/cordis.yml</span><button class="copy-btn" type="button" data-copy="s3-2-code-1" aria-label="复制：scratch-plugin/cordis.yml" hidden>复制代码</button></div>
+          <pre tabindex="0" aria-labelledby="s3-2-code-1-label"><code id="s3-2-code-1" class="language-yaml">- insert:
+    - id: study-hello
+      name: &#x27;/absolute/path/to/deepseek-harness/scratch-plugin/src/study-plugin.ts&#x27;</code></pre>
+        </div><div class="code-example">
+          <div class="code-head"><span id="s3-2-code-2-label">终端 · 加载插件</span><button class="copy-btn" type="button" data-copy="s3-2-code-2" aria-label="复制：终端 · 加载插件" hidden>复制代码</button></div>
+          <pre tabindex="0" aria-labelledby="s3-2-code-2-label"><code id="s3-2-code-2" class="language-sh">pnpm dsh web --patch ./scratch-plugin/cordis.yml</code></pre>
+        </div>
+          <h4>预期结果</h4><p>终端输出 [study-plugin] ready，Web UI 能打开；停止该次启动后，插件不会凭此 patch 自动加入其它启动配置。</p>
+          <details class="practice-errors"><summary>没有得到预期结果？</summary><ul><li>模块不存在：确认替换了 /absolute/path/to/deepseek-harness，并检查文件确实存在。</li><li>YAML 解析失败：使用空格缩进，不要混入 Tab。</li><li>缺少构建产物：先在官方源码目录完成 pnpm install 和 pnpm run build。</li></ul></details>
+          <p class="example-source">文档对照：<time datetime="2026-11-05">2026-11-05</time> · <a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/user/develop/basic/index.md#register-it-in-cordisyml" target="_blank" rel="noopener">官方示例与说明</a>。示例未在你的环境或真实模型端点运行。</p>
+        </section>
         <div class="block check">
           <div class="label">自检</div>
           <div class="qa"><details><summary>为什么必须是绝对路径？</summary><div class="a">Loader 解析模块时以 profile 目录为基准，相对路径会指到错误位置；patch 本身不会改变这个基准。</div></details>
@@ -139,13 +196,13 @@
           <button class="done-btn" type="button" data-done-id="s3-2" aria-pressed="false">
             <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
           </button>
-          <span class="note">进度保存在本机浏览器</span>
+          <span class="note" data-progress-note>进度保存在本机浏览器</span>
         </div>
         <nav class="chapter-nav" aria-label="章节翻页">
           <a class="prev" href="stage-3.html#s3-1"><span class="dir">上一节</span><span class="t">3.1 第一个插件：apply(ctx) 与三种形态</span></a>
           <a class="next" href="stage-3.html#s3-3"><span class="dir">下一节</span><span class="t">3.3 自动清理：ctx.effect 与资源账本</span></a>
         </nav>
-      </article>      <article class="lesson" id="s3-3">
+      </article>      <article class="lesson" id="s3-3" tabindex="-1">
         <div class="lesson-head">
           <span class="lesson-no">3.3</span>
           <h2>自动清理：ctx.effect 与资源账本</h2>
@@ -153,7 +210,12 @@
         <div class="lesson-meta">
           <span>约 30 分钟</span><span>生命周期</span>
           <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-effects.html" target="_blank" rel="noopener">原文 ↗</a>
+          <a class="status ok" href="audit.html#audit-s3-3">仍然成立</a>
         </div>
+        <details class="lesson-audit">
+          <summary>审计依据 · <time datetime="2026-10">2026-10</time></summary>
+          <p>清理机制与异步处置器行为来自教程；具体 disposer 调度以 Cordis 当前实现为准。 <a href="audit.html#audit-s3-3">查看本节审计记录</a></p>
+        </details>
         <div class="block">
           <div class="label">学习目标</div>
           <p>用 ctx.effect 管理定时器等外部资源，并验证插件卸载后资源真的停止。</p>
@@ -174,6 +236,7 @@
           <div class="label">动手任务</div>
           <p>写一个每 5 秒打印心跳的插件，加载后卸载；观察 15 秒内是否还有输出。再把定时器改成不返回 disposer，复现泄漏。</p>
         </div>
+        
         <div class="block check">
           <div class="label">自检</div>
           <div class="qa"><details><summary>通过 ctx 注册的定时器还要手动 clearInterval 吗？</summary><div class="a">如果定时器是通过 <code>ctx.effect</code> 创建并返回 disposer，不需要；直接使用 Node API 创建而不交给 ctx 的，框架不一定能追踪。</div></details>
@@ -183,13 +246,13 @@
           <button class="done-btn" type="button" data-done-id="s3-3" aria-pressed="false">
             <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
           </button>
-          <span class="note">进度保存在本机浏览器</span>
+          <span class="note" data-progress-note>进度保存在本机浏览器</span>
         </div>
         <nav class="chapter-nav" aria-label="章节翻页">
           <a class="prev" href="stage-3.html#s3-2"><span class="dir">上一节</span><span class="t">3.2 加载本地插件：cordis.yml + --patch</span></a>
           <a class="next" href="stage-3.html#s3-4"><span class="dir">下一节</span><span class="t">3.4 声明依赖：inject 与可选服务</span></a>
         </nav>
-      </article>      <article class="lesson" id="s3-4">
+      </article>      <article class="lesson" id="s3-4" tabindex="-1">
         <div class="lesson-head">
           <span class="lesson-no">3.4</span>
           <h2>声明依赖：inject 与可选服务</h2>
@@ -197,7 +260,12 @@
         <div class="lesson-meta">
           <span>约 30 分钟</span><span>依赖</span>
           <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-inject.html" target="_blank" rel="noopener">原文 ↗</a>
+          <a class="status ok" href="audit.html#audit-s3-4">仍然成立</a>
         </div>
+        <details class="lesson-audit">
+          <summary>审计依据 · <time datetime="2026-10">2026-10</time></summary>
+          <p>必需/可选依赖与服务消失行为与教程一致。 <a href="audit.html#audit-s3-4">查看本节审计记录</a></p>
+        </details>
         <div class="block">
           <div class="label">学习目标</div>
           <p>区分必需依赖与可选依赖，并解释服务消失后插件为什么会自动重载。</p>
@@ -218,6 +286,7 @@
           <div class="label">动手任务</div>
           <p>给插件加一个可选的 metrics 依赖：没有服务时正常加载并跳过记录；有服务时调用 <code>record</code>。再用 dump-config 确认依赖声明。</p>
         </div>
+        
         <div class="block check">
           <div class="label">自检</div>
           <div class="qa"><details><summary>PENDING 是错误吗？</summary><div class="a">不是。它表示插件已声明但依赖未就绪；依赖一直不来就一直等。若配置错误则会进入 FAILED，两者要分开看。</div></details>
@@ -227,13 +296,13 @@
           <button class="done-btn" type="button" data-done-id="s3-4" aria-pressed="false">
             <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
           </button>
-          <span class="note">进度保存在本机浏览器</span>
+          <span class="note" data-progress-note>进度保存在本机浏览器</span>
         </div>
         <nav class="chapter-nav" aria-label="章节翻页">
           <a class="prev" href="stage-3.html#s3-3"><span class="dir">上一节</span><span class="t">3.3 自动清理：ctx.effect 与资源账本</span></a>
           <a class="next" href="stage-3.html#s3-5"><span class="dir">下一节</span><span class="t">3.5 第一个工具：defineTool</span></a>
         </nav>
-      </article>      <article class="lesson" id="s3-5">
+      </article>      <article class="lesson" id="s3-5" tabindex="-1">
         <div class="lesson-head">
           <span class="lesson-no">3.5</span>
           <h2>第一个工具：defineTool</h2>
@@ -241,7 +310,12 @@
         <div class="lesson-meta">
           <span>约 35 分钟</span><span>工具</span>
           <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-define-tool.html" target="_blank" rel="noopener">原文 ↗</a>
+          <a class="status ok" href="audit.html#audit-s3-5">仍然成立</a>
         </div>
+        <details class="lesson-audit">
+          <summary>审计依据 · <time datetime="2026-10">2026-10</time></summary>
+          <p>defineTool 字段与行为来自教程；复杂 schema 能力以 &lt;code&gt;@deepseek-ai/dsh-tools&lt;/code&gt; 类型为准。 <a href="audit.html#audit-s3-5">查看本节审计记录</a></p>
+        </details>
         <div class="block">
           <div class="label">学习目标</div>
           <p>用 defineTool 定义 greet 工具，让模型真正调用，并理解 schema 如何进入提示词。</p>
@@ -262,6 +336,7 @@
           <div class="label">动手任务</div>
           <p>写一个 <code>word_count</code> 工具：输入文本，返回字符数与词数；测试空串、超长文本、缺参数三种情况，记录错误是否可读。</p>
         </div>
+        
         <div class="block check">
           <div class="label">自检</div>
           <div class="qa"><details><summary>规范值和渲染内容有什么区别？</summary><div class="a">规范值是 execute 返回、output.schema 声明的结构化值；渲染内容是模型看到的形式。前者用于校验与审计，后者用于展示。</div></details>
@@ -271,13 +346,13 @@
           <button class="done-btn" type="button" data-done-id="s3-5" aria-pressed="false">
             <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
           </button>
-          <span class="note">进度保存在本机浏览器</span>
+          <span class="note" data-progress-note>进度保存在本机浏览器</span>
         </div>
         <nav class="chapter-nav" aria-label="章节翻页">
           <a class="prev" href="stage-3.html#s3-4"><span class="dir">上一节</span><span class="t">3.4 声明依赖：inject 与可选服务</span></a>
           <a class="next" href="stage-3.html#s3-6"><span class="dir">下一节</span><span class="t">3.6 插件配置：Config 与 Schemastery</span></a>
         </nav>
-      </article>      <article class="lesson" id="s3-6">
+      </article>      <article class="lesson" id="s3-6" tabindex="-1">
         <div class="lesson-head">
           <span class="lesson-no">3.6</span>
           <h2>插件配置：Config 与 Schemastery</h2>
@@ -285,7 +360,12 @@
         <div class="lesson-meta">
           <span>约 30 分钟</span><span>配置</span>
           <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-plugin-config.html" target="_blank" rel="noopener">原文 ↗</a>
+          <a class="status ok" href="audit.html#audit-s3-6">仍然成立</a>
         </div>
+        <details class="lesson-audit">
+          <summary>审计依据 · <time datetime="2026-10">2026-10</time></summary>
+          <p>Config/schema 约定与 HMR 行为来自教程。 <a href="audit.html#audit-s3-6">查看本节审计记录</a></p>
+        </details>
         <div class="block">
           <div class="label">学习目标</div>
           <p>用 Config 接口 + 同名 schema 接收配置，并让非法配置在加载时失败。</p>
@@ -306,6 +386,7 @@
           <div class="label">动手任务</div>
           <p>给 greet 加 <code>greeting</code> 与 <code>maxRetries</code> 两个配置：测默认值、cordis.yml 覆盖、非法类型三组，确认错误发生在加载时。</p>
         </div>
+        
         <div class="block check">
           <div class="label">自检</div>
           <div class="qa"><details><summary>为什么不能导出普通对象作为 Config？</summary><div class="a">Cordis 要求 Standard Schema 接口，普通对象没有校验与默认值能力，加载时不会按预期处理。</div></details>
@@ -315,13 +396,13 @@
           <button class="done-btn" type="button" data-done-id="s3-6" aria-pressed="false">
             <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
           </button>
-          <span class="note">进度保存在本机浏览器</span>
+          <span class="note" data-progress-note>进度保存在本机浏览器</span>
         </div>
         <nav class="chapter-nav" aria-label="章节翻页">
           <a class="prev" href="stage-3.html#s3-5"><span class="dir">上一节</span><span class="t">3.5 第一个工具：defineTool</span></a>
           <a class="next" href="stage-3.html#s3-7"><span class="dir">下一节</span><span class="t">3.7 生命周期：Fiber 状态机</span></a>
         </nav>
-      </article>      <article class="lesson" id="s3-7">
+      </article>      <article class="lesson" id="s3-7" tabindex="-1">
         <div class="lesson-head">
           <span class="lesson-no">3.7</span>
           <h2>生命周期：Fiber 状态机</h2>
@@ -329,7 +410,12 @@
         <div class="lesson-meta">
           <span>约 35 分钟</span><span>生命周期</span>
           <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-lifecycle.html" target="_blank" rel="noopener">原文 ↗</a>
+          <a class="status ok" href="audit.html#audit-s3-7">仍然成立</a>
         </div>
+        <details class="lesson-audit">
+          <summary>审计依据 · <time datetime="2026-10">2026-10</time></summary>
+          <p>状态机与清理顺序来自教程；Cordis 后续版本可能增加状态。 <a href="audit.html#audit-s3-7">查看本节审计记录</a></p>
+        </details>
         <div class="block">
           <div class="label">学习目标</div>
           <p>说出 Fiber 的状态流转，并能用状态区分「缺依赖」与「加载失败」。</p>
@@ -350,6 +436,7 @@
           <div class="label">动手任务</div>
           <p>在插件里打印 <code>ctx.fiber.state</code>。分别制造「缺依赖」与「配置类型错误」，记录两次状态与日志差异。</p>
         </div>
+        
         <div class="block check">
           <div class="label">自检</div>
           <div class="qa"><details><summary>PENDING 和 FAILED 怎么区分？</summary><div class="a">PENDING 是等待依赖，通常日志安静；FAILED 是初始化或配置校验抛错，会有明确错误。先看错误信息，不要盲目加依赖。</div></details>
@@ -359,13 +446,13 @@
           <button class="done-btn" type="button" data-done-id="s3-7" aria-pressed="false">
             <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
           </button>
-          <span class="note">进度保存在本机浏览器</span>
+          <span class="note" data-progress-note>进度保存在本机浏览器</span>
         </div>
         <nav class="chapter-nav" aria-label="章节翻页">
           <a class="prev" href="stage-3.html#s3-6"><span class="dir">上一节</span><span class="t">3.6 插件配置：Config 与 Schemastery</span></a>
           <a class="next" href="stage-3.html#s3-8"><span class="dir">下一节</span><span class="t">3.8 依赖驱动加载与嵌套上下文</span></a>
         </nav>
-      </article>      <article class="lesson" id="s3-8">
+      </article>      <article class="lesson" id="s3-8" tabindex="-1">
         <div class="lesson-head">
           <span class="lesson-no">3.8</span>
           <h2>依赖驱动加载与嵌套上下文</h2>
@@ -373,7 +460,12 @@
         <div class="lesson-meta">
           <span>约 30 分钟</span><span>依赖</span>
           <a href="https://www.runoob.com/deepseek-harness/deepseek-harness-nested-reload.html" target="_blank" rel="noopener">原文 ↗</a>
+          <a class="status ok" href="audit.html#audit-s3-8">仍然成立</a>
         </div>
+        <details class="lesson-audit">
+          <summary>审计依据 · <time datetime="2026-10">2026-10</time></summary>
+          <p>依赖驱动与子上下文行为来自教程；重载语义以 Cordis 当前实现为准。 <a href="audit.html#audit-s3-8">查看本节审计记录</a></p>
+        </details>
         <div class="block">
           <div class="label">学习目标</div>
           <p>用依赖表达加载顺序，用 ctx.plugin 创建子插件，并验证子插件随父卸载。</p>
@@ -394,6 +486,7 @@
           <div class="label">动手任务</div>
           <p>写一个父插件，在 apply 里 <code>ctx.plugin(child)</code> 注册子插件；子插件注册一个工具。卸载父插件后，确认工具消失、子 Fiber 也 disposed。</p>
         </div>
+        
         <div class="block check">
           <div class="label">自检</div>
           <div class="qa"><details><summary>依赖驱动加载解决了什么？</summary><div class="a">它把「谁先启动」从人工编排变成声明式依赖：服务就绪才加载，服务消失就卸载，服务回来再重载。</div></details>
@@ -403,7 +496,7 @@
           <button class="done-btn" type="button" data-done-id="s3-8" aria-pressed="false">
             <span class="dot" aria-hidden="true"></span><span class="label-text">标记完成</span>
           </button>
-          <span class="note">进度保存在本机浏览器</span>
+          <span class="note" data-progress-note>进度保存在本机浏览器</span>
         </div>
         <nav class="chapter-nav" aria-label="章节翻页">
           <a class="prev" href="stage-3.html#s3-7"><span class="dir">上一节</span><span class="t">3.7 生命周期：Fiber 状态机</span></a>
@@ -422,7 +515,7 @@
     <div class="footer-in">
       <div>
         <p>蓝本：<a href="https://www.runoob.com/deepseek-harness/deepseek-harness-tutorial.html" target="_blank" rel="noopener">runoob · DeepSeek Harness 教程</a>。本站为学习导读与审计，不复制原文全文；原文版权归原站点所有。</p>
-        <p>代码 MIT；本站原创文字 CC BY-NC-SA 4.0（<a href="../LICENSE">LICENSE</a> / <a href="../LICENSE-CONTENT.md">LICENSE-CONTENT</a>）。审计时间 2026-10，产品处于预览版，信息以官方为准。</p>
+        <p>代码 MIT；本站原创文字 CC BY-NC-SA 4.0（<a href="LICENSE">LICENSE</a> / <a href="LICENSE-CONTENT.md">LICENSE-CONTENT</a>）。审计时间 2026-10，产品处于预览版，信息以官方为准。</p>
       </div>
       <div>
         <h3>阅读</h3>
@@ -437,7 +530,7 @@
         <ul>
           <li><a href="audit.html">内容审计</a></li>
           <li><a href="about.html">来源、许可与维护</a></li>
-          <li><a href="../index.html">返回 AI Agent 学习站</a></li>
+          <li><a href="https://luozawa.github.io/dopamine-agent-lab/">返回 AI Agent 学习站</a></li>
         </ul>
       </div>
     </div>

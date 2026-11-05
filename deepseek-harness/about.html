@@ -28,13 +28,15 @@
     </div>
   </div>
 </header>
+<div class="storage-notice" data-storage-notice role="status" hidden></div>
 <main id="main" class="doc">
   <div class="kicker">About · Usage · Maintenance</div>
   <h1>说明</h1>
   <p class="lede">这一页写清四件事：本站基于什么假设、怎么打开与维护、设计令牌怎么改、哪些内容必须自行核实。</p>
 
   <h2 id="open"><span class="no">01</span>打开方式</h2>
-  <p>本站是纯静态页面，不需要安装、服务器或联网。保持 <code>deepseek-harness/</code> 与 <code>assets/</code> 同级，双击 <code>index.html</code> 即可。</p>
+  <p>本站是纯静态页面，不需要安装、服务器或联网。保持 <code>index.html</code> 与 <code>assets/</code> 在 <code>deepseek-harness/</code> 目录内同级，双击 <code>index.html</code> 即可。阅读手册可离线进行；安装软件、访问模型端点和打开外部文档需要联网。</p>
+  <p>首页会返回上次未完成的小节；该节完成后，推荐按阅读顺序排在最前的未完成小节。阅读位置与完成进度保存在当前浏览器；若存储失败，页面会持续提示「本次进度未保存」。不同浏览器、不同访问地址或直接打开文件时，记录可能不互通。</p>
   <div class="callout warn"><p>如果样式丢失，通常是把 HTML 单独移动了位置；页面引用的是 <code>assets/style.css</code> 相对路径。</p></div>
 
   <h2 id="assumptions"><span class="no">02</span>假设声明</h2>
@@ -77,7 +79,7 @@
   <h2 id="source"><span class="no">04</span>来源、许可与维护</h2>
   <ul>
     <li><b>蓝本：</b><a href="https://www.runoob.com/deepseek-harness/deepseek-harness-tutorial.html" target="_blank" rel="noopener">runoob · DeepSeek Harness 教程</a>，版权归原站点/原作者。本站不复制原文全文，只做导读、任务与审计，每节保留原文链接。</li>
-    <li><b>许可：</b>代码 MIT；本站原创文字（学习路径、要点、任务、审计、说明）采用 CC BY-NC-SA 4.0。详见 <a href="../LICENSE">LICENSE</a> 与 <a href="../LICENSE-CONTENT.md">LICENSE-CONTENT.md</a>；原文与第三方内容不在本站授权范围。</li>
+    <li><b>许可：</b>代码 MIT；本站原创文字（学习路径、要点、任务、审计、说明）采用 CC BY-NC-SA 4.0。详见 <a href="LICENSE">LICENSE</a> 与 <a href="LICENSE-CONTENT.md">LICENSE-CONTENT.md</a>；原文与第三方内容不在本站授权范围。</li>
     <li><b>生成：</b>页面与搜索索引由 <code>tools/build.py</code> 生成；修改课程数据后重新运行即可。</li>
     <li><b>维护：</b>新增一节需要补五字段、更新 <code>STAGE_LESSONS</code> 与前后篇；搜索索引会随构建自动重建。</li>
   </ul>
@@ -106,7 +108,7 @@
     <div class="footer-in">
       <div>
         <p>蓝本：<a href="https://www.runoob.com/deepseek-harness/deepseek-harness-tutorial.html" target="_blank" rel="noopener">runoob · DeepSeek Harness 教程</a>。本站为学习导读与审计，不复制原文全文；原文版权归原站点所有。</p>
-        <p>代码 MIT；本站原创文字 CC BY-NC-SA 4.0（<a href="../LICENSE">LICENSE</a> / <a href="../LICENSE-CONTENT.md">LICENSE-CONTENT</a>）。审计时间 2026-10，产品处于预览版，信息以官方为准。</p>
+        <p>代码 MIT；本站原创文字 CC BY-NC-SA 4.0（<a href="LICENSE">LICENSE</a> / <a href="LICENSE-CONTENT.md">LICENSE-CONTENT</a>）。审计时间 2026-10，产品处于预览版，信息以官方为准。</p>
       </div>
       <div>
         <h3>阅读</h3>
@@ -121,7 +123,7 @@
         <ul>
           <li><a href="audit.html">内容审计</a></li>
           <li><a href="about.html">来源、许可与维护</a></li>
-          <li><a href="../index.html">返回 AI Agent 学习站</a></li>
+          <li><a href="https://luozawa.github.io/dopamine-agent-lab/">返回 AI Agent 学习站</a></li>
         </ul>
       </div>
     </div>
