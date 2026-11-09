@@ -2,6 +2,6 @@
 __pycache__/
 *.pyc
 *.zip
-!examples/stage5-examples.zip
-!examples/stage6-examples.zip
+!ai-agent/examples/stage5-examples.zip
+!ai-agent/examples/stage6-examples.zip
 .env

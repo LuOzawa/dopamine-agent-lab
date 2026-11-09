@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dopamine Agent Lab · AI Agent 本地学习站</title>
+<meta name="description" content="以 runoob AI Agent 教程为蓝本的本地学习站：47 个引导式小节、8 个阶段、内容时效审计、离线可用。">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-accent="violet">
+<a class="skip" href="#main">跳到主要内容</a>
+<div class="read-progress" aria-hidden="true"></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01" stroke-width="3"/></symbol>
+  <symbol id="i-wrench" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0 5 5L20 11l-8.5 8.5a2.1 2.1 0 0 1-3-3L17 8l-.3-1.7z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v18H6.5A2.5 2.5 0 0 0 4 23z"/><path d="M4 18.5h16"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 16H3z"/><path d="M12 9v5M12 17.5h.01"/></symbol>
+</svg>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true"><svg><use href="#i-spark"/></svg></span>
+      <span>Dopamine Agent Lab</span>
+    </a>
+    <nav class="topnav" aria-label="主导航">
+      <a href="index.html" aria-current="page">学习地图</a>
+      <a href="contents.html">全部目录</a>
+      <a href="search.html">搜索</a>
+      <a href="audit.html">内容审计</a>
+      <a href="about.html" class="nav-about">使用说明</a>
+    </nav>
+    <div class="mini-progress" title="总学习进度">
+      <span class="mini-bar" aria-hidden="true"><i data-mini-bar></i></span>
+      <span data-mini-text>0/47</span>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow"><svg width="14" height="14" aria-hidden="true"><use href="#i-book"/></svg> 本地学习站 · 离线优先 · 无需登录</span>
+      <h1>把 AI Agent 教程，<br>改造成<span class="mark">能一步步做完</span>的学习路径。</h1>
+      <p class="lede">
+        以 runoob 的 AI Agent 教程为骨架，重排为 8 个阶段、47 个带「目标 / 前置 / 要点 / 动手 / 自检」的学习小节；
+        过时的 API 与模型名称单独列出审计结论，不确定的部分明确标注「待核实」。
+        所有页面双击即可打开，不依赖网络、账号或构建工具。
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" id="continue-learning" href="stage-1.html#s1-1" aria-describedby="continue-hint"><span>从阶段 1 开始</span> <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn" href="audit.html">先看内容审计</a>
+        <a class="btn btn-ghost" href="about.html">怎么用这个站</a>
+      </div>
+      <p id="continue-hint" class="continue-hint" hidden></p>
+      <div class="stats">
+        <div class="stat"><b>47</b><span>个学习小节</span></div>
+        <div class="stat"><b>8</b><span>个学习阶段</span></div>
+        <div class="stat"><b>≈22h</b><span>建议总时长（按 20–30 分钟/节）</span></div>
+        <div class="stat"><b>0</b><span>个外部资源请求</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="callout info">
+      <svg aria-hidden="true"><use href="#i-alert"/></svg>
+      <p><b>先读这一句：</b>本站不复制原教程全文，只提供「学习路径 + 要点提炼 + 动手任务 + 时效性审计」，每节都保留原文链接。
+        遇到与原文冲突的地方，以站内审计标记和官方文档为准；标注「待核实」的内容请自行核对。</p>
+    </div>
+
+    <div class="section-head" id="path">
+      <div>
+        <div class="kicker">Learning Path</div>
+        <h2>8 个阶段，从概念到能跑起来</h2>
+        <p>阶段之间是递进关系，但不必严格按顺序：有 Python 基础可以直接从阶段 5 开始，做产品的可以从阶段 6 切入。</p>
+      </div>
+      <a class="btn sm" href="about.html#add">如何新增一节</a>
+    </div>
+
+    <div class="stage-grid">
+
+      <a class="stage-card" href="stage-1.html" style="--sc:#6D28D9">
+        <div class="stage-top">
+          <span class="stage-num">1</span>
+          <svg class="ring" data-ring="1" viewBox="0 0 54 54" role="img" aria-label="阶段 1 进度">
+            <circle class="bg" cx="27" cy="27" r="22"></circle>
+            <circle class="fg" cx="27" cy="27" r="22"></circle>
+            <text x="27" y="31" text-anchor="middle">0/4</text>
+          </svg>
+        </div>
+        <h3>认知地图</h3>
+        <p class="desc">先搞清楚 Agent 到底是什么、由哪些部件组成、术语在说什么。不写代码，但决定后面学得顺不顺。</p>
+        <div class="stage-foot"><span>4 节 · 约 1.5h</span><span>入门</span></div>
+      </a>
+
+      <a class="stage-card" href="stage-2.html" style="--sc:#D4176F">
+        <div class="stage-top">
+          <span class="stage-num">2</span>
+          <svg class="ring" data-ring="2" viewBox="0 0 54 54" role="img" aria-label="阶段 2 进度">
+            <circle class="bg" cx="27" cy="27" r="22"></circle>
+            <circle class="fg" cx="27" cy="27" r="22"></circle>
+            <text x="27" y="31" text-anchor="middle">0/5</text>
+          </svg>
+        </div>
+        <h3>模型与提示</h3>
+        <p class="desc">LLM 如何生成、多模态能做什么、提示词为什么有效、Token 如何计费——Agent 的能力边界都在这里。</p>
+        <div class="stage-foot"><span>5 节 · 约 2h</span><span>基础</span></div>
+      </a>
+
+      <a class="stage-card" href="stage-3.html" style="--sc:#0E7490">
+        <div class="stage-top">
+          <span class="stage-num">3</span>
+          <svg class="ring" data-ring="3" viewBox="0 0 54 54" role="img" aria-label="阶段 3 进度">
+            <circle class="bg" cx="27" cy="27" r="22"></circle>
+            <circle class="fg" cx="27" cy="27" r="22"></circle>
+            <text x="27" y="31" text-anchor="middle">0/4</text>
+          </svg>
+        </div>
+        <h3>推理、知识与上下文</h3>
+        <p class="desc">CoT / ReAct / 规划、向量检索与 RAG、上下文预算。解决「模型不知道」和「想不清楚」两类问题。</p>
+        <div class="stage-foot"><span>4 节 · 约 2h</span><span>核心</span></div>
+      </a>
+
+      <a class="stage-card" href="stage-4.html" style="--sc:#4D7C0F">
+        <div class="stage-top">
+          <span class="stage-num">4</span>
+          <svg class="ring" data-ring="4" viewBox="0 0 54 54" role="img" aria-label="阶段 4 进度">
+            <circle class="bg" cx="27" cy="27" r="22"></circle>
+            <circle class="fg" cx="27" cy="27" r="22"></circle>
+            <text x="27" y="31" text-anchor="middle">0/3</text>
+          </svg>
+        </div>
+        <h3>架构与工具选型</h3>
+        <p class="desc">六种 Agent 架构、平台/框架/库的差别、工作流与自主 Agent 的边界。先选对形态，再谈实现。</p>
+        <div class="stage-foot"><span>3 节 · 约 1.5h</span><span>决策</span></div>
+      </a>
+
+      <a class="stage-card" href="stage-5.html" style="--sc:#B8460B">
+        <div class="stage-top">
+          <span class="stage-num">5</span>
+          <svg class="ring" data-ring="5" viewBox="0 0 54 54" role="img" aria-label="阶段 5 进度">
+            <circle class="bg" cx="27" cy="27" r="22"></circle>
+            <circle class="fg" cx="27" cy="27" r="22"></circle>
+            <text x="27" y="31" text-anchor="middle">0/7</text>
+          </svg>
+        </div>
+        <h3>亲手构建</h3>
+        <p class="desc">不依赖框架，用 Python 写出 Agent 循环、工具调用、记忆与最小 RAG。这一阶段决定你是「会用」还是「会造」。</p>
+        <div class="stage-foot"><span>7 节 · 约 4.5h</span><span>实战</span></div>
+      </a>
+
+      <a class="stage-card" href="stage-6.html" style="--sc:#7A5C00">
+        <div class="stage-top">
+          <span class="stage-num">6</span>
+          <svg class="ring" data-ring="6" viewBox="0 0 54 54" role="img" aria-label="阶段 6 进度">
+            <circle class="bg" cx="27" cy="27" r="22"></circle>
+            <circle class="fg" cx="27" cy="27" r="22"></circle>
+            <text x="27" y="31" text-anchor="middle">0/7</text>
+          </svg>
+        </div>
+        <h3>框架与平台</h3>
+        <p class="desc">LangChain 1.x、LangGraph、CrewAI、Deep Agents、Dify、n8n、GraphRAG。学会在正确场景选正确的工具。</p>
+        <div class="stage-foot"><span>7 节 · 约 4h</span><span>工具</span></div>
+      </a>
+
+      <a class="stage-card" href="stage-7.html" style="--sc:#4338CA">
+        <div class="stage-top">
+          <span class="stage-num">7</span>
+          <svg class="ring" data-ring="7" viewBox="0 0 54 54" role="img" aria-label="阶段 7 进度">
+            <circle class="bg" cx="27" cy="27" r="22"></circle>
+            <circle class="fg" cx="27" cy="27" r="22"></circle>
+            <text x="27" y="31" text-anchor="middle">0/9</text>
+          </svg>
+        </div>
+        <h3>前沿产品与工程范式</h3>
+        <p class="desc">Vibe Coding、Harness / Loop Engineering，以及 OpenClaw、Pi、Hermes 等终端与桌面 Agent。看清趋势，也看清权限风险。</p>
+        <div class="stage-foot"><span>9 节 · 约 3h</span><span>趋势</span></div>
+      </a>
+
+      <a class="stage-card" href="stage-8.html" style="--sc:#0F766E">
+        <div class="stage-top">
+          <span class="stage-num">8</span>
+          <svg class="ring" data-ring="8" viewBox="0 0 54 54" role="img" aria-label="阶段 8 进度">
+            <circle class="bg" cx="27" cy="27" r="22"></circle>
+            <circle class="fg" cx="27" cy="27" r="22"></circle>
+            <text x="27" y="31" text-anchor="middle">0/8</text>
+          </svg>
+        </div>
+        <h3>多智能体、生产化与扩展</h3>
+        <p class="desc">多 Agent 协作、MCP / Computer Use、评估与安全、生产部署，以及微调与 3D 这类扩展场景。</p>
+        <div class="stage-foot"><span>8 节 · 约 4h</span><span>进阶</span></div>
+      </a>
+
+    </div>
+
+    <div class="callout info" style="margin-top:8px">
+      <svg aria-hidden="true"><use href="#i-book"/></svg>
+      <p><b>对照原文目录：</b>原文左侧栏是 3 组 48 项（教程首页 + 47 章），本站全部收录，但按 8 阶段重排。
+        <a href="contents.html">查看保留原序的全部目录 →</a></p>
+    </div>
+
+    <div class="callout update" style="margin-top:8px">
+      <svg aria-hidden="true"><use href="#i-book"/></svg>
+      <p><b>第二门课 · DeepSeek Harness：</b>33 节，正式文档风格，从安装、插件、能力三角色一路读到沙箱审批与事故复盘。
+        <a href="../deepseek-harness/index.html">进入学习手册 →</a></p>
+    </div>
+
+    <div class="callout update" style="margin-top:8px">
+      <svg aria-hidden="true"><use href="#i-spark"/></svg>
+      <p><b>找工具或关键词：</b><a href="frameworks.html">13 个框架 + 8 个工具的选型矩阵</a>；
+        或直接用 <a href="search.html">全文搜索</a> 定位到小节和句子。</p>
+    </div>
+
+    <div class="section-head">
+      <div>
+        <div class="kicker">Audit First</div>
+        <h2>先处理这 3 个问题，再照抄代码</h2>
+        <p>审计覆盖全部 47 节，每条都带影响范围、严重程度与优先级。这里是优先处理清单的前三项。</p>
+      </div>
+      <a class="btn sm" href="audit.html">查看完整台账</a>
+    </div>
+
+    <div class="fields" style="margin-bottom:48px">
+      <div class="field goal">
+        <h3><svg aria-hidden="true"><use href="#i-alert"/></svg> P0 · 环境配置章节</h3>
+        <p>原文仍在用 <code>initialize_agent</code>、<code>text-davinci-003</code>、<code>gpt-3.5-turbo</code> 与 <code>langchain.llms</code> 旧导入。照抄大概率直接报错，且示例模型已退役或进入 legacy。</p>
+      </div>
+      <div class="field goal">
+        <h3><svg aria-hidden="true"><use href="#i-alert"/></svg> P0 · 多智能体章节</h3>
+        <p>AutoGen 示例是 0.2 时代的 <code>autogen.AssistantAgent</code> + <code>llm_config</code>，当前稳定版是 <code>autogen-agentchat</code> 0.7.x，导入与构造方式都已改变。</p>
+      </div>
+      <div class="field goal">
+        <h3><svg aria-hidden="true"><use href="#i-alert"/></svg> P1 · 框架与 RAG 示例</h3>
+        <p>LangChain 1.x 主推 <code>create_agent</code>，旧 <code>AgentExecutor</code> 属于 legacy；RAG 示例的 <code>langchain.text_splitter</code> 已拆到独立包 <code>langchain-text-splitters</code>。</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <svg aria-hidden="true"><use href="#i-spark"/></svg>
+      <p><b>学习方式建议：</b>每节先看「目标」和「前置」判断要不要学，再读「要点」，然后必须做「动手」——
+        只看不做的通过率接近零。做完用「自检」的两问自查，答不上来就回到要点。最后的「标记完成」只存在本机浏览器。</p>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-in">
+      <div>
+        <a class="brand" href="index.html" style="margin-bottom:12px">
+          <span class="brand-mark" aria-hidden="true"><svg><use href="#i-spark"/></svg></span>
+          <span>Dopamine Agent Lab</span>
+        </a>
+        <p>蓝本：<a href="https://www.runoob.com/ai-agent/ai-agent-tutorial.html" target="_blank" rel="noopener">runoob · AI Agent（智能体）教程</a>。
+          本站为个人本地学习用途的重构与笔记，不复制原文全文、不用于商业分发。</p>
+        <p class="small">内容审计时间：2026-10。产品与模型信息变化很快，涉及版本、价格、API 参数请以官方文档为准。</p>
+      </div>
+      <div>
+        <h3>学习</h3>
+        <ul>
+          <li><a href="stage-1.html">阶段 1 · 认知地图</a></li>
+          <li><a href="stage-5.html">阶段 5 · 亲手构建</a></li>
+          <li><a href="stage-8.html">阶段 8 · 生产化</a></li>
+          <li><a href="../deepseek-harness/index.html">DeepSeek Harness 手册</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>文档</h3>
+        <ul>
+          <li><a href="audit.html">内容审计台账</a></li>
+          <li><a href="about.html">来源、版权与维护</a></li>
+          <li><a href="about.html#verify">待核实清单</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">离线可用 · 无 Cookie · 无埋点 · 进度仅保存在本机 localStorage</div>
+  </div>
+</footer>
+
+<script src="assets/lesson-map.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

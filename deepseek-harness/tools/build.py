@@ -869,7 +869,7 @@ def footer():
         <ul>
           <li><a href="audit.html">内容审计</a></li>
           <li><a href="about.html">来源、许可与维护</a></li>
-          <li><a href="https://luozawa.github.io/dopamine-agent-lab/">返回 AI Agent 学习站</a></li>
+          <li><a href="../ai-agent/index.html">返回 AI Agent 学习站</a></li>
         </ul>
       </div>
     </div>
